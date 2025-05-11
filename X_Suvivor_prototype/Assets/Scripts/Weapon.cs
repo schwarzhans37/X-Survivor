@@ -37,20 +37,20 @@ public class Weapon : MonoBehaviour
                     Fire();
                 }
 
-                attackSpeed = 0.5f;
+                //attackSpeed = 0.5f;
                 break;
         }
 
         // .. 테스트용 레벨업
-        if (Input.GetButtonDown("Jump")) {
-            LevelUp(20, 5);
-        }
+        //if (Input.GetButtonDown("Jump")) {
+        //    LevelUp(20, 5);
+        //}
     }
 
     public void LevelUp(float damage, int count)
     {
-        this.damage = damage;
-        this.count  += count;
+        this.damage = damage * Character.Damage;
+        this.count += count + Character.Count;
 
         if (id == 0)
             Batch();
@@ -67,8 +67,8 @@ public class Weapon : MonoBehaviour
 
         // 프로퍼티 설정
         id = data.itemId;
-        damage = data.baseDamage;
-        count = data.baseCount;
+        damage = data.baseDamage * Character.Damage;
+        count = data.baseCount + Character.Count;
 
         for (int index = 0; index < GameManager.instance.pool.prefabs.Length; index++) {
             if (data.projectile == GameManager.instance.pool.prefabs[index]) {
@@ -78,11 +78,11 @@ public class Weapon : MonoBehaviour
         }
         switch (id) {
             case 0:
-                attackSpeed = 150;
+                attackSpeed = 150 * Character.WeaponSpeed;
                 Batch();
                 break;
             default:
-                attackSpeed = 0.5f;
+                attackSpeed = 0.5f * Character.WeaponRate;
                 break;
         }
 

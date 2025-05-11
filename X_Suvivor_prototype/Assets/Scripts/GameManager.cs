@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float maxGameTime = 2 * 10f;
 
     [Header("# Player Info")]
+    public int playerId;
     public float health;
     public float maxHealth = 100;
     public int level;
@@ -65,13 +67,13 @@ public class GameManager : MonoBehaviour
         Stop();
     }
 
-    public void GameStart()
+    public void GameStart(int id)
     {
+        playerId = id;
         health = maxHealth;
 
-        // 첫번째 캐릭터 선택
-        uiLevelUo.Select(0);
-        isLive = true;
+        player.gameObject.SetActive(true);
+        uiLevelUo.Select(playerId % 2);
         Resume();
     }
 
