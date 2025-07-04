@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
     [Header("# GameControl")]
     public bool isLive;
     public float gameTime;
@@ -15,12 +16,10 @@ public class GameManager : MonoBehaviour
 
     [Header("# Player Info")]
     public int playerId;
-    public float health;
-    public float maxHealth = 100;
     public int level;
     public int killCount;
-    public int exp;
-    public int[] nextExp = { 10, 30, 100, 200, 360, 600, 800, 1000, 1350, 1600};
+    public int nowExp;
+    public int[] needExp;
 
     [Header("# GameObject")]
     public Player player;
@@ -30,6 +29,7 @@ public class GameManager : MonoBehaviour
     public GameObject enemyCleaner;
 
     void Awake()
+    // 초기화(선언)
     {
         instance = this;
     }
@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour
     public void GameStart(int id)
     {
         playerId = id;
-        health = maxHealth;
 
         player.gameObject.SetActive(true);
         uiLevelUo.Select(playerId % 2);
@@ -107,11 +106,11 @@ public class GameManager : MonoBehaviour
     {
         if (!isLive)
             return;
-        exp++;
+        nowExp++;
 
-        if (exp == nextExp[Mathf.Min(level, nextExp.Length-1)]) {
+        if (nowExp == needExp[Mathf.Min(level, needExp.Length-1)]) {
             level++;
-            exp = 0;
+            nowExp = 0;
             uiLevelUo.show();
         }
     }

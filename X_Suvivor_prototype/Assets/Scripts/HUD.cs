@@ -19,10 +19,13 @@ public class HUD : MonoBehaviour
 
     void LateUpdate()
     {
-        switch (type) {
+        Player player = GameManager.instance.player;
+
+        switch (type)
+        {
             case InfoType.Exp:
-                float currentExp = GameManager.instance.exp;
-                float maxExp = GameManager.instance.nextExp[Mathf.Min(GameManager.instance.level, GameManager.instance.nextExp.Length - 1)];
+                float currentExp = GameManager.instance.nowExp;
+                float maxExp = GameManager.instance.needExp[Mathf.Min(GameManager.instance.level, GameManager.instance.needExp.Length - 1)];
                 mySlider.value = currentExp / maxExp;
                 break;
             case InfoType.Level:
@@ -38,8 +41,8 @@ public class HUD : MonoBehaviour
                 myText.text = string.Format("{0:D2}:{1:D2}", min, sec);
                 break;
             case InfoType.Health:
-                float currentHp = GameManager.instance.health;
-                float maxHp = GameManager.instance.maxHealth;
+                float currentHp = player.health;
+                float maxHp = player.maxHealth;
                 mySlider.value = currentHp / maxHp;
                 break;
         }

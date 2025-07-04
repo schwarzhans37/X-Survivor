@@ -6119,8 +6119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52f061263ea33948b5e1816f1c3885a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  baseSpeed: 3
+  health: 0
+  maxHealth: 100
   inputVec: {x: 0, y: 0}
-  speed: 3
   scanner: {fileID: 0}
   hands: []
   animCon:
@@ -11816,12 +11819,10 @@ MonoBehaviour:
   gameTime: 0
   maxGameTime: 300
   playerId: 0
-  health: 0
-  maxHealth: 100
   level: 0
   killCount: 0
-  exp: 0
-  nextExp: 0a0000001e00000064000000c8000000680100005802000020030000e80300004605000040060000
+  nowExp: 0
+  needExp: 05000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000
   player: {fileID: 274803308}
   pool: {fileID: 941918228}
   uiLevelUo: {fileID: 1390879062}
@@ -12288,7 +12289,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 8.347222
+  orthographic size: 6.633333
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

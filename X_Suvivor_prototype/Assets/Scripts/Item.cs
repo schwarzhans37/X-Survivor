@@ -49,15 +49,21 @@ public class Item : MonoBehaviour
 
     public void OnClick()
     {
-        switch(data.itemType) {
+        //GameManager를 통해 Player.cs 참조하기
+        Player player = GameManager.instance.player;
+
+        switch (data.itemType)
+        {
             case ItemData.ItemType.Melee:
             case ItemData.ItemType.Range:
-                if (level == 0) {
+                if (level == 0)
+                {
                     GameObject newWeapon = new GameObject();
                     weapon = newWeapon.AddComponent<Weapon>();
                     weapon.Init(data);
                 }
-                else {
+                else
+                {
                     float nextDamage = data.baseDamage;
                     int nextCount = 0;
 
@@ -69,25 +75,26 @@ public class Item : MonoBehaviour
                 level++;
                 break;
             case ItemData.ItemType.Glove:
+                /* 장갑 : 플레이어의 공격속도 영향 */
             case ItemData.ItemType.Shoe:
-                if (level == 0) {
+                /* 신발 : 플레이어의 이동속도 영향 */
+                if (level == 0)
+                {
                     GameObject newGear = new GameObject();
                     gear = newGear.AddComponent<Gear>();
                     gear.Init(data);
                 }
-                else {
+                else
+                {
                     float nextRate = data.damages[level];
                     gear.LevelUp(nextRate);
                 }
                 level++;
                 break;
             case ItemData.ItemType.Heal:
-            GameManager.instance.health = GameManager.instance.maxHealth;
+                /* 치유 : 플레이어의 현재 체력 회복 */
+                player.Heal();  // Player.cs에 Heal() 만들어야함
                 break;
-        }
-
-        if (level == data.damages.Length) {
-            GetComponent<Button>().interactable = false;
         }
     }
 }
