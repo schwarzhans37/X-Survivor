@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [Header("# Weapon Number")]
     public int id;  // 무기 ID
+
+    [Header("# Weapon Data")]
     public int prefabId;    // 무기의 프리팹 ID
     public float damage;
     public int count;   // 무기 배치 개수
@@ -40,11 +43,6 @@ public class Weapon : MonoBehaviour
                 //attackSpeed = 0.5f;
                 break;
         }
-
-        // .. 테스트용 레벨업
-        //if (Input.GetButtonDown("Jump")) {
-        //    LevelUp(20, 5);
-        //}
     }
 
     public void LevelUp(float damage, int count)
