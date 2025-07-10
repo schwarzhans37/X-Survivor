@@ -5,12 +5,17 @@ using UnityEngine.Rendering.Universal;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed;
-    public float health;
-    public float maxHealth;
-    public RuntimeAnimatorController[] animCon;
-    public Rigidbody2D target;
+    [Header("# Monster's Status")]
+    public float speed; // 몬스터 이동속도
+    public float health;    // 몬스터의 현재 체력
+    public float maxHealth; // 몬스터의 최대 체력
 
+    [Header("# Monster's Physics")]
+    public Rigidbody2D target;  // 몬스터 충돌 판정 계산 리지드바디
+
+    [Header("# Monster Render")]
+    public RuntimeAnimatorController[] animCon; // 몬스터 애니메이션 컨트롤러
+    
     bool isLive;
     Rigidbody2D rigid;
     Collider2D coll;
@@ -19,6 +24,7 @@ public class Enemy : MonoBehaviour
     WaitForFixedUpdate wait;
 
     void Awake()
+    // 초기화(선언)
     {
         rigid = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
@@ -26,8 +32,26 @@ public class Enemy : MonoBehaviour
         spriter = GetComponent<SpriteRenderer>();
         wait = new WaitForFixedUpdate();
     }
+
+    void OnEnable()
+    {
+        target = GameManager.instance.player.GetComponent<Rigidbody2D>();
+        isLive = true;
+        coll.enabled = true;
+        rigid.simulated = true;
+        spriter.sortingOrder = 2;
+        anim.SetBool("Dead", false);
+        health = maxHealth;
+    }
         
     void FixedUpdate()
+    /* 
+        물리(Physics)계산용 업데이트 함수
+        플레이어의 위치 이동을 위해 사용됨
+        - 프레임 속도 영향 안받음(컴퓨터 성능 영향 안받음)
+        - 고정된 시간 간격으로 호출함
+        - Rigidbody
+     */
     {
         if (!GameManager.instance.isLive) {
             return;
@@ -42,6 +66,12 @@ public class Enemy : MonoBehaviour
     }
 
     void LateUpdate()
+    /* 
+        한 프레임의 모든 Update 함수가 실행 된 후 호출
+        오브젝트의 이동, 로직 등의 처리가 끝난 최종 결과를 가지고 사용
+        - 프레임 속도에 따라 가변적임
+        - 애니메이션 후처리, 카메라 추적 등 사용
+     */
     {
         if (!GameManager.instance.isLive) {
             return;
@@ -50,17 +80,6 @@ public class Enemy : MonoBehaviour
             return;
 
         spriter.flipX = target.position.x < rigid.position.x;
-    }
-
-    void OnEnable()
-    {
-        target = GameManager.instance.player.GetComponent<Rigidbody2D>();
-        isLive = true;
-        coll.enabled = true;
-        rigid.simulated = true;
-        spriter.sortingOrder = 2;
-        anim.SetBool("Dead", false);
-        health = maxHealth;
     }
 
     public void Init(SpawnData data)
@@ -90,9 +109,14 @@ public class Enemy : MonoBehaviour
             spriter.sortingOrder = 1;
             anim.SetBool("Dead", true);
             GameManager.instance.killCount++;
-            GameManager.instance.GetExp();
 
-            if (GameManager.instance.isLive) {
+            //PoolManager에 ExpOrb를 0번 인덱스로 등록했음, 따라서 경험치 오브젝트를 생성하도록 함.
+            GameObject expOrb = GameManager.instance.pool.Get(0);
+            // 받아온 오브젝트의 위치를 현재 사망한 몬스터의 위치로 설정
+            expOrb.transform.position = transform.position;
+
+            if (GameManager.instance.isLive)
+            {
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
             }
         }

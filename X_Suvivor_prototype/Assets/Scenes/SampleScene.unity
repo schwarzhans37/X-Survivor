@@ -6124,7 +6124,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 100
   inputVec: {x: 0, y: 0}
-  scanner: {fileID: 0}
+  itemScanner: {fileID: 0}
   hands: []
   animCon:
   - {fileID: 9100000, guid: bc1fe6d26d801214495cb1d94d81c331, type: 2}
@@ -6331,8 +6331,7 @@ MonoBehaviour:
   scanRange: 10
   targetLayer:
     serializedVersion: 2
-    m_Bits: 64
-  nearestTarget: {fileID: 0}
+    m_Bits: 128
 --- !u!1 &284860207
 GameObject:
   m_ObjectHideFlags: 0
@@ -12289,7 +12288,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 6.633333
+  orthographic size: 7.0740743
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -15125,6 +15124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
+  - {fileID: 5815709779976235455, guid: 96f849c304d45c140bf780e216ddd867, type: 3}
   - {fileID: 269897315896794488, guid: bde7851dc437b3941aa52032e00d8b4a, type: 3}
   - {fileID: 8603556273567077586, guid: 06dea0a8519840f429f4393cad4144f1, type: 3}
   - {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
@@ -30208,8 +30208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893fd350bce804e43b335aef7b61fdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   damage: 1000000
-  per: -1
+  penetration: 0
+  bulletSize: 0
 --- !u!61 &1882968317
 BoxCollider2D:
   m_ObjectHideFlags: 0
