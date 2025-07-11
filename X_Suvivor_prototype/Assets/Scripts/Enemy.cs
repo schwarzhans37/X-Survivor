@@ -63,12 +63,14 @@ public class Enemy : MonoBehaviour
         health = maxHealth;
     }
 
-    public void Init(SpawnData data)
+    public void Init(MonsterData data)
     {
-        anim.runtimeAnimatorController = animCon[data.spriteType];
-        speed = data.monsterSpeed;
-        maxHealth = data.health;
-        health = data.health;
+        speed = data.Speed;
+        maxHealth = data.Maxhealth;
+        health = maxHealth;
+
+        if (data.animator != null)
+            anim.runtimeAnimatorController = data.animator;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
