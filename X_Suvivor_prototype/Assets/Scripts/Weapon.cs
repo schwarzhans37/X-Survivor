@@ -132,7 +132,7 @@ public class Weapon : MonoBehaviour
         // 4. 마우스 월드 좌표를 향해 발사하는 벡터 계산
         Vector2 dir = (worldMousePos - transform.position).normalized;
 
-        Transform bullet = GameManager.instance.pool.Get(3).transform;
+        Transform bullet = GameManager.instance.pool.Get(4).transform;
         bullet.position = transform.position;
 
         bullet.rotation = Quaternion.FromToRotation(Vector2.up, dir);

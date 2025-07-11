@@ -82,7 +82,7 @@ public class Enemy : MonoBehaviour
         spriter.flipX = target.position.x < rigid.position.x;
     }
 
-    public void Init(SpawnData data)
+    public void Init(MonsterData data)
     {
         speed = data.Speed;
         maxHealth = data.Maxhealth;

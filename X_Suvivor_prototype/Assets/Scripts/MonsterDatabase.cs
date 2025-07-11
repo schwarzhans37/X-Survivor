@@ -9,7 +9,7 @@ public class MonsterDatabase : MonoBehaviour
     void Awake()
     {
         LoadMonsterData();
-        Debug.Log("[MonsterDatabase] Awake¿¡¼­ µ¥ÀÌÅÍ ·Îµå ¿Ï·á");
+        Debug.Log("[MonsterDatabase] Awakeì—ì„œ ë°ì´í„° ë¡œë“œ ì™„ë£Œ");
     }
 
     void LoadMonsterData()
@@ -18,7 +18,7 @@ public class MonsterDatabase : MonoBehaviour
         string[] lines = csv.text.Split('\n');
         monsters = new List<MonsterData>();
 
-        for (int i = 1; i < lines.Length; i++) // Ã¹ ÁÙÀº Çì´õ´Ï±î °Ç³Ê¶Ü
+        for (int i = 1; i < lines.Length; i++) // ì²« ì¤„ì€ í—¤ë”ë¼ì„œ ê±´ë„ˆëœ€
         {
             if (string.IsNullOrWhiteSpace(lines[i])) continue;
 
@@ -46,10 +46,10 @@ public class MonsterDatabase : MonoBehaviour
             };
 
             monsters.Add(data);
-            Debug.Log($"[MonsterDatabase] ID {data.Id} ·Îµù ¿Ï·á: {data.Name}");
+            Debug.Log($"[MonsterDatabase] ID {data.Id} ë¡œë”© ì™„ë£Œ: {data.Name}");
         }
 
-        Debug.Log($"[MonsterDatabase] ¸ó½ºÅÍ ÃÑ {monsters.Count}°³ ·Îµå ¿Ï·á");
+        Debug.Log($"[MonsterDatabase] ëª¬ìŠ¤í„° ì´ {monsters.Count}ê°œ ë¡œë“œ ì™„ë£Œ");
     }
 
 
@@ -57,7 +57,7 @@ public class MonsterDatabase : MonoBehaviour
     {
         MonsterData result = monsters.Find(m => m.Id == id);
         if (result == null)
-            Debug.LogError($"[MonsterDatabase] ID {id}¿¡ ÇØ´çÇÏ´Â ¸ó½ºÅÍ¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError($"[MonsterDatabase] ID {id}ì— í•´ë‹¹í•˜ëŠ” ëª¬ìŠ¤í„°ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         return result;
     }
 

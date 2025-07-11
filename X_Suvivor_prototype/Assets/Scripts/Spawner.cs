@@ -10,13 +10,14 @@ public class Spawner : MonoBehaviour
 
     public float spawnInterval = 3f;
     private float timer;
+    private bool isReady = false;   // 스폰 준비 완료 플래그
 
     [System.Serializable]
     public class EliteSchedule
     {
-        public int spawnTime;        // �� ����
-        public int monsterId;        // ��: 1000
-        public bool spawned = false; // �ߺ� ���� ����
+        public int spawnTime;        // 초 단위
+        public int monsterId;        // 예: 1000
+        public bool spawned = false; // 중복 스폰 방지
     }
 
     public List<EliteSchedule> eliteSchedule = new List<EliteSchedule>();
@@ -27,7 +28,7 @@ public class Spawner : MonoBehaviour
 
         if (monsterDatabase == null || monsterDatabase.monsters.Count == 0)
         {
-            Debug.LogError("[Spawner] MonsterDatabase�� �ʱ�ȭ���� �ʾҽ��ϴ�.");
+            Debug.LogError("[Spawner] MonsterDatabase가 초기화되지 않았습니다.");
         }
     }
 
@@ -35,36 +36,42 @@ public class Spawner : MonoBehaviour
     {
         if (monsterDatabase == null)
         {
-            Debug.LogError("[Spawner] MonsterDatabase�� ������� �ʾҽ��ϴ�.");
+            Debug.LogError("[Spawner] MonsterDatabase가 연결되지 않았습니다.");
             return;
         }
 
-        // ������ �ε��� ���� ������ ��� ��� (���� ���� ����)
+        // 데이터 로딩이 끝날 때까지 잠깐 대기 (지연 스폰 시작)
         StartCoroutine(DelayedStart());
     }
 
     IEnumerator DelayedStart()
     {
-        yield return new WaitForSeconds(0.1f);  // ������ �ε� ��ٸ���
-        timer = spawnInterval;  // �ٷ� �����ϵ��� �ʱ�ȭ
+        yield return new WaitForSeconds(0.1f);  // 데이터 로딩 기다리기
+
+        isReady = true;     // 스폰을 시작할 준비가 되었음을 알림
+        timer = spawnInterval;  // 바로 스폰하도록 타이머 초기화
     }
 
     void Update()
     {
-        if (!GameManager.instance.isLive || monsterDatabase == null || monsterDatabase.monsters.Count == 0)
+        // isReady 플래그나 GameManager의 isLive를 통해 스폰 여부 제어
+        if (!isReady || !GameManager.instance.isLive)
+            return;
+        
+        if (monsterDatabase == null || monsterDatabase.monsters.Count == 0)
             return;
 
         float currentTime = GameManager.instance.gameTime;
         timer += Time.deltaTime;
 
-        // �Ϲ� ���� ����
+        // 일반 몬스터 스폰
         if (timer > spawnInterval)
         {
             timer = 0;
             SpawnNormal(currentTime);
         }
 
-        // ����Ʈ ���� ����
+        // 엘리트 몬스터 스폰
         foreach (var schedule in eliteSchedule)
         {
             if (!schedule.spawned && currentTime >= schedule.spawnTime)
@@ -82,11 +89,11 @@ public class Spawner : MonoBehaviour
 
         if (data == null)
         {
-            Debug.LogWarning($"[�Ϲ� ����] ID {monsterId}�� �ش��ϴ� �����Ͱ� �����ϴ�.");
+            Debug.LogWarning($"[일반 몬스터] ID {monsterId}�에 해당하는 데이터가 없습니다.");
             return;
         }
 
-        GameObject enemy = GameManager.instance.pool.Get(0); // �Ϲ� ���ʹ� Ǯ �ε��� 0
+        GameObject enemy = GameManager.instance.pool.Get(1); // 일반 몬스터는 풀 인덱스 1
         enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
 
         int animIndex = monsterDatabase.monsters.FindIndex(m => m.Id == data.Id);
@@ -96,7 +103,7 @@ public class Spawner : MonoBehaviour
         }
 
         enemy.GetComponent<Enemy>().Init(data);
-        Debug.Log($"[�Ϲ� ����] {data.Name} (ID: {data.Id}) ����");
+        Debug.Log($"[일반 몬스터] {data.Name} (ID: {data.Id}) 스폰");
     }
 
     void SpawnElite(int id)
@@ -105,11 +112,11 @@ public class Spawner : MonoBehaviour
 
         if (data == null)
         {
-            Debug.LogWarning($"[����Ʈ ����] ID {id}�� �ش��ϴ� �����Ͱ� �����ϴ�.");
+            Debug.LogWarning($"[앨리트 몬스터] ID {id}에 해당하는 데이터가 없습니다.");
             return;
         }
 
-        GameObject enemy = GameManager.instance.pool.Get(3); // ����Ʈ ���ʹ� Ǯ �ε��� 3
+        GameObject enemy = GameManager.instance.pool.Get(2); // 앨리트 몬스터는 풀 인덱스2
         enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
 
         int animIndex = monsterDatabase.monsters.FindIndex(m => m.Id == data.Id);
@@ -119,7 +126,7 @@ public class Spawner : MonoBehaviour
         }
 
         enemy.GetComponent<Enemy>().Init(data);
-        Debug.Log($"[����Ʈ ����] {data.Name} (ID: {data.Id}) ����");
+        Debug.Log($"[앨리트 몬스터] {data.Name} (ID: {data.Id}) 등장");
     }
 
     int GetNormalMonsterIdByTime(float time)
@@ -136,7 +143,7 @@ public class Spawner : MonoBehaviour
             case 6: return 7;
             case 7: return 8;
             case 8: return 9;
-            default: return 9;  // ���� ��� ���� ����
+            default: return 9;  // 이후 계속 같은 몬스터
         }
     }
 }
