@@ -14,9 +14,9 @@ public class Spawner : MonoBehaviour
     [System.Serializable]
     public class EliteSchedule
     {
-        public int spawnTime;        // ÃÊ ´ÜÀ§
-        public int monsterId;        // ¿¹: 1000
-        public bool spawned = false; // Áßº¹ ½ºÆù ¹æÁö
+        public int spawnTime;        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        public int monsterId;        // ï¿½ï¿½: 1000
+        public bool spawned = false; // ï¿½ßºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     public List<EliteSchedule> eliteSchedule = new List<EliteSchedule>();
@@ -27,7 +27,7 @@ public class Spawner : MonoBehaviour
 
         if (monsterDatabase == null || monsterDatabase.monsters.Count == 0)
         {
-            Debug.LogError("[Spawner] MonsterDatabase°¡ ÃÊ±âÈ­µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogError("[Spawner] MonsterDatabaseï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
         }
     }
 
@@ -35,18 +35,18 @@ public class Spawner : MonoBehaviour
     {
         if (monsterDatabase == null)
         {
-            Debug.LogError("[Spawner] MonsterDatabase°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogError("[Spawner] MonsterDatabaseï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 
-        // µ¥ÀÌÅÍ ·ÎµùÀÌ ³¡³¯ ¶§±îÁö Àá±ñ ´ë±â (Áö¿¬ ½ºÆù ½ÃÀÛ)
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         StartCoroutine(DelayedStart());
     }
 
     IEnumerator DelayedStart()
     {
-        yield return new WaitForSeconds(0.1f);  // µ¥ÀÌÅÍ ·Îµù ±â´Ù¸®±â
-        timer = spawnInterval;  // ¹Ù·Î ½ºÆùÇÏµµ·Ï ÃÊ±âÈ­
+        yield return new WaitForSeconds(0.1f);  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½
+        timer = spawnInterval;  // ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
     }
 
     void Update()
@@ -57,14 +57,14 @@ public class Spawner : MonoBehaviour
         float currentTime = GameManager.instance.gameTime;
         timer += Time.deltaTime;
 
-        // ÀÏ¹Ý ¸ó½ºÅÍ ½ºÆù
+        // ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (timer > spawnInterval)
         {
             timer = 0;
             SpawnNormal(currentTime);
         }
 
-        // ¿¤¸®Æ® ¸ó½ºÅÍ ½ºÆù
+        // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         foreach (var schedule in eliteSchedule)
         {
             if (!schedule.spawned && currentTime >= schedule.spawnTime)
@@ -82,11 +82,11 @@ public class Spawner : MonoBehaviour
 
         if (data == null)
         {
-            Debug.LogWarning($"[ÀÏ¹Ý ¸ó½ºÅÍ] ID {monsterId}¿¡ ÇØ´çÇÏ´Â µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogWarning($"[ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½] ID {monsterId}ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 
-        GameObject enemy = GameManager.instance.pool.Get(0); // ÀÏ¹Ý ¸ó½ºÅÍ´Â Ç® ÀÎµ¦½º 0
+        GameObject enemy = GameManager.instance.pool.Get(0); // ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½Í´ï¿½ Ç® ï¿½Îµï¿½ï¿½ï¿½ 0
         enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
 
         int animIndex = monsterDatabase.monsters.FindIndex(m => m.Id == data.Id);
@@ -96,7 +96,7 @@ public class Spawner : MonoBehaviour
         }
 
         enemy.GetComponent<Enemy>().Init(data);
-        Debug.Log($"[ÀÏ¹Ý ¸ó½ºÅÍ] {data.Name} (ID: {data.Id}) ½ºÆù");
+        Debug.Log($"[ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½] {data.Name} (ID: {data.Id}) ï¿½ï¿½ï¿½ï¿½");
     }
 
     void SpawnElite(int id)
@@ -105,11 +105,11 @@ public class Spawner : MonoBehaviour
 
         if (data == null)
         {
-            Debug.LogWarning($"[¿¤¸®Æ® ¸ó½ºÅÍ] ID {id}¿¡ ÇØ´çÇÏ´Â µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogWarning($"[ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½] ID {id}ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 
-        GameObject enemy = GameManager.instance.pool.Get(3); // ¿¤¸®Æ® ¸ó½ºÅÍ´Â Ç® ÀÎµ¦½º 3
+        GameObject enemy = GameManager.instance.pool.Get(3); // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Í´ï¿½ Ç® ï¿½Îµï¿½ï¿½ï¿½ 3
         enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
 
         int animIndex = monsterDatabase.monsters.FindIndex(m => m.Id == data.Id);
@@ -119,7 +119,7 @@ public class Spawner : MonoBehaviour
         }
 
         enemy.GetComponent<Enemy>().Init(data);
-        Debug.Log($"[¿¤¸®Æ® ¸ó½ºÅÍ] {data.Name} (ID: {data.Id}) µîÀå");
+        Debug.Log($"[ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½] {data.Name} (ID: {data.Id}) ï¿½ï¿½ï¿½ï¿½");
     }
 
     int GetNormalMonsterIdByTime(float time)
@@ -136,7 +136,7 @@ public class Spawner : MonoBehaviour
             case 6: return 7;
             case 7: return 8;
             case 8: return 9;
-            default: return 9;  // ÀÌÈÄ °è¼Ó °°Àº ¸ó½ºÅÍ
+            default: return 9;  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
     }
 }

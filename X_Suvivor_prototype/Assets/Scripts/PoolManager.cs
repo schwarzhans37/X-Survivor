@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    // 프리펩 보관할 변수
+    // 프리펩 보관할 배열
     public GameObject[] prefabs;
 
     // 풀 담당 리스트

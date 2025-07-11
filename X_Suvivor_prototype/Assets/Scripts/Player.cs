@@ -5,22 +5,22 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [Header("# Player's Main Status")]
+    [Header("# 플레이어 캐릭터 능력치")]
     public float speed; //실 적용 이동속도
     public float baseSpeed; // 기본 이동속도
     public float health;    // 현재 체력
     public float maxHealth;   // 최대 체력
     //스킬은 쿨타임제로 , 기초 스텟에 미반영
 
-    [Header("# Player's Physics")]
+    [Header("# 플레이어 캐릭터 물리")]
     public Vector2 inputVec;    // 캐릭터 좌표
-    public Scanner scanner;     // 캐릭터 인지범위
+    public ItemScanner itemScanner;     // 캐릭터의 아이템 회수범위
 
-    [Header("# Player Render")]
+    [Header("# 캐릭터 이미지 렌더")]
     public Hand[] hands;
     public RuntimeAnimatorController[] animCon; // 플레이어 캐릭터 애니메이션 컨트롤러
 
-    Rigidbody2D rigid;  // 충돌 판정 계산 리지드바디디
+    Rigidbody2D rigid;  // 충돌 판정 계산 리지드바디
     SpriteRenderer spriter; // 스프라이트(이미지)
     Animator anim;  // 캐릭터 애니메이션
 
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        scanner = GetComponent<Scanner>();
+        itemScanner = GetComponent<ItemScanner>();
         hands = GetComponentsInChildren<Hand>(true);
     }
 
@@ -72,16 +72,39 @@ public class Player : MonoBehaviour
         - 애니메이션 후처리, 카메라 추적 등 사용
      */
     {
+        // 애니메이션 플립 로직
         anim.SetFloat("speed", inputVec.magnitude);
 
-        if (inputVec.x != 0) {
+        if (inputVec.x != 0)
+        {
             spriter.flipX = inputVec.x < 0;
+        }
+
+        // ItemScanner의 아이템 흡수 로직
+        if (itemScanner != null && itemScanner.Targets.Length > 0)
+        {
+            // 모든 감지된 아이템에 대해 반복
+            foreach (Collider2D target in itemScanner.Targets)
+            {
+                ExpOrb expOrb = target.GetComponent<ExpOrb>();
+                if (expOrb != null)
+                {
+                    expOrb.StartSeeking();
+                }
+            }
+
         }
     }
 
     void OnCollisionStay2D(Collision2D collision)
     // 캐릭터가 몬스터와 충돌할 경우 데미지를 받게 함
     {
+        // 몬스터 외의 오브젝트(아이템, 경험치 등)와 충돌했을 경우는 제외
+        if (!collision.gameObject.CompareTag("Enemy"))
+        {
+            return;
+        }
+
         TakeDamage(Time.deltaTime * 10);
     }
 

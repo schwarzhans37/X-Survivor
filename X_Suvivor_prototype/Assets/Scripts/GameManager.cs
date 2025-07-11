@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public int nowExp;
     public int[] needExp;
 
-    [Header("# GameObject")]
+    [Header("# GameObjects")]
     public Player player;
     public PoolManager pool;
     public LevelUp uiLevelUo;

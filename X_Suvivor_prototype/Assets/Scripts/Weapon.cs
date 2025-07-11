@@ -115,20 +115,30 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    void Fire() 
+    void Fire()
     {
-        if (!player.scanner.nearestTarget)
-            return;
-        
-        Vector3 targetPos = player.scanner.nearestTarget.position;
-        Vector3 dir = targetPos - transform.position;
-        dir = dir.normalized;
+        /*
+            원거리 사격용 함수. 마우스의 스크린 상 좌표를 받아 해당 방향으로 투사체를 발사함.
+         */
+        // 1. 마우스의 스크린 좌표 가져오기
+        Vector3 mousePos = Input.mousePosition;
 
-        Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
+        // 2. 마우스의 z좌표를 카메라와의 거리로 설정해야 올바르게 2D로 변환됨
+        mousePos.z = Camera.main.nearClipPlane;
+
+        // 3. 스크린 좌표를 월드 좌표로 변환
+        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        // 4. 마우스 월드 좌표를 향해 발사하는 벡터 계산
+        Vector2 dir = (worldMousePos - transform.position).normalized;
+
+        Transform bullet = GameManager.instance.pool.Get(3).transform;
         bullet.position = transform.position;
-        bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+
+        bullet.rotation = Quaternion.FromToRotation(Vector2.up, dir);
         bullet.GetComponent<Bullet>().Init(damage, count, dir);
 
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
+
     }
 }
