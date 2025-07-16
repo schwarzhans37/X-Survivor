@@ -5,15 +5,35 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [Header("UI 패널들")]
+    // ==== 싱글톤 패턴 ====
+    public static MenuManager instance;
+    // ====================
+
+    [Header("UI 패널 관리자")]
     public GameObject bg_Image; // menu_1, menu_2 전용 배경이미지
     public GameObject menu1_Panel;  // Game Start, Setting, Exit 버튼이 있는 패널
     public GameObject menu2_Panel;  // New Game, Load, Gacha, Back 버튼이 있는 패널
+    public GameObject NewGame_Panel;
     public GameObject charSelect_Panel;    // 캐릭터 선택 패널
+    public CharaSelectionUI charaSelectionUI;
     public GameObject Gacha_Panel;      // 미구현
-    public GameObject PetSelect_Panel;     // 미구현
+    public GameObject PetSelect_Panel;     // 펫 선택 패널
+    public PetSelectionUI petSelectionUI;
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        // ===== 싱글톤 초기화 =====
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        // ========================
+    }
+
     void Start()
     {
         // 게임 시작 시 메인 메뉴(Menu1_panel)만 보이도록
@@ -31,8 +51,8 @@ public class MenuManager : MonoBehaviour
     }
 
     /* 
-        여기서부터는 버튼 OnClick 이벤트
-     */
+         ===== 여기서부터는 버튼 OnClick 이벤트 =====
+    */
 
     // Menu_1의 'GAME START'버튼 클릭 시 호출
     public void GameStart()
@@ -62,6 +82,7 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("New Game 버튼이 클릭됨");
         menu2_Panel.SetActive(false);
+        NewGame_Panel.SetActive(true);
         charSelect_Panel.SetActive(true);
         bg_Image.SetActive(false);
     }
@@ -89,25 +110,48 @@ public class MenuManager : MonoBehaviour
         ShowMainMenu();
     }
 
-    // 캐릭터 선택 화면의 캐릭터를 선택한 후 'NEXT'버튼 클릭 시 호출(캐릭터 선택 로직의 별도 구현 필요)
+    // 캐릭터 선택 화면의 캐릭터를 선택한 후 'NEXT'버튼 클릭 시 호출
     public void GoToPetSelect()
     {
-        // 원래는 Debug.Log("캐릭터 ID : {characterId}번 선택됨. 팻 선택 메뉴로 이동")과 함께 펫 선택 후 게임 플레이 씬으로 이동해야함.
-        Debug.Log($"캐릭터 선택! 게임 플레이 씬으로 이동합니다.");
+        charaSelectionUI.ConfirmSelection();
+    }
 
-        // 씬 전환 전 데이터 저장 로직 추가
-        //PlayerDataManager.instance.selectedCharacter = characterId;
+    // PetSelect 페이지로 넘어가는 실제 로직(ConfirmSelection에서 호출)
+    public void ShowPetSelectPage()
+    {
+        Debug.Log("펫 선택 메뉴로 이동합니다.");
+        charSelect_Panel.SetActive(false);
+        PetSelect_Panel.SetActive(true);
+    }
 
-        //게임 플레이 씬 로드
-        SceneManager.LoadScene("GamePlayScene");
+    // 펫 선택 후 'START' 버튼이 눌렸을 때
+    public void StartGameFromPetSelect()
+    {
+        // 모든 로직을 PetSelectionUI에 위임
+        petSelectionUI.ConfirmSelection();
+    }
+
+    // PetSelectionUI가 호출해 줄 실제 게임 시작 함수
+    public void StartGame()
+    {
+        Debug.Log("게임이 시작됩니다.");
+        SceneManager.LoadScene("GamePlayerScene");
     }
 
     // 캐릭터 선택 화면의 'BACK'버튼 클릭 시 호출
     public void BackFromCharaSelect()
     {
         Debug.Log("Back 버튼이 클릭됨(이전 메뉴로 이동)");
-        charSelect_Panel.SetActive(false);
+        NewGame_Panel.SetActive(false);
         bg_Image.SetActive(true);
         menu2_Panel.SetActive(true);
+    }
+
+    // 펫 선택 페이지에서 'BACK'버튼 클릭 시 호출
+    public void BackFromPetSelect()
+    {
+        Debug.Log("Back 버튼이 클릭됨 (캐릭터 선택으로 이동)");
+        PetSelect_Panel.SetActive(false);
+        charSelect_Panel.SetActive(true);
     }
 }

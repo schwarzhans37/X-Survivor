@@ -52,7 +52,7 @@ public class MonsterDatabase : MonoBehaviour
         Debug.Log($"[MonsterDatabase] 몬스터 총 {monsters.Count}개 로드 완료");
     }
 
-
+    // ID를 통해 몬스터 데이터 찾기
     public MonsterData GetByID(int id)
     {
         MonsterData result = monsters.Find(m => m.Id == id);
