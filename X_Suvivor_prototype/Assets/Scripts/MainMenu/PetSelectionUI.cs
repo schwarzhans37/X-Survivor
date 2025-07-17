@@ -73,7 +73,7 @@ public class PetSelectionUI : MonoBehaviour
         }
 
         // 선택된 펫 ID를 PlayerDataManager에 저장
-        PlayerDataManager.instance.selectedPetId = selectedPet.Id;
+        PlayerDataManager.instance.playerData.selectedPetId = selectedPet.Id;
 
         // 게임 플레이 씬 로드
         MenuManager.instance.StartGame();

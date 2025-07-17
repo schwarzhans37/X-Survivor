@@ -15,7 +15,11 @@ public class PlayerData
     public List<int> completedAchievementIDs;
     public List<int> unlockedMonsterIDs;
     public List<int> seenPetIDs;
-    
+
+    // 현재 게임 세션을 위해 선택된 정보
+    public int selectedCharacterId;
+    public int selectedPetId;
+
     // 기본 데이터 생성자
     public PlayerData()
     {
@@ -26,5 +30,7 @@ public class PlayerData
         completedAchievementIDs = new List<int>();
         unlockedMonsterIDs = new List<int>();
         seenPetIDs = new List<int>();
+        selectedCharacterId = 1;
+        selectedPetId = -1;     // -1은 선택하지 않았음을 의미
     }
 }

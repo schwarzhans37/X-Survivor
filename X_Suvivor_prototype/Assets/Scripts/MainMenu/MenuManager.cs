@@ -135,7 +135,7 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("게임이 시작됩니다.");
-        SceneManager.LoadScene("GamePlayerScene");
+        SceneManager.LoadScene("GamePlayScene");
     }
 
     // 캐릭터 선택 화면의 'BACK'버튼 클릭 시 호출

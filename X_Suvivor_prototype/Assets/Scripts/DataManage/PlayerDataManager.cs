@@ -9,12 +9,6 @@ public class PlayerDataManager : MonoBehaviour
     public PlayerData playerData;       // 현재 플레이어의 모든 데이터
     private string savePath;            // 데이터 저장 경로
 
-
-    // ===== 현재 게임 세션에서 선택된 정보 =====
-    public int selectedCharacterId;
-    public int selectedPetId;
-    // ========================================
-
     void Awake()
     {
         // ===== 싱글톤 패턴 =====

@@ -61,7 +61,7 @@ public class CharaSelectionUI : MonoBehaviour
         if (currentlySelectedSlot == null) return;
 
         // 최종 선택된 캐릭터 ID를 데이터 관리자에 저장
-        PlayerDataManager.instance.selectedCharacterId = currentlySelectedSlot.charaId;
+        PlayerDataManager.instance.playerData.selectedCharacterId = currentlySelectedSlot.charaId;
 
         // MenuManager에게 펫 선택 페이지로 넘겨달라고 요청
         MenuManager.instance.ShowPetSelectPage();

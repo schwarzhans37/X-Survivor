@@ -18,11 +18,16 @@ public class Player : MonoBehaviour
 
     [Header("# 캐릭터 이미지 렌더")]
     public Hand[] hands;
-    public RuntimeAnimatorController[] animCon; // 플레이어 캐릭터 애니메이션 컨트롤러
+
+    [Header("캐릭터별 애니메이션 컨트롤러")]
+    public RuntimeAnimatorController[] spriteAnimCon; // 플레이어 캐릭터 애니메이션 컨트롤러
 
     Rigidbody2D rigid;  // 충돌 판정 계산 리지드바디
     SpriteRenderer spriter; // 스프라이트(이미지)
     Animator anim;  // 캐릭터 애니메이션
+
+    [Header("게임 중 현재 보우한 무기 목록")]
+    public List<Weapon> equippedWeapons;
 
 
     void Awake()
@@ -30,6 +35,7 @@ public class Player : MonoBehaviour
     {
         speed = baseSpeed;      // 시작 시 이동속도 초기화
         health = maxHealth;     // 시작 시 체력 초기화
+        equippedWeapons = new List<Weapon>();   // 리스트 초기화
         
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
@@ -38,13 +44,28 @@ public class Player : MonoBehaviour
         hands = GetComponentsInChildren<Hand>(true);
     }
 
-    void OnEnable()
-    // 오브젝트가 활성화 되었을 때 마다 호출함
+    public void Init(int charId)
     {
         speed = baseSpeed;
-        anim.runtimeAnimatorController = animCon[GameManager.instance.playerId];
-    }
 
+        Debug.Log("[Player.OnEnable] 함수 호출됨!"); // <--- 호출 시점 확인용 로그 추가
+
+        // GameManager에 기록된 playerId를 바탕으로 올바른 애니메이션 컨트롤러를 설정
+        int charaId = GameManager.instance.playerId;
+        Debug.Log($"[Player.OnEnable] GameManager로부터 받은 캐릭터 ID: {charaId}"); // <--- 확인용 로그 추가
+        int controllerIndex = charaId - 1;
+        Debug.Log($"[Player.OnEnable] 계산된 컨트롤러 인덱스: {controllerIndex}"); // <--- 확인용 로그 추가
+
+        if (controllerIndex >= 0 && controllerIndex < spriteAnimCon.Length && spriteAnimCon[controllerIndex] != null)
+        {
+            anim.runtimeAnimatorController = spriteAnimCon[controllerIndex];
+            Debug.Log($"[Player.OnEnable] {spriteAnimCon[controllerIndex].name} 컨트롤러 적용 완료!"); // <--- 확인용 로그 추가
+        }
+        else
+        {
+            Debug.LogError($"캐릭터 ID: {charaId}에 해당하는 오버라이드 컨트롤러를 찾을 수 없거나 할당되지 않았습니다.");
+        }
+    }
     
     void FixedUpdate()
     /* 
@@ -108,6 +129,28 @@ public class Player : MonoBehaviour
         TakeDamage(Time.deltaTime * 10);
     }
 
+    public void EquipWeapon(ItemData weaponData)
+    {
+        if (weaponData == null) return;
+
+        // 무기 오브젝트를 플레이어의 자식으로 생성
+        GameObject newWeaponObj = new GameObject();
+        newWeaponObj.transform.parent = transform;
+
+        // Weapon 컴포넌트를 추가하고 초기화
+        Weapon weapon = newWeaponObj.AddComponent<Weapon>();
+        weapon.Init(weaponData);
+
+        // 장착된 무기를 목록에 추가
+        equippedWeapons.Add(weapon);
+    }
+
+    public Weapon FindEquippedWeapon(ItemData weaponeData)
+    {
+        if (weaponeData == null) return null;
+        return equippedWeapons.Find(w => w.id == weaponeData.itemId);
+    }
+
     public void TakeDamage(float damage)
     {
         if (!GameManager.instance.isLive) return;
@@ -145,6 +188,4 @@ public class Player : MonoBehaviour
     {
         inputVec = value.Get<Vector2>();
     }
-
-
 }
