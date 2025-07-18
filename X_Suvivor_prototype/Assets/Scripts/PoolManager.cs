@@ -18,7 +18,7 @@ public class PoolManager : MonoBehaviour
             pools[index] = new List<GameObject>();
         }
 
-        Debug.Log(pools.Length);
+        Debug.Log($"{pools.Length}개의 몬스터 개체 소환");
     }
 
     public GameObject Get(int index)

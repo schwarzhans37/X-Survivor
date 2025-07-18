@@ -7,7 +7,6 @@ public class Item : MonoBehaviour
 {
     public ItemData data;
     public int level;
-    public Weapon weapon;
     public Gear gear;
 
     Image icon;
@@ -56,13 +55,13 @@ public class Item : MonoBehaviour
         {
             case ItemData.ItemType.Melee:
             case ItemData.ItemType.Range:
-                if (level == 0)
+                // 1. 현재 어떤 무기를 장비중인지 확인
+                Weapon existingWeapon = player.FindEquippedWeapon(data);
+                if (existingWeapon == null)     // 만약 처음 획득하는 무기라면
                 {
-                    GameObject newWeapon = new GameObject();
-                    weapon = newWeapon.AddComponent<Weapon>();
-                    weapon.Init(data);
+                    player.EquipWeapon(data);
                 }
-                else
+                else                            // 이미 해당 무기를 가지고 있다면
                 {
                     float nextDamage = data.baseDamage;
                     int nextCount = 0;
@@ -70,7 +69,7 @@ public class Item : MonoBehaviour
                     nextDamage += data.baseDamage * data.damages[level];
                     nextCount += data.counts[level];
 
-                    weapon.LevelUp(nextDamage, nextCount);
+                    existingWeapon.LevelUp(nextDamage, nextCount);
                 }
                 level++;
                 break;
