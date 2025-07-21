@@ -16,7 +16,7 @@ public class MenuManager : MonoBehaviour
     public GameObject NewGame_Panel;
     public GameObject charSelect_Panel;    // 캐릭터 선택 패널
     public CharaSelectionUI charaSelectionUI;
-    public GameObject Gacha_Panel;      // 미구현
+    public GameObject Gacha_Panel;
     public GameObject PetSelect_Panel;     // 펫 선택 패널
     public PetSelectionUI petSelectionUI;
 
@@ -95,13 +95,13 @@ public class MenuManager : MonoBehaviour
     }
     */
 
-    /* Menu_2의 'Gacha'버튼 클릭 시 호출
+    // Menu_2의 'Gacha'버튼 클릭 시 호출
     public void Gacha()
     {
-        Debug.Log("펫 가챠 페이지 버튼이 클릭됨(아직 미구현 페이지)");
-        차후 페이지 추가
+        Debug.Log("펫 가챠 페이지 버튼이 클릭됨");
+        Gacha_Panel.SetActive(true);
+        menu2_Panel.SetActive(false);
     }
-    */
 
     // Menu_2의 'BACK'버튼 클릭 시 호출
     public void BackToMainMenu()

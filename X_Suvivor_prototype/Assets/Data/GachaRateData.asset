@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e43aedb1b905f449c401d9fea790d2, type: 3}
+  m_Name: GachaRateData
+  m_EditorClassIdentifier: 
+  rates:
+  - grade: "\uB178\uBA40"
+    probability: 70
+    petIds: 64000000c80000002c01000090010000f4010000
+  - grade: "\uB808\uC5B4"
+    probability: 25
+    petIds: 65000000c90000002d01000091010000f5010000
+  - grade: "\uC720\uB2C8\uD06C"
+    probability: 5
+    petIds: 66000000ca0000002e01000092010000f6010000
