@@ -6,7 +6,12 @@ using System.IO;    //파일 입출력을 위해 필요
 public class PlayerDataManager : MonoBehaviour
 {
     public static PlayerDataManager instance;   // 싱글톤 인스턴스
+
+    [Header("플레이어 게임 데이터")]
     public PlayerData playerData;       // 현재 플레이어의 모든 데이터
+
+    [Header("데이터베이스 참조")]
+    public PetDatabase petDatabase;   // 펫 데이터베이스 연결
     private string savePath;            // 데이터 저장 경로
 
     void Awake()

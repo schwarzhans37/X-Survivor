@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rates:
   - grade: "\uB178\uBA40"
-    probability: 70
-    petIds: 64000000c80000002c01000090010000f4010000
+    probability: 50
+    petIds: 64000000c8000000
   - grade: "\uB808\uC5B4"
-    probability: 25
-    petIds: 65000000c90000002d01000091010000f5010000
+    probability: 35
+    petIds: 65000000c9000000
   - grade: "\uC720\uB2C8\uD06C"
-    probability: 5
-    petIds: 66000000ca0000002e01000092010000f6010000
+    probability: 14
+    petIds: 66000000ca000000
+  - grade: "\uC5D0\uD53D"
+    probability: 1
+    petIds: 67000000cb000000

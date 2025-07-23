@@ -32,19 +32,17 @@ public class PetSelectionUI : MonoBehaviour
         if (PlayerDataManager.instance == null || PlayerDataManager.instance.playerData == null) return;
 
         // 2. 플레이어가 보유한 펫 목록을 불러옴
-        var ownedPets = PlayerDataManager.instance.playerData.ownedPetIDs;
-        if (ownedPets == null) return;  // 데이터가 로드되지 않았을 경우 대비
+        var ownedPetIDs = PlayerDataManager.instance.playerData.ownedPetIDs;
+        var petDB = PlayerDataManager.instance.petDatabase;     // 데이터베이스 참조 가져오기
 
         // 3. 보유한 펫만큼 슬롯을 동적으로 생성
-        foreach (int petId in ownedPets)
+        foreach (int petId in ownedPetIDs)
         {
-            // PetDatabase 싱글톤 인스턴스를 통해 데이터 가져오기
-            PetData data = PetDatabase.instance.GetByID(petId);
+            PetData data = petDB.GetPetByID(petId);     // 데이터베이스에서 검색
             if (data != null)
             {
                 GameObject slotGO = Instantiate(petSlotPrefab, gridContainer);
-                PetSlot slot = slotGO.GetComponent<PetSlot>();
-                slot.Setup(data, this); // 슬롯 초기화
+                slotGO.GetComponent<PetSlot>().Setup(data, this);
             }
         }
 
@@ -57,7 +55,7 @@ public class PetSelectionUI : MonoBehaviour
     public void OnPetSelected(PetData petData)
     {
         selectedPet = petData;
-        Debug.Log($"[{selectedPet.Grade}] {selectedPet.PetType} 선택됨");
+        Debug.Log($"[{selectedPet.grade}] {selectedPet.petName} 선택됨");
 
         // START 버튼 활성화
         startButton.interactable = true;
@@ -73,7 +71,7 @@ public class PetSelectionUI : MonoBehaviour
         }
 
         // 선택된 펫 ID를 PlayerDataManager에 저장
-        PlayerDataManager.instance.playerData.selectedPetId = selectedPet.Id;
+        PlayerDataManager.instance.playerData.selectedPetId = selectedPet.id;
 
         // 게임 플레이 씬 로드
         MenuManager.instance.StartGame();

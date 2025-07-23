@@ -12,8 +12,10 @@ public class GachaManager : MonoBehaviour
     // 1회 뽑기
     public void DrawOne()
     {
+        Debug.Log("1회 뽑기버튼이 클릭됨.");
         if (PlayerDataManager.instance.playerData.gems < 100)
         {
+            Debug.LogError("1회 뽑기에 필요한 Gems가 부족함.");
             notEnoughGemsMessage.Show();
             return;
         }
@@ -27,8 +29,10 @@ public class GachaManager : MonoBehaviour
 
     public void DrawTen()
     {
+        Debug.Log("10회 뽑기버튼이 클릭됨.");
         if (PlayerDataManager.instance.playerData.gems < 1000)
         {
+            Debug.Log("10회 뽑기에 필요한 Gems가 부족함.");
             notEnoughGemsMessage.Show();
             return;
         }
@@ -66,7 +70,8 @@ public class GachaManager : MonoBehaviour
         int selectedPetId = selectedGrade.petIds[randomIndex];
 
         // 3. 펫 데이터 가져오기
-        PetData drawPet = PetDatabase.instance.GetByID(selectedPetId);
+        var petDB = PlayerDataManager.instance.petDatabase;
+        PetData drawPet = petDB.GetPetByID(selectedPetId);
 
         // 4. 플레이어 데이터 업데이트 및 결과 생성
         bool isNew = !PlayerDataManager.instance.playerData.ownedPetIDs.Contains(selectedPetId);
@@ -78,7 +83,7 @@ public class GachaManager : MonoBehaviour
         else
         {
             // 중복 펫은 카운트 증가 또는 재화로 변환(차후 구현)
-            Debug.Log($"중복 펫 획득: {drawPet.PetType} (ID: {drawPet.Id})");
+            Debug.Log($"중복 펫 획득: {drawPet.petName} (ID: {drawPet.id})");
         }
 
         PlayerDataManager.instance.SaveData();  //  데이터 변경 후 저장

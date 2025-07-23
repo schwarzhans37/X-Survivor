@@ -24,7 +24,7 @@ public class PetSlot : MonoBehaviour
 
         // 아이콘 설정 (PetDatabase에서 아이콘 Sprite를 가져와야 함)
         //petIcon.sprite = PetDatabase.instance.GetSpriteForPet(data.Id);
-        petIcon.color = GetColorByGrade(data.Grade); // 임시로 등급별 색상 표시
+        petIcon.color = GetColorByGrade(data.grade); // 임시로 등급별 색상 표시
     }
 
     // 이 슬롯이 클릭이 되었을 경우

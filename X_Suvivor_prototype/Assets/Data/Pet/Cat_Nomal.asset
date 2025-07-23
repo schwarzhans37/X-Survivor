@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
+  m_Name: Cat_Nomal
+  m_EditorClassIdentifier: 
+  id: 200
+  petName: "\uACE0\uC591\uC774(\uB178\uBA40)"
+  petType: "\uACE0\uC591\uC774"
+  grade: "\uB178\uBA40"
+  petIcon: {fileID: 21300000, guid: 7870456e3d174ca49ac88838b366829f, type: 3}
+  petSlot: {fileID: 2286721273538385791, guid: bae4acfb95636e1469be71e48316a60c, type: 3}
+  inGameSprite: {fileID: 21300000, guid: 7870456e3d174ca49ac88838b366829f, type: 3}
+  splashArtPrefab: {fileID: 3779638420565449872, guid: cfdc68bd10f3d3441aabad9ef5a5b6d2, type: 3}
+  buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
+  hasSkill: 0
+  skillDescription: "\uC2A4\uD0AC \uC5C6\uC74C"
+  initialSkillCount: 0

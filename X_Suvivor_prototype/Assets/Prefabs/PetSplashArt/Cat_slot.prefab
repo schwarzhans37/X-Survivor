@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8093288822480213521}
   - component: {fileID: 3342695712900425844}
   m_Layer: 0
-  m_Name: PetSlot_Template
+  m_Name: Cat_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2e23f9c01270837419543252010788a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7870456e3d174ca49ac88838b366829f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
