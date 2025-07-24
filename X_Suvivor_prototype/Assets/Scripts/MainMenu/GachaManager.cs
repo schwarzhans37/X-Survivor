@@ -13,13 +13,13 @@ public class GachaManager : MonoBehaviour
     public void DrawOne()
     {
         Debug.Log("1회 뽑기버튼이 클릭됨.");
-        if (PlayerDataManager.instance.playerData.gems < 100)
+        if (!PlayerDataManager.instance.SpendGems(100L))
         {
             Debug.LogError("1회 뽑기에 필요한 Gems가 부족함.");
             notEnoughGemsMessage.Show();
             return;
         }
-        PlayerDataManager.instance.playerData.gems -= 100;
+        Debug.Log("가챠 1회 실행 성공");
 
         List<GachaResult> results = new List<GachaResult>();
         results.Add(PerformDraw());    // 1회 뽑기 실행
@@ -30,13 +30,13 @@ public class GachaManager : MonoBehaviour
     public void DrawTen()
     {
         Debug.Log("10회 뽑기버튼이 클릭됨.");
-        if (PlayerDataManager.instance.playerData.gems < 1000)
+        if (!PlayerDataManager.instance.SpendGems(1000L))
         {
-            Debug.Log("10회 뽑기에 필요한 Gems가 부족함.");
+            Debug.LogError("10회 뽑기에 필요한 Gems가 부족함.");
             notEnoughGemsMessage.Show();
             return;
         }
-        PlayerDataManager.instance.playerData.gems -= 1000;
+        Debug.Log("가챠 10회 실행 성공");
 
         List<GachaResult> results = new List<GachaResult>();
         for (int i = 0; i < 10; i++)

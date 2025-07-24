@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;    //파일 입출력을 위해 필요
+using System.IO;
+using System;    //파일 입출력을 위해 필요
 
 public class PlayerDataManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerDataManager : MonoBehaviour
     [Header("데이터베이스 참조")]
     public PetDatabase petDatabase;   // 펫 데이터베이스 연결
     private string savePath;            // 데이터 저장 경로
+
+    public event Action OnPlayerDataUpdated;    // 재화 변경 이벤트 선언(인스턴스 기반)
 
     void Awake()
     {
@@ -30,7 +33,48 @@ public class PlayerDataManager : MonoBehaviour
         // =======================
 
         savePath = Path.Combine(Application.persistentDataPath, "playerdata.json");
+        Debug.Log("데이터 저장 경로: " + savePath);
         LoadData(); // 게임 시작 시 데이터 로드
+    }
+
+    public void AddGold(long amount)
+    {
+        playerData.gold += amount;
+        NotifyDataUpdate(); // 데이터 변경 알림
+        Debug.Log($"{amount}만큼의 돈이 추가됩니다.");
+        SaveData();
+    }
+
+    public void AddGems(long amount)
+    {
+        playerData.gems += amount;
+        NotifyDataUpdate(); // 데이터 변경 알림
+        Debug.Log($"{amount}만큼의 젬이 추가됩니다.");
+        SaveData();
+    }
+
+    public bool SpendGems(long amount)
+    {
+        if (playerData.gems >= amount)
+        {
+            playerData.gems -= amount;
+            NotifyDataUpdate(); // 데이터 변경 알림
+            Debug.Log($"가챠 실행 성공.");
+            SaveData();
+            return true;    // 구매 성공
+        }
+        Debug.LogError($"가챠 실행 실패.");
+        return false; // 구매 실패
+    }
+
+    // 외부에 데이터 변경을 알리는 함수
+    private void NotifyDataUpdate()
+    {
+        if (OnPlayerDataUpdated != null)
+        {
+            OnPlayerDataUpdated();
+        }
+        Debug.Log("플레이어 데이터 변경 알림을 보냈습니다.");
     }
 
     // ===== 데이터 저장 및 로드 =====
@@ -49,6 +93,7 @@ public class PlayerDataManager : MonoBehaviour
             playerData = new PlayerData();
             SaveData(); // 처음 생성 시 바로 한 번 저장
         }
+        NotifyDataUpdate();
     }
 
     public void SaveData()

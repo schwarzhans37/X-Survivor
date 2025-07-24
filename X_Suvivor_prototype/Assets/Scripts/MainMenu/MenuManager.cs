@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
 
     [Header("UI 패널 관리자")]
     public GameObject bg_Image; // menu_1, menu_2 전용 배경이미지
+    public GameObject gacha_BackImage;
     public GameObject menu1_Panel;  // Game Start, Setting, Exit 버튼이 있는 패널
     public GameObject menu2_Panel;  // New Game, Load, Gacha, Back 버튼이 있는 패널
     public GameObject NewGame_Panel;
@@ -101,6 +102,15 @@ public class MenuManager : MonoBehaviour
         Debug.Log("펫 가챠 페이지 버튼이 클릭됨");
         Gacha_Panel.SetActive(true);
         menu2_Panel.SetActive(false);
+    }
+
+    public void BackFromCGacha()
+    {
+        Debug.Log("Back 버튼이 클릭됨(이전 메뉴로 이동)");
+        Gacha_Panel.SetActive(false);
+        gacha_BackImage.SetActive(false);
+        bg_Image.SetActive(true);
+        menu2_Panel.SetActive(true);
     }
 
     // Menu_2의 'BACK'버튼 클릭 시 호출
