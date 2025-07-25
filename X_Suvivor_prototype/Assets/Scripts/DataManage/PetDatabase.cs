@@ -1,65 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using System.IO;
 
-public class PetDatabase : MonoBehaviour
+[CreateAssetMenu(fileName = "PetDatabase", menuName = "Pet/Pet Database")]
+public class PetDatabase : ScriptableObject
 {
-    public static PetDatabase instance; // 싱글톤으로 만들어 외부 접근 가능하게 만들기
-    public List<PetData> pets = new List<PetData>();
+    public List<PetData> allPets;
 
-    void Awake()
+    // ID로 펫 데이터를 찾는 함수
+    public PetData GetPetByID(int id)
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        LoadPetData();
+        return allPets.FirstOrDefault(p => p.id == id);
     }
 
-    public void LoadPetData()
+    // 에디터에서 데이터를 자동으로 찾아 리스트에 채워주는 기능
+    [ContextMenu("Find and Add All Pets")]
+    private void FindAndAddAllPets()
     {
-        TextAsset csv = Resources.Load<TextAsset>("PetData");
-
-        pets.Clear();
-
-        StringReader reader = new StringReader(csv.text);
-        bool isFirstLine = true;
-
-        while (reader.Peek() > -1)
+#if UNITY_EDITOR
+        allPets = new List<PetData>();
+        string[] guids = UnityEditor.AssetDatabase.FindAssets("t:PetDataSO");
+        foreach (string guid in guids)
         {
-            string line = reader.ReadLine();
-            if (isFirstLine) { isFirstLine = false; continue; }
-
-            string[] values = line.Split(',');
-
-            if (values.Length < 7) continue;
-
-            PetData pet = new PetData
+            string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+            PetData petData = UnityEditor.AssetDatabase.LoadAssetAtPath<PetData>(path);
+            if (petData != null)
             {
-                Id = int.Parse(values[0].Trim()),
-                PetType = values[1].Trim(),
-                Grade = values[2].Trim(),
-                HasSkill = bool.Parse(values[3].Trim()),
-                BuffDescription = values[4].Trim(),
-                SkillDescription = values[5].Trim(),
-                SkillCount = int.Parse(values[6].Trim())
-            };
-
-            pets.Add(pet);
+                allPets.Add(petData);
+            }
         }
-
-        Debug.Log($"[PetDatabase] {pets.Count}개의 펫 데이터를 불러왔습니다.");
-    }
-
-    // ID를 통해 펫 데이터 찾기
-    public PetData GetByID(int id)
-    {
-        return pets.Find(p => p.Id == id);
+        Debug.Log($"Found and added {allPets.Count} pets to the database.");
+        #endif
     }
 }
