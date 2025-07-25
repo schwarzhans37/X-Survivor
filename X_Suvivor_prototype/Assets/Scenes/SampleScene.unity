@@ -5253,7 +5253,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 45c648bd175e3ee4fb726ccc05727e36, type: 2}
   level: 0
-  weapon: {fileID: 0}
   gear: {fileID: 0}
 --- !u!114 &134957068
 MonoBehaviour:
@@ -5742,7 +5741,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
   level: 0
-  weapon: {fileID: 0}
   gear: {fileID: 0}
 --- !u!114 &215061061
 MonoBehaviour:
@@ -6172,11 +6170,8 @@ MonoBehaviour:
   inputVec: {x: 0, y: 0}
   itemScanner: {fileID: 0}
   hands: []
-  animCon:
-  - {fileID: 9100000, guid: bc1fe6d26d801214495cb1d94d81c331, type: 2}
-  - {fileID: 22100000, guid: 6bc6910d1bc79404b9bd2383832fd765, type: 2}
-  - {fileID: 22100000, guid: d15a74b70ff303b408a8d28616248680, type: 2}
-  - {fileID: 22100000, guid: b3be3670aa63d46419f265a814b1cb63, type: 2}
+  spriteAnimCon: []
+  equippedWeapons: []
 --- !u!70 &274803309
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -11274,7 +11269,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 738c5fe054bfe25478bfcc4c22e45186, type: 2}
   level: 0
-  weapon: {fileID: 0}
   gear: {fileID: 0}
 --- !u!114 &378761491
 MonoBehaviour:
@@ -11872,6 +11866,7 @@ MonoBehaviour:
   uiLevelUo: {fileID: 1390879062}
   uiResult: {fileID: 1780199141}
   enemyCleaner: {fileID: 1882968315}
+  charaDatas: []
 --- !u!4 &492052613
 Transform:
   m_ObjectHideFlags: 0
@@ -12037,7 +12032,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: a3d94efcd1e8d1e4b8e4ad5af1509ece, type: 2}
   level: 0
-  weapon: {fileID: 0}
   gear: {fileID: 0}
 --- !u!114 &497561704
 MonoBehaviour:
@@ -12333,7 +12327,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 8.375
+  orthographic size: 4.55432
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -12895,7 +12889,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 9fdd3a6da9c9d154abaf124eac0b053f, type: 2}
   level: 0
-  weapon: {fileID: 0}
   gear: {fileID: 0}
 --- !u!114 &576173953
 MonoBehaviour:
