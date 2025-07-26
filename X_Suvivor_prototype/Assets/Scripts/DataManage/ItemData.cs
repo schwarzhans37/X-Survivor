@@ -15,7 +15,7 @@ public class ItemData : ScriptableObject
     [TextArea]
     public string itemDesc;
     public Sprite itemIcon;
-    
+
 
     [Header("# Level Data")]
     public float baseDamage;
@@ -26,4 +26,5 @@ public class ItemData : ScriptableObject
     [Header("# Weapon Data")]
     public GameObject projectile;
     public Sprite hand;
+    public float bulletBaseSpeed;
 }

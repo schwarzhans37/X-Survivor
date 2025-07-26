@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class Bullet : MonoBehaviour
 {
@@ -11,22 +13,37 @@ public class Bullet : MonoBehaviour
     public float damage;    // 탄환 데미지
     public int penetration; // 관통 횟수
     public float bulletSize;    // 탄환 크기
+    public float bulletSpeed;     // 탄환 속도
 
-    Rigidbody2D rigid;
+    private Rigidbody2D rigid;
+    private Vector2 moveDir;    // 이동 방향 벡터
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    public void Init(float damage, int penetration, Vector3 dir)
+    public void Init(float dmg, int pene, float spd, Vector2 dir)
     {
-        this.damage = damage;
-        this.penetration  = penetration;
+        damage = dmg;
+        penetration = pene;
+        bulletSpeed = spd;
+        moveDir = dir;
 
-        if (penetration >= 0) {
-            rigid.velocity = dir * 15f;
+        if (bulletSpeed > 0)
+        {
+            rigid.velocity = dir * bulletSpeed;
         }
+        else // 근접 무기(속도 0)의 경우
+        {
+            rigid.velocity = Vector2.zero;
+        }
+    }
+
+    void OnDisable()
+    {
+        // 풀로 돌아갈 때 초기화
+        rigid.velocity = Vector2.zero;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -37,7 +54,6 @@ public class Bullet : MonoBehaviour
         penetration--;
 
         if (penetration < 0) {
-            rigid.velocity = Vector2.zero;
             gameObject.SetActive(false);
         }
     }

@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     public float damage;
     public int count;   // 무기 배치 개수
     public float attackSpeed; // 공격속도
+    public float projectileSpeed;   // 투사체 속도
 
     float timer;
 
@@ -67,9 +68,12 @@ public class Weapon : MonoBehaviour
         id = data.itemId;
         damage = data.baseDamage * Character.Damage;
         count = data.baseCount + Character.Count;
+        projectileSpeed = data.bulletBaseSpeed;
 
-        for (int index = 0; index < GameManager.instance.pool.prefabs.Length; index++) {
-            if (data.projectile == GameManager.instance.pool.prefabs[index]) {
+        for (int index = 0; index < GameManager.instance.pool.prefabs.Length; index++)
+        {
+            if (data.projectile == GameManager.instance.pool.prefabs[index])
+            {
                 prefabId = index;
                 break;
             }
@@ -111,7 +115,7 @@ public class Weapon : MonoBehaviour
             Vector3 rotVec = Vector3.forward * 360 * index / count;
             bullet.Rotate(rotVec);
             bullet.Translate(bullet.up * 1.5f, Space.World);
-            bullet.GetComponent<Bullet>().Init(damage, -100,Vector3.zero);     // -100은 여기서는 무한(-1)으로 관통하게끔 넣음
+            bullet.GetComponent<Bullet>().Init(damage, -100, 0,Vector2.zero);     // -100은 여기서는 무한(-1)으로 관통하게끔 넣음
         }
     }
 
@@ -123,20 +127,19 @@ public class Weapon : MonoBehaviour
         // 1. 마우스의 스크린 좌표 가져오기
         Vector3 mousePos = Input.mousePosition;
 
-        // 2. 마우스의 z좌표를 카메라와의 거리로 설정해야 올바르게 2D로 변환됨
-        mousePos.z = Camera.main.nearClipPlane;
+        mousePos.z = -Camera.main.transform.position.z;
 
-        // 3. 스크린 좌표를 월드 좌표로 변환
+        // 2. 스크린 좌표를 월드 좌표로 변환
         Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-        // 4. 마우스 월드 좌표를 향해 발사하는 벡터 계산
+        // 3. 마우스 월드 좌표를 향해 발사하는 벡터 계산
         Vector2 dir = (worldMousePos - transform.position).normalized;
 
         Transform bullet = GameManager.instance.pool.Get(4).transform;
         bullet.position = transform.position;
 
         bullet.rotation = Quaternion.FromToRotation(Vector2.up, dir);
-        bullet.GetComponent<Bullet>().Init(damage, count, dir);
+        bullet.GetComponent<Bullet>().Init(damage, count, projectileSpeed, dir);
 
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
 
