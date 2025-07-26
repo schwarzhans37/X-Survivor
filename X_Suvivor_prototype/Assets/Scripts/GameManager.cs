@@ -4,6 +4,7 @@ using System.Data.Common;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,9 +28,12 @@ public class GameManager : MonoBehaviour
     public LevelUp uiLevelUo;
     public Result uiResult;
     public GameObject enemyCleaner;
+    public GameObject pauseMenuPanel;
 
     [Header("# 캐릭터 관련 데이터베이스")]
     public List<CharaData> charaDatas;  // 모든 캐릭터 데이터를 담는 리스트
+
+    private bool isPaused;  // 게임이 일시정지 상태인지 확인
 
     void Awake()
     // 초기화(선언)
@@ -82,7 +86,7 @@ public class GameManager : MonoBehaviour
                 petObject.GetComponent<Pet>().Init(data, player.transform);
             */
             Debug.Log($"펫 Id: {petId}와 함께 게임을 시작합니다.");
-        }  
+        }
 
         // 5. UI 및 게임 상태 설정
         //uiLevelUo.Select(playerId % 2);
@@ -137,12 +141,21 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!isLive) {
+        // 일시정지 토글 로직
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+            Debug.Log("게임이 일시정지 되었습니다.");
+        }
+
+        if (!isLive || isPaused)    // 일시정지 상태 혹은 사망 시 게임 시간 정지
+        {
             return;
         }
         gameTime += Time.deltaTime;
 
-        if (gameTime > maxGameTime) {
+        if (gameTime > maxGameTime)
+        {
             gameTime = maxGameTime;
             GameVictory();
         }
@@ -154,7 +167,8 @@ public class GameManager : MonoBehaviour
             return;
         nowExp++;
 
-        if (nowExp == needExp[Mathf.Min(level, needExp.Length-1)]) {
+        if (nowExp == needExp[Mathf.Min(level, needExp.Length - 1)])
+        {
             level++;
             nowExp = 0;
             uiLevelUo.show();
@@ -171,5 +185,39 @@ public class GameManager : MonoBehaviour
     {
         isLive = true;
         Time.timeScale = 1;
+    }
+
+    public void TogglePause()
+    {
+        if (isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0;
+        pauseMenuPanel.SetActive(true);
+        Debug.Log("일시정지 메뉴 활성화.");
+    }
+
+    public void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1;
+        pauseMenuPanel.SetActive(false);
+        Debug.Log("일시정지 메뉴 비활성화.");
+    }
+
+    public void ExitToMainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenuScene");
     }
 }
