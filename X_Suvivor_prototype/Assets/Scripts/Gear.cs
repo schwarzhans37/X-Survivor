@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Gear : MonoBehaviour
 {
-    public ItemData.ItemType type;
+    public WeaponData.ItemType type;
     public float rate;
 
-    public void Init(ItemData data)
+    public void Init(WeaponData data)
     {
         // 기본 설정
         name = "Gear" + data.itemId;
@@ -29,10 +29,10 @@ public class Gear : MonoBehaviour
     void ApplyGear()
     {
         switch (type) {
-            case ItemData.ItemType.Glove:
+            case WeaponData.ItemType.Glove:
                 RateUp();
                 break;
-            case ItemData.ItemType.Shoe:
+            case WeaponData.ItemType.Shoe:
                 SpeedUp();
                 break;
         }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
-    public ItemData data;
+    public WeaponData data;
     public int level;
     public Gear gear;
 
@@ -31,12 +31,12 @@ public class Item : MonoBehaviour
         textLevel.text = "Lv." + (level);
 
         switch (data.itemType) {
-            case ItemData.ItemType.Melee:
-            case ItemData.ItemType.Range:
+            case WeaponData.ItemType.Melee:
+            case WeaponData.ItemType.Range:
                 textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100, data.counts[level]);
                 break;
-            case ItemData.ItemType.Glove:
-            case ItemData.ItemType.Shoe:
+            case WeaponData.ItemType.Glove:
+            case WeaponData.ItemType.Shoe:
                 textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100);
                 break;
             default:
@@ -53,8 +53,8 @@ public class Item : MonoBehaviour
 
         switch (data.itemType)
         {
-            case ItemData.ItemType.Melee:
-            case ItemData.ItemType.Range:
+            case WeaponData.ItemType.Melee:
+            case WeaponData.ItemType.Range:
                 // 1. 현재 어떤 무기를 장비중인지 확인
                 Weapon existingWeapon = player.FindEquippedWeapon(data);
                 if (existingWeapon == null)     // 만약 처음 획득하는 무기라면
@@ -73,9 +73,9 @@ public class Item : MonoBehaviour
                 }
                 level++;
                 break;
-            case ItemData.ItemType.Glove:
+            case WeaponData.ItemType.Glove:
                 /* 장갑 : 플레이어의 공격속도 영향 */
-            case ItemData.ItemType.Shoe:
+            case WeaponData.ItemType.Shoe:
                 /* 신발 : 플레이어의 이동속도 영향 */
                 if (level == 0)
                 {
@@ -90,7 +90,7 @@ public class Item : MonoBehaviour
                 }
                 level++;
                 break;
-            case ItemData.ItemType.Heal:
+            case WeaponData.ItemType.Heal:
                 /* 치유 : 플레이어의 현재 체력 회복 */
                 player.Heal();  // Player.cs에 Heal() 만들어야함
                 break;

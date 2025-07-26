@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     Animator anim;  // 캐릭터 애니메이션
 
     [Header("게임 중 현재 보우한 무기 목록")]
-    public List<Weapon> equippedWeapons;
+    public List<WeaponBase> equippedWeapons;
 
 
     void Awake()
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     {
         speed = baseSpeed;      // 시작 시 이동속도 초기화
         health = maxHealth;     // 시작 시 체력 초기화
-        equippedWeapons = new List<Weapon>();   // 리스트 초기화
+        equippedWeapons = new List<WeaponBase>();   // 리스트 초기화
         
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
@@ -129,23 +129,29 @@ public class Player : MonoBehaviour
         TakeDamage(Time.deltaTime * 10);
     }
 
-    public void EquipWeapon(ItemData weaponData)
+    public void EquipWeapon(WeaponData weaponData)
     {
         if (weaponData == null) return;
 
         // 무기 오브젝트를 플레이어의 자식으로 생성
         GameObject newWeaponObj = new GameObject();
         newWeaponObj.transform.parent = transform;
+        newWeaponObj.transform.localPosition = Vector3.zero;
 
         // Weapon 컴포넌트를 추가하고 초기화
-        Weapon weapon = newWeaponObj.AddComponent<Weapon>();
-        weapon.Init(weaponData);
+        WeaponBase weaponComponent = null;
+        switch (weaponData.weaponType)
+        {
+            case WeaponData.WeaponType.Melee:
+                weaponComponent = newWeaponObj.AddComponent<MeleeWeapon>();
+                break;
+        }
 
         // 장착된 무기를 목록에 추가
         equippedWeapons.Add(weapon);
     }
 
-    public Weapon FindEquippedWeapon(ItemData weaponeData)
+    public Weapon FindEquippedWeapon(WeaponData weaponeData)
     {
         if (weaponeData == null) return null;
         return equippedWeapons.Find(w => w.id == weaponeData.itemId);
