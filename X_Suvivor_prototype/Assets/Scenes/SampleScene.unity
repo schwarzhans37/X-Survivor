@@ -11866,6 +11866,7 @@ MonoBehaviour:
   uiLevelUo: {fileID: 1390879062}
   uiResult: {fileID: 1780199141}
   enemyCleaner: {fileID: 1882968315}
+  pauseMenuPanel: {fileID: 0}
   charaDatas: []
 --- !u!4 &492052613
 Transform:
@@ -12327,7 +12328,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.9
+  orthographic size: 6.013889
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
