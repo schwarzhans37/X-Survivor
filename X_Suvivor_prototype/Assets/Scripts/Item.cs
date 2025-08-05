@@ -1,99 +1,114 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
-    public WeaponData data;
-    public int level;
-    public Gear gear;
+    // 아이템의 종류를 식별하기 위한 enum
+    public enum ItemCategory { Weapon, Gear };
+    public ItemCategory itemCategory;
 
-    Image icon;
-    Text textLevel;
-    Text textName;
-    Text textDesc;
+    // 데이터를 담을 변수, 인스펙터에서는 하나만 사용됨
+    public WeaponData weaponData;
+    public GearData gearData;
+    public int currentDisplayLevel;   // 이 아이템 UI가 현재 표시하는 레벨
 
+    // UI 요소
+    private Image icon;
+    private TextMeshProUGUI textLevel;
+    private TextMeshProUGUI textName;
+    private TextMeshProUGUI textDesc;
 
     void Awake()
     {
-        icon = GetComponentsInChildren<Image>()[1];
-        icon.sprite = data.itemIcon;
-
-        Text[] texts = GetComponentsInChildren<Text>();
-        textLevel = texts[0];
-        textName = texts[1];
-        textDesc = texts[2];
-        textName.text = data.itemName;
-    }
-    void OnEnable()
-    {
-        textLevel.text = "Lv." + (level);
-
-        switch (data.itemType) {
-            case WeaponData.ItemType.Melee:
-            case WeaponData.ItemType.Range:
-                textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100, data.counts[level]);
-                break;
-            case WeaponData.ItemType.Glove:
-            case WeaponData.ItemType.Shoe:
-                textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100);
-                break;
-            default:
-                textDesc.text = string.Format(data.itemDesc);
-                break;
-        }
-        
+        // UI 컴포넌트들을 자식에서 찾아 할당
+        icon = transform.Find("Icon").GetComponent<Image>();
+        textLevel = transform.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        textName = transform.Find("NameText").GetComponent<TextMeshProUGUI>();
+        textDesc = transform.Find("DescText").GetComponent<TextMeshProUGUI>();
     }
 
-    public void OnClick()
+    // LevelUp 스크립트가 이 함수를 호출하여 아이템 정보를 설정
+    public void Init(WeaponData data)
     {
-        //GameManager를 통해 Player.cs 참조하기
+        itemCategory = ItemCategory.Weapon;
+        this.weaponData = data;
+        UpdateUI();
+    }
+
+    public void Init(GearData data)
+    {
+        itemCategory = ItemCategory.Gear;
+        this.gearData = data;
+        UpdateUI();
+    }
+
+    // 현재 정보에 맞게 UI 텍스트와 아이콘을 업데이트
+    public void UpdateUI()
+    {
+        // Player를 찾아 현재 장착된 아이템의 레벨을 가져옴
         Player player = GameManager.instance.player;
 
-        switch (data.itemType)
+        switch (itemCategory)
         {
-            case WeaponData.ItemType.Melee:
-            case WeaponData.ItemType.Range:
-                // 1. 현재 어떤 무기를 장비중인지 확인
-                Weapon existingWeapon = player.FindEquippedWeapon(data);
-                if (existingWeapon == null)     // 만약 처음 획득하는 무기라면
-                {
-                    player.EquipWeapon(data);
-                }
-                else                            // 이미 해당 무기를 가지고 있다면
-                {
-                    float nextDamage = data.baseDamage;
-                    int nextCount = 0;
+            case ItemCategory.Weapon:
+                // 플레이어가 가진 무기의 실제 레벨을 가져와야 함
+                WeaponBase equippedWeapon = player.FindEquippedWeapon(weaponData);
+                currentDisplayLevel = equippedWeapon != null ? equippedWeapon.currentLevel : -1;
 
-                    nextDamage += data.baseDamage * data.damages[level];
-                    nextCount += data.counts[level];
-
-                    existingWeapon.LevelUp(nextDamage, nextCount);
-                }
-                level++;
+                icon.sprite = weaponData.weaponIcon;
+                textName.text = weaponData.weaponName;
+                textLevel.text = "Lv." + (currentDisplayLevel + 2);
+                // TODO: 레벨에 맞는 설명 업데이트
+                // textDesc.text = ...
                 break;
-            case WeaponData.ItemType.Glove:
-                /* 장갑 : 플레이어의 공격속도 영향 */
-            case WeaponData.ItemType.Shoe:
-                /* 신발 : 플레이어의 이동속도 영향 */
-                if (level == 0)
+            case ItemCategory.Gear:
+                // 플레이어가 가진 장비의 실제 레벨을 가져와야 함
+                Gear equippedGear = player.FindEquippedGear(gearData);
+                currentDisplayLevel = equippedGear != null ? equippedGear.currentLevel : -1;
+
+                icon.sprite = gearData.gearIcon;
+                textName.text = gearData.gearName;
+                textLevel.text = "Lv." + (currentDisplayLevel + 2);
+                // textDesc.text = string.Format(gearData.gearDesc, ...);
+                break;
+        }
+    }
+
+    // 레벨업 버튼 클릭 시
+    public void OnClick()
+    {
+        Player player = GameManager.instance.player;
+
+        switch (itemCategory)
+        {
+            case ItemCategory.Weapon:
+                WeaponBase existingWeapon = player.FindEquippedWeapon(weaponData);
+                if (existingWeapon == null)
                 {
-                    GameObject newGear = new GameObject();
-                    gear = newGear.AddComponent<Gear>();
-                    gear.Init(data);
+                    player.EquipWeapon(weaponData);
                 }
                 else
                 {
-                    float nextRate = data.damages[level];
-                    gear.LevelUp(nextRate);
+                    existingWeapon.LevelUp();
                 }
-                level++;
                 break;
-            case WeaponData.ItemType.Heal:
-                /* 치유 : 플레이어의 현재 체력 회복 */
-                player.Heal();  // Player.cs에 Heal() 만들어야함
+            case ItemCategory.Gear:
+                Gear existingGear = player.FindEquippedGear(gearData);
+                if (existingGear == null)
+                {
+                    player.EquipGear(gearData);
+                }
+                else
+                {
+                    existingGear.LevelUp();
+                }
                 break;
         }
+
+        // 레벨업 UI를 닫는 로직
+        GameManager.instance.uiLevelUo.hide();
     }
 }

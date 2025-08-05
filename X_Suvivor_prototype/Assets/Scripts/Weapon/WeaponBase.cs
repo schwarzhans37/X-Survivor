@@ -17,6 +17,7 @@ public abstract class WeaponBase : MonoBehaviour
 
     protected float timer;
     protected Player player;
+    protected float gearCooldownRate = 0f;  // 장비로 인한 쿨다운 감소율
 
     protected virtual void Awake()
     {
@@ -60,10 +61,17 @@ public abstract class WeaponBase : MonoBehaviour
             currentPenetration = weaponData.penetrations[levelIndex];
             currentCount = weaponData.counts[levelIndex];
             currentCooldown = weaponData.cooldowns[levelIndex]; // 쿨다운은 배열 값을 그대로 사용 (빼기 X)
+            currentCooldown *= (1f - gearCooldownRate);
             
             // 투사체 속도는 현재 WeaponData에 레벨별 배열이 없으므로 일단 base 값 유지
             currentProjectileSpeed = weaponData.baseProjectileSpeed;
         }
+    }
+
+    public void ApplyGearRate(float rate)
+    {
+        gearCooldownRate = rate;
+        ApplyStatusByLevel();
     }
 
     protected virtual void Update()

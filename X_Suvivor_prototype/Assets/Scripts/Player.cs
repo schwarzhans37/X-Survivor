@@ -26,8 +26,14 @@ public class Player : MonoBehaviour
     SpriteRenderer spriter; // 스프라이트(이미지)
     Animator anim;  // 캐릭터 애니메이션
 
-    [Header("게임 중 현재 보우한 무기 목록")]
+    [Header("게임 중 현재 보유한 무기 목록")]
     public List<WeaponBase> equippedWeapons;
+
+    [Header("게임 중 현재 보유한 장비 목록")]
+    public List<Gear> equippedGears;
+
+
+    private float speedBonusRate = 0f; // 장비를 통한 속도 증가율
 
 
     void Awake()
@@ -35,7 +41,8 @@ public class Player : MonoBehaviour
     {
         speed = baseSpeed;      // 시작 시 이동속도 초기화
         health = maxHealth;     // 시작 시 체력 초기화
-        equippedWeapons = new List<WeaponBase>();   // 리스트 초기화
+        equippedWeapons = new List<WeaponBase>();   // 무기 리스트 초기화
+        equippedGears = new List<Gear>();           // 장비 리스트 초기화
         
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
@@ -65,6 +72,8 @@ public class Player : MonoBehaviour
         {
             Debug.LogError($"캐릭터 ID: {charaId}에 해당하는 오버라이드 컨트롤러를 찾을 수 없거나 할당되지 않았습니다.");
         }
+
+        UpdateSpeed();
     }
     
     void FixedUpdate()
@@ -131,30 +140,55 @@ public class Player : MonoBehaviour
 
     public void EquipWeapon(WeaponData weaponData)
     {
-        if (weaponData == null) return;
-
-        // 무기 오브젝트를 플레이어의 자식으로 생성
-        GameObject newWeaponObj = new GameObject();
-        newWeaponObj.transform.parent = transform;
-        newWeaponObj.transform.localPosition = Vector3.zero;
-
-        // Weapon 컴포넌트를 추가하고 초기화
-        WeaponBase weaponComponent = null;
-        switch (weaponData.weaponType)
+        if (weaponData == null)
         {
-            case WeaponData.WeaponType.Melee:
-                weaponComponent = newWeaponObj.AddComponent<MeleeWeapon>();
-                break;
+            Debug.LogError("장착하려는 WeaponData가 null입니다.");
+            return;
+        }
+        if (weaponData.controllerPrefab == null)
+        {
+            Debug.LogError($"WeaponData '{weaponData.weaponName}'에 ControllerPrefab이 연결되지 않았습니다.");
+            return;
         }
 
-        // 장착된 무기를 목록에 추가
-        equippedWeapons.Add(weapon);
+        // 무기 오브젝트를 플레이어의 자식으로 생성
+        GameObject newWeaponObj = Instantiate(weaponData.controllerPrefab, transform);
+        newWeaponObj.transform.localPosition = Vector3.zero;
+
+        // 생성된 오브젝트에서 WeaponBase 컴포넌트를 가져옴
+        WeaponBase weaponComponent = newWeaponObj.GetComponent<WeaponBase>();
+
+        // 컴포넌트를 성공적으로 찾으면, 초기화하고 목록에 추가
+        if (weaponComponent != null)
+        {
+            weaponComponent.Init(weaponData); // Init 함수 호출
+            equippedWeapons.Add(weaponComponent); // 리스트에 추가
+            Debug.Log($"[{weaponData.weaponName}] 무기를 장착했습니다.");
+        }
+        else
+        {
+            Debug.LogError($"'{weaponData.controllerPrefab.name}' 프리팹에 WeaponBase를 상속받는 스크립트(Melee, Projectile 등)가 없습니다.");
+        }
     }
 
-    public Weapon FindEquippedWeapon(WeaponData weaponeData)
+    public WeaponBase FindEquippedWeapon(WeaponData weaponeData)
     {
         if (weaponeData == null) return null;
-        return equippedWeapons.Find(w => w.id == weaponeData.itemId);
+        return equippedWeapons.Find(w => w.weaponData.weaponId == weaponeData.weaponId);
+    }
+
+    public void EquipGear(GearData gearData)
+    {
+        if (gearData == null) return;
+
+        GameObject newGearObj = new GameObject();
+        newGearObj.transform.parent = transform;
+        newGearObj.transform.localPosition = Vector3.zero;
+
+        Gear gearComponent = newGearObj.AddComponent<Gear>();
+        gearComponent.Init(gearData);
+        equippedGears.Add(gearComponent);
+        Debug.Log($"[{gearData.gearName}] 장비를 장착했습니다.");
     }
 
     public void TakeDamage(float damage)
@@ -168,6 +202,24 @@ public class Player : MonoBehaviour
             health = 0;
             Die();  //캐릭터 사망 시 죽음 처리 함수 호출
         }
+    }
+
+    public Gear FindEquippedGear(GearData gearData)
+    {
+        if (gearData == null) return null;
+        return equippedGears.Find(g => g.gearData.gearId == gearData.gearId);
+    }
+
+    private void UpdateSpeed()
+    {
+        // 기본 속도에 보너스 증가율을 적용
+        speed = baseSpeed * (1 + speedBonusRate);
+    }
+
+    public void UpdateSpeedBonus(float rate)
+    {
+        speedBonusRate = rate;
+        UpdateSpeed(); // 보너스가 변경될 때마다 속도를 다시 계산
     }
 
     void Die()

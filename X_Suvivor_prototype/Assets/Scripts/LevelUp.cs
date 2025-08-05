@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class LevelUp : MonoBehaviour
 {
+    public List<WeaponData> weaponDatas; // 인스펙터에서 모든 무기 데이터 연결
+    public List<GearData> gearDatas;   // 인스펙터에서 모든 장비 데이터 연결
     RectTransform rect;
-    Item[] items;
+    private Item[] items; // 레벨업 슬롯 UI들
 
     void Awake()
     {
@@ -36,34 +38,43 @@ public class LevelUp : MonoBehaviour
         items[index].OnClick();
     }
 
-    void Next()
+   void Next()
     {
-        // 1. 모든 아이템 비활성화
-        foreach (Item item in items) {
+        foreach (Item item in items)
+        {
             item.gameObject.SetActive(false);
         }
-        // 2. 그 중 랜덤 3개의 아이템 활성화
-        int[] ran = new int[3];
 
-        while (true) {
-            ran[0] = Random.Range(0, items.Length);
-            ran[1] = Random.Range(0, items.Length);
-            ran[2] = Random.Range(0, items.Length);
+        // 1. 선택 가능한 모든 아이템(무기+장비) 목록을 만듭니다.
+        List<object> candidateItems = new List<object>();
+        candidateItems.AddRange(weaponDatas);
+        candidateItems.AddRange(gearDatas);
 
-            if (ran[0]!=ran[1] && ran[1]!=ran[2] && ran[0]!=ran[2])
-                break;
+        // 2. 이 중에서 랜덤하게 3개를 중복 없이 뽑습니다.
+        List<object> selectedItems = new List<object>();
+        while (selectedItems.Count < 3 && candidateItems.Count > 0)
+        {
+            int randomIndex = Random.Range(0, candidateItems.Count);
+            selectedItems.Add(candidateItems[randomIndex]);
+            candidateItems.RemoveAt(randomIndex);
         }
 
-        for (int index=0; index <ran.Length; index++) {
-            Item ranItem = items[ran[index]];
+        // 3. 뽑힌 아이템들을 UI 슬롯에 할당합니다.
+        for (int i = 0; i < selectedItems.Count; i++)
+        {
+            object selectedData = selectedItems[i];
+            Item uiSlot = items[i];
 
-            // 3. 만랩 아이템의 경우는 소비 아이템으로 대체
-            if (ranItem.level == ranItem.data.damages.Length) {
-                items[4].gameObject.SetActive(true);
+            if (selectedData is WeaponData) // 뽑힌 것이 무기 데이터라면
+            {
+                uiSlot.Init((WeaponData)selectedData);
             }
-            else {
-                ranItem.gameObject.SetActive(true);
+            else if (selectedData is GearData) // 뽑힌 것이 장비 데이터라면
+            {
+                uiSlot.Init((GearData)selectedData);
             }
+            
+            uiSlot.gameObject.SetActive(true);
         }
     }
 }

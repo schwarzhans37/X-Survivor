@@ -15,23 +15,27 @@ public class WeaponData : ScriptableObject
     [TextArea]
     public string weaponDesc;
 
+    // ==========================================================
+    [Tooltip("이 무기의 행동 로직이 담긴 프리팹 (Melee, Projectile 등)")]
+    public GameObject controllerPrefab;
+    // ==========================================================
 
     [Header("# 레벨 데이터")]
-    public float baseDamage;
-    public int basePenetration; //  관통 횟수
-    public int baseCount;       // 투사체 수(보통은 1, 산탄총 같은 무기 추가 시 이걸 활용할 것)
-    public float baseCooldown;  // 사격 간 대기시간
-    public float baseProjectileSpeed;   // 투사체 속도
+    public float baseDamage;          // 레벨 0 (기본) 데미지
+    public int baseCount;             // 레벨 0 (기본) 개수
+    public int basePenetration;       // 레벨 0 (기본) 관통력
+    public float baseCooldown;        // 레벨 0 (기본) 쿨다운
+    public float baseProjectileSpeed; // 레벨 0 (기본) 투사체/회전 속도
 
     // 레벨업에 따른 '증가량'을 배열로 관리
     public float[] damages;
-    public int[] penetrations;
     public int[] counts;
+    public int[] penetrations;
     public float[] cooldowns;
+    public float[] projectileSpeeds;
 
     [Header("# 이미지 데이터")]
-    public Sprite weaponIcon;
-    public GameObject projectile;
-    public Sprite handSprite;
-    public float bulletBaseSpeed;
+    public Sprite weaponIcon;         // UI 아이콘
+    public GameObject projectilePrefab;     // 발사될 투사체 또는 회전할 칼날의 모양 프리팹
+    public Sprite handSprite;         // 플레이어 손에 표시될 스프라이트
 }

@@ -14,17 +14,20 @@ public class Projectile : WeaponBase
         // 투사체 프리팹 ID 찾기
         for (int i = 0; i < GameManager.instance.pool.prefabs.Length; i++)
         {
-            if (data.projectile == GameManager.instance.pool.prefabs[i])
+            if (data.projectilePrefab == GameManager.instance.pool.prefabs[i])
             {
                 projectileId = i;
                 break;
             }
         }
 
-        // 무기 장비 로직(플레이어 캐릭터 스프라이트 위에 무기 스프라이트를 그려냄)
-        Hand hand = player.hands[(int)data.weaponType];
-        hand.spriter.sprite = data.handSprite;
-        hand.gameObject.SetActive(true);
+        // 손 등장 로직 (차후에는 삭제해야할 컨텐츠의 로직임)
+        Hand hand = System.Array.Find(player.hands, h => !h.isLeft);
+        if (hand != null)
+        {
+            hand.spriter.sprite = data.handSprite;
+            hand.gameObject.SetActive(true);
+        }
     }
 
     protected override void Attack()
