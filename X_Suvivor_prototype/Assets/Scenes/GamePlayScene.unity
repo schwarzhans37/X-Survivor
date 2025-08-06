@@ -5210,7 +5210,7 @@ GameObject:
   - component: {fileID: 134957068}
   - component: {fileID: 134957067}
   m_Layer: 5
-  m_Name: Item 0 (3)
+  m_Name: Shoes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5251,10 +5251,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 45c648bd175e3ee4fb726ccc05727e36, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 995042284}
+  textLevel: {fileID: 920244178}
+  textName: {fileID: 1364945006}
+  textDesc: {fileID: 1802175363}
 --- !u!114 &134957068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5699,7 +5703,7 @@ GameObject:
   - component: {fileID: 215061061}
   - component: {fileID: 215061060}
   m_Layer: 5
-  m_Name: Item 0
+  m_Name: Shovel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5740,10 +5744,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 284860209}
+  textLevel: {fileID: 1176450505}
+  textName: {fileID: 1264261811}
+  textDesc: {fileID: 239863719}
 --- !u!114 &215061061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6179,6 +6187,8 @@ MonoBehaviour:
   - {fileID: 22100000, guid: 6bc6910d1bc79404b9bd2383832fd765, type: 2}
   - {fileID: 22100000, guid: d15a74b70ff303b408a8d28616248680, type: 2}
   - {fileID: 22100000, guid: b3be3670aa63d46419f265a814b1cb63, type: 2}
+  equippedWeapons: []
+  equippedGears: []
 --- !u!70 &274803309
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -11233,7 +11243,7 @@ GameObject:
   - component: {fileID: 378761491}
   - component: {fileID: 378761490}
   m_Layer: 5
-  m_Name: Item 0 (4)
+  m_Name: Glasses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11274,10 +11284,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 738c5fe054bfe25478bfcc4c22e45186, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 1516740689}
+  textLevel: {fileID: 1995017326}
+  textName: {fileID: 1067992504}
+  textDesc: {fileID: 871365347}
 --- !u!114 &378761491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11366,8 +11380,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8390244, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 927338625, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11999,7 +12013,7 @@ GameObject:
   - component: {fileID: 497561704}
   - component: {fileID: 497561703}
   m_Layer: 5
-  m_Name: Item 0 (1)
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12040,10 +12054,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: a3d94efcd1e8d1e4b8e4ad5af1509ece, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 11400000, guid: a3d94efcd1e8d1e4b8e4ad5af1509ece, type: 2}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 1791054443}
+  textLevel: {fileID: 1974663144}
+  textName: {fileID: 1911615229}
+  textDesc: {fileID: 1842563511}
 --- !u!114 &497561704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12857,7 +12875,7 @@ GameObject:
   - component: {fileID: 576173953}
   - component: {fileID: 576173952}
   m_Layer: 5
-  m_Name: Item 0 (2)
+  m_Name: Gloves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12898,10 +12916,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9fdd3a6da9c9d154abaf124eac0b053f, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  gear: {fileID: 0}
+  itemCategory: 1
+  weaponData: {fileID: 0}
+  gearData: {fileID: 11400000, guid: b3f04ac9babce0b45895e05ce436bfd0, type: 2}
+  currentDisplayLevel: 0
+  icon: {fileID: 1783480692}
+  textLevel: {fileID: 953458019}
+  textName: {fileID: 2051453362}
+  textDesc: {fileID: 35211630}
 --- !u!114 &576173953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15852,7 +15874,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  m_Sprite: {fileID: -966295699, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18782,6 +18804,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fed49378c4d134439802f3654201f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponDatas:
+  - {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
+  - {fileID: 11400000, guid: a3d94efcd1e8d1e4b8e4ad5af1509ece, type: 2}
+  gearDatas:
+  - {fileID: 11400000, guid: b3f04ac9babce0b45895e05ce436bfd0, type: 2}
+  - {fileID: 11400000, guid: 1ccf9c3adcc733743afc615e86b7e6d0, type: 2}
 --- !u!1 &1396656158
 GameObject:
   m_ObjectHideFlags: 0
@@ -19026,7 +19054,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -29601,7 +29629,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  m_Sprite: {fileID: -201829820, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29716,7 +29744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  m_Sprite: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -30262,6 +30290,7 @@ MonoBehaviour:
   damage: 1000000
   penetration: 0
   bulletSize: 0
+  bulletSpeed: 0
 --- !u!61 &1882968317
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -11,16 +11,6 @@ public class Projectile : WeaponBase
     {
         base.Init(data);    // 부모 클래스의 Init 실행
 
-        // 투사체 프리팹 ID 찾기
-        for (int i = 0; i < GameManager.instance.pool.prefabs.Length; i++)
-        {
-            if (data.projectilePrefab == GameManager.instance.pool.prefabs[i])
-            {
-                projectileId = i;
-                break;
-            }
-        }
-
         // 손 등장 로직 (차후에는 삭제해야할 컨텐츠의 로직임)
         Hand hand = System.Array.Find(player.hands, h => !h.isLeft);
         if (hand != null)
@@ -43,7 +33,7 @@ public class Projectile : WeaponBase
         Vector2 dir = (worldMousePos - transform.position).normalized;
 
         // 4. 오브젝트 풀에서 투사체를 가져옴
-        Transform bulletTransform = GameManager.instance.pool.Get(projectileId).transform;
+        Transform bulletTransform = GameManager.instance.pool.Get(weaponData.PoolManagerIndex).transform;
         bulletTransform.position = transform.position;
         bulletTransform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
 

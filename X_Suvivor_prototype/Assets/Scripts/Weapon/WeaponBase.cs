@@ -6,12 +6,12 @@ public abstract class WeaponBase : MonoBehaviour
 {
     // 모든 무기가 가지는 핵심 데이터
     public WeaponData weaponData;
-    public int currentLevel = 0;
+    public int currentLevel;
 
     // 현재 레벨에 맞는 최종 스텟;
     protected float currentDamage;
-    protected int currentPenetration;
     protected int currentCount;
+    protected int currentPenetration;
     protected float currentCooldown;
     protected float currentProjectileSpeed;
 
@@ -41,7 +41,7 @@ public abstract class WeaponBase : MonoBehaviour
     }
 
     // 현재 레벨에 맞춰 WeaponData에서 최종 스탯을 가져오기
-    protected virtual void ApplyStatusByLevel()
+    public virtual void ApplyStatusByLevel()
     {
         // 레벨 0은 base 스탯을 사용
         if (currentLevel == 0)
@@ -55,23 +55,27 @@ public abstract class WeaponBase : MonoBehaviour
         else // 레벨 1 이상부터는 배열 값을 사용
         {
             // 레벨 1은 인덱스 0, 레벨 2는 인덱스 1...
-            int levelIndex = currentLevel - 1; 
+            int levelIndex = currentLevel - 1;
 
-            currentDamage = weaponData.damages[levelIndex];
-            currentPenetration = weaponData.penetrations[levelIndex];
-            currentCount = weaponData.counts[levelIndex];
-            currentCooldown = weaponData.cooldowns[levelIndex]; // 쿨다운은 배열 값을 그대로 사용 (빼기 X)
-            currentCooldown *= (1f - gearCooldownRate);
-            
+            if (levelIndex < weaponData.damages.Length)
+                currentDamage = weaponData.damages[levelIndex];
+
+            if (levelIndex < weaponData.penetrations.Length)
+                currentPenetration = weaponData.penetrations[levelIndex];
+
+            if (levelIndex < weaponData.counts.Length)
+                currentCount = weaponData.counts[levelIndex];
+
+            if (levelIndex < weaponData.cooldowns.Length)
+                currentCooldown = weaponData.cooldowns[levelIndex];
+
             // 투사체 속도는 현재 WeaponData에 레벨별 배열이 없으므로 일단 base 값 유지
-            currentProjectileSpeed = weaponData.baseProjectileSpeed;
+            if (levelIndex < weaponData.projectileSpeeds.Length)
+                currentProjectileSpeed = weaponData.projectileSpeeds[levelIndex];
         }
-    }
 
-    public void ApplyGearRate(float rate)
-    {
-        gearCooldownRate = rate;
-        ApplyStatusByLevel();
+        // 장갑으로 인한 모든 무기 최종데미지 추가 적용 로직
+        currentDamage += player.GetDamageBonusFromGears();
     }
 
     protected virtual void Update()

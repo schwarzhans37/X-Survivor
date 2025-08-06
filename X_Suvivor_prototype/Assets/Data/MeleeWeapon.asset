@@ -12,19 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f190dca0fa466469403cef61e0866e, type: 3}
   m_Name: MeleeWeapon
   m_EditorClassIdentifier: 
-  itemType: 0
-  itemId: 0
-  itemName: "\uC0BD"
-  itemDesc: "\uB370\uBBF8\uC9C0 {0}% \uC99D\uAC00\n\uD68C\uC804\uCCB4 {1}\uAC1C \uC99D\uAC00"
-  itemIcon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-  baseDamage: 4.5
+  weaponType: 0
+  weaponId: 0
+  weaponName: "\uC0BD"
+  weaponDesc: "\uD3C9\uBC94\uD55C \uC0BD\uC774\uB2E4."
+  controllerPrefab: {fileID: 7476748833660721422, guid: 6aacbed4c49829240a6b20548cb1d194, type: 3}
+  baseDamage: 10
   baseCount: 3
+  basePenetration: 0
+  baseCooldown: 0
+  baseProjectileSpeed: 150
   damages:
-  - 0.5
-  - 1
-  - 1.5
-  - 2
-  - 2.5
-  counts: 0100000001000000010000000100000002000000
-  projectile: {fileID: 8603556273567077586, guid: 06dea0a8519840f429f4393cad4144f1, type: 3}
-  hand: {fileID: 143021600, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  - 15
+  - 20
+  - 25
+  - 30
+  counts: 04000000050000000600000007000000
+  penetrations: 
+  cooldowns: []
+  projectileSpeeds:
+  - 180
+  - 210
+  - 240
+  - 270
+  weaponIcon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  projectilePrefab: {fileID: 8603556273567077586, guid: 06dea0a8519840f429f4393cad4144f1, type: 3}
+  handSprite: {fileID: 143021600, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  PoolManagerIndex: 3

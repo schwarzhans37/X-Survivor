@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using UnityEngine;
+using System.Linq;
 
 public class LevelUp : MonoBehaviour
 {
@@ -45,19 +46,59 @@ public class LevelUp : MonoBehaviour
             item.gameObject.SetActive(false);
         }
 
-        // 1. 선택 가능한 모든 아이템(무기+장비) 목록을 만듭니다.
+        Player player = GameManager.instance.player;
+
+        // ===== 1. 레벨업 가능한 후보 아이템 목록 생성 =====
         List<object> candidateItems = new List<object>();
-        candidateItems.AddRange(weaponDatas);
-        candidateItems.AddRange(gearDatas);
+
+        // ----- 후보 1: 아직 획득하지 않은 무기들 -----
+        List<WeaponData> availableWeapons = new List<WeaponData>();
+        foreach (WeaponData data in weaponDatas)
+        {
+            // 플레이어가 이 무기를 가지고 있지 않다면 후보에 추가
+            if (player.FindEquippedWeapon(data) == null)
+            {
+                availableWeapons.Add(data);
+            }
+        }
+        candidateItems.AddRange(availableWeapons);
+
+        // ----- 후보 2: 이미 획득했지만, 최대 레벨이 아닌 무기들 -----
+        foreach (WeaponBase equippedWeapon in player.equippedWeapons)
+        {
+            // 최대 레벨이 아니라면 후보에 추가
+            if (equippedWeapon.currentLevel < equippedWeapon.weaponData.damages.Length)
+            {
+                candidateItems.Add(equippedWeapon.weaponData);
+            }
+        }
+
+        // ----- 후보 3 & 4: 장비 (위와 동일한 로직 적용) -----
+        // (Player.cs에 FindEquippedGear 함수가 완성되었다고 가정)
+        List<GearData> availableGears = new List<GearData>();
+        foreach(GearData data in gearDatas)
+        {
+            if (player.FindEquippedGear(data) == null)
+            {
+                availableGears.Add(data);
+            }
+        }
+        candidateItems.AddRange(availableGears);
+        
+        foreach(Gear equippedGear in player.equippedGears)
+        {
+            if (equippedGear.currentLevel < equippedGear.gearData.Values.Length)
+            {
+                candidateItems.Add(equippedGear.gearData);
+            }
+        }
+        
+        // ===============================================
 
         // 2. 이 중에서 랜덤하게 3개를 중복 없이 뽑습니다.
-        List<object> selectedItems = new List<object>();
-        while (selectedItems.Count < 3 && candidateItems.Count > 0)
-        {
-            int randomIndex = Random.Range(0, candidateItems.Count);
-            selectedItems.Add(candidateItems[randomIndex]);
-            candidateItems.RemoveAt(randomIndex);
-        }
+        // 후보가 3개 미만일 수도 있으므로, Math.Min을 사용해 안전하게 처리
+        int numToSelect = Mathf.Min(3, candidateItems.Count);
+        List<object> selectedItems = candidateItems.OrderBy(x => Random.value).Take(numToSelect).ToList();
 
         // 3. 뽑힌 아이템들을 UI 슬롯에 할당합니다.
         for (int i = 0; i < selectedItems.Count; i++)
@@ -65,11 +106,11 @@ public class LevelUp : MonoBehaviour
             object selectedData = selectedItems[i];
             Item uiSlot = items[i];
 
-            if (selectedData is WeaponData) // 뽑힌 것이 무기 데이터라면
+            if (selectedData is WeaponData)
             {
                 uiSlot.Init((WeaponData)selectedData);
             }
-            else if (selectedData is GearData) // 뽑힌 것이 장비 데이터라면
+            else if (selectedData is GearData)
             {
                 uiSlot.Init((GearData)selectedData);
             }

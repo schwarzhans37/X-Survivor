@@ -15,19 +15,21 @@ public class Item : MonoBehaviour
     public GearData gearData;
     public int currentDisplayLevel;   // 이 아이템 UI가 현재 표시하는 레벨
 
-    // UI 요소
-    private Image icon;
-    private TextMeshProUGUI textLevel;
-    private TextMeshProUGUI textName;
-    private TextMeshProUGUI textDesc;
+
+    [Header("UI 연결")]
+    [Tooltip("레벨업 메뉴에 등장할 성장 요소들의 내용물을 설정합니다.")]
+    public Image icon;
+    public Text textLevel;
+    public Text textName;
+    public Text textDesc;
 
     void Awake()
     {
         // UI 컴포넌트들을 자식에서 찾아 할당
         icon = transform.Find("Icon").GetComponent<Image>();
-        textLevel = transform.Find("LevelText").GetComponent<TextMeshProUGUI>();
-        textName = transform.Find("NameText").GetComponent<TextMeshProUGUI>();
-        textDesc = transform.Find("DescText").GetComponent<TextMeshProUGUI>();
+        textLevel = transform.Find("LevelText").GetComponent<Text>();
+        textName = transform.Find("NameText").GetComponent<Text>();
+        textDesc = transform.Find("DescText").GetComponent<Text>();
     }
 
     // LevelUp 스크립트가 이 함수를 호출하여 아이템 정보를 설정

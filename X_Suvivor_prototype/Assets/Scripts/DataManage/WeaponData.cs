@@ -38,4 +38,7 @@ public class WeaponData : ScriptableObject
     public Sprite weaponIcon;         // UI 아이콘
     public GameObject projectilePrefab;     // 발사될 투사체 또는 회전할 칼날의 모양 프리팹
     public Sprite handSprite;         // 플레이어 손에 표시될 스프라이트
+
+    [Header("# 기타")]
+    public int PoolManagerIndex;
 }

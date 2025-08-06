@@ -179,17 +179,87 @@ public class Player : MonoBehaviour
 
     public void EquipGear(GearData gearData)
     {
-        if (gearData == null) return;
+        if (gearData == null) 
+        {
+            Debug.LogError("장착하려는 GearData가 null입니다.");
+            return;
+        }
 
+        // 1. Gear 컴포넌트를 가진 GameObject를 생성합니다.
         GameObject newGearObj = new GameObject();
-        newGearObj.transform.parent = transform;
+        newGearObj.transform.parent = transform; // 플레이어의 자식으로 설정
         newGearObj.transform.localPosition = Vector3.zero;
 
         Gear gearComponent = newGearObj.AddComponent<Gear>();
-        gearComponent.Init(gearData);
+        
+        // 2. 생성된 Gear를 장비 목록에 **먼저** 추가합니다.
         equippedGears.Add(gearComponent);
+        
+        // 3. Init 함수를 호출하여 데이터를 설정합니다.
+        gearComponent.Init(gearData);
+        
+        // 4. 새 장비가 추가되었으니, 모든 관련 스탯을 즉시 업데이트합니다.
+        UpdateAllStatsFromGears();
+        
         Debug.Log($"[{gearData.gearName}] 장비를 장착했습니다.");
     }
+
+    public Gear FindEquippedGear(GearData gearData)
+    {
+        if (gearData == null) return null;
+        return equippedGears.Find(g => g.gearData.gearId == gearData.gearId);
+    }
+
+    public float GetSpeedBonusFromGears()
+    {
+        float totalBonus = 0f;
+        foreach (Gear gear in equippedGears)
+        {
+            if (gear.type == GearData.GearType.Shoe)
+            {
+                totalBonus += gear.rate;
+            }
+        }
+        return totalBonus;
+    }
+
+    private void UpdateSpeed()
+    {
+        // 기본 속도에 보너스 증가율을 적용
+        float finalSpeedBonusRate = GetSpeedBonusFromGears();
+        speed = baseSpeed + finalSpeedBonusRate;
+    }
+
+    // 최종데미지를 올려주는 장비를 얻은 경우, 최종데미지를 무기의 데미지에 합산하여 반환
+    public float GetDamageBonusFromGears()
+    {
+        float totalBonus = 0f;
+        foreach (Gear gear in equippedGears)
+        {
+            // 장비 타입이 장갑(Glove)이라면, 그 장비의 현재 효과 수치(rate)를 더함
+            if (gear.type == GearData.GearType.Glove)
+            {
+                totalBonus += gear.rate;
+            }
+        }
+        return totalBonus;
+    }
+
+    // ===== 장비 변경 기 캐릭터의 스텟을 갱신하도록 요청
+    public void UpdateAllStatsFromGears()
+    {
+        // 1. 플레이어 스탯 업데이트 (현재는 속도)
+        UpdateSpeed();
+        // UpdateArmor(); // 나중에 방어력 등이 추가되면 여기에 호출
+
+        // 2. 모든 무기 스탯 업데이트
+        foreach (WeaponBase weapon in equippedWeapons)
+        {
+            weapon.ApplyStatusByLevel();
+        }
+        Debug.Log("모든 장비 효과를 스탯에 다시 적용했습니다.");
+    }
+
 
     public void TakeDamage(float damage)
     {
@@ -202,24 +272,6 @@ public class Player : MonoBehaviour
             health = 0;
             Die();  //캐릭터 사망 시 죽음 처리 함수 호출
         }
-    }
-
-    public Gear FindEquippedGear(GearData gearData)
-    {
-        if (gearData == null) return null;
-        return equippedGears.Find(g => g.gearData.gearId == gearData.gearId);
-    }
-
-    private void UpdateSpeed()
-    {
-        // 기본 속도에 보너스 증가율을 적용
-        speed = baseSpeed * (1 + speedBonusRate);
-    }
-
-    public void UpdateSpeedBonus(float rate)
-    {
-        speedBonusRate = rate;
-        UpdateSpeed(); // 보너스가 변경될 때마다 속도를 다시 계산
     }
 
     void Die()
