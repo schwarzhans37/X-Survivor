@@ -26,8 +26,14 @@ public class Player : MonoBehaviour
     SpriteRenderer spriter; // 스프라이트(이미지)
     Animator anim;  // 캐릭터 애니메이션
 
-    [Header("게임 중 현재 보우한 무기 목록")]
-    public List<Weapon> equippedWeapons;
+    [Header("게임 중 현재 보유한 무기 목록")]
+    public List<WeaponBase> equippedWeapons;
+
+    [Header("게임 중 현재 보유한 장비 목록")]
+    public List<Gear> equippedGears;
+
+
+    private float speedBonusRate = 0f; // 장비를 통한 속도 증가율
 
 
     void Awake()
@@ -35,7 +41,8 @@ public class Player : MonoBehaviour
     {
         speed = baseSpeed;      // 시작 시 이동속도 초기화
         health = maxHealth;     // 시작 시 체력 초기화
-        equippedWeapons = new List<Weapon>();   // 리스트 초기화
+        equippedWeapons = new List<WeaponBase>();   // 무기 리스트 초기화
+        equippedGears = new List<Gear>();           // 장비 리스트 초기화
         
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
@@ -65,6 +72,8 @@ public class Player : MonoBehaviour
         {
             Debug.LogError($"캐릭터 ID: {charaId}에 해당하는 오버라이드 컨트롤러를 찾을 수 없거나 할당되지 않았습니다.");
         }
+
+        UpdateSpeed();
     }
     
     void FixedUpdate()
@@ -129,27 +138,128 @@ public class Player : MonoBehaviour
         TakeDamage(Time.deltaTime * 10);
     }
 
-    public void EquipWeapon(ItemData weaponData)
+    public void EquipWeapon(WeaponData weaponData)
     {
-        if (weaponData == null) return;
+        if (weaponData == null)
+        {
+            Debug.LogError("장착하려는 WeaponData가 null입니다.");
+            return;
+        }
+        if (weaponData.controllerPrefab == null)
+        {
+            Debug.LogError($"WeaponData '{weaponData.weaponName}'에 ControllerPrefab이 연결되지 않았습니다.");
+            return;
+        }
 
         // 무기 오브젝트를 플레이어의 자식으로 생성
-        GameObject newWeaponObj = new GameObject();
-        newWeaponObj.transform.parent = transform;
+        GameObject newWeaponObj = Instantiate(weaponData.controllerPrefab, transform);
+        newWeaponObj.transform.localPosition = Vector3.zero;
 
-        // Weapon 컴포넌트를 추가하고 초기화
-        Weapon weapon = newWeaponObj.AddComponent<Weapon>();
-        weapon.Init(weaponData);
+        // 생성된 오브젝트에서 WeaponBase 컴포넌트를 가져옴
+        WeaponBase weaponComponent = newWeaponObj.GetComponent<WeaponBase>();
 
-        // 장착된 무기를 목록에 추가
-        equippedWeapons.Add(weapon);
+        // 컴포넌트를 성공적으로 찾으면, 초기화하고 목록에 추가
+        if (weaponComponent != null)
+        {
+            weaponComponent.Init(weaponData); // Init 함수 호출
+            equippedWeapons.Add(weaponComponent); // 리스트에 추가
+            Debug.Log($"[{weaponData.weaponName}] 무기를 장착했습니다.");
+        }
+        else
+        {
+            Debug.LogError($"'{weaponData.controllerPrefab.name}' 프리팹에 WeaponBase를 상속받는 스크립트(Melee, Projectile 등)가 없습니다.");
+        }
     }
 
-    public Weapon FindEquippedWeapon(ItemData weaponeData)
+    public WeaponBase FindEquippedWeapon(WeaponData weaponeData)
     {
         if (weaponeData == null) return null;
-        return equippedWeapons.Find(w => w.id == weaponeData.itemId);
+        return equippedWeapons.Find(w => w.weaponData.weaponId == weaponeData.weaponId);
     }
+
+    public void EquipGear(GearData gearData)
+    {
+        if (gearData == null) 
+        {
+            Debug.LogError("장착하려는 GearData가 null입니다.");
+            return;
+        }
+
+        // 1. Gear 컴포넌트를 가진 GameObject를 생성합니다.
+        GameObject newGearObj = new GameObject();
+        newGearObj.transform.parent = transform; // 플레이어의 자식으로 설정
+        newGearObj.transform.localPosition = Vector3.zero;
+
+        Gear gearComponent = newGearObj.AddComponent<Gear>();
+        
+        // 2. 생성된 Gear를 장비 목록에 **먼저** 추가합니다.
+        equippedGears.Add(gearComponent);
+        
+        // 3. Init 함수를 호출하여 데이터를 설정합니다.
+        gearComponent.Init(gearData);
+        
+        // 4. 새 장비가 추가되었으니, 모든 관련 스탯을 즉시 업데이트합니다.
+        UpdateAllStatsFromGears();
+        
+        Debug.Log($"[{gearData.gearName}] 장비를 장착했습니다.");
+    }
+
+    public Gear FindEquippedGear(GearData gearData)
+    {
+        if (gearData == null) return null;
+        return equippedGears.Find(g => g.gearData.gearId == gearData.gearId);
+    }
+
+    public float GetSpeedBonusFromGears()
+    {
+        float totalBonus = 0f;
+        foreach (Gear gear in equippedGears)
+        {
+            if (gear.type == GearData.GearType.Shoe)
+            {
+                totalBonus += gear.rate;
+            }
+        }
+        return totalBonus;
+    }
+
+    private void UpdateSpeed()
+    {
+        // 기본 속도에 보너스 증가율을 적용
+        float finalSpeedBonusRate = GetSpeedBonusFromGears();
+        speed = baseSpeed + finalSpeedBonusRate;
+    }
+
+    // 최종데미지를 올려주는 장비를 얻은 경우, 최종데미지를 무기의 데미지에 합산하여 반환
+    public float GetDamageBonusFromGears()
+    {
+        float totalBonus = 0f;
+        foreach (Gear gear in equippedGears)
+        {
+            // 장비 타입이 장갑(Glove)이라면, 그 장비의 현재 효과 수치(rate)를 더함
+            if (gear.type == GearData.GearType.Glove)
+            {
+                totalBonus += gear.rate;
+            }
+        }
+        return totalBonus;
+    }
+
+    // ===== 장비 변경 기 캐릭터의 스텟을 갱신하도록 요청
+    public void UpdateAllStatsFromGears()
+    {
+        // 1. 플레이어 스탯 업데이트 (현재는 속도)
+        UpdateSpeed();
+        // UpdateArmor(); // 나중에 방어력 등이 추가되면 여기에 호출
+
+        // 2. 모든 무기 스탯 업데이트
+        foreach (WeaponBase weapon in equippedWeapons)
+        {
+            weapon.ApplyStatusByLevel();
+        }
+        Debug.Log("모든 장비 효과를 스탯에 다시 적용했습니다.");
+    }
+
 
     public void TakeDamage(float damage)
     {

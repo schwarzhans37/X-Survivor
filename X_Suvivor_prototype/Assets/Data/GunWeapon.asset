@@ -12,20 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f190dca0fa466469403cef61e0866e, type: 3}
   m_Name: GunWeapon
   m_EditorClassIdentifier: 
-  itemType: 1
-  itemId: 1
-  itemName: "\uC5FD\uCD1D"
-  itemDesc: "\uB370\uBBF8\uC9C0 {0}% \uC99D\uAC00\n\uAD00\uD1B5\uB825 {1} \uC99D\uAC00"
-  itemIcon: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-  baseDamage: 20
-  baseCount: 0
+  weaponType: 1
+  weaponId: 1
+  weaponName: "\uC0AC\uB0E5\uCD1D"
+  weaponDesc: "\uD3C9\uBC94\uD55C \uC0AC\uB0E5\uCD1D\uC774\uB2E4."
+  controllerPrefab: {fileID: 3203754832001300600, guid: 5b75026db9a3ddd438bb52aa0d88e5b1, type: 3}
+  baseDamage: 10
+  baseCount: 1
+  basePenetration: 0
+  baseCooldown: 1
+  baseProjectileSpeed: 3
   damages:
-  - 0.35
-  - 0.7
+  - 15
+  - 20
+  - 25
+  - 30
+  counts: 01000000010000000100000001000000
+  penetrations: 01000000020000000300000004000000
+  cooldowns:
   - 1
-  - 1.4
-  - 2
-  counts: 0100000001000000020000000300000004000000
-  projectile: {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
-  hand: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-  bulletBaseSpeed: 5
+  - 0.7
+  - 0.5
+  - 0.2
+  projectileSpeeds:
+  - 4
+  - 6
+  - 8
+  - 10
+  weaponIcon: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  projectilePrefab: {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
+  handSprite: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  PoolManagerIndex: 4

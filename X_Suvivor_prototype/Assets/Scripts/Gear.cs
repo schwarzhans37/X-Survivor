@@ -4,61 +4,38 @@ using UnityEngine;
 
 public class Gear : MonoBehaviour
 {
-    public ItemData.ItemType type;
+    public GearData.GearType type;
+    public GearData gearData;   // GearData 참조
     public float rate;
+    public int currentLevel;
+    protected Player player;
 
-    public void Init(ItemData data)
+    void Awake()
     {
+        player = GameManager.instance.player;
+    }
+
+    public void Init(GearData data)
+    {
+        this.gearData = data;   // 데이터 저장
+        this.currentLevel = 0;  // 초기 레벨은 0
+
         // 기본 설정
-        name = "Gear" + data.itemId;
-        transform.parent = GameManager.instance.player.transform;
-        transform.localPosition = Vector3.zero;
+        name = "장비 : " + data.gearName;
 
         //프로퍼티 설정
-        type = data.itemType;
-        rate = data.damages[0];
-        ApplyGear();
+        type = data.gearType;
+        rate = data.baseValue;
     }
 
-    public void LevelUp(float rate)
+    public void LevelUp()
     {
-        this.rate = rate;
-        ApplyGear();
-    }
+        if (currentLevel >= gearData.Values.Length) return; // 최대 레벨
 
-    void ApplyGear()
-    {
-        switch (type) {
-            case ItemData.ItemType.Glove:
-                RateUp();
-                break;
-            case ItemData.ItemType.Shoe:
-                SpeedUp();
-                break;
-        }
-    }
+        currentLevel++;
+        // 레벨에 맞는 최종값으로 rate를 업데이트
+        rate = gearData.Values[currentLevel - 1];
 
-    void RateUp()
-    {
-        Weapon[] weapons = transform.parent.GetComponentsInChildren<Weapon>();
-
-        foreach(Weapon weapon in weapons) {
-            switch(weapon.id) {
-                case 0:
-                    float speed = 150 * Character.WeaponSpeed;
-                    weapon.attackSpeed = speed + (speed * rate);
-                    break;
-                default:
-                    speed = 0.5f * Character.WeaponRate;
-                    weapon.attackSpeed = speed * (1f - rate);
-                    break;
-            }
-        }
-    }
-
-    void SpeedUp()
-    {
-        float speed = 3 * Character.Speed;
-        GameManager.instance.player.speed = speed + speed * rate;
+        GameManager.instance.player.UpdateAllStatsFromGears();
     }
 }
