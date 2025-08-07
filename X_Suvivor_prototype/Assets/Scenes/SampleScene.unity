@@ -11866,6 +11866,7 @@ MonoBehaviour:
   uiLevelUo: {fileID: 1390879062}
   uiResult: {fileID: 1780199141}
   enemyCleaner: {fileID: 1882968315}
+  pauseMenuPanel: {fileID: 0}
   charaDatas: []
 --- !u!4 &492052613
 Transform:
@@ -12327,7 +12328,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.55432
+  orthographic size: 5.6203704
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -30250,6 +30251,7 @@ MonoBehaviour:
   damage: 1000000
   penetration: 0
   bulletSize: 0
+  bulletSpeed: 0
 --- !u!61 &1882968317
 BoxCollider2D:
   m_ObjectHideFlags: 0
