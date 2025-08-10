@@ -7,11 +7,6 @@ public class KillCountUI : MonoBehaviour
 {
     public Text killText;
 
-    void Awake()
-    {
-        killText = GetComponent<Text>();
-    }
-
     void LateUpdate()
     {
         killText.text = $"{GameManager.instance.killCount}";

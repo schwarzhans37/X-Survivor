@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     public float speed; //실 적용 이동속도
     public float baseSpeed; // 기본 이동속도
     public int health;    // 현재 체력
-    public int maxHealth;   // 최대 체력
+    public int baseMaxHealth;   // 기본 최대 체력
+    public int maxHealth;   // 최종 최대 체력(기본 + 장비)   
     public float invincibleTime = 3f;   // 무적 시간
     private bool isInvincible = false;   // 현재 무적인지 확인
     
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
     public RuntimeAnimatorController[] spriteAnimCon; // 플레이어 캐릭터 애니메이션 컨트롤러
 
     Rigidbody2D rigid;  // 충돌 판정 계산 리지드바디
+    CapsuleCollider2D capColl;
     SpriteRenderer spriter; // 스프라이트(이미지)
     Animator anim;  // 캐릭터 애니메이션
 
@@ -43,11 +45,13 @@ public class Player : MonoBehaviour
     // 초기화(선언)
     {
         speed = baseSpeed;      // 시작 시 이동속도 초기화
-        health = maxHealth;     // 시작 시 체력 초기화
+        maxHealth = baseMaxHealth;
+        health = baseMaxHealth;     // 시작 시 체력 초기화
         equippedWeapons = new List<WeaponBase>();   // 무기 리스트 초기화
         equippedGears = new List<Gear>();           // 장비 리스트 초기화
         
         rigid = GetComponent<Rigidbody2D>();
+        capColl = GetComponent<CapsuleCollider2D>();
         spriter = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         itemScanner = GetComponent<ItemScanner>();
@@ -129,13 +133,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     // 캐릭터가 몬스터와 충돌할 경우 데미지를 받게 함
     {
         // 몬스터 외의 오브젝트(아이템, 경험치 등)와 충돌했을 경우는 제외
-        if (!collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && !isInvincible)
         {
-            TakeDamage(1);
+                TakeDamage(1);
         }
     }
 
@@ -231,6 +235,32 @@ public class Player : MonoBehaviour
         speed = baseSpeed + finalSpeedBonusRate;
     }
 
+    private void UpdateMaxHealth()
+    {
+        int previousMaxHealth = maxHealth;
+        int healthBonus = 0;
+
+        //모든 장착된 장비 중 'Armor'타입의 효과를 합산
+        foreach (Gear gear in equippedGears)
+        {
+            if (gear.type == GearData.GearType.Armor)
+            {
+                healthBonus += (int)gear.rate;
+            }
+        }
+
+        // 최종 최대 체력 계산
+        maxHealth = baseMaxHealth + healthBonus;
+
+        // 최대 체력이 이전보다 증가했다면, 그 증가량 만큼 현재 체력도 회복
+        if (maxHealth > previousMaxHealth)
+        {
+            int healthIncrease = maxHealth - previousMaxHealth;
+            health += healthIncrease;
+            Debug.Log($"최대 체력이 {healthIncrease}만큼 증가하여, 현재 체력도 함께 회복됨.");
+        }
+    }
+
     // 최종데미지를 올려주는 장비를 얻은 경우, 최종데미지를 무기의 데미지에 합산하여 반환
     public float GetDamageBonusFromGears()
     {
@@ -251,7 +281,7 @@ public class Player : MonoBehaviour
     {
         // 1. 플레이어 스탯 업데이트 (현재는 속도)
         UpdateSpeed();
-        // UpdateArmor(); // 나중에 방어력 등이 추가되면 여기에 호출
+        UpdateMaxHealth();
 
         // 2. 모든 무기 스탯 업데이트
         foreach (WeaponBase weapon in equippedWeapons)
@@ -267,6 +297,7 @@ public class Player : MonoBehaviour
         if (isInvincible || !GameManager.instance.isLive) return;
 
         health -= damage;
+        Debug.Log("플레이어가 공격받았습니다.");
 
         if (health <= 0)
         {
@@ -276,12 +307,14 @@ public class Player : MonoBehaviour
         else
         {
             StartCoroutine(InvincibleRoutine());
+            Debug.Log("플레이어가 생명력 1개를 잃고 3초간 무적이 됩니다.");
         }
     }
 
     IEnumerator InvincibleRoutine()
     {
         isInvincible = true;
+        capColl.isTrigger = true;
 
         // 1. 몬스터와의 충돌을 무시하기 위해 레이어 변경
         int originalLayer = gameObject.layer;
@@ -308,12 +341,14 @@ public class Player : MonoBehaviour
         // 3. 무적 시간이 끝나면 원상복구
         gameObject.layer = originalLayer;
         spriter.color = originalColor;
+        capColl.isTrigger = false;
+
         isInvincible = false;
     }
 
     void Die()
     // 플레이어 사망 시 내부 처리 로직
-    {  
+    {
         for (int index = 2; index < transform.childCount; index++)
         {
             transform.GetChild(index).gameObject.SetActive(false);
@@ -324,6 +359,7 @@ public class Player : MonoBehaviour
 
         // 게임 매니저에게 '사망했음'을 알림
         GameManager.instance.GameOver();
+        Debug.Log("플레이어가 사망했습니다.");
     }
 
     public void Heal()

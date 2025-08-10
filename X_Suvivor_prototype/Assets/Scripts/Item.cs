@@ -98,18 +98,25 @@ public class Item : MonoBehaviour
                 }
                 break;
             case ItemCategory.Gear:
-                Gear existingGear = player.FindEquippedGear(gearData);
-                if (existingGear == null)
+                if (gearData.gearType == GearData.GearType.Heal)
                 {
-                    player.EquipGear(gearData);
+                    player.Heal();
+                    Debug.Log("체력을 모두 회복합니다.");
                 }
                 else
                 {
-                    existingGear.LevelUp();
+                    Gear existingGear = player.FindEquippedGear(gearData);
+                    if (existingGear == null)
+                    {
+                        player.EquipGear(gearData);
+                    }
+                    else
+                    {
+                        existingGear.LevelUp();
+                    }
                 }
                 break;
         }
-
         // 레벨업 UI를 닫는 로직
         GameManager.instance.uiLevelUo.hide();
     }

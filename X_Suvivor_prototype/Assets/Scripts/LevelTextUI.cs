@@ -7,11 +7,6 @@ public class LevelTextUI : MonoBehaviour
 {
     public Text levelText;
 
-    void Awake()
-    {
-        levelText = GetComponent<Text>();
-    }
-
     void LateUpdate()
     {
         levelText.text = $"Lv.{GameManager.instance.level}";
