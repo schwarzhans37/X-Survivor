@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour
 {
     [Header("# 플레이어 캐릭터 능력치")]
     public float speed; //실 적용 이동속도
     public float baseSpeed; // 기본 이동속도
-    public float health;    // 현재 체력
-    public float maxHealth;   // 최대 체력
-    //스킬은 쿨타임제로 , 기초 스텟에 미반영
+    public int health;    // 현재 체력
+    public int maxHealth;   // 최대 체력
+    public float invincibleTime = 3f;   // 무적 시간
+    private bool isInvincible = false;   // 현재 무적인지 확인
+    
 
     [Header("# 플레이어 캐릭터 물리")]
     public Vector2 inputVec;    // 캐릭터 좌표
@@ -132,10 +135,8 @@ public class Player : MonoBehaviour
         // 몬스터 외의 오브젝트(아이템, 경험치 등)와 충돌했을 경우는 제외
         if (!collision.gameObject.CompareTag("Enemy"))
         {
-            return;
+            TakeDamage(1);
         }
-
-        TakeDamage(Time.deltaTime * 10);
     }
 
     public void EquipWeapon(WeaponData weaponData)
@@ -261,17 +262,53 @@ public class Player : MonoBehaviour
     }
 
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
-        if (!GameManager.instance.isLive) return;
+        if (isInvincible || !GameManager.instance.isLive) return;
 
         health -= damage;
 
         if (health <= 0)
         {
             health = 0;
-            Die();  //캐릭터 사망 시 죽음 처리 함수 호출
+            Die();
         }
+        else
+        {
+            StartCoroutine(InvincibleRoutine());
+        }
+    }
+
+    IEnumerator InvincibleRoutine()
+    {
+        isInvincible = true;
+
+        // 1. 몬스터와의 충돌을 무시하기 위해 레이어 변경
+        int originalLayer = gameObject.layer;
+        gameObject.layer = LayerMask.NameToLayer("PlayerInvincible");
+
+        // 2. 깜빡임 효과
+        Color originalColor = spriter.color;
+        float blinkInterval = 0.2f;  //깜빡이는 간격
+        float elapsedTime = 0f;
+
+        while (elapsedTime < invincibleTime)
+        {
+            // 반투명하게
+            spriter.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.5f);
+            yield return new WaitForSeconds(blinkInterval / 2);
+
+            // 원래대로
+            spriter.color = originalColor;
+            yield return new WaitForSeconds(blinkInterval / 2);
+
+            elapsedTime += blinkInterval;
+        }
+
+        // 3. 무적 시간이 끝나면 원상복구
+        gameObject.layer = originalLayer;
+        spriter.color = originalColor;
+        isInvincible = false;
     }
 
     void Die()
