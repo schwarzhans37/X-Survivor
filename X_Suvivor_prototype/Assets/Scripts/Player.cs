@@ -11,10 +11,12 @@ public class Player : MonoBehaviour
     public float baseSpeed; // 기본 이동속도
     public int health;    // 현재 체력
     public int baseMaxHealth;   // 기본 최대 체력
-    public int maxHealth;   // 최종 최대 체력(기본 + 장비)   
+    public int maxHealth;   // 최종 최대 체력(기본 + 장비)
     public float invincibleTime = 3f;   // 무적 시간
     private bool isInvincible = false;   // 현재 무적인지 확인
-    
+
+    [Header("# 아이템 스캐너")]
+    public float baseScanRange; // 기본 아이템 획득 범위    
 
     [Header("# 플레이어 캐릭터 물리")]
     public Vector2 inputVec;    // 캐릭터 좌표
@@ -55,6 +57,7 @@ public class Player : MonoBehaviour
         spriter = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         itemScanner = GetComponent<ItemScanner>();
+        baseScanRange = itemScanner.scanRange;
         hands = GetComponentsInChildren<Hand>(true);
     }
 
@@ -282,6 +285,7 @@ public class Player : MonoBehaviour
         // 1. 플레이어 스탯 업데이트 (현재는 속도)
         UpdateSpeed();
         UpdateMaxHealth();
+        UpdateItemScannerRange();
 
         // 2. 모든 무기 스탯 업데이트
         foreach (WeaponBase weapon in equippedWeapons)
@@ -360,6 +364,24 @@ public class Player : MonoBehaviour
         // 게임 매니저에게 '사망했음'을 알림
         GameManager.instance.GameOver();
         Debug.Log("플레이어가 사망했습니다.");
+    }
+
+    void UpdateItemScannerRange()
+    {
+        float rangeBonus = 0f;
+
+        // 모든 장착된 장비 중 'Magnet' 타입의 효과를 합산
+        foreach (Gear gear in equippedGears)
+        {
+            if (gear.type == GearData.GearType.Magnet)
+            {
+                rangeBonus += gear.rate;
+            }
+        }
+
+        // 최종 아이템 획득 범위 계산
+        itemScanner.scanRange = baseScanRange + rangeBonus;
+        Debug.Log($"자석 효과 적용! 현재 아이템 획득 범위: {itemScanner.scanRange}");
     }
 
     public void Heal()

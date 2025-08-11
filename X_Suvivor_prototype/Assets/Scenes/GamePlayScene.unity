@@ -6104,6 +6104,7 @@ MonoBehaviour:
   baseMaxHealth: 3
   maxHealth: 0
   invincibleTime: 3
+  baseScanRange: 0
   inputVec: {x: 0, y: 0}
   itemScanner: {fileID: 0}
   hands:
@@ -6312,7 +6313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f9984b39b0f344c98d9fbccb919b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scanRange: 1
+  scanRange: 2
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -15655,8 +15656,9 @@ MonoBehaviour:
   - {fileID: 5815709779976235455, guid: 96f849c304d45c140bf780e216ddd867, type: 3}
   - {fileID: 269897315896794488, guid: bde7851dc437b3941aa52032e00d8b4a, type: 3}
   - {fileID: 6912399271862598263, guid: caa30f801f7faaa4387f4a0f64776745, type: 3}
-  - {fileID: 8603556273567077586, guid: 06dea0a8519840f429f4393cad4144f1, type: 3}
+  - {fileID: 8603556273567077586, guid: b8c748878cd45864db22ee214d1423b4, type: 3}
   - {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
+  - {fileID: 8603556273567077586, guid: 4348f9bd9fb65d74b8f53ebe72dbcef9, type: 3}
 --- !u!1 &953070458
 GameObject:
   m_ObjectHideFlags: 0
@@ -19431,10 +19433,13 @@ MonoBehaviour:
   weaponDatas:
   - {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
   - {fileID: 11400000, guid: a3d94efcd1e8d1e4b8e4ad5af1509ece, type: 2}
+  - {fileID: 11400000, guid: 53bf31cc59e0fd04c8c2cf4348008cec, type: 2}
+  - {fileID: 11400000, guid: a39f79fc8739d5b469db1706b19a3760, type: 2}
   gearDatas:
   - {fileID: 11400000, guid: b3f04ac9babce0b45895e05ce436bfd0, type: 2}
   - {fileID: 11400000, guid: 1ccf9c3adcc733743afc615e86b7e6d0, type: 2}
   - {fileID: 11400000, guid: 010950c3aac462345bbbd341c4da15d3, type: 2}
+  - {fileID: 11400000, guid: f0cd57b372b1e574d90d5822aa1f9d73, type: 2}
   - {fileID: 11400000, guid: 62f751b5a392f2e4fbf27959246e4611, type: 2}
 --- !u!1 &1412047257
 GameObject:

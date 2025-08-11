@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Gear", menuName = "GearData")]
 public class GearData : ScriptableObject
 {
-    public enum GearType { Glove, Shoe, Armor, Glass, Heal }
+    public enum GearType { Glove, Shoe, Armor, Magnet, Heal }
 
     [Header("기본 정보")]
     public GearType gearType;
