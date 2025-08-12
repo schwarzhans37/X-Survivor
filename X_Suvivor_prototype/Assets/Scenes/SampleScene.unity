@@ -5251,9 +5251,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 45c648bd175e3ee4fb726ccc05727e36, type: 2}
-  level: 0
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 0}
+  textLevel: {fileID: 0}
+  textName: {fileID: 0}
+  textDesc: {fileID: 0}
 --- !u!114 &134957068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5739,9 +5744,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
-  level: 0
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 0}
+  textLevel: {fileID: 0}
+  textName: {fileID: 0}
+  textDesc: {fileID: 0}
 --- !u!114 &215061061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6172,6 +6182,7 @@ MonoBehaviour:
   hands: []
   spriteAnimCon: []
   equippedWeapons: []
+  equippedGears: []
 --- !u!70 &274803309
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -11267,9 +11278,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 738c5fe054bfe25478bfcc4c22e45186, type: 2}
-  level: 0
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 0}
+  textLevel: {fileID: 0}
+  textName: {fileID: 0}
+  textDesc: {fileID: 0}
 --- !u!114 &378761491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12031,9 +12047,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: a3d94efcd1e8d1e4b8e4ad5af1509ece, type: 2}
-  level: 0
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 0}
+  textLevel: {fileID: 0}
+  textName: {fileID: 0}
+  textDesc: {fileID: 0}
 --- !u!114 &497561704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12328,7 +12349,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.6203704
+  orthographic size: 4.55432
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -12888,9 +12909,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9fdd3a6da9c9d154abaf124eac0b053f, type: 2}
-  level: 0
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 0}
+  textLevel: {fileID: 0}
+  textName: {fileID: 0}
+  textDesc: {fileID: 0}
 --- !u!114 &576173953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18771,6 +18797,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fed49378c4d134439802f3654201f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponDatas: []
+  gearDatas: []
 --- !u!1 &1396656158
 GameObject:
   m_ObjectHideFlags: 0
