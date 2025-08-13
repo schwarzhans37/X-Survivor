@@ -26,6 +26,7 @@ public class WeaponData : ScriptableObject
     public int basePenetration;       // 레벨 0 (기본) 관통력
     public float baseCooldown;        // 레벨 0 (기본) 쿨다운
     public float baseProjectileSpeed; // 레벨 0 (기본) 투사체/회전 속도
+    public float baseSpreadAngle;     // [방사형 무기용] 레벨 0 투사체 발사각도
 
     // 레벨업에 따른 '증가량'을 배열로 관리
     public float[] damages;
@@ -33,6 +34,7 @@ public class WeaponData : ScriptableObject
     public int[] penetrations;
     public float[] cooldowns;
     public float[] projectileSpeeds;
+    public float[] spreadAngles;       // [방사형 무기용] 레벨별 발사 각도
 
     [Header("# 이미지 데이터")]
     public Sprite weaponIcon;         // UI 아이콘

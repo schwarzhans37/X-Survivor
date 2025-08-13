@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charaId: 1
   charaName: Chara1
-  startingWeapon: {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
+  startingWeapon: {fileID: 11400000, guid: a39f79fc8739d5b469db1706b19a3760, type: 2}
