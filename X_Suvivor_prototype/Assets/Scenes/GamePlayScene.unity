@@ -12504,14 +12504,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0053ecb3fe4877748bc23f588b44363b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: []
-  monsterDatabase: {fileID: 90801893}
-  animCon: []
-  spawnInterval: 1
-  eliteSchedule:
-  - spawnTime: 20
-    monsterId: 1000
-    spawned: 0
+  poolManager: {fileID: 941918228}
+  spawnWaves:
+  - startTime: 0
+    endTime: 120
+    monsterData: {fileID: 11400000, guid: 4fcef17c46e15ee4987276a6e26f97eb, type: 2}
+    spawnInterval: 1
+    timer: 0
+  - startTime: 60
+    endTime: 180
+    monsterData: {fileID: 11400000, guid: 6eaae39a45a14134aa5088f09a728cda, type: 2}
+    spawnInterval: 1
+    timer: 0
+  - startTime: 120
+    endTime: 240
+    monsterData: {fileID: 11400000, guid: 4fcef17c46e15ee4987276a6e26f97eb, type: 2}
+    spawnInterval: 1
+    timer: 0
+  spawnEvents: []
 --- !u!1 &558546457
 GameObject:
   m_ObjectHideFlags: 0
@@ -15652,13 +15662,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24162acb7e2ade4fa346d744ba9ee1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
+  itemPrefabs:
   - {fileID: 5815709779976235455, guid: 96f849c304d45c140bf780e216ddd867, type: 3}
-  - {fileID: 269897315896794488, guid: bde7851dc437b3941aa52032e00d8b4a, type: 3}
-  - {fileID: 6912399271862598263, guid: caa30f801f7faaa4387f4a0f64776745, type: 3}
-  - {fileID: 8603556273567077586, guid: b8c748878cd45864db22ee214d1423b4, type: 3}
-  - {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
+  projectilePrefabs:
   - {fileID: 8603556273567077586, guid: 4348f9bd9fb65d74b8f53ebe72dbcef9, type: 3}
+  - {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
+  - {fileID: 8603556273567077586, guid: b8c748878cd45864db22ee214d1423b4, type: 3}
+  normalMonsterPrefabs:
+  - {fileID: 2701320078967796374, guid: b4cb9574361f0cc46a5c653f2ee41005, type: 3}
+  - {fileID: 2719428963997641290, guid: 266d064aece5a61469275cb0989e9b59, type: 3}
+  - {fileID: 9198723933020546755, guid: b56d93d193553f040a38c010289562cb, type: 3}
+  eliteMonsterPrefabs: []
+  bossMonsterPrefabs: []
 --- !u!1 &953070458
 GameObject:
   m_ObjectHideFlags: 0

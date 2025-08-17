@@ -10,12 +10,12 @@ public class Enemy : MonoBehaviour
     public float health;    // 몬스터의 현재 체력
     public float maxHealth; // 몬스터의 최대 체력
 
-    [Header("# Monster's Physics")]
-    public Rigidbody2D target;  // 몬스터 충돌 판정 계산 리지드바디
+    [Header("# Data")]
+    public MonsterData monsterData;
 
-    [Header("# Monster Render")]
-    public RuntimeAnimatorController[] animCon; // 몬스터 애니메이션 컨트롤러
-    
+    [Header("# Monster's Physics")]
+    public Rigidbody2D target;
+
     bool isLive;
     Rigidbody2D rigid;
     Collider2D coll;
@@ -41,7 +41,9 @@ public class Enemy : MonoBehaviour
         rigid.simulated = true;
         spriter.sortingOrder = 2;
         anim.SetBool("Dead", false);
-        health = maxHealth;
+
+        // OnEnable 될 때마다 monsterData를 기반으로 스탯을 초기화
+        Init(monsterData);
     }
         
     void FixedUpdate()
@@ -84,10 +86,13 @@ public class Enemy : MonoBehaviour
 
     public void Init(MonsterData data)
     {
+        // ScriptableObject에서 데이터를 가져와 적용
+        monsterData = data; // 데이터 참조 저장
         speed = data.Speed;
         maxHealth = data.Maxhealth;
         health = maxHealth;
 
+        // 애니메이터 컨트롤러 설정
         if (data.animator != null)
             anim.runtimeAnimatorController = data.animator;
     }
@@ -113,7 +118,7 @@ public class Enemy : MonoBehaviour
             GameManager.instance.killCount++;
 
             //PoolManager에 ExpOrb를 0번 인덱스로 등록했음, 따라서 경험치 오브젝트를 생성하도록 함.
-            GameObject expOrb = GameManager.instance.pool.Get(0);
+            GameObject expOrb = GameManager.instance.pool.Get(PoolCategory.Item, 0);
             // 받아온 오브젝트의 위치를 현재 사망한 몬스터의 위치로 설정
             expOrb.transform.position = transform.position;
 
@@ -133,7 +138,7 @@ public class Enemy : MonoBehaviour
         rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
     }
 
-    void Dead()
+    public void Dead()
     {
         gameObject.SetActive(false);
     }
