@@ -117,14 +117,57 @@ public class Enemy : MonoBehaviour
             anim.SetBool("Dead", true);
             GameManager.instance.killCount++;
 
-            //PoolManager에 ExpOrb를 0번 인덱스로 등록했음, 따라서 경험치 오브젝트를 생성하도록 함.
-            GameObject expOrb = GameManager.instance.pool.Get(PoolCategory.Item, 0);
-            // 받아온 오브젝트의 위치를 현재 사망한 몬스터의 위치로 설정
-            expOrb.transform.position = transform.position;
+            DropItems();
+
+            if (monsterData.tier == MonsterData.MonsterTier.Boss)
+            {
+                GameManager.instance.NotifyBossDefeated();
+            }
 
             if (GameManager.instance.isLive)
+                {
+                    AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+                }
+        }
+    }
+
+    void DropItems()
+    {
+        if (monsterData == null) return;
+
+        // 1. 경험치 구슬 드랍
+        // min과 max가 같으면 고정값, 다르면 랜덤
+        int expOrbCount = Random.Range(monsterData.mixExpOrbs, monsterData.maxExpOrbs + 1);
+        int expPoolIndex = 0; // 기본 경험치 구슬 인덱스
+        switch (monsterData.tier)
+        {
+            case MonsterData.MonsterTier.Elite:
+                expPoolIndex = 1; // Exp2
+                break;
+            case MonsterData.MonsterTier.Boss:
+                expPoolIndex = 2; // Exp3
+                break;
+        }
+
+        for (int i = 0; i < expOrbCount; i++)
+        {
+            GameObject item = GameManager.instance.pool.Get(PoolCategory.Item, expPoolIndex);
+            // 아이템이 겹치지 않게 살짝 랜덤한 위치에 생성
+            item.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
+        }
+
+        // 2. 추가 아이템 리스트 드랍 (골드, 젬 등)
+        foreach (var itemToDrop in monsterData.dropList)
+        {
+            // 드랍 확률 체크
+            if (Random.Range(0f, 1f) <= itemToDrop.dropChance)
             {
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+                int amount = Random.Range(itemToDrop.minAmount, itemToDrop.maxAmount + 1);
+                for (int i = 0; i < amount; i++)
+                {
+                    GameObject item = GameManager.instance.pool.Get(PoolCategory.Item, itemToDrop.itemPoolIndex);
+                    item.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
+                }
             }
         }
     }

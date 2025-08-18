@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c4dd2cff55dd44788a87cc7b162e65, type: 3}
   m_Name: SlimeGreen_Data
   m_EditorClassIdentifier: 
+  PoolManagerIndex: 0
   Id: 0
   Name: "\uB179\uC0C9 \uC2AC\uB77C\uC784"
   tier: 0
-  Maxhealth: 20
+  Maxhealth: 25
   AttackPower: 0
   AttackRange: 0
-  Speed: 2
+  Speed: 1.75
+  mixExpOrbs: 1
+  maxExpOrbs: 1
+  dropList: []
   animator: {fileID: 22100000, guid: 60b8f230d74ee1e49a658d9047bb445c, type: 2}
-  PoolManagerIndex: 0

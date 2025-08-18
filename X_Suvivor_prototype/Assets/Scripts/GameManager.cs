@@ -4,6 +4,7 @@ using System.Data.Common;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     public int killCount;
     public int nowExp;
     public int[] needExp;
+    public long acquiredGold;   // 게임 중 획득한 골드
+    public long acquiredGems;   // 게임 중 획득한 젬
 
     [Header("# 게임 오브젝트들")]
     public Player player;
@@ -32,6 +35,9 @@ public class GameManager : MonoBehaviour
 
     [Header("# 캐릭터 관련 데이터베이스")]
     public List<CharaData> charaDatas;  // 모든 캐릭터 데이터를 담는 리스트
+
+    public event Action<Enemy> OnBossSpawned;
+    public event Action OnBossDefeated;
 
     private bool isPaused;  // 게임이 일시정지 상태인지 확인
 
@@ -107,6 +113,9 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
+        PlayerDataManager.instance.AddGold(acquiredGold);
+        PlayerDataManager.instance.AddGems(acquiredGems);
+
         uiResult.gameObject.SetActive(true);
         uiResult.Win();
         Stop();
@@ -125,6 +134,9 @@ public class GameManager : MonoBehaviour
         isLive = false;
 
         yield return new WaitForSeconds(0.5f);
+
+        PlayerDataManager.instance.AddGold(acquiredGold);
+        PlayerDataManager.instance.AddGems(acquiredGems);
 
         uiResult.gameObject.SetActive(true);
         uiResult.Lose();
@@ -161,18 +173,48 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GetExp()
+    public void NotifyBossSpawned(Enemy boss)
+    {
+        OnBossSpawned?.Invoke(boss);    // 보스가 등장했음을 알림
+    }
+
+    public void NotifyBossDefeated()
+    {
+        OnBossDefeated?.Invoke();       // 보스가 사망했음을 알림
+    }
+
+    public void GetExp(int amount)
     {
         if (!isLive)
             return;
-        nowExp++;
 
-        if (nowExp == needExp[Mathf.Min(level, needExp.Length - 1)])
+        nowExp += amount;
+
+        while (nowExp >= needExp[Mathf.Min(level, needExp.Length - 1)])
         {
+            // 1. 현재 레벨에서 필요했던 경험치 만큼만 차감
+            nowExp -= needExp[Mathf.Min(level, needExp.Length - 1)];
+            // 2. 레벨업
             level++;
-            nowExp = 0;
+            // 3. 레벨업 UI 표시
             uiLevelUo.show();
         }
+    }
+
+    public void GetGold(int amount)
+    {
+        if (!isLive)
+            return;
+        acquiredGold += amount;
+        // TODO: HUD에 골드 획득량 표시 UI 업데이트
+    }
+
+    public void GetGems(int amount)
+    {
+        if (!isLive)
+            return;
+        acquiredGems += amount;
+        // TODO: HUD에 젬 획득량 표시 UI 업데이트
     }
 
     public void Stop()

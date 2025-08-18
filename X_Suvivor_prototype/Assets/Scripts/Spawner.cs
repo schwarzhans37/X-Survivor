@@ -97,12 +97,18 @@ public class Spawner : MonoBehaviour
         // PoolManager에 몬스터 카테고리와 데이터에 저장된 인덱스를 넘겨줌
         GameObject monster = poolManager.Get(category, monsterData.PoolManagerIndex);
         monster.transform.position = GetRandomSpawnPosition();
-        
+
         // Enemy 스크립트에 MonsterData를 전달하여 초기화
         Enemy enemy = monster.GetComponent<Enemy>();
         if (enemy != null)
         {
             enemy.Init(monsterData);
+        }
+
+        if (monsterData.tier == MonsterData.MonsterTier.Boss)
+        {
+            Debug.Log($"<color=red><b>[Spawner] 보스 생성 확인! 이름: {monsterData.Name}, 등급: {monsterData.tier}. GameManager에 알림을 보냅니다.</b></color>");
+            GameManager.instance.NotifyBossSpawned(enemy);
         }
     }
 
