@@ -12,6 +12,8 @@ public class DodgeSkill : MonoBehaviour
 
     private Player player; // Player 스크립트 참조
     private float cooldownTimer = 0f; // 남은 쿨타임을 추적
+    public float CooldownTimer { get { return cooldownTimer; } }
+    public float MaxCooldown { get { return cooldown; } }
     private bool isDashing = false;   // 현재 돌진 중인지 여부
 
     void Awake()
