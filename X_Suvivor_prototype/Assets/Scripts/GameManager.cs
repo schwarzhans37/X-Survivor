@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
     [Header("# 캐릭터 관련 데이터베이스")]
     public List<CharaData> charaDatas;  // 모든 캐릭터 데이터를 담는 리스트
 
+    [Header("# 보물상자 설정")]
+    public int killsForNextChest = 100;    // 상자 스폰용 킬 카운트 간격
+    private int currentKillThreshold;   // 다음 상자가 스폰될 목표 킬 카운트
+
     public event Action<Enemy> OnBossSpawned;
     public event Action OnBossDefeated;
 
@@ -45,6 +49,7 @@ public class GameManager : MonoBehaviour
     // 초기화(선언)
     {
         instance = this;
+        currentKillThreshold = killsForNextChest;
     }
 
     // PlayerDataManager로부터 선택 정보를 가져와 게임을 시작
@@ -181,6 +186,31 @@ public class GameManager : MonoBehaviour
     public void NotifyBossDefeated()
     {
         OnBossDefeated?.Invoke();       // 보스가 사망했음을 알림
+    }
+
+    public void AddKill()
+    {
+        if (!isLive) return;
+
+        killCount++;
+
+        if (killCount >= currentKillThreshold)
+        {
+            SpawnTreasureChest();
+            currentKillThreshold += killsForNextChest;
+        }
+    }
+
+    void SpawnTreasureChest()
+    {
+        GameObject chest = pool.Get(PoolCategory.Item, 5);
+
+        Vector3 playerPos = player.transform.position;
+        float spawnRadius = 5.0f;
+         Vector3 randomDir = UnityEngine.Random.insideUnitCircle.normalized * spawnRadius;
+        chest.transform.position = playerPos + randomDir;
+
+        Debug.Log($"<color=yellow><b>보물상자가 스폰되었습니다! 다음 상자는 {currentKillThreshold}킬 달성 시 나타납니다.</b></color>");
     }
 
     public void GetExp(int amount)

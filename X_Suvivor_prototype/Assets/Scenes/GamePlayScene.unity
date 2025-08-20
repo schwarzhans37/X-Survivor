@@ -12359,6 +12359,7 @@ MonoBehaviour:
   charaDatas:
   - {fileID: 11400000, guid: b2dee6c27d4bd0240b5815fdcff1b813, type: 2}
   - {fileID: 11400000, guid: 501416ec2bd07a84da40ea9df6703c8f, type: 2}
+  killsForNextChest: 100
 --- !u!4 &492052613
 Transform:
   m_ObjectHideFlags: 0
@@ -13266,7 +13267,7 @@ MonoBehaviour:
   - spawnTime: 240
     monsterData: {fileID: 11400000, guid: bc39ebeaac5a04045bd4aa8350fe5227, type: 2}
     isSpawned: 0
-  - spawnTime: 5
+  - spawnTime: 240
     monsterData: {fileID: 11400000, guid: 51abb8e97a04a594fb47f73164326791, type: 2}
     isSpawned: 0
 --- !u!1 &558546457
@@ -17211,6 +17212,7 @@ MonoBehaviour:
   - {fileID: 4606826972570224425, guid: 9f1e76b356b10f44986e41123b8846c1, type: 3}
   - {fileID: 2851910924784830511, guid: e0cf58c3d91478545a0c31dbbefb4c0c, type: 3}
   - {fileID: 3583342307031291452, guid: a2fd35eceb6b1924fb92fe7907056142, type: 3}
+  - {fileID: 2344654081402875958, guid: 14cd078c46626b647b9e830c71e32437, type: 3}
   projectilePrefabs:
   - {fileID: 8603556273567077586, guid: 4348f9bd9fb65d74b8f53ebe72dbcef9, type: 3}
   - {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
