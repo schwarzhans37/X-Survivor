@@ -5082,8 +5082,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bac408bc8cf2834fb48b50f855f186b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsters: []
-  animCon: []
 --- !u!1 &91911106
 GameObject:
   m_ObjectHideFlags: 0
@@ -12862,7 +12860,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 5.9888887
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
