@@ -28,7 +28,8 @@ public class Player : MonoBehaviour
     [Header("캐릭터별 애니메이션 컨트롤러")]
     public RuntimeAnimatorController[] spriteAnimCon; // 플레이어 캐릭터 애니메이션 컨트롤러
 
-    Rigidbody2D rigid;  // 충돌 판정 계산 리지드바디
+    public bool isDashing { get; set; } = false;
+    public Rigidbody2D rigid { get; private set; }  // 충돌 판정 계산 리지드바디
     CapsuleCollider2D capColl;
     SpriteRenderer spriter; // 스프라이트(이미지)
     Animator anim;  // 캐릭터 애니메이션
@@ -95,7 +96,7 @@ public class Player : MonoBehaviour
         - Rigidbody
      */
     {
-        if (!GameManager.instance.isLive) {
+        if (!GameManager.instance.isLive || isDashing) {
             return;
         }
 
@@ -126,10 +127,10 @@ public class Player : MonoBehaviour
             // 모든 감지된 아이템에 대해 반복
             foreach (Collider2D target in itemScanner.Targets)
             {
-                ExpOrb expOrb = target.GetComponent<ExpOrb>();
-                if (expOrb != null)
+                Collectible collectible = target.GetComponent<Collectible>();
+                if (collectible != null)
                 {
-                    expOrb.StartSeeking();
+                    collectible.StartSeeking();
                 }
             }
 
@@ -310,12 +311,21 @@ public class Player : MonoBehaviour
         }
         else
         {
-            StartCoroutine(InvincibleRoutine());
+            StartCoroutine(InvincibleRoutine(invincibleTime));
             Debug.Log("플레이어가 생명력 1개를 잃고 3초간 무적이 됩니다.");
         }
     }
 
-    IEnumerator InvincibleRoutine()
+    public void BecomeInvincible(float duration)
+    {
+        // 이미 무적상태가 아니라면 코루틴 실행
+        if (!isInvincible)
+        {
+            StartCoroutine(InvincibleRoutine(duration));
+        }
+    }
+
+    IEnumerator InvincibleRoutine(float duration)
     {
         isInvincible = true;
         capColl.isTrigger = true;
@@ -329,7 +339,7 @@ public class Player : MonoBehaviour
         float blinkInterval = 0.2f;  //깜빡이는 간격
         float elapsedTime = 0f;
 
-        while (elapsedTime < invincibleTime)
+        while (elapsedTime < duration)
         {
             // 반투명하게
             spriter.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.5f);
@@ -391,6 +401,12 @@ public class Player : MonoBehaviour
 
     void OnMove(InputValue value)
     {
+        if (isDashing)
+        {
+            inputVec = Vector2.zero;
+            return;
+        }
+
         inputVec = value.Get<Vector2>();
     }
 }

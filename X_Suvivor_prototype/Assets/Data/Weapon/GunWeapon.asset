@@ -44,4 +44,4 @@ MonoBehaviour:
   weaponIcon: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   projectilePrefab: {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
   handSprite: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-  PoolManagerIndex: 4
+  PoolManagerIndex: 1

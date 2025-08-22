@@ -2,148 +2,122 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 인스펙터에서 시간대별 소환 정보를 설정하기 위한 보조 클래스들
+[System.Serializable]
+public class SpawnWave
+{
+    [Tooltip("이 웨이브가 시작되는 게임 시간 (초)")]
+    public float startTime;
+    [Tooltip("이 웨이브가 끝나는 게임 시간 (초)")]
+    public float endTime;
+    [Tooltip("소환할 몬스터의 데이터")]
+    public MonsterData monsterData;
+    [Tooltip("해당 몬스터의 소환 간격")]
+    public float spawnInterval;
+
+    // 내부적으로 사용할 타이머
+    [HideInInspector]
+    public float timer;
+}
+
+[System.Serializable]
+public class SpawnEvent
+{
+    [Tooltip("몬스터가 소환될 정확한 게임 시간 (초)")]
+    public float spawnTime;
+    [Tooltip("소환할 몬스터의 데이터")]
+    public MonsterData monsterData;
+
+    // 소환 완료 여부 체크
+    [HideInInspector]
+    public bool isSpawned;
+}
+
 public class Spawner : MonoBehaviour
 {
-    public Transform[] spawnPoint;
-    public MonsterDatabase monsterDatabase;
-    public RuntimeAnimatorController[] animCon;
+    public PoolManager poolManager;
 
-    public float spawnInterval = 3f;
-    private float timer;
-    private bool isReady = false;   // 스폰 준비 완료 플래그
+    [Header("지속 소환 웨이브 설정")]
+    public List<SpawnWave> spawnWaves; // 시간에 따라 지속적으로 소환될 몬스터 목록
 
-    [System.Serializable]
-    public class EliteSchedule
-    {
-        public int spawnTime;        // 초 단위
-        public int monsterId;        // 예: 1000
-        public bool spawned = false; // 중복 스폰 방지
-    }
-
-    public List<EliteSchedule> eliteSchedule = new List<EliteSchedule>();
-
-    void Awake()
-    {
-        spawnPoint = GetComponentsInChildren<Transform>();
-
-        if (monsterDatabase == null || monsterDatabase.monsters.Count == 0)
-        {
-            Debug.LogError("[Spawner] MonsterDatabase가 초기화되지 않았습니다.");
-        }
-    }
-
-    void Start()
-    {
-        if (monsterDatabase == null)
-        {
-            Debug.LogError("[Spawner] MonsterDatabase가 연결되지 않았습니다.");
-            return;
-        }
-
-        // 데이터 로딩이 끝날 때까지 잠깐 대기 (지연 스폰 시작)
-        StartCoroutine(DelayedStart());
-    }
-
-    IEnumerator DelayedStart()
-    {
-        yield return new WaitForSeconds(0.1f);  // 데이터 로딩 기다리기
-
-        isReady = true;     // 스폰을 시작할 준비가 되었음을 알림
-        timer = spawnInterval;  // 바로 스폰하도록 타이머 초기화
-    }
+    [Header("이벤트 소환 설정 (엘리트, 보스)")]
+    public List<SpawnEvent> spawnEvents; // 특정 시간에 한 번만 소환될 몬스터 목록
 
     void Update()
     {
-        // isReady 플래그나 GameManager의 isLive를 통해 스폰 여부 제어
-        if (!isReady || !GameManager.instance.isLive)
-            return;
-        
-        if (monsterDatabase == null || monsterDatabase.monsters.Count == 0)
+        if (!GameManager.instance.isLive)
             return;
 
-        float currentTime = GameManager.instance.gameTime;
-        timer += Time.deltaTime;
+        float gameTime = GameManager.instance.gameTime;
 
-        // 일반 몬스터 스폰
-        if (timer > spawnInterval)
+        // 1. 지속 소환 웨이브 처리
+        foreach (var wave in spawnWaves)
         {
-            timer = 0;
-            SpawnNormal(currentTime);
+            // 현재 게임 시간이 웨이브의 시작과 끝 시간 사이에 있는지 확인
+            if (gameTime >= wave.startTime && gameTime < wave.endTime)
+            {
+                wave.timer += Time.deltaTime;
+                if (wave.timer >= wave.spawnInterval)
+                {
+                    wave.timer = 0;
+                    Spawn(wave.monsterData);
+                }
+            }
         }
 
-        // 엘리트 몬스터 스폰
-        foreach (var schedule in eliteSchedule)
+        // 2. 이벤트 소환 처리
+        foreach (var evt in spawnEvents)
         {
-            if (!schedule.spawned && currentTime >= schedule.spawnTime)
+            // 아직 소환되지 않았고, 소환 시간이 되었다면
+            if (!evt.isSpawned && gameTime >= evt.spawnTime)
             {
-                schedule.spawned = true;
-                SpawnElite(schedule.monsterId);
+                evt.isSpawned = true; // 한 번만 소환되도록 플래그 설정
+                Spawn(evt.monsterData);
             }
         }
     }
 
-    void SpawnNormal(float currentTime)
+    void Spawn(MonsterData monsterData)
     {
-        int monsterId = GetNormalMonsterIdByTime(currentTime);
-        MonsterData data = monsterDatabase.GetByID(monsterId);
-
-        if (data == null)
+        // MonsterData에 저장된 Tier 정보를 바탕으로 올바른 PoolCategory를 선택
+        PoolCategory category;
+        switch (monsterData.tier)
         {
-            Debug.LogWarning($"[일반 몬스터] ID {monsterId}�에 해당하는 데이터가 없습니다.");
-            return;
+            case MonsterData.MonsterTier.Elite:
+                category = PoolCategory.EliteMonster;
+                break;
+            case MonsterData.MonsterTier.Boss:
+                category = PoolCategory.BossMonster;
+                break;
+            default: // MonsterTier.Normal
+                category = PoolCategory.NormalMonster;
+                break;
         }
 
-        GameObject enemy = GameManager.instance.pool.Get(1); // 일반 몬스터는 풀 인덱스 1
-        enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
+        // PoolManager에 몬스터 카테고리와 데이터에 저장된 인덱스를 넘겨줌
+        GameObject monster = poolManager.Get(category, monsterData.PoolManagerIndex);
+        monster.transform.position = GetRandomSpawnPosition();
 
-        int animIndex = monsterDatabase.monsters.FindIndex(m => m.Id == data.Id);
-        if (animIndex >= 0 && animIndex < animCon.Length)
+        // Enemy 스크립트에 MonsterData를 전달하여 초기화
+        Enemy enemy = monster.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            data.animator = animCon[animIndex];
+            enemy.Init(monsterData);
         }
 
-        enemy.GetComponent<Enemy>().Init(data);
-        Debug.Log($"[일반 몬스터] {data.Name} (ID: {data.Id}) 스폰");
+        if (monsterData.tier == MonsterData.MonsterTier.Boss)
+        {
+            Debug.Log($"<color=red><b>[Spawner] 보스 생성 확인! 이름: {monsterData.Name}, 등급: {monsterData.tier}. GameManager에 알림을 보냅니다.</b></color>");
+            GameManager.instance.NotifyBossSpawned(enemy);
+        }
     }
 
-    void SpawnElite(int id)
+    Vector3 GetRandomSpawnPosition()
     {
-        MonsterData data = monsterDatabase.GetByID(id);
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        float spawnRadius = 15.0f;
 
-        if (data == null)
-        {
-            Debug.LogWarning($"[앨리트 몬스터] ID {id}에 해당하는 데이터가 없습니다.");
-            return;
-        }
-
-        GameObject enemy = GameManager.instance.pool.Get(2); // 앨리트 몬스터는 풀 인덱스2
-        enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
-
-        int animIndex = monsterDatabase.monsters.FindIndex(m => m.Id == data.Id);
-        if (animIndex >= 0 && animIndex < animCon.Length)
-        {
-            data.animator = animCon[animIndex];
-        }
-
-        enemy.GetComponent<Enemy>().Init(data);
-        Debug.Log($"[앨리트 몬스터] {data.Name} (ID: {data.Id}) 등장");
-    }
-
-    int GetNormalMonsterIdByTime(float time)
-    {
-        int minute = Mathf.FloorToInt(time / 60f);
-        switch (minute)
-        {
-            case 0: return 1;
-            case 1: return 2;
-            case 2: return 3;
-            case 3: return 4;
-            case 4: return 5;
-            case 5: return 6;
-            case 6: return 7;
-            case 7: return 8;
-            case 8: return 9;
-            default: return 9;  // 이후 계속 같은 몬스터
-        }
+        Vector3 randomDir = Random.insideUnitCircle.normalized * spawnRadius;
+        return playerPos + randomDir;
     }
 }

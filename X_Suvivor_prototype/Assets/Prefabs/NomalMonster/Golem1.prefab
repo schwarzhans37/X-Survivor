@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4048918415383561762}
   - component: {fileID: 6222173061283900366}
+  - component: {fileID: 8841313085283882995}
   - component: {fileID: 8500413909922105699}
   - component: {fileID: 7078020284151701728}
   - component: {fileID: 4911822953093135428}
@@ -87,6 +88,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8841313085283882995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4212458102610426768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4f6a4e0ef6903489f932d81a0d23f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  health: 0
+  maxHealth: 0
+  monsterData: {fileID: 0}
+  target: {fileID: 7078020284151701728}
 --- !u!95 &8500413909922105699
 Animator:
   serializedVersion: 5
