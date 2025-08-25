@@ -181,6 +181,54 @@ public class Enemy : MonoBehaviour
         rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
     }
 
+    //소모성 스킬용 공용 데미지 함수 추가
+    public void ApplyDamage(float amount, Vector3? sourcePos = null, float knockPower = 3f)
+    {
+        if (!isLive) return;
+
+        // 체력 감소
+        health -= amount;
+
+        // 넉백: sourcePos가 있으면 그 기준으로 밀기(폭발 등), 없으면 플레이어 기준(기존)
+        if (sourcePos.HasValue)
+            StartCoroutine(KnockBackFrom(sourcePos.Value, knockPower));
+        else
+            StartCoroutine("KnockBack");
+
+        if (health > 0)
+        {
+            anim.SetTrigger("Hit");
+            if (GameManager.instance.isLive)
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+        }
+        else
+        {
+            // ==== 기존 죽음 로직 그대로 복붙 ====
+            isLive = false;
+            coll.enabled = false;
+            rigid.simulated = false;
+            spriter.sortingOrder = 1;
+            anim.SetBool("Dead", true);
+            GameManager.instance.AddKill();
+
+            DropItems();
+
+            if (monsterData.tier == MonsterData.MonsterTier.Boss)
+                GameManager.instance.NotifyBossDefeated();
+
+            if (GameManager.instance.isLive)
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+        }
+    }
+
+    // 폭발 중심에서 바깥으로 밀어내는 넉백
+    IEnumerator KnockBackFrom(Vector3 sourcePos, float power)
+    {
+        yield return wait; // 물리 프레임 싱크
+        Vector3 dirVec = (transform.position - sourcePos).normalized;
+        rigid.AddForce(dirVec * power, ForceMode2D.Impulse);
+    }
+
     public void Dead()
     {
         gameObject.SetActive(false);

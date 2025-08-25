@@ -6432,6 +6432,7 @@ GameObject:
   - component: {fileID: 274803313}
   - component: {fileID: 274803314}
   - component: {fileID: 274803315}
+  - component: {fileID: 274803317}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -6685,6 +6686,23 @@ MonoBehaviour:
   distance: 3
   duration: 0.2
   cooldown: 8
+--- !u!114 &274803317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274803307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94863159c74b73459b5f6b903382239, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 6
+  minePrefab: {fileID: 4109112691387933910, guid: 2005293c9c7c60b4dac94c31d0b3a7b3, type: 3}
+  maxActiveMines: 3
+  placeOffset: 0.1
+  armingDelay: 0.15
 --- !u!1 &284860207
 GameObject:
   m_ObjectHideFlags: 0

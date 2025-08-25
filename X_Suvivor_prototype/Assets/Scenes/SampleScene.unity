@@ -4875,8 +4875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bac408bc8cf2834fb48b50f855f186b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsters: []
-  animCon: []
 --- !u!1 &91911106
 GameObject:
   m_ObjectHideFlags: 0
@@ -6176,7 +6174,10 @@ MonoBehaviour:
   speed: 0
   baseSpeed: 3
   health: 0
+  baseMaxHealth: 0
   maxHealth: 100
+  invincibleTime: 3
+  baseScanRange: 0
   inputVec: {x: 0, y: 0}
   itemScanner: {fileID: 0}
   hands: []
@@ -6509,7 +6510,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b859672a6d4b6b4abfd917a567cc47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
+  healthUI: {fileID: 0}
+  expBarUI: {fileID: 0}
+  levelTextUI: {fileID: 0}
+  killCountUI: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!114 &294626587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11877,6 +11882,8 @@ MonoBehaviour:
   killCount: 0
   nowExp: 0
   needExp: 05000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000
+  acquiredGold: 0
+  acquiredGems: 0
   player: {fileID: 274803308}
   pool: {fileID: 941918228}
   uiLevelUo: {fileID: 1390879062}
@@ -11884,6 +11891,7 @@ MonoBehaviour:
   enemyCleaner: {fileID: 1882968315}
   pauseMenuPanel: {fileID: 0}
   charaDatas: []
+  killsForNextChest: 100
 --- !u!4 &492052613
 Transform:
   m_ObjectHideFlags: 0
@@ -12349,7 +12357,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.55432
+  orthographic size: 5.9888887
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -12579,14 +12587,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0053ecb3fe4877748bc23f588b44363b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: []
-  monsterDatabase: {fileID: 90801893}
-  animCon: []
-  spawnInterval: 1
-  eliteSchedule:
-  - spawnTime: 20
-    monsterId: 1000
-    spawned: 0
+  poolManager: {fileID: 0}
+  spawnWaves: []
+  spawnEvents: []
 --- !u!1 &558546457
 GameObject:
   m_ObjectHideFlags: 0
@@ -15187,12 +15190,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24162acb7e2ade4fa346d744ba9ee1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 5815709779976235455, guid: 96f849c304d45c140bf780e216ddd867, type: 3}
-  - {fileID: 269897315896794488, guid: bde7851dc437b3941aa52032e00d8b4a, type: 3}
-  - {fileID: 6912399271862598263, guid: caa30f801f7faaa4387f4a0f64776745, type: 3}
-  - {fileID: 8603556273567077586, guid: 06dea0a8519840f429f4393cad4144f1, type: 3}
-  - {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
+  itemPrefabs: []
+  projectilePrefabs: []
+  normalMonsterPrefabs: []
+  eliteMonsterPrefabs: []
+  bossMonsterPrefabs: []
 --- !u!1 &953070458
 GameObject:
   m_ObjectHideFlags: 0
@@ -15285,7 +15287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b859672a6d4b6b4abfd917a567cc47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  healthUI: {fileID: 0}
+  expBarUI: {fileID: 0}
+  levelTextUI: {fileID: 0}
+  killCountUI: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!1 &953458017
 GameObject:
   m_ObjectHideFlags: 0
@@ -18665,7 +18671,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b859672a6d4b6b4abfd917a567cc47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  healthUI: {fileID: 0}
+  expBarUI: {fileID: 0}
+  levelTextUI: {fileID: 0}
+  killCountUI: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!114 &1386245242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19302,7 +19312,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b859672a6d4b6b4abfd917a567cc47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  healthUI: {fileID: 0}
+  expBarUI: {fileID: 0}
+  levelTextUI: {fileID: 0}
+  killCountUI: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!1 &1499530239
 GameObject:
   m_ObjectHideFlags: 0
@@ -29179,7 +29193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b859672a6d4b6b4abfd917a567cc47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  healthUI: {fileID: 0}
+  expBarUI: {fileID: 0}
+  levelTextUI: {fileID: 0}
+  killCountUI: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!1 &1748265743
 GameObject:
   m_ObjectHideFlags: 0
