@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8009090977573679459}
   - component: {fileID: 4368333285856967845}
   - component: {fileID: 8931686529609860135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flamehorn_Boss1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

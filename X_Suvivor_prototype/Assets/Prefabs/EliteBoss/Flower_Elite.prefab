@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6955022764759700595}
   - component: {fileID: 2213033726624707253}
   - component: {fileID: 3891794963366467097}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flower_Elite
   m_TagString: Enemy
   m_Icon: {fileID: 0}

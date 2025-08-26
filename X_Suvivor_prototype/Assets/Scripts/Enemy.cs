@@ -23,6 +23,11 @@ public class Enemy : MonoBehaviour
     SpriteRenderer spriter;
     WaitForFixedUpdate wait;
 
+    // -------- 슬로우 상태 (추가) --------
+    float baseSpeed;            // baseSpeed : 원래 이동속도(Init에서 기록)
+    float slowMultiplier = 1f;  // slowMultiplier : 1=정상, 0.7=30% 감속
+    float slowRemain = 0f;      // slowRemain : 남은 슬로우 시간(0이 되면 자동 정상화)
+
     void Awake()
     // 초기화(선언)
     {
@@ -61,8 +66,22 @@ public class Enemy : MonoBehaviour
         if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 
+        // ----- 슬로우 시간 처리 (추가) -----
+        if (slowRemain > 0f)
+        {
+            slowRemain -= Time.fixedDeltaTime;
+            if (slowRemain <= 0f)
+            {
+                slowRemain = 0f;
+                slowMultiplier = 1f; // 만료 시 정상화
+            }
+        }
+
+        // 현재 속도 = 원속도 * 슬로우 멀티
+        float curSpeed = baseSpeed * slowMultiplier;
+
         Vector2 dirVec = target.position - rigid.position;
-        Vector2 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
+        Vector2 nextVec = dirVec.normalized * curSpeed * Time.fixedDeltaTime; // curSpeed로 변경
         rigid.MovePosition(rigid.position + nextVec);
         rigid.velocity = Vector2.zero;
     }
@@ -95,6 +114,11 @@ public class Enemy : MonoBehaviour
         // 애니메이터 컨트롤러 설정
         if (data.animator != null)
             anim.runtimeAnimatorController = data.animator;
+
+        // ----- 슬로우 상태 리셋 (추가) -----
+        baseSpeed = speed;        // 원래 속도 저장
+        slowMultiplier = 1f;
+        slowRemain = 0f;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -227,6 +251,17 @@ public class Enemy : MonoBehaviour
         yield return wait; // 물리 프레임 싱크
         Vector3 dirVec = (transform.position - sourcePos).normalized;
         rigid.AddForce(dirVec * power, ForceMode2D.Impulse);
+    }
+
+    // ===== 슬로우 적용 (자기장용) =====
+    // percent: 0.3f -> 30% 감속, duration: 유지 시간(틱마다 갱신 가능)
+    public void ApplySlow(float percent, float duration)
+    {
+        float m = Mathf.Clamp01(1f - percent); // 1→정상, 0.7→30%감속
+        // 더 강한(작은) 멀티가 오면 갱신
+        if (m < slowMultiplier) slowMultiplier = m;
+        // 남은 시간은 큰 값으로 갱신(연장)
+        if (duration > slowRemain) slowRemain = duration;
     }
 
     public void Dead()

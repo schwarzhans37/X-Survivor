@@ -6433,6 +6433,7 @@ GameObject:
   - component: {fileID: 274803314}
   - component: {fileID: 274803315}
   - component: {fileID: 274803317}
+  - component: {fileID: 274803318}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -6703,6 +6704,30 @@ MonoBehaviour:
   maxActiveMines: 3
   placeOffset: 0.1
   armingDelay: 0.15
+--- !u!114 &274803318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274803307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff070881923f67b439a7c9f523e275fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 6
+  cooldown: 10
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
+  radius: 2.5
+  auraPrefab: {fileID: 4379711475903724824, guid: 5d67da957ab868c4c97549a333070295, type: 3}
+  auraSortingOrderBoost: 1
+  dps: 8
+  tickInterval: 0.5
+  slowPercent: 0.3
+  slowDuration: 0.6
 --- !u!1 &284860207
 GameObject:
   m_ObjectHideFlags: 0

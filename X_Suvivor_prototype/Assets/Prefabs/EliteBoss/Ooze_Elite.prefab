@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 1709084214067585329}
   - component: {fileID: 8737435030549545790}
   - component: {fileID: 2554322614559644628}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ooze_Elite
   m_TagString: Enemy
   m_Icon: {fileID: 0}

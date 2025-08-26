@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7033475526606770414}
   - component: {fileID: 356676860766403790}
   - component: {fileID: 3410883401060911813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Darkblade_Boss2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

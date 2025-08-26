@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2549994097651599032}
   - component: {fileID: 399892380220954845}
   - component: {fileID: 9160143188328496367}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: VampireBat_Elite
   m_TagString: Enemy
   m_Icon: {fileID: 0}

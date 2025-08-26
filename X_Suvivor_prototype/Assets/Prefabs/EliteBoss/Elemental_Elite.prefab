@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1665744893174270415}
   - component: {fileID: 5427022558239264683}
   - component: {fileID: 2582420907460424486}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Elemental_Elite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
