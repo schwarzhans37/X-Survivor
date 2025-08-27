@@ -19,6 +19,7 @@ public class LandMine : MonoBehaviour
     public string explodeTrigger = "Explode";
     public float effectLifetime = 1.0f;          // 프리팹 사용 시 이펙트 생존 시간
     public float explodeAnimDuration = 0.6f;     // 자기 Animator 사용 시 폭발 클립 길이
+    public float visualScale = 0.8f;
 
     [Header("기타")]
     public bool destroyAfterExplode = true; // 폭발 후 이 오브젝트를 파괴할지(false면 SetActive(false))
@@ -31,8 +32,12 @@ public class LandMine : MonoBehaviour
 
     // 폭발 실제 반경(비주얼용)
     float ExplosionRadius => baseExplosionRadius * explosionScaleFactor;
+
     // 데미지 판정 반경 (200%정도 반경 늘려야 애니메이션과 범위 비슷함)
     float DamageRadius => ExplosionRadius * 2f;
+
+    // 비주얼 표시 반경
+    float VisualRadius => ExplosionRadius * visualScale;
 
     void Awake()
     {
@@ -96,7 +101,7 @@ public class LandMine : MonoBehaviour
                 float spriteUnitWidth = fxSR.sprite.bounds.size.x; // 스케일 1에서의 너비(월드 유닛)
                 if (spriteUnitWidth > 0f)
                 {
-                    float scale = (ExplosionRadius * 2f) / spriteUnitWidth;
+                    float scale = (VisualRadius * 2f) / spriteUnitWidth;
                     fx.transform.localScale = new Vector3(scale, scale, 1f);
                 }
             }
@@ -138,7 +143,7 @@ public class LandMine : MonoBehaviour
     {
         // 폭발 비주얼 반경(빨간색)
         Gizmos.color = new Color(1f, 0.3f, 0.3f, 0.35f);
-        Gizmos.DrawWireSphere(transform.position, ExplosionRadius);
+        Gizmos.DrawWireSphere(transform.position, VisualRadius);
 
         // 실제 데미지 판정 반경(노란색)
         Gizmos.color = new Color(1f, 1f, 0.2f, 0.35f);

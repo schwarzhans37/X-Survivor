@@ -28,6 +28,11 @@ public class Enemy : MonoBehaviour
     float slowMultiplier = 1f;  // slowMultiplier : 1=정상, 0.7=30% 감속
     float slowRemain = 0f;      // slowRemain : 남은 슬로우 시간(0이 되면 자동 정상화)
 
+    // -------- 스턴(기절) 상태 --------
+    float stunRemain = 0f;             // 남은 스턴 시간
+    public bool IsStunned => stunRemain > 0f; // 외부 조회용
+    public bool IsAlive => isLive;           // 외부 조회용(타겟 선택 등)
+
     void Awake()
     // 초기화(선언)
     {
@@ -52,20 +57,28 @@ public class Enemy : MonoBehaviour
     }
         
     void FixedUpdate()
-    /* 
-        물리(Physics)계산용 업데이트 함수
-        플레이어의 위치 이동을 위해 사용됨
-        - 프레임 속도 영향 안받음(컴퓨터 성능 영향 안받음)
-        - 고정된 시간 간격으로 호출함
-        - Rigidbody
-     */
     {
-        if (!GameManager.instance.isLive) {
+        if (!GameManager.instance.isLive)
+        {
             return;
         }
         if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 
+        // ----- 스턴 시간 갱신 -----
+        if (stunRemain > 0f)
+        {
+            stunRemain -= Time.fixedDeltaTime;
+            if (stunRemain < 0f) stunRemain = 0f;
+        }
+
+        // 스턴 중에는 이동 완전 정지
+        if (IsStunned)
+        {
+            rigid.velocity = Vector2.zero;
+            return;
+        }
+        
         // ----- 슬로우 시간 처리 (추가) -----
         if (slowRemain > 0f)
         {
@@ -87,12 +100,6 @@ public class Enemy : MonoBehaviour
     }
 
     void LateUpdate()
-    /* 
-        한 프레임의 모든 Update 함수가 실행 된 후 호출
-        오브젝트의 이동, 로직 등의 처리가 끝난 최종 결과를 가지고 사용
-        - 프레임 속도에 따라 가변적임
-        - 애니메이션 후처리, 카메라 추적 등 사용
-     */
     {
         if (!GameManager.instance.isLive) {
             return;
@@ -119,6 +126,7 @@ public class Enemy : MonoBehaviour
         baseSpeed = speed;        // 원래 속도 저장
         slowMultiplier = 1f;
         slowRemain = 0f;
+        stunRemain = 0f;     // 스턴 해제
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -134,24 +142,7 @@ public class Enemy : MonoBehaviour
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
         }
         else {         // 죽음
-            isLive = false;
-            coll.enabled = false;
-            rigid.simulated = false;
-            spriter.sortingOrder = 1;
-            anim.SetBool("Dead", true);
-            GameManager.instance.AddKill();
-
-            DropItems();
-
-            if (monsterData.tier == MonsterData.MonsterTier.Boss)
-            {
-                GameManager.instance.NotifyBossDefeated();
-            }
-
-            if (GameManager.instance.isLive)
-                {
-                    AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
-                }
+            Die();
         }
     }
 
@@ -227,21 +218,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            // ==== 기존 죽음 로직 그대로 복붙 ====
-            isLive = false;
-            coll.enabled = false;
-            rigid.simulated = false;
-            spriter.sortingOrder = 1;
-            anim.SetBool("Dead", true);
-            GameManager.instance.AddKill();
-
-            DropItems();
-
-            if (monsterData.tier == MonsterData.MonsterTier.Boss)
-                GameManager.instance.NotifyBossDefeated();
-
-            if (GameManager.instance.isLive)
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+            Die();
         }
     }
 
@@ -262,6 +239,37 @@ public class Enemy : MonoBehaviour
         if (m < slowMultiplier) slowMultiplier = m;
         // 남은 시간은 큰 값으로 갱신(연장)
         if (duration > slowRemain) slowRemain = duration;
+    }
+
+    // === 스턴(낙뢰용) ===
+    public void ApplyStun(float duration)
+    {
+        if (!isLive) return;
+        if (duration > stunRemain) stunRemain = duration; // 더 긴 스턴으로 갱신
+        // 연출을 원하면 여기서 anim.SetTrigger("Hit") 등 추가 가능
+        rigid.velocity = Vector2.zero; // 즉시 정지
+    }
+
+    void Die()
+    {
+        isLive = false;
+        coll.enabled = false;
+        rigid.simulated = false;
+        spriter.sortingOrder = 1;
+        anim.SetBool("Dead", true);
+        GameManager.instance.AddKill();
+
+        DropItems();
+
+        if (monsterData.tier == MonsterData.MonsterTier.Boss)
+        {
+            GameManager.instance.NotifyBossDefeated();
+        }
+
+        if (GameManager.instance.isLive)
+        {
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+        }
     }
 
     public void Dead()

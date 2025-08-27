@@ -42,9 +42,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "BombSkill",
+                    "name": "Lightning",
                     "type": "Value",
-                    "id": "144e0408-bcd8-442c-85c7-8f60f317a368",
+                    "id": "2a6af520-6ddc-4516-9b84-78635438f655",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -54,6 +54,15 @@
                     "name": "MagneticField",
                     "type": "Value",
                     "id": "8ae732c5-bab6-4d94-b989-f76548d8b170",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "BombSkill",
+                    "type": "Value",
+                    "id": "144e0408-bcd8-442c-85c7-8f60f317a368",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -305,8 +314,19 @@
                 },
                 {
                     "name": "",
+                    "id": "5966a018-52e1-49b1-aeba-9eb410acb741",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lightning",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3064dd76-755a-41e4-94de-4d467590bd13",
-                    "path": "<Keyboard>/5",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
