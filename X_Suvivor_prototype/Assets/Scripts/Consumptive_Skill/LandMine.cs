@@ -11,7 +11,7 @@ public class LandMine : MonoBehaviour
     public float explosionScaleFactor = 1.5f;   // 폭발 크기 배수
     public int damage = 40;                     // 폭발 데미지(예: 30, 40 등)
     public float knockback = 5f;                // 폭발 중심에서 바깥 방향으로 밀어내는 힘
-    public float explodeDelay = 1f;             // 밟은 후 1초 뒤 폭발
+    public float explodeDelay = 0.6f;             // 밟은 후 1초 뒤 폭발
 
     [Header("비주얼")]
     public SpriteRenderer spriteRenderer;   // 지뢰 본체 스프라이트

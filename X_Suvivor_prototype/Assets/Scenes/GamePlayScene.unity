@@ -6435,6 +6435,7 @@ GameObject:
   - component: {fileID: 274803317}
   - component: {fileID: 274803318}
   - component: {fileID: 274803319}
+  - component: {fileID: 274803320}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -6754,6 +6755,27 @@ MonoBehaviour:
   lightningFxPrefab: {fileID: 1898655292594457388, guid: 29c1e3c9a9a25034e9a343e09defcab1, type: 3}
   fxLifetime: 0.8
   scaleFxToRadius: 1
+--- !u!114 &274803320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274803307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b65dd155893604eadf88a25c86e2b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowPrefab: {fileID: 1415503585567529511, guid: fb278dd7e1a563349b034e2b0632852b, type: 3}
+  arrowCount: 12
+  arrowSpeed: 12
+  damage: 40
+  duration: 6
+  cooldown: 10
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &284860207
 GameObject:
   m_ObjectHideFlags: 0

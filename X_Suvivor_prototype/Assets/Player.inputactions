@@ -51,6 +51,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "SplitArrow",
+                    "type": "Value",
+                    "id": "fc78e2fe-0fce-4ed4-8177-b682715240f2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "MagneticField",
                     "type": "Value",
                     "id": "8ae732c5-bab6-4d94-b989-f76548d8b170",
@@ -331,6 +340,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MagneticField",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7760007d-cc24-4882-a6ba-78ce405eb74d",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SplitArrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

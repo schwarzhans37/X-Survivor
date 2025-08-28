@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 3831674377905039992}
   - component: {fileID: 8249659759652194759}
   m_Layer: 6
-  m_Name: Shadowhex_Boss3
+  m_Name: Shadowhex_Boss2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
