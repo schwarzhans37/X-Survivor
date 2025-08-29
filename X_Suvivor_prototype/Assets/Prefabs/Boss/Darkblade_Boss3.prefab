@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6553500717324510473}
   - component: {fileID: 9214369255755578499}
+  - component: {fileID: -4309515787171481723}
   - component: {fileID: 7033475526606770414}
   - component: {fileID: 356676860766403790}
   - component: {fileID: 3410883401060911813}
-  m_Layer: 0
-  m_Name: Darkblade_Boss2
+  m_Layer: 6
+  m_Name: Darkblade_Boss3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,6 +89,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4309515787171481723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358341899799466298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4f6a4e0ef6903489f932d81a0d23f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  health: 0
+  maxHealth: 0
+  monsterData: {fileID: 11400000, guid: 51abb8e97a04a594fb47f73164326791, type: 2}
+  target: {fileID: 356676860766403790}
 --- !u!95 &7033475526606770414
 Animator:
   serializedVersion: 5

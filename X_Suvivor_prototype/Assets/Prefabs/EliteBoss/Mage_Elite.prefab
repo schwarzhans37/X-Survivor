@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2499298817223067117}
   - component: {fileID: 6092285599493761204}
   - component: {fileID: 3216232273833082786}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mage_Elite
   m_TagString: Enemy
   m_Icon: {fileID: 0}

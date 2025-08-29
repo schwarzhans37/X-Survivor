@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3397310566164003200}
   - component: {fileID: 1358214337830821063}
   - component: {fileID: 9063470980574290455}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MegaBeholder_Elite
   m_TagString: Enemy
   m_Icon: {fileID: 0}

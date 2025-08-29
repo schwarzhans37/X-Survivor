@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 7953561325484253291}
   - component: {fileID: 8737822439776208074}
   - component: {fileID: 2488339572639724266}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HugeMushroom_Elite
   m_TagString: Enemy
   m_Icon: {fileID: 0}

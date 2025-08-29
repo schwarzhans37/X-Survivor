@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2692735979990007702}
   - component: {fileID: 3274378338045328567}
   - component: {fileID: 5966099196511783260}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GoblinKing_Elite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
