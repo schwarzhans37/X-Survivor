@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Demon_Boss_attack2_0
+      name: Demon_Boss_attack2_7
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_attack2_1
+      name: Demon_Boss_attack2_6
       rect:
         serializedVersion: 2
         x: 96
@@ -139,7 +139,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_attack2_2
+      name: Demon_Boss_attack2_5
       rect:
         serializedVersion: 2
         x: 192
@@ -160,7 +160,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_attack2_3
+      name: Demon_Boss_attack2_4
       rect:
         serializedVersion: 2
         x: 288
@@ -181,7 +181,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,7 +194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_attack2_4
+      name: Demon_Boss_attack2_3
       rect:
         serializedVersion: 2
         x: 384
@@ -202,7 +202,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,7 +215,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_attack2_5
+      name: Demon_Boss_attack2_2
       rect:
         serializedVersion: 2
         x: 480
@@ -223,7 +223,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,7 +236,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_attack2_6
+      name: Demon_Boss_attack2_1
       rect:
         serializedVersion: 2
         x: 576
@@ -244,7 +244,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,7 +257,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_attack2_7
+      name: Demon_Boss_attack2_0
       rect:
         serializedVersion: 2
         x: 672
@@ -265,7 +265,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -288,14 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Demon_Boss_attack2_0: 862418975
-      Demon_Boss_attack2_1: -256444916
-      Demon_Boss_attack2_2: 329685019
-      Demon_Boss_attack2_3: -605437405
-      Demon_Boss_attack2_4: 2105301330
-      Demon_Boss_attack2_5: -945704022
-      Demon_Boss_attack2_6: -1816215010
-      Demon_Boss_attack2_7: -1091351729
+      Demon_Boss_attack2_0: -1091351729
+      Demon_Boss_attack2_1: -1816215010
+      Demon_Boss_attack2_2: -945704022
+      Demon_Boss_attack2_3: 2105301330
+      Demon_Boss_attack2_4: -605437405
+      Demon_Boss_attack2_5: 329685019
+      Demon_Boss_attack2_6: -256444916
+      Demon_Boss_attack2_7: 862418975
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

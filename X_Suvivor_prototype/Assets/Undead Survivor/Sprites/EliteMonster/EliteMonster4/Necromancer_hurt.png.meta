@@ -110,10 +110,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Necromancer_hurt_1
+      name: Necromancer_hurt_0
       rect:
         serializedVersion: 2
-        x: 72
+        x: 144
         y: 0
         width: 72
         height: 72
@@ -141,8 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Necromancer_hurt_0: 1547260065
-      Necromancer_hurt_1: 1473256090
+      Necromancer_hurt_0: 1473256090
       Necromancer_hurt_2: 1678329306
       Necromancer_hurt_3: -260574804
   mipmapLimitGroupName: 

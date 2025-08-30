@@ -110,12 +110,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Necromancer_death_0
+      name: Necromancer_death_5
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 108
+        width: 72
         height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -131,12 +131,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Necromancer_death_1
+      name: Necromancer_death_4
       rect:
         serializedVersion: 2
-        x: 108
+        x: 72
         y: 0
-        width: 108
+        width: 72
         height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -152,12 +152,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Necromancer_death_2
+      name: Necromancer_death_3
       rect:
         serializedVersion: 2
-        x: 216
+        x: 144
         y: 0
-        width: 108
+        width: 72
         height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -173,12 +173,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Necromancer_death_3
+      name: Necromancer_death_2
       rect:
         serializedVersion: 2
-        x: 324
+        x: 216
         y: 0
-        width: 108
+        width: 72
         height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -189,6 +189,48 @@ TextureImporter:
       bones: []
       spriteID: 5de69c947f4d0e245a1f27ce9c0b37f4
       internalID: -1321611770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Necromancer_death_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb5a723e1a611b34fa83393c8f1a7227
+      internalID: -2084329700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Necromancer_death_0
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 142a9a81d8b1e18458fab0a4bb8d0614
+      internalID: 230004794
       vertices: []
       indices: 
       edges: []
@@ -204,10 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Necromancer_death_0: 360505646
-      Necromancer_death_1: 1609821075
-      Necromancer_death_2: 84129281
-      Necromancer_death_3: -1321611770
+      Necromancer_death_0: 230004794
+      Necromancer_death_1: -2084329700
+      Necromancer_death_2: -1321611770
+      Necromancer_death_3: 84129281
+      Necromancer_death_4: 1609821075
+      Necromancer_death_5: 360505646
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
