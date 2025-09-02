@@ -6,15 +6,43 @@ using UnityEngine.Rendering.Universal;
 public class Enemy : MonoBehaviour
 {
     [Header("# Monster's Status")]
-    public float speed; // 몬스터 이동속도
-    public float health;    // 몬스터의 현재 체력
-    public float maxHealth; // 몬스터의 최대 체력
+    public float speed;           // 이동속도(실제 이동에 씀)
+    public float health;          // 현재 체력
+    public float maxHealth;       // 최대 체력
 
-    [Header("# Data")]
-    public MonsterData monsterData;
+    [Header("# Data (기존 사용 그대로)")]
+    public MonsterData monsterData;   // 스탯/드랍/애니 컨트롤러 등 기존 SO
 
     [Header("# Monster's Physics")]
-    public Rigidbody2D target;
+    public Rigidbody2D target;        // 플레이어 Rigidbody
+
+    [Header("# Monster Attack")]
+    public float attackRange = 1.1f;    // 공격 시작 거리
+    public float attackCooldown = 1.0f; // 공격 쿨
+    public Collider2D attackHitbox;     // Graphics 자식(Trigger)
+    public float windupTime = 0.15f;    // 예비동작
+    public float activeTime = 0.10f;    // 히트박스 on 유지 시간(이벤트 미사용시)
+
+    [Header("# Graphics & Colliders")]
+    public Transform graphics;                // Sprite/Shadow/Hitbox 묶음(이것만 좌우 반전)
+    public Transform shadow;                  // 선택
+    public CapsuleCollider2D bodyCollider;    // 루트 몸통(비트리거)
+
+    [Header("Body Collider per-direction tweak")]
+    public float bodyRightX = 0f; // 오른쪽 볼 때 X 추가 오프셋(+면 앞쪽)
+    public float bodyLeftX = 0f; // 왼쪽 볼 때 X 추가 오프셋(+면 앞쪽)
+    public float bodyY = 0f; // 위/아래 공통 보정이 필요하면 사용(선택)
+
+
+    // 내부 저장: 기본 위치/오프셋
+    [SerializeField] Vector2 graphicsBaseLocalPos; // 비워두면 Awake에서 자동 기록
+    Vector3 shadowBaseLocalPos;
+    Vector2 bodyColBaseOffset;
+    Vector2 atkBoxBaseOffset;
+
+    // 상태
+    bool isAttacking = false;
+    float lastAttackTime = -999f;
 
     bool isLive;
     Rigidbody2D rigid;
@@ -23,23 +51,35 @@ public class Enemy : MonoBehaviour
     SpriteRenderer spriter;
     WaitForFixedUpdate wait;
 
-    // -------- 슬로우 상태 (추가) --------
-    float baseSpeed;            // baseSpeed : 원래 이동속도(Init에서 기록)
-    float slowMultiplier = 1f;  // slowMultiplier : 1=정상, 0.7=30% 감속
-    float slowRemain = 0f;      // slowRemain : 남은 슬로우 시간(0이 되면 자동 정상화)
-
-    // -------- 스턴(기절) 상태 --------
-    float stunRemain = 0f;             // 남은 스턴 시간
-    public bool IsStunned => stunRemain > 0f; // 외부 조회용
-    public bool IsAlive => isLive;           // 외부 조회용(타겟 선택 등)
+    // 슬로우/스턴
+    float baseSpeed;
+    float slowMultiplier = 1f;
+    float slowRemain = 0f;
+    float stunRemain = 0f;
+    public bool IsStunned => stunRemain > 0f;
+    public bool IsAlive => isLive;
 
     void Awake()
-    // 초기화(선언)
     {
         rigid = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
-        anim = GetComponent<Animator>();
-        spriter = GetComponent<SpriteRenderer>();
+
+        // Animator/SpriteRenderer는 Graphics에 있음
+        anim = GetComponentInChildren<Animator>(true);
+        spriter = anim ? anim.GetComponent<SpriteRenderer>()
+                       : GetComponentInChildren<SpriteRenderer>(true);
+
+        if (bodyCollider == null) bodyCollider = GetComponent<CapsuleCollider2D>();
+
+        // 기준값 항상 기록(0,0도 포함)
+        if (attackHitbox is BoxCollider2D box) atkBoxBaseOffset = box.offset;
+        if (bodyCollider) bodyColBaseOffset = bodyCollider.offset;
+
+        if (graphics && graphicsBaseLocalPos == Vector2.zero)
+            graphicsBaseLocalPos = graphics.localPosition;
+
+        if (shadow) shadowBaseLocalPos = shadow.localPosition;
+
         wait = new WaitForFixedUpdate();
     }
 
@@ -47,134 +87,179 @@ public class Enemy : MonoBehaviour
     {
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
+
         coll.enabled = true;
         rigid.simulated = true;
-        spriter.sortingOrder = 2;
-        anim.SetBool("Dead", false);
 
-        // OnEnable 될 때마다 monsterData를 기반으로 스탯을 초기화
+        if (spriter) spriter.sortingOrder = 2;
+        if (anim) anim.SetBool("Dead", false);
+
         Init(monsterData);
+
+        if (attackHitbox) attackHitbox.enabled = false;
+
+        // 히트박스에 부모 참조(넉백 방향용)
+        var hb = attackHitbox ? attackHitbox.GetComponent<EnemyAttackHitbox>() : null;
+        if (hb) hb.attacker = transform;
     }
-        
+
     void FixedUpdate()
     {
-        if (!GameManager.instance.isLive)
-        {
-            return;
-        }
-        if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+        if (!GameManager.instance.isLive) return;
+        if (!isLive) return;
+
+        if (!isLive || (anim && anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")))
             return;
 
-        // ----- 스턴 시간 갱신 -----
-        if (stunRemain > 0f)
+        // 스턴은 그대로(스턴 중엔 멈춤)
+        if (stunRemain > 0f) { stunRemain -= Time.fixedDeltaTime; if (stunRemain < 0f) stunRemain = 0f; }
+        if (IsStunned) { rigid.velocity = Vector2.zero; return; }
+
+        if (slowRemain > 0f) { slowRemain -= Time.fixedDeltaTime; if (slowRemain <= 0f) { slowRemain = 0f; slowMultiplier = 1f; } }
+
+        // ── 공격 체크: "트리거만" 걸고 이동은 계속 ──
+        float dist = Vector2.Distance(target.position, rigid.position);
+        bool canAttack = dist <= attackRange &&
+                         Time.time >= lastAttackTime + attackCooldown &&
+                         !isAttacking;
+
+        if (canAttack)
         {
-            stunRemain -= Time.fixedDeltaTime;
-            if (stunRemain < 0f) stunRemain = 0f;
+            StartCoroutine(AttackRoutine());
         }
 
-        // 스턴 중에는 이동 완전 정지
-        if (IsStunned)
-        {
-            rigid.velocity = Vector2.zero;
-            return;
-        }
-        
-        // ----- 슬로우 시간 처리 (추가) -----
-        if (slowRemain > 0f)
-        {
-            slowRemain -= Time.fixedDeltaTime;
-            if (slowRemain <= 0f)
-            {
-                slowRemain = 0f;
-                slowMultiplier = 1f; // 만료 시 정상화
-            }
-        }
-
-        // 현재 속도 = 원속도 * 슬로우 멀티
+        // 이동
         float curSpeed = baseSpeed * slowMultiplier;
 
         Vector2 dirVec = target.position - rigid.position;
-        Vector2 nextVec = dirVec.normalized * curSpeed * Time.fixedDeltaTime; // curSpeed로 변경
+        Vector2 nextVec = dirVec.normalized * curSpeed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
         rigid.velocity = Vector2.zero;
     }
 
     void LateUpdate()
     {
-        if (!GameManager.instance.isLive) {
-            return;
-        }
-        if (!isLive)
-            return;
+        if (!GameManager.instance.isLive) return;
+        if (!isLive) return;
+        if (target == null) return;
 
-        spriter.flipX = target.position.x < rigid.position.x;
+        // 1) 좌/우 방향
+        float sign = (target.position.x < rigid.position.x) ? -1f : 1f;
+
+        // 2) 그래픽 그룹만 좌우 반전 (자식 전부 함께 뒤집힘)
+        if (graphics) graphics.localScale = new Vector3(sign, 1f, 1f);
+
+        // 3) 루트 몸통 콜라이더만 오프셋 미러링 (루트는 스케일 고정이니까)
+        if (bodyCollider)
+        {
+            float baseX = Mathf.Abs(bodyColBaseOffset.x) * sign;
+            float addX = (sign > 0f) ? bodyRightX : -bodyLeftX; // 좌우 각각 따로
+            bodyCollider.offset = new Vector2(baseX + addX,
+                                              bodyColBaseOffset.y + bodyY);
+        }
+
+        // 4) AttackHitbox / Shadow 는 graphics 밑에 있으므로
+        //    추가 보정(오프셋/위치) 하지 않는다.  ❌ (double flip 방지)
+        //    => 애니에서 설정한 offset/size 그대로 사용 + 부모 스케일로 자동 반전
     }
 
     public void Init(MonsterData data)
     {
-        // ScriptableObject에서 데이터를 가져와 적용
-        monsterData = data; // 데이터 참조 저장
+        monsterData = data;
+
+        // 기본 스탯
         speed = data.Speed;
         maxHealth = data.Maxhealth;
         health = maxHealth;
 
-        // 애니메이터 컨트롤러 설정
-        if (data.animator != null)
-            anim.runtimeAnimatorController = data.animator;
+        // 애니메이터 교체(개별 몬스터 컨트롤러)
+        if (data.animator != null && anim) anim.runtimeAnimatorController = data.animator;
 
-        // ----- 슬로우 상태 리셋 (추가) -----
-        baseSpeed = speed;        // 원래 속도 저장
+        // 상태 리셋
+        baseSpeed = speed;
         slowMultiplier = 1f;
         slowRemain = 0f;
-        stunRemain = 0f;     // 스턴 해제
+        stunRemain = 0f;
+        isAttacking = false;
+        lastAttackTime = -999f;
+        if (attackHitbox) attackHitbox.enabled = false;
+
+        // ※ 방향 보정값은 Enemy.cs의 facingAdjust(프리팹별)에서 사용
+        // (MonsterData에 넣지 않아도 됩니다)
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Bullet") || !isLive)
-            return;
-        
-        health -= collision.GetComponent<Bullet>().damage;
-        StartCoroutine("KnockBack");
+        if (!isLive) return;
+        if (!collision.CompareTag("Bullet")) return;
 
-        if (health > 0) {       // 살아있음 => 피격 반응
-            anim.SetTrigger("Hit");
+        health -= collision.GetComponent<Bullet>().damage;
+        StartCoroutine(KnockBack());
+
+        if (health > 0)
+        {
+            if (anim) anim.SetTrigger("Hit");
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
         }
-        else {         // 죽음
+        else
+        {
             Die();
         }
     }
+
+    // ===== 공격 루틴 & 애니 이벤트 백업 =====
+    IEnumerator AttackRoutine()
+    {
+        isAttacking = true;
+        lastAttackTime = Time.time;
+
+        if (anim) anim.SetTrigger("Attack"); // 애니 트리거
+
+        // 이벤트 미세팅 대비 백업 on/off
+        yield return new WaitForSeconds(windupTime);
+        if (attackHitbox && !attackHitbox.enabled) attackHitbox.enabled = true;
+        yield return new WaitForSeconds(activeTime);
+        if (attackHitbox && attackHitbox.enabled) attackHitbox.enabled = false;
+
+        // 쿨 남은 시간 대기
+        float remain = Mathf.Max(0f, (lastAttackTime + attackCooldown) - Time.time);
+        if (remain > 0f) yield return new WaitForSeconds(remain);
+
+        // 안전 복귀(전이 막힘 대비)
+        if (anim)
+        {
+            anim.ResetTrigger("Attack");
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                anim.CrossFade("Run", 0.05f, 0);
+        }
+
+        isAttacking = false;
+    }
+
+    // 애니메이션 이벤트용
+    public void AE_EnableHitbox() { if (attackHitbox) attackHitbox.enabled = true; }
+    public void AE_DisableHitbox() { if (attackHitbox) attackHitbox.enabled = false; }
 
     void DropItems()
     {
         if (monsterData == null) return;
 
-        // 1. 경험치 구슬 드랍
-        // min과 max가 같으면 고정값, 다르면 랜덤
         int expOrbCount = Random.Range(monsterData.mixExpOrbs, monsterData.maxExpOrbs + 1);
-        int expPoolIndex = 0; // 기본 경험치 구슬 인덱스
+        int expPoolIndex = 0;
         switch (monsterData.tier)
         {
-            case MonsterData.MonsterTier.Elite:
-                expPoolIndex = 1; // Exp2
-                break;
-            case MonsterData.MonsterTier.Boss:
-                expPoolIndex = 2; // Exp3
-                break;
+            case MonsterData.MonsterTier.Elite: expPoolIndex = 1; break;
+            case MonsterData.MonsterTier.Boss: expPoolIndex = 2; break;
         }
 
         for (int i = 0; i < expOrbCount; i++)
         {
             GameObject item = GameManager.instance.pool.Get(PoolCategory.Item, expPoolIndex);
-            // 아이템이 겹치지 않게 살짝 랜덤한 위치에 생성
             item.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
         }
 
-        // 2. 추가 아이템 리스트 드랍 (골드, 젬 등)
         foreach (var itemToDrop in monsterData.dropList)
         {
-            // 드랍 확률 체크
             if (Random.Range(0f, 1f) <= itemToDrop.dropChance)
             {
                 int amount = Random.Range(itemToDrop.minAmount, itemToDrop.maxAmount + 1);
@@ -187,34 +272,27 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // 비동기 코루틴 함수
     IEnumerator KnockBack()
     {
-        yield return wait;      // 다음 하나의 물리 프레임까지 기다리는 딜레이
+        yield return wait;
         Vector3 playerPos = GameManager.instance.player.transform.position;
         Vector3 dirVec = transform.position - playerPos;
-        rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
+        rigid.AddForce(dirVec.normalized * 3f, ForceMode2D.Impulse);
     }
 
-    //소모성 스킬용 공용 데미지 함수 추가
     public void ApplyDamage(float amount, Vector3? sourcePos = null, float knockPower = 3f)
     {
         if (!isLive) return;
 
-        // 체력 감소
         health -= amount;
 
-        // 넉백: sourcePos가 있으면 그 기준으로 밀기(폭발 등), 없으면 플레이어 기준(기존)
-        if (sourcePos.HasValue)
-            StartCoroutine(KnockBackFrom(sourcePos.Value, knockPower));
-        else
-            StartCoroutine("KnockBack");
+        if (sourcePos.HasValue) StartCoroutine(KnockBackFrom(sourcePos.Value, knockPower));
+        else StartCoroutine(KnockBack());
 
         if (health > 0)
         {
-            anim.SetTrigger("Hit");
-            if (GameManager.instance.isLive)
-                AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+            if (anim) anim.SetTrigger("Hit");
+            if (GameManager.instance.isLive) AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
         }
         else
         {
@@ -222,54 +300,51 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // 폭발 중심에서 바깥으로 밀어내는 넉백
     IEnumerator KnockBackFrom(Vector3 sourcePos, float power)
     {
-        yield return wait; // 물리 프레임 싱크
+        yield return wait;
         Vector3 dirVec = (transform.position - sourcePos).normalized;
         rigid.AddForce(dirVec * power, ForceMode2D.Impulse);
     }
 
-    // ===== 슬로우 적용 (자기장용) =====
-    // percent: 0.3f -> 30% 감속, duration: 유지 시간(틱마다 갱신 가능)
+    // 슬로우/스턴
     public void ApplySlow(float percent, float duration)
     {
-        float m = Mathf.Clamp01(1f - percent); // 1→정상, 0.7→30%감속
-        // 더 강한(작은) 멀티가 오면 갱신
+        float m = Mathf.Clamp01(1f - percent);
         if (m < slowMultiplier) slowMultiplier = m;
-        // 남은 시간은 큰 값으로 갱신(연장)
         if (duration > slowRemain) slowRemain = duration;
     }
 
-    // === 스턴(낙뢰용) ===
     public void ApplyStun(float duration)
     {
         if (!isLive) return;
-        if (duration > stunRemain) stunRemain = duration; // 더 긴 스턴으로 갱신
-        // 연출을 원하면 여기서 anim.SetTrigger("Hit") 등 추가 가능
-        rigid.velocity = Vector2.zero; // 즉시 정지
+        if (duration > stunRemain) stunRemain = duration;
+        rigid.velocity = Vector2.zero;
     }
 
     void Die()
     {
         isLive = false;
+
+        if (attackHitbox) attackHitbox.enabled = false;
+
         coll.enabled = false;
         rigid.simulated = false;
-        spriter.sortingOrder = 1;
-        anim.SetBool("Dead", true);
-        GameManager.instance.AddKill();
 
+        if (spriter) spriter.sortingOrder = 1;
+        if (anim) anim.SetBool("Dead", true);
+
+        GameManager.instance.AddKill();
         DropItems();
 
         if (monsterData.tier == MonsterData.MonsterTier.Boss)
-        {
             GameManager.instance.NotifyBossDefeated();
-        }
 
         if (GameManager.instance.isLive)
-        {
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
-        }
+
+        // Death 끝에서 Dead()를 애니메이션 이벤트/SMB로 호출하길 권장
+        // 필요시 코루틴으로 딜레이 후 Dead() 호출해도 됨
     }
 
     public void Dead()
