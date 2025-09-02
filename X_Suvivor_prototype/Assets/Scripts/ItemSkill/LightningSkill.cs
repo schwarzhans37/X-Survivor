@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class LightningSkill : MonoBehaviour
 {
@@ -24,17 +23,12 @@ public class LightningSkill : MonoBehaviour
     const float FX_SCALE_MULT = 6f;     // 실제 뇌격 애니메이션 크기
     const float DAMAGE_R_MULT = 3f;     // 실제 피해 반경 범위
 
-    float cooldownTimer;
+    public float cooldownTimer;
     bool casting;
 
     void Update()
     {
         if (cooldownTimer > 0f) cooldownTimer -= Time.deltaTime;
-    }
-
-    public void OnLightning(InputValue v)
-    {
-        TryUse();
     }
 
     public bool TryUse()
@@ -47,6 +41,11 @@ public class LightningSkill : MonoBehaviour
 
         StartCoroutine(CoCast());
         return true;
+    }
+
+    public float GetCooldownRatio()
+    {
+        return Mathf.Clamp01(cooldownTimer / cooldown);
     }
 
     IEnumerator CoCast()

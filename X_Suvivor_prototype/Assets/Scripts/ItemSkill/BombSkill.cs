@@ -1,18 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class BombSkill : MonoBehaviour
 {
     [Header("쿨타임")]
     public float cooldown = 6f;
-    private float cooldownTimer = 0f;
+    public float cooldownTimer = 0f;
 
     private Player player; // Player 스크립트 참조
-    public float CooldownTimer => cooldownTimer;
-    public float MaxCooldown => cooldown;
-    public float CooldownRatio => Mathf.Clamp01(cooldownTimer / Mathf.Max(0.0001f, cooldown));
 
     public System.Action<float> OnCooldownStarted; // 쿨다운 시작 알림(초 단위)
 
@@ -26,8 +22,8 @@ public class BombSkill : MonoBehaviour
 
     void Awake()
     {
-        // 같은 게임 오브젝트에 있는 Player 컴포넌트를 가져옴
-        player = GetComponent<Player>();
+        // SkillInventory가 이 스크립트를 플레이어의 자식으로 생성하기 때문에 Player를 찾는 로직은 부모 오브젝트에서 찾도록 변경하는 것이 더 안전
+        player = GetComponentInParent<Player>();
     }
 
     void Update()
@@ -40,10 +36,20 @@ public class BombSkill : MonoBehaviour
     }
 
     // Player Input 컴포넌트가 호출할 함수
-    public void OnBombSkill(InputValue value)
+    public bool TryUse()
     {
-        if (cooldownTimer > 0f) return;
+        if (cooldownTimer > 0f)
+        {
+            return false; // 쿨타임 중이라 사용 실패
+        }
+
         StartCoroutine(PlaceMineCoroutine());
+        return true; // 사용 성공
+    }
+
+    public float GetCooldownRatio()
+    {
+        return Mathf.Clamp01(cooldownTimer / cooldown);
     }
 
     private IEnumerator PlaceMineCoroutine()
