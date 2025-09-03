@@ -12951,7 +12951,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.55432
+  orthographic size: 5.9888887
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -13323,8 +13323,8 @@ MonoBehaviour:
     spawnInterval: 0.5
     timer: 0
   spawnEvents:
-  - spawnTime: 30
-    monsterData: {fileID: 11400000, guid: 5399fefffbe0fd245811a28d9b94a432, type: 2}
+  - spawnTime: 5
+    monsterData: {fileID: 11400000, guid: 846151683613370469b0aed1a499b0ae, type: 2}
     isSpawned: 0
   - spawnTime: 60
     monsterData: {fileID: 11400000, guid: 5399fefffbe0fd245811a28d9b94a432, type: 2}
@@ -17320,8 +17320,8 @@ MonoBehaviour:
   - {fileID: 3988668707713930940, guid: e4cf830cfa4226149a77b6a240806b66, type: 3}
   - {fileID: 7784789937604695717, guid: 80f158855206c234fbeff0314e7bd709, type: 3}
   eliteMonsterPrefabs:
+  - {fileID: 8804294624336814762, guid: 19d5bb9ac586e9b4bab011eddfdb434e, type: 3}
   - {fileID: 2685350850363827018, guid: 63b37b4792739fb42ba5ff6a53e3b67f, type: 3}
-  - {fileID: 8420054668364800457, guid: 2b34cf73688b6a64f8add411ab28e031, type: 3}
   - {fileID: 5139850067042497739, guid: a998079f4eb197844b44f0232ca0a50a, type: 3}
   - {fileID: 6003643809653928565, guid: 102b09b860139be44b829d9b3fd71304, type: 3}
   bossMonsterPrefabs:

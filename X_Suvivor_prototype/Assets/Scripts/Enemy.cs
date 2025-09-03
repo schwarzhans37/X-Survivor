@@ -20,8 +20,6 @@ public class Enemy : MonoBehaviour
     public float attackRange = 1.1f;    // 공격 시작 거리
     public float attackCooldown = 1.0f; // 공격 쿨
     public Collider2D attackHitbox;     // Graphics 자식(Trigger)
-    public float windupTime = 0.15f;    // 예비동작
-    public float activeTime = 0.10f;    // 히트박스 on 유지 시간(이벤트 미사용시)
 
     [Header("# Graphics & Colliders")]
     public Transform graphics;                // Sprite/Shadow/Hitbox 묶음(이것만 좌우 반전)
@@ -213,25 +211,38 @@ public class Enemy : MonoBehaviour
         isAttacking = true;
         lastAttackTime = Time.time;
 
-        if (anim) anim.SetTrigger("Attack"); // 애니 트리거
+        // 안전: 시작 전에 꺼두기
+        if (attackHitbox) attackHitbox.enabled = false;
 
-        // 이벤트 미세팅 대비 백업 on/off
-        yield return new WaitForSeconds(windupTime);
-        if (attackHitbox && !attackHitbox.enabled) attackHitbox.enabled = true;
-        yield return new WaitForSeconds(activeTime);
-        if (attackHitbox && attackHitbox.enabled) attackHitbox.enabled = false;
-
-        // 쿨 남은 시간 대기
-        float remain = Mathf.Max(0f, (lastAttackTime + attackCooldown) - Time.time);
-        if (remain > 0f) yield return new WaitForSeconds(remain);
-
-        // 안전 복귀(전이 막힘 대비)
+        // 애니 트리거
         if (anim)
         {
-            anim.ResetTrigger("Attack");
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-                anim.CrossFade("Run", 0.05f, 0);
+            anim.ResetTrigger("Hit");   // 피격 트리거 충돌 방지(선택)
+            anim.SetTrigger("Attack");
         }
+
+        // 1) 실제로 Attack 상태에 들어갈 때까지 잠깐 대기(최대 0.25s)
+        float guard = 0f;
+        while (guard < 0.25f)
+        {
+            if (!anim || anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                break;
+
+            guard += Time.deltaTime;
+            yield return null;
+        }
+
+        // 2) Attack 상태가 끝날 때까지 대기
+        while (anim && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            yield return null;
+
+        // 안전: 끝나면 반드시 꺼두기(이벤트 누락 대비)
+        if (attackHitbox) attackHitbox.enabled = false;
+
+        // 3) 남은 쿨타임 보장
+        float next = lastAttackTime + attackCooldown;
+        if (Time.time < next)
+            yield return new WaitForSeconds(next - Time.time);
 
         isAttacking = false;
     }

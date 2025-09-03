@@ -2,10 +2,29 @@
 
 public class AnimEventRelay : MonoBehaviour
 {
-    // AnimationEvent에서 호출됨
+    Enemy enemy;
+
+    void Awake()
+    {
+        // 한 번만 찾아 캐싱(매 프레임 GetComponent 호출 방지)
+        enemy = GetComponentInParent<Enemy>();
+    }
+
+    // Death 애니메이션 끝에서 호출
     public void Dead()
     {
-        // 부모 Enemy 컴포넌트 찾아서 Dead() 실행
-        GetComponentInParent<Enemy>()?.Dead();
+        enemy?.Dead();
+    }
+
+    // Attack 애니메이션 중 "켜는" 프레임에서 호출
+    public void AE_EnableHitbox()
+    {
+        enemy?.AE_EnableHitbox();
+    }
+
+    // Attack 애니메이션 중 "끄는" 프레임에서 호출
+    public void AE_DisableHitbox()
+    {
+        enemy?.AE_DisableHitbox();
     }
 }
