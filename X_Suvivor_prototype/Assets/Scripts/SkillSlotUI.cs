@@ -5,41 +5,71 @@ using UnityEngine.UI;
 
 public class SkillSlotUI : MonoBehaviour
 {
-    public Image icon;
-    public Image cooldownImage;
+    [Header("UI 컴포넌트 연결")]
+    public Button skillButton;
     public Text countText;
-    public GameObject keyHint; // '1', '2' 등이 쓰인 키보드 이미지
+    public Text cooldownText;
 
     private InventorySlot currentSlot;
 
     void Update()
     {
-        // 슬롯에 스킬이 할당되어 있고, 쿨타임 중일 때만 UI 업데이트
-        if (currentSlot != null && currentSlot.count > 0)
+        // 슬롯에 스킬이 할당되어 있을 때만 업데이트
+        if (currentSlot != null && currentSlot.skillInstance != null)
         {
-            // TODO: 각 스킬 스크립트에서 쿨타임 비율을 가져오는 통일된 방법 필요
-            // float ratio = currentSlot.GetCooldownRatio();
-            // cooldownImage.fillAmount = ratio;
+            // 쿨타임이 돌고 있는지 여부 확인
+            bool onCooldown = currentSlot.IsOnCooldown();
+            
+            // 버튼의 상호작용 가능 상태를 쿨타임이 아닌 상태와 일치시킴
+            // (쿨타임 중이면 false, 아니면 true)
+            skillButton.interactable = !onCooldown;
+            
+            // 쿨타임 텍스트의 활성화 상태를 쿨타임 중인 상태와 일치시킴
+            cooldownText.gameObject.SetActive(onCooldown);
+
+            if (onCooldown)
+            {
+                // 쿨타임 중일 때만 텍스트 업데이트
+                cooldownText.text = currentSlot.GetCooldownTimer().ToString("F1");
+            }
         }
     }
 
+    // SkillInventory가 이 함수를 호출하여 슬롯 정보를 갱신
     public void UpdateSlot(InventorySlot slot)
     {
         currentSlot = slot;
         gameObject.SetActive(true);
 
-        icon.sprite = slot.data.skillIcon;
-        icon.color = new Color(1, 1, 1, 1); // 아이콘 활성화
-        countText.text = slot.count.ToString();
-        countText.gameObject.SetActive(true);
+        // 버튼의 Image 컴포넌트에 아이콘을 설정
+        skillButton.image.sprite = slot.data.skillIcon;
+        skillButton.image.color = new Color(1, 1, 1, 1); // 아이콘 활성화
+
+        if (countText != null)
+        {
+            countText.text = slot.count.ToString();
+            countText.gameObject.SetActive(true);
+        }
+        
+        // 처음 업데이트 시에는 쿨타임이 아니므로 버튼 활성화 및 텍스트 숨김
+        skillButton.interactable = true;
+        cooldownText.gameObject.SetActive(false);
     }
 
+    // 슬롯이 비워질 때 호출
     public void ClearSlot()
     {
         currentSlot = null;
-        icon.sprite = null;
-        icon.color = new Color(1, 1, 1, 0.5f); // 아이콘 비활성화
-        countText.gameObject.SetActive(false);
-        cooldownImage.fillAmount = 0;
+        
+        skillButton.image.sprite = null;
+        skillButton.image.color = new Color(1, 1, 1, 0.0f); // 아이콘 비활성화 (반투명)
+        skillButton.interactable = false; // 빈 슬롯은 클릭 불가
+
+        if (countText != null)
+        {
+            countText.gameObject.SetActive(false);
+        }
+        
+        cooldownText.gameObject.SetActive(false);
     }
 }

@@ -6,6 +6,7 @@ public class LightningSkill : MonoBehaviour
 {
     [Header("기본")]
     public float cooldown = 12f;         // 쿨타임
+    public float cooldownTimer;
     public int strikeCount = 5;          // 총 타격 횟수
     public float strikeInterval = 0.5f;  // 타격 간격
     public LayerMask enemyMask;          // Enemy 레이어
@@ -23,7 +24,6 @@ public class LightningSkill : MonoBehaviour
     const float FX_SCALE_MULT = 6f;     // 실제 뇌격 애니메이션 크기
     const float DAMAGE_R_MULT = 3f;     // 실제 피해 반경 범위
 
-    public float cooldownTimer;
     bool casting;
 
     void Update()

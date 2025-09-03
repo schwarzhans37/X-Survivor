@@ -10,10 +10,13 @@ public class DodgeSkill : MonoBehaviour
     public float duration = 0.2f; // 돌진에 걸리는 시간
     public float cooldown = 8f;   // 쿨타임
 
+    [Header("UI 연결")]
+    [Tooltip("이 스킬의 상태를 표시할 UI 슬롯")]
+    public SkillSlotUI dodgeUI;
+
     private Player player; // Player 스크립트 참조
     private float cooldownTimer = 0f; // 남은 쿨타임을 추적
-    public float CooldownTimer { get { return cooldownTimer; } }
-    public float MaxCooldown { get { return cooldown; } }
+    public float CooldownTimer => cooldownTimer;
     private bool isDashing = false;   // 현재 돌진 중인지 여부
 
     void Awake()
@@ -29,6 +32,8 @@ public class DodgeSkill : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
         }
+
+        UpdateDodgeUI();
     }
 
     // Player Input 컴포넌트가 호출할 함수
@@ -39,6 +44,22 @@ public class DodgeSkill : MonoBehaviour
             return;
         }
         StartCoroutine(DodgeCoroutine());
+    }
+
+    private void UpdateDodgeUI()
+    {
+        if (dodgeUI == null) return;
+
+        bool onCooldown = cooldownTimer > 0;
+
+        dodgeUI.skillButton.interactable = !onCooldown;
+        dodgeUI.cooldownText.gameObject.SetActive(onCooldown);
+
+        if (onCooldown)
+        {
+            // 쿨타임 중일 때만 텍스트 업데이트
+            dodgeUI.cooldownText.text = cooldownTimer.ToString("F1");
+        }
     }
 
     private IEnumerator DodgeCoroutine()

@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 확률적 스킬 드랍을 인스펙터에서 편하게 설정하기 위한 보조 클래스
+[System.Serializable]
+public class SkillDrop
+{
+    public ItemSkillData skillData;
+    [Tooltip("이 스킬 아이템이 드랍될 확률 (0.0 ~ 1.0)")]
+    [Range(0f, 1f)]
+    public float dropChance;
+}
+
 public class TreasureChest : MonoBehaviour
 {
     [Header("상호작용 설정")]
@@ -12,8 +22,10 @@ public class TreasureChest : MonoBehaviour
     public Image progressCircle;
 
     [Header("드랍 아이템 설정")]
-    [Tooltip("드랍할 아이템 목록")]
-    public List<DropItem> dropList; // MonsterData.cs에 있던 DropItem 클래스 재활용
+    [Tooltip("확정적으로 드랍할 아이템 목록 (골드, 젬 등)")]
+    public List<DropItem> fixedDrops; // MonsterData.cs의 DropItem 클래스 재활용
+    [Tooltip("확률적으로 드랍할 수 있는 스킬 아이템 목록")]
+    public List<SkillDrop> potentialSkillDrops;
 
     private float currentTimer = 0f;
     private bool isPlayerInside = false;
@@ -27,29 +39,24 @@ public class TreasureChest : MonoBehaviour
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
     }
-
-    // 오브젝트 풀에서 재사용될 때를 대비한 초기화 함수
+    
     void OnEnable()
     {
         isOpened = false;
-        coll.enabled = true; // 콜라이더 다시 활성화
-        progressCircle.fillAmount = 0; // 진행 원 초기화
-        progressCircle.gameObject.SetActive(false); // 처음엔 숨김
-        // TODO: 애니메이터를 '닫힌' 상태로 되돌리는 로직 추가 (필요 시)
-        // anim.Rebind(); or anim.Play("Idle_State_Name");
+        coll.enabled = true;
+        progressCircle.fillAmount = 0;
+        progressCircle.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if (isOpened) return; // 이미 열렸으면 아무것도 안 함
+        if (isOpened) return;
 
         if (isPlayerInside)
         {
-            // 플레이어가 안에 있으면 타이머 증가
             currentTimer += Time.deltaTime;
             progressCircle.fillAmount = currentTimer / openTime;
 
-            // 타이머가 다 차면 상자 열기
             if (currentTimer >= openTime)
             {
                 OpenChest();
@@ -57,15 +64,13 @@ public class TreasureChest : MonoBehaviour
         }
         else
         {
-            // 플레이어가 밖에 있으면 타이머 감소 (서서히 사라지는 효과)
             if (currentTimer > 0)
             {
-                currentTimer -= Time.deltaTime * 2f; // 더 빨리 감소
+                currentTimer -= Time.deltaTime * 2f;
                 progressCircle.fillAmount = currentTimer / openTime;
             }
             else
             {
-                // 타이머가 0이 되면 진행 원 UI를 완전히 숨김
                 progressCircle.gameObject.SetActive(false);
             }
         }
@@ -73,57 +78,54 @@ public class TreasureChest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isOpened) return;
-
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInside = true;
-            progressCircle.gameObject.SetActive(true); // 플레이어가 들어오면 진행 원 보이기
-        }
+        if (isOpened || !other.CompareTag("Player")) return;
+        isPlayerInside = true;
+        progressCircle.gameObject.SetActive(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (isOpened) return;
-
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInside = false;
-            // 타이머를 바로 0으로 만들면 밖으로 나가자마자 원이 팍 사라짐.
-            // 점진적으로 감소시키기 위해 여기서는 타이머를 리셋하지 않음.
-        }
+        if (isOpened || !other.CompareTag("Player")) return;
+        isPlayerInside = false;
     }
 
     private void OpenChest()
     {
         isOpened = true;
         isPlayerInside = false;
-        coll.enabled = false; // 중복 상호작용 방지
-        progressCircle.gameObject.SetActive(false); // 열리면 진행 원 숨기기
-
-        anim.SetTrigger("Open"); // "Open"이라는 이름의 트리거 파라미터를 애니메이터에 전달
+        coll.enabled = false;
+        progressCircle.gameObject.SetActive(false);
+        anim.SetTrigger("Open");
     }
 
-    // 애니메이션 이벤트에서 호출될 함수 1
+    // 애니메이션 이벤트에서 호출될 함수
     public void SpawnItems()
     {
-        foreach (var itemToDrop in dropList)
+        // 1. 확정 드랍 (골드, 젬 등)
+        foreach (var itemToDrop in fixedDrops)
         {
-            if (Random.Range(0f, 1f) <= itemToDrop.dropChance)
+            int amount = Random.Range(itemToDrop.minAmount, itemToDrop.maxAmount + 1);
+            for (int i = 0; i < amount; i++)
             {
-                int amount = Random.Range(itemToDrop.minAmount, itemToDrop.maxAmount + 1);
-                for (int i = 0; i < amount; i++)
-                {
-                    GameObject item = GameManager.instance.pool.Get(PoolCategory.Item, itemToDrop.itemPoolIndex);
-                    // 상자 주변에 아이템이 흩뿌려지도록 연출
-                    Vector3 spawnPos = transform.position + (Vector3)Random.insideUnitCircle * 1.5f;
-                    item.transform.position = spawnPos;
-                }
+                GameObject item = GameManager.instance.pool.Get(PoolCategory.Item, itemToDrop.itemPoolIndex);
+                Vector3 spawnPos = transform.position + (Vector3)Random.insideUnitCircle * 1.5f;
+                item.transform.position = spawnPos;
+            }
+        }
+
+        // 2. 확률적 스킬 드랍
+        foreach (var skillDrop in potentialSkillDrops)
+        {
+            // 설정된 확률에 따라 드랍 여부 결정
+            if (Random.Range(0f, 1f) <= skillDrop.dropChance)
+            {
+                GameManager.instance.player.GetComponent<SkillInventory>().AddItem(skillDrop.skillData);
+                // 스킬 획득 시 시각/청각적 피드백을 주면 더 좋습니다.
             }
         }
     }
 
-    // 애니메이션 이벤트에서 호출될 함수 2
+    // 애니메이션 이벤트에서 호출될 함수
     public void Deactivate()
     {
         gameObject.SetActive(false);

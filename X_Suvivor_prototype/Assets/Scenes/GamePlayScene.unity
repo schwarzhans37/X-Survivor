@@ -6679,13 +6679,10 @@ GameObject:
   - component: {fileID: 274803309}
   - component: {fileID: 274803308}
   - component: {fileID: 274803316}
+  - component: {fileID: 274803317}
   - component: {fileID: 274803313}
   - component: {fileID: 274803314}
   - component: {fileID: 274803315}
-  - component: {fileID: 274803317}
-  - component: {fileID: 274803318}
-  - component: {fileID: 274803319}
-  - component: {fileID: 274803320}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -6881,7 +6878,127 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ec707430-a0a5-407b-8287-73ebcc433971
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 34424e17-631e-488c-a9b9-f00367250012
+    m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b824c633-5460-4e41-9c20-e1202d5437b1
+    m_ActionName: Player/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f6aa4882-d65f-4cd6-9f03-cee360c52ce0
+    m_ActionName: Player/Dodge[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 274803317}
+        m_TargetAssemblyTypeName: SkillInventory, Assembly-CSharp
+        m_MethodName: OnUseSkill1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a5d1fcf2-7104-4244-939c-4e08a109d617
+    m_ActionName: Player/UseInventory1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 274803317}
+        m_TargetAssemblyTypeName: SkillInventory, Assembly-CSharp
+        m_MethodName: OnUseSkill2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0ce6e873-ddb1-4288-a5be-4c381455500e
+    m_ActionName: Player/UseInventory2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 274803317}
+        m_TargetAssemblyTypeName: SkillInventory, Assembly-CSharp
+        m_MethodName: OnUseSkill3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 52b2e911-f7f9-4b8f-996c-d198d7bb104f
+    m_ActionName: Player/UseInventory3[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 274803317}
+        m_TargetAssemblyTypeName: SkillInventory, Assembly-CSharp
+        m_MethodName: OnUseSkill4
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ee7d6822-ad3a-4a24-8ecf-7e726a6e28ed
+    m_ActionName: Player/UseInventory4[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ec685f46-5738-44dd-9448-8aaf6b44df94
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8409f634-8969-446c-8e43-edd8aa92a8ea
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e44527ce-727b-41a0-9069-419871e0693c
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ec97886a-c7ad-44e3-a192-243f406b4432
+    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 908974d4-c4e2-4ab3-8102-6695965f07dc
+    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a4c279ca-0629-42b7-b5f1-c02719a22458
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 20f4a280-aa6b-4e4d-8868-e8191d031cf1
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dfca4b61-ed9e-46ab-9379-d0d21da31dab
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 46eacd15-5e20-45ab-8a28-6f36c3fe3e31
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b7a2e0ac-1f56-4eb9-a62b-7e4c504da7a8
+    m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -6939,6 +7056,7 @@ MonoBehaviour:
   distance: 3
   duration: 0.2
   cooldown: 8
+  dodgeUI: {fileID: 1955453265}
 --- !u!114 &274803317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6948,84 +7066,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 274803307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94863159c74b73459b5f6b903382239, type: 3}
+  m_Script: {fileID: 11500000, guid: 4964840d3dd62374ca030f3828c563ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 6
-  minePrefab: {fileID: 4109112691387933910, guid: 2005293c9c7c60b4dac94c31d0b3a7b3, type: 3}
-  maxActiveMines: 3
-  placeOffset: 0.1
-  armingDelay: 0.15
---- !u!114 &274803318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274803307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff070881923f67b439a7c9f523e275fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 6
-  cooldown: 10
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 64
-  baseRadius: 3.5
-  visualScaleFactor: 1.1
-  auraPrefab: {fileID: 4379711475903724824, guid: 5d67da957ab868c4c97549a333070295, type: 3}
-  sortingOrderOffset: -1
-  dps: 8
-  tickInterval: 0.5
-  slowPercent: 0.3
-  slowDuration: 0.6
---- !u!114 &274803319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274803307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b80881424589614a8c5b464cd80510b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 12
-  strikeCount: 5
-  strikeInterval: 0.5
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 64
-  damage: 40
-  radius: 1.2
-  stunDuration: 1
-  lightningFxPrefab: {fileID: 1898655292594457388, guid: 29c1e3c9a9a25034e9a343e09defcab1, type: 3}
-  fxLifetime: 0.8
-  scaleFxToRadius: 1
---- !u!114 &274803320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274803307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5b65dd155893604eadf88a25c86e2b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrowPrefab: {fileID: 1415503585567529511, guid: fb278dd7e1a563349b034e2b0632852b, type: 3}
-  arrowCount: 12
-  arrowSpeed: 12
-  damage: 40
-  duration: 6
-  cooldown: 10
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 64
+  maxSlots: 4
+  uiSlots:
+  - {fileID: 1843705118}
+  - {fileID: 1550170053}
+  - {fileID: 1412126216}
+  - {fileID: 1561582994}
 --- !u!1 &284860207
 GameObject:
   m_ObjectHideFlags: 0
@@ -16635,7 +16684,6 @@ GameObject:
   - component: {fileID: 799282871}
   - component: {fileID: 799282870}
   - component: {fileID: 799282869}
-  - component: {fileID: 799282872}
   m_Layer: 5
   m_Name: DodgeButton
   m_TagString: Untagged
@@ -16747,22 +16795,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799282867}
   m_CullTransparentMesh: 1
---- !u!114 &799282872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 799282867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a87e3707384e91b49be9cc51045ef12f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dodgeSkill: {fileID: 274803316}
-  cooldownText: {fileID: 840121097}
-  iconImage: {fileID: 799282870}
-  skillButton: {fileID: 799282869}
 --- !u!1 &802708569
 GameObject:
   m_ObjectHideFlags: 0
@@ -23268,6 +23300,7 @@ GameObject:
   - component: {fileID: 1412126213}
   - component: {fileID: 1412126215}
   - component: {fileID: 1412126214}
+  - component: {fileID: 1412126216}
   m_Layer: 5
   m_Name: Inventory3
   m_TagString: Untagged
@@ -23330,6 +23363,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412126212}
   m_CullTransparentMesh: 1
+--- !u!114 &1412126216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412126212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d7f00008fd8814686281dd9edbcb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillButton: {fileID: 1331843764}
+  countText: {fileID: 1257035508}
+  cooldownText: {fileID: 1210740489}
 --- !u!1 &1431062989
 GameObject:
   m_ObjectHideFlags: 0
@@ -32995,6 +33043,7 @@ GameObject:
   - component: {fileID: 1550170050}
   - component: {fileID: 1550170052}
   - component: {fileID: 1550170051}
+  - component: {fileID: 1550170053}
   m_Layer: 5
   m_Name: Inventory2
   m_TagString: Untagged
@@ -33057,6 +33106,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550170049}
   m_CullTransparentMesh: 1
+--- !u!114 &1550170053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550170049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d7f00008fd8814686281dd9edbcb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillButton: {fileID: 689386161}
+  countText: {fileID: 624323645}
+  cooldownText: {fileID: 1060718557}
 --- !u!1 &1554093636
 GameObject:
   m_ObjectHideFlags: 0
@@ -33171,6 +33235,7 @@ GameObject:
   - component: {fileID: 1561582991}
   - component: {fileID: 1561582993}
   - component: {fileID: 1561582992}
+  - component: {fileID: 1561582994}
   m_Layer: 5
   m_Name: Inventory4
   m_TagString: Untagged
@@ -33233,6 +33298,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561582990}
   m_CullTransparentMesh: 1
+--- !u!114 &1561582994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561582990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d7f00008fd8814686281dd9edbcb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillButton: {fileID: 832311542}
+  countText: {fileID: 552283321}
+  cooldownText: {fileID: 1814042729}
 --- !u!1 &1563968136
 GameObject:
   m_ObjectHideFlags: 0
@@ -36271,6 +36351,7 @@ GameObject:
   - component: {fileID: 1843705115}
   - component: {fileID: 1843705117}
   - component: {fileID: 1843705116}
+  - component: {fileID: 1843705118}
   m_Layer: 5
   m_Name: Inventory1
   m_TagString: Untagged
@@ -36333,6 +36414,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1843705114}
   m_CullTransparentMesh: 1
+--- !u!114 &1843705118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843705114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d7f00008fd8814686281dd9edbcb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillButton: {fileID: 1629193378}
+  countText: {fileID: 61224537}
+  cooldownText: {fileID: 1033696521}
 --- !u!1 &1858013150
 GameObject:
   m_ObjectHideFlags: 0
@@ -37253,6 +37349,7 @@ GameObject:
   - component: {fileID: 1955453262}
   - component: {fileID: 1955453264}
   - component: {fileID: 1955453263}
+  - component: {fileID: 1955453265}
   m_Layer: 5
   m_Name: Dodge
   m_TagString: Untagged
@@ -37315,6 +37412,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955453261}
   m_CullTransparentMesh: 1
+--- !u!114 &1955453265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955453261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d7f00008fd8814686281dd9edbcb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillButton: {fileID: 799282869}
+  countText: {fileID: 0}
+  cooldownText: {fileID: 840121097}
 --- !u!1 &1965833287
 GameObject:
   m_ObjectHideFlags: 0

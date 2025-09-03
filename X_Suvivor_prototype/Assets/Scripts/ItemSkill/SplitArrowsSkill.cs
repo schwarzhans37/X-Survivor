@@ -10,9 +10,9 @@ public class SplitArrowsSkill : MonoBehaviour
     public int damage = 20;            // 1회 타격 데미지
     public float duration = 6f;        // 전체 지속 시간(6초)
     public float cooldown = 10f;       // 쿨타임
+    public float cooldownTimer;
     public LayerMask enemyMask;        // Enemy 레이어
 
-    public float cooldownTimer;
     bool casting;
 
     void Update()
