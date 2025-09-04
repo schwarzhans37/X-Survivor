@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c4dd2cff55dd44788a87cc7b162e65, type: 3}
   m_Name: 2_HugeMushroom_Elite_Data
   m_EditorClassIdentifier: 
-  PoolManagerIndex: 2
+  PoolManagerIndex: 1
   Id: 11
   Name: "\uAC70\uB300 \uBC84\uC12F"
   tier: 1

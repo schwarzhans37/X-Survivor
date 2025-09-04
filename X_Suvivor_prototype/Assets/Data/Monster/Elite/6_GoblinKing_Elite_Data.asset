@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c4dd2cff55dd44788a87cc7b162e65, type: 3}
   m_Name: 6_GoblinKing_Elite_Data
   m_EditorClassIdentifier: 
-  PoolManagerIndex: 6
+  PoolManagerIndex: 5
   Id: 15
   Name: "\uACE0\uBE14\uB9B0 \uD0B9"
   tier: 1

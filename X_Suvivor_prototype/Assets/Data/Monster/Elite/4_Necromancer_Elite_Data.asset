@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c4dd2cff55dd44788a87cc7b162e65, type: 3}
   m_Name: 4_Necromancer_Elite_Data
   m_EditorClassIdentifier: 
-  PoolManagerIndex: 4
+  PoolManagerIndex: 3
   Id: 13
   Name: "\uB124\uD06C\uB85C\uB9E8\uC11C"
   tier: 1
