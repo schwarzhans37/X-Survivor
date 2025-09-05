@@ -6577,7 +6577,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 978012912, guid: 99a24620d31e5ce4e823c32d11e17c2c, type: 3}
+  m_Sprite: {fileID: 1339409289, guid: 3376772ed807adf429300f3a1ee8b305, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6598,7 +6598,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 309433881}
@@ -6647,7 +6647,7 @@ Animator:
   m_GameObject: {fileID: 274803307}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bc1fe6d26d801214495cb1d94d81c331, type: 2}
+  m_Controller: {fileID: 22100000, guid: 645dfdacd85cd354d9571b6188d31652, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6972,8 +6972,8 @@ Transform:
   m_GameObject: {fileID: 309433880}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.45, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.2, y: -3.6, z: 0}
+  m_LocalScale: {x: 4, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 274803312}
@@ -12951,7 +12951,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.55432
+  orthographic size: 5.787037
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -13323,7 +13323,7 @@ MonoBehaviour:
     spawnInterval: 0.5
     timer: 0
   spawnEvents:
-  - spawnTime: 30
+  - spawnTime: 5
     monsterData: {fileID: 11400000, guid: 5399fefffbe0fd245811a28d9b94a432, type: 2}
     isSpawned: 0
   - spawnTime: 60
