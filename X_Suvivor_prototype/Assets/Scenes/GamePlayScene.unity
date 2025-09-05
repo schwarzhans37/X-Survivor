@@ -6972,8 +6972,8 @@ Transform:
   m_GameObject: {fileID: 309433880}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2, y: -3.6, z: 0}
-  m_LocalScale: {x: 4, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: -0.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 274803312}
@@ -12951,7 +12951,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.787037
+  orthographic size: 4.55432
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -13323,7 +13323,7 @@ MonoBehaviour:
     spawnInterval: 0.5
     timer: 0
   spawnEvents:
-  - spawnTime: 5
+  - spawnTime: 30
     monsterData: {fileID: 11400000, guid: 5399fefffbe0fd245811a28d9b94a432, type: 2}
     isSpawned: 0
   - spawnTime: 60
