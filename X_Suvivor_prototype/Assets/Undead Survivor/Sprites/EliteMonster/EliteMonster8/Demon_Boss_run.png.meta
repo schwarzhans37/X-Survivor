@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Demon_Boss_run_0
+      name: Demon_Boss_run_7
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_run_1
+      name: Demon_Boss_run_6
       rect:
         serializedVersion: 2
         x: 96
@@ -139,7 +139,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_run_2
+      name: Demon_Boss_run_5
       rect:
         serializedVersion: 2
         x: 192
@@ -160,7 +160,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_run_3
+      name: Demon_Boss_run_4
       rect:
         serializedVersion: 2
         x: 288
@@ -181,7 +181,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,7 +194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_run_4
+      name: Demon_Boss_run_3
       rect:
         serializedVersion: 2
         x: 384
@@ -202,7 +202,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,7 +215,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_run_5
+      name: Demon_Boss_run_2
       rect:
         serializedVersion: 2
         x: 480
@@ -223,7 +223,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,7 +236,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_run_6
+      name: Demon_Boss_run_1
       rect:
         serializedVersion: 2
         x: 576
@@ -244,7 +244,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,7 +257,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Demon_Boss_run_7
+      name: Demon_Boss_run_0
       rect:
         serializedVersion: 2
         x: 672
@@ -265,7 +265,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -288,14 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Demon_Boss_run_0: -879189717
-      Demon_Boss_run_1: 652668142
-      Demon_Boss_run_2: 1689107706
-      Demon_Boss_run_3: 1544233938
-      Demon_Boss_run_4: -798114049
-      Demon_Boss_run_5: 6354492
-      Demon_Boss_run_6: 506162259
-      Demon_Boss_run_7: -430220728
+      Demon_Boss_run_0: -430220728
+      Demon_Boss_run_1: 506162259
+      Demon_Boss_run_2: 6354492
+      Demon_Boss_run_3: -798114049
+      Demon_Boss_run_4: 1544233938
+      Demon_Boss_run_5: 1689107706
+      Demon_Boss_run_6: 652668142
+      Demon_Boss_run_7: -879189717
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

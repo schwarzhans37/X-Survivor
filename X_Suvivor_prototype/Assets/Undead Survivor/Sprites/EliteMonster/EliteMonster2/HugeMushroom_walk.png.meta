@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HugeMushroom_walk_0
+      name: HugeMushroom_walk_5
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_walk_1
+      name: HugeMushroom_walk_4
       rect:
         serializedVersion: 2
         x: 72
@@ -139,7 +139,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_walk_2
+      name: HugeMushroom_walk_3
       rect:
         serializedVersion: 2
         x: 144
@@ -160,7 +160,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_walk_3
+      name: HugeMushroom_walk_2
       rect:
         serializedVersion: 2
         x: 216
@@ -181,7 +181,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,7 +194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_walk_4
+      name: HugeMushroom_walk_1
       rect:
         serializedVersion: 2
         x: 288
@@ -202,7 +202,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,7 +215,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_walk_5
+      name: HugeMushroom_walk_0
       rect:
         serializedVersion: 2
         x: 360
@@ -223,7 +223,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -246,12 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HugeMushroom_walk_0: 682106407
-      HugeMushroom_walk_1: -1963302858
-      HugeMushroom_walk_2: 933774437
-      HugeMushroom_walk_3: -1132195718
-      HugeMushroom_walk_4: -339734286
-      HugeMushroom_walk_5: 2102212617
+      HugeMushroom_walk_0: 2102212617
+      HugeMushroom_walk_1: -339734286
+      HugeMushroom_walk_2: -1132195718
+      HugeMushroom_walk_3: 933774437
+      HugeMushroom_walk_4: -1963302858
+      HugeMushroom_walk_5: 682106407
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

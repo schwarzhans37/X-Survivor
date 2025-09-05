@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HugeMushroom_attack2_0
+      name: HugeMushroom_attack2_3
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_attack2_1
+      name: HugeMushroom_attack2_2
       rect:
         serializedVersion: 2
         x: 72
@@ -139,7 +139,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_attack2_2
+      name: HugeMushroom_attack2_1
       rect:
         serializedVersion: 2
         x: 144
@@ -160,7 +160,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_attack2_3
+      name: HugeMushroom_attack2_0
       rect:
         serializedVersion: 2
         x: 216
@@ -181,7 +181,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HugeMushroom_attack2_0: 2062031491
-      HugeMushroom_attack2_1: -77401367
-      HugeMushroom_attack2_2: -1755441113
-      HugeMushroom_attack2_3: -1790890140
+      HugeMushroom_attack2_0: -1790890140
+      HugeMushroom_attack2_1: -1755441113
+      HugeMushroom_attack2_2: -77401367
+      HugeMushroom_attack2_3: 2062031491
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

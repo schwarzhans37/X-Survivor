@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GoblinKing_death_0
+      name: GoblinKing_death_3
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoblinKing_death_1
+      name: GoblinKing_death_2
       rect:
         serializedVersion: 2
         x: 72
@@ -139,7 +139,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoblinKing_death_2
+      name: GoblinKing_death_1
       rect:
         serializedVersion: 2
         x: 144
@@ -160,7 +160,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoblinKing_death_3
+      name: GoblinKing_death_0
       rect:
         serializedVersion: 2
         x: 216
@@ -181,7 +181,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GoblinKing_death_0: -1805052563
-      GoblinKing_death_1: 1549173375
-      GoblinKing_death_2: 530136203
-      GoblinKing_death_3: -1116182487
+      GoblinKing_death_0: -1116182487
+      GoblinKing_death_1: 530136203
+      GoblinKing_death_2: 1549173375
+      GoblinKing_death_3: -1805052563
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

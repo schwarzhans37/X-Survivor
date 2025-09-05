@@ -13751,7 +13751,7 @@ MonoBehaviour:
     monsterData: {fileID: 11400000, guid: bc39ebeaac5a04045bd4aa8350fe5227, type: 2}
     isSpawned: 0
   - spawnTime: 240
-    monsterData: {fileID: 11400000, guid: 51abb8e97a04a594fb47f73164326791, type: 2}
+    monsterData: {fileID: 11400000, guid: 48a84c02ee3aeb54c8e55da97830dd57, type: 2}
     isSpawned: 0
 --- !u!1 &552283318
 GameObject:
@@ -18408,10 +18408,10 @@ MonoBehaviour:
   - {fileID: 3988668707713930940, guid: e4cf830cfa4226149a77b6a240806b66, type: 3}
   - {fileID: 7784789937604695717, guid: 80f158855206c234fbeff0314e7bd709, type: 3}
   eliteMonsterPrefabs:
-  - {fileID: 2825432851472637955, guid: 87552ca1b851601439603c13b1fc7189, type: 3}
-  - {fileID: 8420054668364800457, guid: 2b34cf73688b6a64f8add411ab28e031, type: 3}
-  - {fileID: 5139850067042497739, guid: a998079f4eb197844b44f0232ca0a50a, type: 3}
-  - {fileID: 6003643809653928565, guid: 102b09b860139be44b829d9b3fd71304, type: 3}
+  - {fileID: 2685350850363827018, guid: 63b37b4792739fb42ba5ff6a53e3b67f, type: 3}
+  - {fileID: 279685942638945235, guid: 10fe10593ae860e45896e091979bde2d, type: 3}
+  - {fileID: 2545108064805020258, guid: 4de47d659d3d3d34ea082810013b8531, type: 3}
+  - {fileID: 1330077050571081481, guid: 9d39f7c369187d84384617fc4aa50cd9, type: 3}
   bossMonsterPrefabs:
   - {fileID: 1249882315775862263, guid: 8afc2e2cb594ce34285e885df5e419c6, type: 3}
   - {fileID: 5839732775987554974, guid: 0b91cbc6a16bc0a428e4af28a26001b3, type: 3}

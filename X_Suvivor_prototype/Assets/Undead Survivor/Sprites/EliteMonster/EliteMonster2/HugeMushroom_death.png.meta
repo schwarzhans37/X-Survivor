@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HugeMushroom_death_0
+      name: HugeMushroom_death_3
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_death_1
+      name: HugeMushroom_death_2
       rect:
         serializedVersion: 2
         x: 72
@@ -139,7 +139,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_death_2
+      name: HugeMushroom_death_1
       rect:
         serializedVersion: 2
         x: 144
@@ -160,7 +160,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HugeMushroom_death_3
+      name: HugeMushroom_death_0
       rect:
         serializedVersion: 2
         x: 216
@@ -181,7 +181,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HugeMushroom_death_0: 512649769
-      HugeMushroom_death_1: 1382224387
-      HugeMushroom_death_2: 1719914368
-      HugeMushroom_death_3: -597142018
+      HugeMushroom_death_0: -597142018
+      HugeMushroom_death_1: 1719914368
+      HugeMushroom_death_2: 1382224387
+      HugeMushroom_death_3: 512649769
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mage_boss_run_0
+      name: Mage_boss_run_5
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mage_boss_run_1
+      name: Mage_boss_run_4
       rect:
         serializedVersion: 2
         x: 64
@@ -139,7 +139,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mage_boss_run_2
+      name: Mage_boss_run_3
       rect:
         serializedVersion: 2
         x: 128
@@ -160,7 +160,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mage_boss_run_3
+      name: Mage_boss_run_2
       rect:
         serializedVersion: 2
         x: 192
@@ -181,7 +181,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,7 +194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mage_boss_run_4
+      name: Mage_boss_run_1
       rect:
         serializedVersion: 2
         x: 256
@@ -202,7 +202,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,7 +215,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mage_boss_run_5
+      name: Mage_boss_run_0
       rect:
         serializedVersion: 2
         x: 320
@@ -223,7 +223,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -246,12 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Mage_boss_run_0: -1511657310
-      Mage_boss_run_1: -263958011
-      Mage_boss_run_2: 2137991715
-      Mage_boss_run_3: 1943286335
-      Mage_boss_run_4: 609341913
-      Mage_boss_run_5: 1446014250
+      Mage_boss_run_0: 1446014250
+      Mage_boss_run_1: 609341913
+      Mage_boss_run_2: 1943286335
+      Mage_boss_run_3: 2137991715
+      Mage_boss_run_4: -263958011
+      Mage_boss_run_5: -1511657310
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

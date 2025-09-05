@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Necromancer_idle_0
+      name: Necromancer_idle_3
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Necromancer_idle_1
+      name: Necromancer_idle_2
       rect:
         serializedVersion: 2
         x: 72
@@ -139,7 +139,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Necromancer_idle_2
+      name: Necromancer_idle_1
       rect:
         serializedVersion: 2
         x: 144
@@ -160,7 +160,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Necromancer_idle_3
+      name: Necromancer_idle_0
       rect:
         serializedVersion: 2
         x: 216
@@ -181,7 +181,7 @@ TextureImporter:
         width: 72
         height: 72
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Necromancer_idle_0: -2023140766
-      Necromancer_idle_1: -2046049487
-      Necromancer_idle_2: -573624375
-      Necromancer_idle_3: 1259978396
+      Necromancer_idle_0: 1259978396
+      Necromancer_idle_1: -573624375
+      Necromancer_idle_2: -2046049487
+      Necromancer_idle_3: -2023140766
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
