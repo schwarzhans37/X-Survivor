@@ -206,15 +206,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openTime: 2.5
   progressCircle: {fileID: 40583993424625308}
-  dropList:
+  fixedDrops:
   - itemPoolIndex: 3
     dropChance: 1
     minAmount: 3
     maxAmount: 6
   - itemPoolIndex: 4
     dropChance: 1
-    minAmount: 3
-    maxAmount: 6
+    minAmount: 2
+    maxAmount: 5
+  potentialSkillDrops:
+  - skillData: {fileID: 11400000, guid: a1cd4abf9bcdf6c4db53ed21264f3075, type: 2}
+    dropChance: 0.75
+  - skillData: {fileID: 11400000, guid: efec1b202f8f92c4ab441fb4ad1ff3d1, type: 2}
+    dropChance: 0.35
+  - skillData: {fileID: 11400000, guid: d896e672cef170b44a3259e9e7cf337f, type: 2}
+    dropChance: 0.5
+  - skillData: {fileID: 11400000, guid: f80e9a217d6c19444a13a801799e451d, type: 2}
+    dropChance: 0.35
 --- !u!95 &4240307569526073017
 Animator:
   serializedVersion: 5

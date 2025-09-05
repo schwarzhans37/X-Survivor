@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class SplitArrowsSkill : MonoBehaviour
 {
@@ -11,20 +10,14 @@ public class SplitArrowsSkill : MonoBehaviour
     public int damage = 20;            // 1회 타격 데미지
     public float duration = 6f;        // 전체 지속 시간(6초)
     public float cooldown = 10f;       // 쿨타임
+    public float cooldownTimer;
     public LayerMask enemyMask;        // Enemy 레이어
 
-    float cooldownTimer;
     bool casting;
 
     void Update()
     {
         if (cooldownTimer > 0f) cooldownTimer -= Time.deltaTime;
-    }
-
-    // Input Actions에서 2번키에 바인딩한 액션이 호출
-    public void OnSplitArrow(InputValue v)
-    {
-        TryUse();
     }
 
     public bool TryUse()
@@ -35,6 +28,11 @@ public class SplitArrowsSkill : MonoBehaviour
 
         StartCoroutine(CoCast());
         return true;
+    }
+
+    public float GetCooldownRatio()
+    {
+        return Mathf.Clamp01(cooldownTimer / cooldown);
     }
 
     IEnumerator CoCast()

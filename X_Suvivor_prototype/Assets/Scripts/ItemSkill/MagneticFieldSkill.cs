@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MagneticFieldSkill : MonoBehaviour
 {
     [Header("스킬 기본")]
     public float duration = 10f;          // 오라 유지 시간
     public float cooldown = 15f;         // 쿨타임
+    public float cooldownTimer = 0f;
     public LayerMask enemyMask;          // Enemy 레이어
 
     [Header("범위/연출")]
@@ -22,7 +22,6 @@ public class MagneticFieldSkill : MonoBehaviour
     public float slowDuration = 0.6f;    // 슬로우 유지 시간(틱마다 갱신됨)
 
     // 내부 상태
-    float cooldownTimer = 0f;
     bool active = false;
 
     // 참조
@@ -41,12 +40,6 @@ public class MagneticFieldSkill : MonoBehaviour
         if (cooldownTimer > 0f) cooldownTimer -= Time.deltaTime;
     }
 
-    // 입력 시스템에서 호출할 함수 (Input Actions에 "MagneticField" 같은 액션을 5번 키로 바인딩)
-    public void OnMagneticField(InputValue value)
-    {
-        TryUse();
-    }
-
     public bool TryUse()
     {
         if (active) return false;
@@ -55,6 +48,11 @@ public class MagneticFieldSkill : MonoBehaviour
 
         StartCoroutine(CoRun());
         return true;
+    }
+
+    public float GetCooldownRatio()
+    {
+        return Mathf.Clamp01(cooldownTimer / cooldown);
     }
 
     IEnumerator CoRun()

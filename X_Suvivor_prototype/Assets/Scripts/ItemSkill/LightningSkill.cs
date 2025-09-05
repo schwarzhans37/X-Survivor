@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class LightningSkill : MonoBehaviour
 {
     [Header("기본")]
     public float cooldown = 12f;         // 쿨타임
+    public float cooldownTimer;
     public int strikeCount = 5;          // 총 타격 횟수
     public float strikeInterval = 0.5f;  // 타격 간격
     public LayerMask enemyMask;          // Enemy 레이어
@@ -24,17 +24,11 @@ public class LightningSkill : MonoBehaviour
     const float FX_SCALE_MULT = 6f;     // 실제 뇌격 애니메이션 크기
     const float DAMAGE_R_MULT = 3f;     // 실제 피해 반경 범위
 
-    float cooldownTimer;
     bool casting;
 
     void Update()
     {
         if (cooldownTimer > 0f) cooldownTimer -= Time.deltaTime;
-    }
-
-    public void OnLightning(InputValue v)
-    {
-        TryUse();
     }
 
     public bool TryUse()
@@ -47,6 +41,11 @@ public class LightningSkill : MonoBehaviour
 
         StartCoroutine(CoCast());
         return true;
+    }
+
+    public float GetCooldownRatio()
+    {
+        return Mathf.Clamp01(cooldownTimer / cooldown);
     }
 
     IEnumerator CoCast()
