@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2499812205850076455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4008730124218605876}
+  m_Layer: 6
+  m_Name: Shoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4008730124218605876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2499812205850076455}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.687, y: -1.074, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2660786240810932236}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3549744941311813483
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +242,7 @@ Transform:
   m_Children:
   - {fileID: 1607866467944850946}
   - {fileID: 2789378852963149516}
+  - {fileID: 4008730124218605876}
   m_Father: {fileID: 886802175680972905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4331601139552089355
@@ -350,7 +382,7 @@ MonoBehaviour:
   maxHealth: 0
   monsterData: {fileID: 11400000, guid: 846151683613370469b0aed1a499b0ae, type: 2}
   target: {fileID: 825119429889463638}
-  attackRange: 3.5
+  attackRange: 5
   attackCooldown: 1
   attackHitbox: {fileID: 1324305830468638266}
   graphics: {fileID: 2660786240810932236}
@@ -359,6 +391,8 @@ MonoBehaviour:
   bodyRightX: -0.3
   bodyLeftX: -0.3
   bodyY: 0
+  shootPivot: {fileID: 4008730124218605876}
+  projectilePoolIndex: 4
   graphicsBaseLocalPos: {x: 0, y: 0}
 --- !u!50 &825119429889463638
 Rigidbody2D:

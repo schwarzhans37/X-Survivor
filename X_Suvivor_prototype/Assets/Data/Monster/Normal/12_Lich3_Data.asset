@@ -19,7 +19,7 @@ MonoBehaviour:
   Maxhealth: 350
   AttackPower: 0
   AttackRange: 0
-  Speed: 3.5
+  Speed: 3
   mixExpOrbs: 1
   maxExpOrbs: 1
   dropList: []

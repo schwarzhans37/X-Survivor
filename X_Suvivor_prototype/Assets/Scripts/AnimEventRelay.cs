@@ -27,4 +27,10 @@ public class AnimEventRelay : MonoBehaviour
     {
         enemy?.AE_DisableHitbox();
     }
+
+    // 원거리 공격 애니메이션에서 투사체를 발사하는 프레임에 호출합니다.
+    public void AE_FireProjectile()
+    {
+        enemy?.AE_FireProjectile();
+    }
 }
