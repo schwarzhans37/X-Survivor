@@ -25,5 +25,33 @@
    
 - __개발 도구__
   -  게임 엔진 : Unity
+  -  일러스트 생성 : Chat GPT
  
 - __특징__
+  - 시작 시 기본 무기를 가지는 캐릭터
+  <img width="472" height="609" alt="image" src="https://github.com/user-attachments/assets/27c3029f-e82d-421e-9196-7f3f3e4f8529" />
+  <img width="474" height="609" alt="image" src="https://github.com/user-attachments/assets/eab81be7-5f0b-4f6a-b04f-41525320346e" />
+
+  - 랜덤 강화 선택지
+  <img width="1019" height="399" alt="image" src="https://github.com/user-attachments/assets/e7ceaf53-729a-4c70-83e0-c0aca7c55cfb" />
+  외에도 다양한 선택지가 있음
+
+  - 펫
+  <img width="1103" height="445" alt="image" src="https://github.com/user-attachments/assets/2ce167a8-04eb-44b4-8439-e6eb13bc4fbd" />
+  조력자 포지션으로, 필드 위 플레이어의 주변을 배회하면서 펫 전용 스킬을 통해 플레이어를 보조
+
+  - 몬스터
+    1) 등급 : 일반 몬스터, 엘리트 몬스터, 보스 몬스터
+    2) 일반 몬스터 : 사방에서 쏟아지는 몬스터 군세의 주역. 특별한 공격 능력은 없음.
+    3) 엘리트 몬스터 : 특정 시간대마다 출현하는 몬스터. 전용 공격 있음.
+    4) 보스 몬스터 : 특정 시간대에만 등장하는 강력한 몬스터. 전용 UI가 화면에 나타나며, 전용 공격 보유.
+
+  - 소모성 아이템
+    1) 정의 : 소모성 아이템 형태로 얻는, 사용 횟수에 제한이 있는 스킬
+    2) 목적 : 플레이어의 상황에 따라 전략적으로 사용되어 여러 상황을 타개하거나 자신에게 유리하게 만들도록 추구
+
+  - 보물상자
+    1) 정의 : 특정 킬수 달성 시 마다 플레이어와 가까운 필드의 랜덤한 위치에 등장하는 상자
+    2) 목적 : 재화(골드, 잼)와 소모성 아이템을 얻을 수 있는 선물상자
+    3) UX : 필드에 등장한 상자 근처에서 2초 정도 머물러야 잠금이 풀리고 아이템을 얻을 수 있음
+    
