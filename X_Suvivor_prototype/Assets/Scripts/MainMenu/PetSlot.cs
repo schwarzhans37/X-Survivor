@@ -22,9 +22,17 @@ public class PetSlot : MonoBehaviour
         this.petData = data;
         this.uiManager = manager;
 
-        // 아이콘 설정 (PetDatabase에서 아이콘 Sprite를 가져와야 함)
-        //petIcon.sprite = PetDatabase.instance.GetSpriteForPet(data.Id);
-        petIcon.color = GetColorByGrade(data.grade); // 임시로 등급별 색상 표시
+        if (data.petIcon != null)
+        {
+            // Image 컴포넌트의 sprite 속성에 PetData의 아이콘을 할당
+            petIcon.sprite = data.petIcon;
+            petIcon.color = Color.white;
+        }
+        else
+        {
+            // 아이콘이 없다면 비활성화하거나 기본 이미지 표시
+            petIcon.color = new Color(1, 1, 1, 0);  // 투명하게 만듦
+        }
     }
 
     // 이 슬롯이 클릭이 되었을 경우
@@ -32,18 +40,5 @@ public class PetSlot : MonoBehaviour
     {
         // UI 관리자에게 "내가 선택되었다." 라고 알림
         uiManager.OnPetSelected(this.petData);
-    }
-
-    // 등급에 따라 색상을 반환하는 임시 함수
-    private Color GetColorByGrade(string grade)
-    {
-        switch (grade)
-        {
-            case "레전드": return Color.yellow;
-            case "유니크": return new Color(1f, 0.5f, 0f);
-            case "에픽": return Color.magenta;
-            case "레어": return Color.blue;
-            case "노멀": default: return Color.white;
-        }
     }
 }

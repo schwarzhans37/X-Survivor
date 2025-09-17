@@ -15,13 +15,16 @@ MonoBehaviour:
   rates:
   - grade: "\uB178\uBA40"
     probability: 50
-    petIds: 64000000c8000000
+    petIds: 64000000c80000002c010000
   - grade: "\uB808\uC5B4"
     probability: 35
-    petIds: 65000000c9000000
-  - grade: "\uC720\uB2C8\uD06C"
-    probability: 14
-    petIds: 66000000ca000000
+    petIds: 65000000c90000002d010000
   - grade: "\uC5D0\uD53D"
+    probability: 14
+    petIds: 66000000ca0000002e010000
+  - grade: "\uC720\uB2C8\uD06C"
     probability: 1
-    petIds: 67000000cb000000
+    petIds: 67000000cb0000002f010000
+  - grade: "\uB808\uC804\uB354\uB9AC"
+    probability: 0.3
+    petIds: 68000000cc00000030010000

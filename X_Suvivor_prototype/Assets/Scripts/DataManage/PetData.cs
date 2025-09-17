@@ -16,10 +16,12 @@ public class PetData : ScriptableObject
     [Header("그래픽 에셋")]
     public Sprite petIcon;       // UI에 표시될 아이콘
     public GameObject petSlot;
-    public Sprite inGameSprite;     // 게임 플레이 중 플레이어를 따라다니는 스프라이트 애니메이션
+    public GameObject inGamePrefab;     // 게임 플레이 중 플레이어를 따라다닐 펫 프리팹
     public GameObject splashArtPrefab;  // 가챠 결과창에 표시될 스플래시 아트 프리팹
 
-    [Header("능려기 및 버프")]
+
+
+    [Header("능력 및 버프")]
     [TextArea(3, 5)]
     public string buffDescription;
     // 이곳에 실제로 적용될 버프 값 추가
