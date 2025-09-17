@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4004067844454076504}
-  - component: {fileID: -6573052949945317556}
+  - component: {fileID: -7377042968307317815}
   - component: {fileID: 4368333285856967845}
   - component: {fileID: 8931686529609860135}
   m_Layer: 6
@@ -128,7 +128,7 @@ Transform:
   - {fileID: 4724747948482660159}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6573052949945317556
+--- !u!114 &-7377042968307317815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1249882315775862263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4f6a4e0ef6903489f932d81a0d23f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a6ca82ba1d16a041adbe232063f7cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
@@ -145,16 +145,101 @@ MonoBehaviour:
   maxHealth: 0
   monsterData: {fileID: 11400000, guid: 48a84c02ee3aeb54c8e55da97830dd57, type: 2}
   target: {fileID: 4368333285856967845}
-  attackRange: 1.1
+  attackRange: 3
   attackCooldown: 1
   attackHitbox: {fileID: 3529198203380981259}
   graphics: {fileID: 4724747948482660159}
   shadow: {fileID: 4724747948482660159}
   bodyCollider: {fileID: 8931686529609860135}
-  bodyRightX: -5.2
-  bodyLeftX: -5.2
+  bodyRightX: -5
+  bodyLeftX: -5
   bodyY: 0
+  shootPivot: {fileID: 5650591807307770457}
+  projectilePoolIndex: 5
   graphicsBaseLocalPos: {x: 0, y: 0}
+  useMeleeWhenInRange: 1
+  meleeRange: 3
+  fire:
+    name: Fire
+    animTrigger: Fire
+    cooldown: 10
+    startReady: 1
+    preCastDelay: 0.25
+    fireOnAnimEvent: 1
+    projectilePoolIndex: 5
+    projectileAnimName: Fire
+    shootPivots:
+    - {fileID: 5650591807307770457}
+    aimAtPlayer: 1
+    startAngleDeg: 0
+    spreadDeg: 360
+    projectilesPerBurst: 1
+    bursts: 1
+    burstInterval: 0.12
+    rotatePerBurstDeg: 0
+    randomJitterDeg: 0
+    overrideProjectile:
+      overrideDamage: 0
+      damage: 0
+      overrideSpeed: 0
+      speed: 0
+      overrideLife: 0
+      life: 0
+    nextReadyTime: 0
+  magic:
+    name: Magic
+    animTrigger: Magic
+    cooldown: 2
+    startReady: 1
+    preCastDelay: 0.25
+    fireOnAnimEvent: 1
+    projectilePoolIndex: 6
+    projectileAnimName: Magic
+    shootPivots:
+    - {fileID: 5650591807307770457}
+    aimAtPlayer: 1
+    startAngleDeg: 0
+    spreadDeg: 360
+    projectilesPerBurst: 1
+    bursts: 1
+    burstInterval: 0.12
+    rotatePerBurstDeg: 0
+    randomJitterDeg: 0
+    overrideProjectile:
+      overrideDamage: 0
+      damage: 0
+      overrideSpeed: 0
+      speed: 0
+      overrideLife: 0
+      life: 0
+    nextReadyTime: 0
+  lightning:
+    name: Lightning
+    animTrigger: Lightning
+    cooldown: 15
+    startReady: 1
+    preCastDelay: 0.25
+    fireOnAnimEvent: 1
+    projectilePoolIndex: 7
+    projectileAnimName: Lightning
+    shootPivots:
+    - {fileID: 5650591807307770457}
+    aimAtPlayer: 1
+    startAngleDeg: 0
+    spreadDeg: 360
+    projectilesPerBurst: 1
+    bursts: 1
+    burstInterval: 0.12
+    rotatePerBurstDeg: 0
+    randomJitterDeg: 0
+    overrideProjectile:
+      overrideDamage: 0
+      damage: 0
+      overrideSpeed: 0
+      speed: 0
+      overrideLife: 0
+      life: 0
+    nextReadyTime: 0
 --- !u!50 &4368333285856967845
 Rigidbody2D:
   serializedVersion: 4
@@ -301,6 +386,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3267920656190752819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5650591807307770457}
+  m_Layer: 6
+  m_Name: Shoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5650591807307770457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3267920656190752819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4724747948482660159}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7085549491730524194
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +451,7 @@ Transform:
   m_Children:
   - {fileID: 5749513286497466478}
   - {fileID: 7029215711987213167}
+  - {fileID: 5650591807307770457}
   m_Father: {fileID: 4004067844454076504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4029751863335054879
@@ -422,3 +539,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4cb520930c6b349bc3eaaccc0d9098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: -7377042968307317815}

@@ -43,21 +43,21 @@ public class Enemy : MonoBehaviour
     Vector2 atkBoxBaseOffset;
 
     // 상태
-    bool isAttacking = false;
-    float lastAttackTime = -999f;
+    protected bool isAttacking = false;
+    protected float lastAttackTime = -999f;
 
-    bool isLive;
-    Rigidbody2D rigid;
+    protected bool isLive;
+    protected Rigidbody2D rigid;
     Collider2D coll;
-    Animator anim;
-    SpriteRenderer spriter;
+    protected Animator anim;
+    protected SpriteRenderer spriter;
     WaitForFixedUpdate wait;
 
     // 슬로우/스턴
-    float baseSpeed;
-    float slowMultiplier = 1f;
-    float slowRemain = 0f;
-    float stunRemain = 0f;
+    protected float baseSpeed;
+    protected float slowMultiplier = 1f;
+    protected float slowRemain = 0f;
+    protected float stunRemain = 0f;
     public bool IsStunned => stunRemain > 0f;
     public bool IsAlive => isLive;
 
@@ -210,7 +210,7 @@ public class Enemy : MonoBehaviour
     }
 
     // ===== 공격 루틴 & 애니 이벤트 백업 =====
-    IEnumerator AttackRoutine()
+    protected virtual IEnumerator AttackRoutine()
     {
         isAttacking = true;
         lastAttackTime = Time.time;
@@ -252,7 +252,7 @@ public class Enemy : MonoBehaviour
     }
 
     // 애니메이션 이벤트용
-    public void AE_FireProjectile()
+    public virtual void AE_FireProjectile()
     {
         if (!GameManager.instance?.player) return;
 
@@ -266,12 +266,12 @@ public class Enemy : MonoBehaviour
 
         // 3) 진행 방향 전달 → 투사체가 스스로 움직임
         var proj = go.GetComponent<EnemyProjectile>();
-        if (proj) proj.Fire(toPlayer);
+        if (proj) proj.Fire(toPlayer, "Fly");
     }
 
     // 애니메이션 이벤트용
-    public void AE_EnableHitbox() { if (attackHitbox) attackHitbox.enabled = true; }
-    public void AE_DisableHitbox() { if (attackHitbox) attackHitbox.enabled = false; }
+    public virtual void AE_EnableHitbox() { if (attackHitbox) attackHitbox.enabled = true; Debug.Log("히트박스 활성화됨!"); }
+    public virtual void AE_DisableHitbox() { if (attackHitbox) attackHitbox.enabled = false; Debug.Log("히트박스 비활성화됨!"); }
 
     void DropItems()
     {

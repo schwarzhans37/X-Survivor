@@ -260,14 +260,14 @@ MonoBehaviour:
   attackRange: 3
   attackCooldown: 1
   attackHitbox: {fileID: 3574641484667001530}
-  windupTime: 0.05
-  activeTime: 0.521
   graphics: {fileID: 7569571607972352609}
   shadow: {fileID: 7055259910907940982}
   bodyCollider: {fileID: 2028691210627139538}
   bodyRightX: -1.2
   bodyLeftX: -1.2
   bodyY: 0
+  shootPivot: {fileID: 0}
+  projectilePoolIndex: 0
   graphicsBaseLocalPos: {x: 0, y: 0}
 --- !u!50 &1605555663911315459
 Rigidbody2D:

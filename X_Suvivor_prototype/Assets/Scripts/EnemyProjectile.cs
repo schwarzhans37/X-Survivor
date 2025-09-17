@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Collider2D), typeof(Animator))]
 public class EnemyProjectile : MonoBehaviour
@@ -14,7 +16,7 @@ public class EnemyProjectile : MonoBehaviour
     float despawnAt;
     bool exploding;
 
-    public void Fire(Vector2 direction)
+    public void Fire(Vector2 direction, string animName)
     {
         anim ??= GetComponent<Animator>();
         col ??= GetComponent<Collider2D>();
@@ -28,7 +30,7 @@ public class EnemyProjectile : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        anim.Play("Fly", 0, 0f);
+        anim.Play(animName, 0, 0f);
     }
 
     void Update()
@@ -55,7 +57,7 @@ public class EnemyProjectile : MonoBehaviour
     {
         exploding = true;
         col.enabled = false;
-        anim.Play("Explode", 0, 0f); // 없으면 바로 Despawn() 호출해도 됨
+        anim.SetTrigger("StartExplode"); // "Explode" 상태로 전환하는 트리거 호출
     }
 
     // Explode 마지막 프레임에 Animation Event로 호출
