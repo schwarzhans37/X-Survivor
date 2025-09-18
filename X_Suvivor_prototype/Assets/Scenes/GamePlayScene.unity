@@ -13345,7 +13345,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.55432
+  orthographic size: 5.7222223
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -13656,7 +13656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolManager: {fileID: 941918228}
   spawnWaves:
-  - startTime: 90
+  - startTime: 0
     endTime: 300
     monsterData: {fileID: 11400000, guid: 3de283e4d60cf9b43a00a80b417bd526, type: 2}
     spawnInterval: 0.5
@@ -13717,8 +13717,8 @@ MonoBehaviour:
     spawnInterval: 0.5
     timer: 0
   spawnEvents:
-  - spawnTime: 5
-    monsterData: {fileID: 11400000, guid: 48a84c02ee3aeb54c8e55da97830dd57, type: 2}
+  - spawnTime: 30
+    monsterData: {fileID: 11400000, guid: 5399fefffbe0fd245811a28d9b94a432, type: 2}
     isSpawned: 0
   - spawnTime: 60
     monsterData: {fileID: 11400000, guid: 5399fefffbe0fd245811a28d9b94a432, type: 2}

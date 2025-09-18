@@ -52,7 +52,7 @@ MonoBehaviour:
   maxHealth: 0
   monsterData: {fileID: 11400000, guid: 0fe3f203932029544a2ab9c9e5d669bc, type: 2}
   target: {fileID: 356676860766403790}
-  attackRange: 3
+  attackRange: 3.5
   attackCooldown: 1
   attackHitbox: {fileID: 3166166802155246743}
   graphics: {fileID: 8225537675535747796}
@@ -65,7 +65,7 @@ MonoBehaviour:
   projectilePoolIndex: 6
   graphicsBaseLocalPos: {x: 0, y: 0}
   useMeleeWhenInRange: 1
-  meleeRange: 3
+  meleeRange: 3.5
   fire:
     name: Fire
     animTrigger: Fire
@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4cb520930c6b349bc3eaaccc0d9098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
 --- !u!1 &7206615897618013260
 GameObject:
   m_ObjectHideFlags: 0

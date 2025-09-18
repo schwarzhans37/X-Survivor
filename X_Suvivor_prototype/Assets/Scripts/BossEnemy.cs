@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Enemy 클래스를 상속받습니다.
 public class BossEnemy : Enemy
 {
     [Header("# Boss Behaviour")]
@@ -10,13 +9,11 @@ public class BossEnemy : Enemy
     public float meleeRange = 1.2f;
 
     [Header("# Ranged Skills")]
-    public RangedSkill fire;    // Trigger: "Fire"
-    public RangedSkill magic;   // Trigger: "Magic"
-    public RangedSkill lightning;   // Trigger: "Lightning"
+    public RangedSkill fire;
+    public RangedSkill magic;
+    public RangedSkill lightning; // 보통 DirectToLockedPlayer 권장
 
     List<RangedSkill> skills;
-
-    // 애니 이벤트 연동용
     RangedSkill currentSkill;
     bool waitingForAnimEvent;
 
@@ -36,10 +33,8 @@ public class BossEnemy : Enemy
 
     void FixedUpdate()
     {
-        if (!GameManager.instance.isLive) return;
-        if (!isLive) return;
-        if (!isLive || (anim && anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")))
-            return;
+        if (!GameManager.instance.isLive || !isLive) return;
+        if (anim && anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
 
         if (stunRemain > 0f) { stunRemain -= Time.fixedDeltaTime; if (stunRemain < 0f) stunRemain = 0f; }
         if (IsStunned) { rigid.velocity = Vector2.zero; return; }
@@ -48,8 +43,8 @@ public class BossEnemy : Enemy
 
         if (!isAttacking)
         {
-            float dist = (target ? Vector2.Distance(target.position, transform.position) : 999f);
-            bool canMelee = useMeleeWhenInRange && attackHitbox != null && dist <= meleeRange;
+            float dist = target ? Vector2.Distance(target.position, transform.position) : 999f;
+            bool canMelee = useMeleeWhenInRange && attackHitbox && dist <= meleeRange;
 
             if (canMelee)
             {
@@ -66,13 +61,14 @@ public class BossEnemy : Enemy
             }
         }
 
+        // 추적 이동
         float curSpeed = baseSpeed * slowMultiplier;
         Vector2 dirVec = target.position - rigid.position;
-        Vector2 nextVec = dirVec.normalized * curSpeed * Time.fixedDeltaTime;
-        rigid.MovePosition(rigid.position + nextVec);
+        rigid.MovePosition(rigid.position + dirVec.normalized * curSpeed * Time.fixedDeltaTime);
         rigid.velocity = Vector2.zero;
     }
 
+    // 기본 Enemy의 근접 루틴은 사용 안 함
     protected override IEnumerator AttackRoutine() { yield break; }
 
     public IEnumerator AttackRoutine(RangedSkill skill)
@@ -81,6 +77,7 @@ public class BossEnemy : Enemy
         yield return StartCoroutine(CastAndFire(skill));
         skill.nextReadyTime = Time.time + skill.cooldown;
 
+        // 필요 시 후딜
         yield return new WaitForSeconds(3.0f);
 
         isAttacking = false;
@@ -88,32 +85,32 @@ public class BossEnemy : Enemy
 
     IEnumerator DoMeleeOnce()
     {
+        if (isAttacking) yield break;
+        isAttacking = true;
+
         if (attackHitbox) attackHitbox.enabled = false;
 
-        if (anim)
-        {
-            anim.ResetTrigger("Hit");
-            anim.SetTrigger("Attack");
-        }
+        if (anim) { anim.ResetTrigger("Hit"); anim.SetTrigger("Attack"); }
 
+        // Attack 상태 진입 대기(최대 0.25s)
         float guard = 0f;
         while (guard < 0.25f)
         {
             if (!anim || anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) break;
             guard += Time.deltaTime; yield return null;
         }
+        // Attack 상태 종료까지 대기
         while (anim && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")) yield return null;
 
         if (attackHitbox) attackHitbox.enabled = false;
 
         isAttacking = false;
-        yield return null;
     }
 
     List<RangedSkill> GetReadySkills()
     {
         float now = Time.time;
-        var list = new List<RangedSkill>();
+        var list = new List<RangedSkill>(skills.Count);
         foreach (var s in skills)
             if (s != null && now >= s.nextReadyTime)
                 list.Add(s);
@@ -128,15 +125,17 @@ public class BossEnemy : Enemy
             anim.SetTrigger(s.animTrigger);
         }
 
-        if (s.preCastDelay > 0f) yield return new WaitForSeconds(s.preCastDelay);
+        if (s.preCastDelay > 0f)
+            yield return new WaitForSeconds(s.preCastDelay);
 
         if (s.fireOnAnimEvent)
         {
             currentSkill = s;
             waitingForAnimEvent = true;
 
+            // 안전 타임아웃
             float timeout = 2.0f;
-            while (waitingForAnimEvent && (timeout > 0f))
+            while (waitingForAnimEvent && timeout > 0f)
             {
                 timeout -= Time.deltaTime;
                 yield return null;
@@ -148,68 +147,58 @@ public class BossEnemy : Enemy
         yield return StartCoroutine(ExecutePattern(s));
     }
 
+    // === 패턴 실행 (슬림) ===
     IEnumerator ExecutePattern(RangedSkill s)
     {
         Transform[] pivots = (s.shootPivots != null && s.shootPivots.Length > 0)
             ? s.shootPivots
-            : new Transform[] { shootPivot != null ? shootPivot : transform };
+            : new Transform[] { shootPivot ? shootPivot : transform };
 
-        float aimBase = 0f;
-        if (s.aimAtPlayer && GameManager.instance?.player)
+        // Direct 모드면 발사 순간의 플레이어 좌표를 잠가둔다
+        Vector3 lockedPos = Vector3.zero;
+        if (s.pattern == RangedSkill.PatternMode.DirectToLockedPlayer && GameManager.instance?.player)
+            lockedPos = GameManager.instance.player.transform.position;
+
+        foreach (var p in pivots)
         {
-            Vector3 origin = shootPivot ? shootPivot.position : transform.position;
-            Vector2 toP = (GameManager.instance.player.transform.position - origin);
-            aimBase = Mathf.Atan2(toP.y, toP.x) * Mathf.Rad2Deg;
-        }
+            Vector3 origin = p.position;
+            Vector2 shotDir;
 
-        float angle = s.startAngleDeg;
-
-        for (int b = 0; b < s.bursts; b++)
-        {
-            float baseAngle = aimBase + angle;
-
-            int count = Mathf.Max(1, s.projectilesPerBurst);
-            float step = (s.spreadDeg >= 360f) ? 360f / count
-                                                : (count > 1 ? s.spreadDeg / (count - 1) : 0f);
-            float start = (s.spreadDeg >= 360f) ? 0f : -s.spreadDeg * 0.5f;
-
-            for (int i = 0; i < count; i++)
+            if (s.pattern == RangedSkill.PatternMode.DirectToLockedPlayer)
             {
-                float a = baseAngle + start + step * i + Random.Range(-s.randomJitterDeg, s.randomJitterDeg);
-                Vector2 dir = new(Mathf.Cos(a * Mathf.Deg2Rad), Mathf.Sin(a * Mathf.Deg2Rad));
-
-                foreach (var p in pivots)
-                    SpawnProjectile(p.position, dir, s.projectilePoolIndex, s.overrideProjectile, s.projectileAnimName);
+                // 잠근 좌표로 직사(유도 X)
+                Vector3 targetPos = GameManager.instance?.player ? lockedPos : origin + Vector3.right;
+                shotDir = ((Vector2)(targetPos - origin)).normalized;
+            }
+            else // AimedAtPlayer
+            {
+                Vector3 targetPos = GameManager.instance?.player
+                    ? GameManager.instance.player.transform.position
+                    : origin + Vector3.right;
+                shotDir = ((Vector2)(targetPos - origin)).normalized;
             }
 
-            if (b < s.bursts - 1) yield return new WaitForSeconds(s.burstInterval);
-
-            angle += s.rotatePerBurstDeg;
+            SpawnProjectile(origin, shotDir, s.projectilePoolIndex, s.projectileAnimName);
         }
+
+        yield break;
     }
 
-    void SpawnProjectile(Vector3 origin, Vector2 dir, int poolIndex, ProjectileOverride ov, string animName)
+    void SpawnProjectile(Vector3 origin, Vector2 dir, int poolIndex, string animName)
     {
         var go = GameManager.instance.pool.Get(PoolCategory.Projectile, poolIndex);
         go.transform.position = origin;
-        go.transform.rotation = Quaternion.identity; // 회전 초기화
+        go.transform.rotation = Quaternion.identity; // 그래픽 회전은 EnemyProjectile이 처리
 
         var proj = go.GetComponent<EnemyProjectile>();
         if (!proj) return;
 
-        if (ov != null) ov.ApplyTo(proj);
         proj.Fire(dir, animName);
     }
 
-    public override void AE_EnableHitbox()
-    {
-        base.AE_EnableHitbox();
-    }
-
-    public override void AE_DisableHitbox()
-    {
-        base.AE_DisableHitbox();
-    }
+    // 애니메이션 이벤트 연동
+    public override void AE_EnableHitbox() { base.AE_EnableHitbox(); }
+    public override void AE_DisableHitbox() { base.AE_DisableHitbox(); }
 
     public override void AE_FireProjectile()
     {
@@ -223,9 +212,16 @@ public class BossEnemy : Enemy
         base.AE_FireProjectile();
     }
 }
+
 [System.Serializable]
 public class RangedSkill
 {
+    public enum PatternMode
+    {
+        DirectToLockedPlayer, // 발사 "순간"의 플레이어 좌표로 직사
+        AimedAtPlayer         // 발사 시점의 플레이어 방향으로 단발
+    }
+
     [Header("Common")]
     public string name;
     public string animTrigger = "Fire";
@@ -236,37 +232,13 @@ public class RangedSkill
 
     [Header("Projectile")]
     public int projectilePoolIndex = 0;
-    public string projectileAnimName = "투사체 애니메이션 이름 입력";
-    public Transform[] shootPivots;
+    public string projectileAnimName = "Anim";
+    public Transform[] shootPivots; // 비우면 BossEnemy.shootPivot 사용
 
     [Header("Pattern")]
-    public bool aimAtPlayer = true;
-    public float startAngleDeg = 0f;
-    public float spreadDeg = 360f;
-    public int projectilesPerBurst = 12;
-    public int bursts = 1;
-    public float burstInterval = 0.12f;
-    public float rotatePerBurstDeg = 0f;
-    public float randomJitterDeg = 0f;
-
-    public ProjectileOverride overrideProjectile;
+    public PatternMode pattern = PatternMode.AimedAtPlayer;
 
     [HideInInspector] public float nextReadyTime;
     public void ResetCD() => nextReadyTime = Time.time + cooldown;
     public void ForceReady() => nextReadyTime = Time.time;
-}
-
-[System.Serializable]
-public class ProjectileOverride
-{
-    public bool overrideDamage; public int damage;
-    public bool overrideSpeed; public float speed;
-    public bool overrideLife; public float life;
-
-    public void ApplyTo(EnemyProjectile p)
-    {
-        if (overrideDamage) p.damage = damage;
-        if (overrideSpeed) p.speed = speed;
-        if (overrideLife) p.lifeTime = life;
-    }
 }

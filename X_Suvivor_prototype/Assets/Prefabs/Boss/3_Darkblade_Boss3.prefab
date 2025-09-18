@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4cb520930c6b349bc3eaaccc0d9098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
 --- !u!1 &5839732775987554974
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +281,7 @@ MonoBehaviour:
   projectilePoolIndex: 7
   graphicsBaseLocalPos: {x: 0, y: 0}
   useMeleeWhenInRange: 1
-  meleeRange: 3
+  meleeRange: 3.5
   fire:
     name: Fire
     animTrigger: Fire

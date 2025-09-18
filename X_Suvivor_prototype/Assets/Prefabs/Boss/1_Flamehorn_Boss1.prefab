@@ -145,7 +145,7 @@ MonoBehaviour:
   maxHealth: 0
   monsterData: {fileID: 11400000, guid: 48a84c02ee3aeb54c8e55da97830dd57, type: 2}
   target: {fileID: 4368333285856967845}
-  attackRange: 3
+  attackRange: 3.5
   attackCooldown: 1
   attackHitbox: {fileID: 3529198203380981259}
   graphics: {fileID: 4724747948482660159}
@@ -158,7 +158,7 @@ MonoBehaviour:
   projectilePoolIndex: 5
   graphicsBaseLocalPos: {x: 0, y: 0}
   useMeleeWhenInRange: 1
-  meleeRange: 3
+  meleeRange: 3.5
   fire:
     name: Fire
     animTrigger: Fire
@@ -178,6 +178,8 @@ MonoBehaviour:
     burstInterval: 0.12
     rotatePerBurstDeg: 0
     randomJitterDeg: 0
+    verticalOnly: 0
+    snapXToPlayer: 0
     overrideProjectile:
       overrideDamage: 0
       damage: 0
@@ -205,6 +207,8 @@ MonoBehaviour:
     burstInterval: 0.12
     rotatePerBurstDeg: 0
     randomJitterDeg: 0
+    verticalOnly: 0
+    snapXToPlayer: 0
     overrideProjectile:
       overrideDamage: 0
       damage: 0
@@ -232,6 +236,8 @@ MonoBehaviour:
     burstInterval: 0.12
     rotatePerBurstDeg: 0
     randomJitterDeg: 0
+    verticalOnly: 1
+    snapXToPlayer: 0
     overrideProjectile:
       overrideDamage: 0
       damage: 0

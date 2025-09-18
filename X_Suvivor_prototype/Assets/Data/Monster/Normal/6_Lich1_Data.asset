@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c4dd2cff55dd44788a87cc7b162e65, type: 3}
   m_Name: 6_Lich1_Data
   m_EditorClassIdentifier: 
-  PoolManagerIndex: 0
+  PoolManagerIndex: 5
   Id: 5
   Name: "\uC2A4\uCF08\uB808\uD1A4"
   tier: 0

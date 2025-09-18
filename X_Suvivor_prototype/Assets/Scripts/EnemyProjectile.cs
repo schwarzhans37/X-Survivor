@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(Collider2D), typeof(Animator))]
 public class EnemyProjectile : MonoBehaviour
@@ -9,6 +7,10 @@ public class EnemyProjectile : MonoBehaviour
     public float speed = 2f;
     public float lifeTime = 20f;
     public float knockback = 1f;
+
+    public enum OrientationMode { Upright, FaceDirection }
+    [Header("Visual Orientation")]
+    public OrientationMode orientation = OrientationMode.Upright; // 번개는 Upright
 
     Animator anim;
     Collider2D col;
@@ -26,11 +28,24 @@ public class EnemyProjectile : MonoBehaviour
         exploding = false;
         col.enabled = true;
 
-        // 진행 방향으로 회전(선택)
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        if (orientation == OrientationMode.FaceDirection)
+        {
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity; // 항상 세로
+        }
 
         anim.Play(animName, 0, 0f);
+    }
+
+    void OnEnable()
+    {
+        if (orientation == OrientationMode.Upright)
+            transform.rotation = Quaternion.identity;
+        exploding = false;
     }
 
     void Update()
@@ -48,7 +63,7 @@ public class EnemyProjectile : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         var p = other.GetComponent<Player>();
-        if (p) p.TakeDamage(damage); // 필요하면 넉백 추가
+        if (p) p.TakeDamage(damage);
 
         StartExplode();
     }
@@ -57,12 +72,9 @@ public class EnemyProjectile : MonoBehaviour
     {
         exploding = true;
         col.enabled = false;
-        anim.SetTrigger("StartExplode"); // "Explode" 상태로 전환하는 트리거 호출
+        anim.SetTrigger("StartExplode");
     }
 
-    // Explode 마지막 프레임에 Animation Event로 호출
-    public void Despawn()
-    {
-        gameObject.SetActive(false);
-    }
+    // Explode 마지막 프레임 이벤트에서 호출
+    public void Despawn() => gameObject.SetActive(false);
 }
