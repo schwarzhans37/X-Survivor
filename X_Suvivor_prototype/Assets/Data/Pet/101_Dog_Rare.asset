@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
-  m_Name: Cat_Rare
+  m_Name: 101_Dog_Rare
   m_EditorClassIdentifier: 
-  id: 201
-  petName: "\uACE0\uC591\uC774(\uB808\uC5B4)"
-  petType: "\uACE0\uC591\uC774"
+  id: 101
+  petName: "\uAC15\uC544\uC9C0(\uB808\uC5B4)"
+  petType: "\uAC15\uC544\uC9C0"
   grade: "\uB808\uC5B4"
-  petIcon: {fileID: 21300000, guid: 7870456e3d174ca49ac88838b366829f, type: 3}
-  petSlot: {fileID: 2286721273538385791, guid: bae4acfb95636e1469be71e48316a60c, type: 3}
-  inGameSprite: {fileID: 21300000, guid: 7870456e3d174ca49ac88838b366829f, type: 3}
-  splashArtPrefab: {fileID: 4546957856435332560, guid: 5250ac35164450b42a5e1fbc1fbad736, type: 3}
+  petIcon: {fileID: 21300000, guid: 5744a732468999b46bd8ea4f061deed8, type: 3}
+  petSlot: {fileID: 2286721273538385791, guid: 36738770ffbd4b7428dd4eac48468651, type: 3}
+  inGamePrefab: {fileID: 1448656011933182545, guid: b30082977fe0d6a4792bc51725d144c0, type: 3}
+  splashArtPrefab: {fileID: 1943430713910390657, guid: 297f0196e2ea6294cabd150034086750, type: 3}
   buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
   hasSkill: 0
   skillDescription: "\uC2A4\uD0AC \uC5C6\uC74C"

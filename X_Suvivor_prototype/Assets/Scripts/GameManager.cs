@@ -87,16 +87,33 @@ public class GameManager : MonoBehaviour
             Debug.LogError($"ID {charId}에 해당하는 CharaData를 찾을 수 없습니다.");
         }
 
-        // 4. 펫 설정(임시)
+        // 4. 선택된 펫 소환 로직
         if (petId != -1)    // 선택된 펫이 있다면....
         {
-            // 펫을 생성하고 설정하는 코드 추가 필요
-            /* 예시 :
-                PetData data = PetDatabase.instance.GetByID(petId);
-                GameObject petObject = pool.Get(펫 프리팹 인덱스);
-                petObject.GetComponent<Pet>().Init(data, player.transform);
-            */
-            Debug.Log($"펫 Id: {petId}와 함께 게임을 시작합니다.");
+            PetData selectedPetData = PlayerDataManager.instance.petDatabase.GetPetByID(petId);
+
+            if (selectedPetData != null)
+            {
+                // PetData에 게임용 프리팹이 연결되어 있는지 확인
+                if (selectedPetData.inGamePrefab != null)
+                {
+                    // 프리팹을 씬에 생성
+                    GameObject petObject = Instantiate(selectedPetData.inGamePrefab, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+                    Debug.Log($"[{selectedPetData.grade}] {selectedPetData.petName} (ID:{petId}) 펫을 소환했습니다.");
+                }
+                else
+                {
+                    Debug.LogError($"Pet Id {petId}의 PetData에 'inGamePrefab'이 연결되지 않았습니다.");
+                }
+            }
+            else
+            {
+                Debug.LogError($"Pet ID {petId}에 해당하는 PetData를 PetDatabase에서 찾을 수 없습니다.");
+            }
+        }
+        else
+        {
+            Debug.Log("선택된 펫이 없어 펫 없이 게임을 시작합니다.");
         }
 
         // 5. UI 및 게임 상태 설정

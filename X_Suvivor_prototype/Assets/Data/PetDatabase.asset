@@ -13,11 +13,18 @@ MonoBehaviour:
   m_Name: PetDatabase
   m_EditorClassIdentifier: 
   allPets:
-  - {fileID: 11400000, guid: e4b7ff831d49fef43b92ad20d2681fe2, type: 2}
-  - {fileID: 11400000, guid: d5085bec1e08cc545a5ff21420e0ed1d, type: 2}
+  - {fileID: 11400000, guid: 0411098268177444183d6045f69e3db1, type: 2}
   - {fileID: 11400000, guid: 9cb6ed1442f79b14db247949f14022be, type: 2}
-  - {fileID: 11400000, guid: ef9f9769c9ecc564dafe8fc0e65c0fce, type: 2}
-  - {fileID: 11400000, guid: 5b54bb1a85f4df64c931ead723247424, type: 2}
-  - {fileID: 11400000, guid: cb95057decdce0f4d9c771c0ac9caa46, type: 2}
   - {fileID: 11400000, guid: 6014702e9e7466a4eafb8ef0dd328ac2, type: 2}
+  - {fileID: 11400000, guid: 5b54bb1a85f4df64c931ead723247424, type: 2}
+  - {fileID: 11400000, guid: 8e3ac731ec2f14d489a7f73b677dffc5, type: 2}
+  - {fileID: 11400000, guid: e9cf2b0b554801840b54e4201319537e, type: 2}
+  - {fileID: 11400000, guid: ef9f9769c9ecc564dafe8fc0e65c0fce, type: 2}
   - {fileID: 11400000, guid: a35e21af23852bd4bb970631c0bd5061, type: 2}
+  - {fileID: 11400000, guid: cb95057decdce0f4d9c771c0ac9caa46, type: 2}
+  - {fileID: 11400000, guid: 817a1abf1d6f45d44b3a5b71c9923205, type: 2}
+  - {fileID: 11400000, guid: e479188c1395e3e40975d17bceaf1484, type: 2}
+  - {fileID: 11400000, guid: 150fcef134860f64891e838ae60e0d17, type: 2}
+  - {fileID: 11400000, guid: 8f1a183f95b6faf46a6f5e673016e894, type: 2}
+  - {fileID: 11400000, guid: 36d94e02d790a4a43a8aaff4b06a9141, type: 2}
+  - {fileID: 11400000, guid: 24efb1c0ffc5a7d4788bf025d49d7199, type: 2}

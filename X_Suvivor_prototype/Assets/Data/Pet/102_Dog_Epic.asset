@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
-  m_Name: Dog_Nomal
+  m_Name: 102_Dog_Epic
   m_EditorClassIdentifier: 
-  id: 100
-  petName: "\uAC15\uC544\uC9C0(\uB178\uBA40)"
+  id: 102
+  petName: "\uAC15\uC544\uC9C0(\uC5D0\uD53D)"
   petType: "\uAC15\uC544\uC9C0"
-  grade: "\uB178\uBA40"
-  petIcon: {fileID: 21300000, guid: 2e23f9c01270837419543252010788a4, type: 3}
+  grade: "\uC5D0\uD53D"
+  petIcon: {fileID: 21300000, guid: 288f5ee7cf00775469c6e6e3159a6aa8, type: 3}
   petSlot: {fileID: 2286721273538385791, guid: 36738770ffbd4b7428dd4eac48468651, type: 3}
-  inGameSprite: {fileID: 21300000, guid: 2e23f9c01270837419543252010788a4, type: 3}
-  splashArtPrefab: {fileID: 2438299749029603491, guid: 66c3a2a4b8855ff47b380d8bdd9e01b8, type: 3}
+  inGamePrefab: {fileID: 1448656011933182545, guid: 7baabe0bfb2def045ba894dd4c8af964, type: 3}
+  splashArtPrefab: {fileID: 1185510649239504073, guid: 008230e357c91ba44a5e153d061acf40, type: 3}
   buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
   hasSkill: 0
   skillDescription: "\uC2A4\uD0AC \uC5C6\uC74C"

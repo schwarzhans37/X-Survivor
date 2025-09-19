@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
-  m_Name: Cat_Unique
+  m_Name: 303_Rabbit_Unique
   m_EditorClassIdentifier: 
-  id: 202
-  petName: "\uACE0\uC591\uC774(\uC720\uB2C8\uD06C)"
-  petType: "\uACE0\uC591\uC774"
+  id: 103
+  petName: "\uD1A0\uB07C(\uC720\uB2C8\uD06C)"
+  petType: "\uD1A0\uB07C"
   grade: "\uC720\uB2C8\uD06C"
-  petIcon: {fileID: 21300000, guid: 7870456e3d174ca49ac88838b366829f, type: 3}
-  petSlot: {fileID: 2286721273538385791, guid: bae4acfb95636e1469be71e48316a60c, type: 3}
-  inGameSprite: {fileID: 21300000, guid: 7870456e3d174ca49ac88838b366829f, type: 3}
-  splashArtPrefab: {fileID: 617814565094820369, guid: 820aa549a8893314488b7df055f71e1f, type: 3}
+  petIcon: {fileID: 21300000, guid: 8ced4d2a64e71bd448a32197db6186bf, type: 3}
+  petSlot: {fileID: 0}
+  inGamePrefab: {fileID: 1448656011933182545, guid: bb0c830dde2b6b64aad18d76aab365f7, type: 3}
+  splashArtPrefab: {fileID: 0}
   buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
   hasSkill: 0
   skillDescription: "\uC2A4\uD0AC \uC5C6\uC74C"
