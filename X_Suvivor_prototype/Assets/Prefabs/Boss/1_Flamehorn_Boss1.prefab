@@ -170,23 +170,7 @@ MonoBehaviour:
     projectileAnimName: Fire
     shootPivots:
     - {fileID: 5650591807307770457}
-    aimAtPlayer: 1
-    startAngleDeg: 0
-    spreadDeg: 360
-    projectilesPerBurst: 1
-    bursts: 1
-    burstInterval: 0.12
-    rotatePerBurstDeg: 0
-    randomJitterDeg: 0
-    verticalOnly: 0
-    snapXToPlayer: 0
-    overrideProjectile:
-      overrideDamage: 0
-      damage: 0
-      overrideSpeed: 0
-      speed: 0
-      overrideLife: 0
-      life: 0
+    pattern: 1
     nextReadyTime: 0
   magic:
     name: Magic
@@ -199,23 +183,7 @@ MonoBehaviour:
     projectileAnimName: Magic
     shootPivots:
     - {fileID: 5650591807307770457}
-    aimAtPlayer: 1
-    startAngleDeg: 0
-    spreadDeg: 360
-    projectilesPerBurst: 1
-    bursts: 1
-    burstInterval: 0.12
-    rotatePerBurstDeg: 0
-    randomJitterDeg: 0
-    verticalOnly: 0
-    snapXToPlayer: 0
-    overrideProjectile:
-      overrideDamage: 0
-      damage: 0
-      overrideSpeed: 0
-      speed: 0
-      overrideLife: 0
-      life: 0
+    pattern: 1
     nextReadyTime: 0
   lightning:
     name: Lightning
@@ -228,23 +196,7 @@ MonoBehaviour:
     projectileAnimName: Lightning
     shootPivots:
     - {fileID: 5650591807307770457}
-    aimAtPlayer: 1
-    startAngleDeg: 0
-    spreadDeg: 360
-    projectilesPerBurst: 1
-    bursts: 1
-    burstInterval: 0.12
-    rotatePerBurstDeg: 0
-    randomJitterDeg: 0
-    verticalOnly: 1
-    snapXToPlayer: 0
-    overrideProjectile:
-      overrideDamage: 0
-      damage: 0
-      overrideSpeed: 0
-      speed: 0
-      overrideLife: 0
-      life: 0
+    pattern: 1
     nextReadyTime: 0
 --- !u!50 &4368333285856967845
 Rigidbody2D:
