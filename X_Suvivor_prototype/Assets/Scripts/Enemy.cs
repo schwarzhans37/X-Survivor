@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     public float health;          // 현재 체력
     public float maxHealth;       // 최대 체력
 
-    [Header("# Data (기존 사용 그대로)")]
+    [Header("# Data")]
     public MonsterData monsterData;   // 스탯/드랍/애니 컨트롤러 등 기존 SO
 
     [Header("# Monster's Physics")]
@@ -31,6 +31,10 @@ public class Enemy : MonoBehaviour
     public float bodyLeftX = 0f; // 왼쪽 볼 때 X 추가 오프셋(+면 앞쪽)
     public float bodyY = 0f; // 위/아래 공통 보정이 필요하면 사용(선택)
 
+    [Header("# Ranged Attack")]
+    public Transform shootPivot;           // 총구 위치(Enemy 프리팹에서 지정)
+    public int projectilePoolIndex = 0;    // PoolManager.Projectile 배열 인덱스
+
 
     // 내부 저장: 기본 위치/오프셋
     [SerializeField] Vector2 graphicsBaseLocalPos; // 비워두면 Awake에서 자동 기록
@@ -39,21 +43,21 @@ public class Enemy : MonoBehaviour
     Vector2 atkBoxBaseOffset;
 
     // 상태
-    bool isAttacking = false;
-    float lastAttackTime = -999f;
+    protected bool isAttacking = false;
+    protected float lastAttackTime = -999f;
 
-    bool isLive;
-    Rigidbody2D rigid;
+    protected bool isLive;
+    protected Rigidbody2D rigid;
     Collider2D coll;
-    Animator anim;
-    SpriteRenderer spriter;
+    protected Animator anim;
+    protected SpriteRenderer spriter;
     WaitForFixedUpdate wait;
 
     // 슬로우/스턴
-    float baseSpeed;
-    float slowMultiplier = 1f;
-    float slowRemain = 0f;
-    float stunRemain = 0f;
+    protected float baseSpeed;
+    protected float slowMultiplier = 1f;
+    protected float slowRemain = 0f;
+    protected float stunRemain = 0f;
     public bool IsStunned => stunRemain > 0f;
     public bool IsAlive => isLive;
 
@@ -157,7 +161,7 @@ public class Enemy : MonoBehaviour
         }
 
         // 4) AttackHitbox / Shadow 는 graphics 밑에 있으므로
-        //    추가 보정(오프셋/위치) 하지 않는다.  ❌ (double flip 방지)
+        //    추가 보정(오프셋/위치) 하지 않는다. (double flip 방지)
         //    => 애니에서 설정한 offset/size 그대로 사용 + 부모 스케일로 자동 반전
     }
 
@@ -206,7 +210,7 @@ public class Enemy : MonoBehaviour
     }
 
     // ===== 공격 루틴 & 애니 이벤트 백업 =====
-    IEnumerator AttackRoutine()
+    protected virtual IEnumerator AttackRoutine()
     {
         isAttacking = true;
         lastAttackTime = Time.time;
@@ -248,8 +252,26 @@ public class Enemy : MonoBehaviour
     }
 
     // 애니메이션 이벤트용
-    public void AE_EnableHitbox() { if (attackHitbox) attackHitbox.enabled = true; }
-    public void AE_DisableHitbox() { if (attackHitbox) attackHitbox.enabled = false; }
+    public virtual void AE_FireProjectile()
+    {
+        if (!GameManager.instance?.player) return;
+
+        // 1) 발사 원점과 목표 방향
+        Vector3 origin = shootPivot ? shootPivot.position : transform.position;
+        Vector3 toPlayer = (GameManager.instance.player.transform.position - origin).normalized;
+
+        // 2) 풀에서 투사체 꺼내 배치
+        var go = GameManager.instance.pool.Get(PoolCategory.Projectile, projectilePoolIndex);
+        go.transform.position = origin;
+
+        // 3) 진행 방향 전달 → 투사체가 스스로 움직임
+        var proj = go.GetComponent<EnemyProjectile>();
+        if (proj) proj.Fire(toPlayer, "Fly");
+    }
+
+    // 애니메이션 이벤트용
+    public virtual void AE_EnableHitbox() { if (attackHitbox) attackHitbox.enabled = true; Debug.Log("히트박스 활성화됨!"); }
+    public virtual void AE_DisableHitbox() { if (attackHitbox) attackHitbox.enabled = false; Debug.Log("히트박스 비활성화됨!"); }
 
     void DropItems()
     {

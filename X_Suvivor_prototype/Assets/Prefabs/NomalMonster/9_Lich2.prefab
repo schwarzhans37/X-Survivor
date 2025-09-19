@@ -93,6 +93,37 @@ MonoBehaviour:
   damage: 1
   knockbackForce: 1
   attacker: {fileID: 0}
+--- !u!1 &3465669349817894291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8199492578935991343}
+  m_Layer: 6
+  m_Name: Shoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8199492578935991343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3465669349817894291}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: -0.14999998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5895647821695831295}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5528740575247767453
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +157,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7530697064711298199}
+  - {fileID: 8199492578935991343}
   m_Father: {fileID: 2761509116324445066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &619436514069484235
@@ -265,7 +297,7 @@ MonoBehaviour:
   maxHealth: 0
   monsterData: {fileID: 11400000, guid: 3ba379973477f7d428a410f44aadac39, type: 2}
   target: {fileID: 435859748036936648}
-  attackRange: 1.1
+  attackRange: 7
   attackCooldown: 1
   attackHitbox: {fileID: 8734567459728836789}
   graphics: {fileID: 5895647821695831295}
@@ -274,6 +306,8 @@ MonoBehaviour:
   bodyRightX: 0
   bodyLeftX: 0
   bodyY: 0
+  shootPivot: {fileID: 8199492578935991343}
+  projectilePoolIndex: 3
   graphicsBaseLocalPos: {x: 0, y: 0}
 --- !u!50 &435859748036936648
 Rigidbody2D:

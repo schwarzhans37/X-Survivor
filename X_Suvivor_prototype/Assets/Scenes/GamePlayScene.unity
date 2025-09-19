@@ -13345,7 +13345,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 4.55432
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -18394,6 +18394,11 @@ MonoBehaviour:
   - {fileID: 8603556273567077586, guid: 4348f9bd9fb65d74b8f53ebe72dbcef9, type: 3}
   - {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
   - {fileID: 8603556273567077586, guid: b8c748878cd45864db22ee214d1423b4, type: 3}
+  - {fileID: 3186317915084925538, guid: 592c4ce41b9ab3c4f96ce21882aef7b6, type: 3}
+  - {fileID: 8648201717169045297, guid: cd99f8064f91c70489dbac6409f340f8, type: 3}
+  - {fileID: 4377587479154669750, guid: 5e4e16863710ee84f901d205086926e7, type: 3}
+  - {fileID: 6789345883338771121, guid: 411bf34d2bec1584793b8e9b8473f596, type: 3}
+  - {fileID: 2466804144809045657, guid: 02559352a721dae40a6db21653c8d7bb, type: 3}
   normalMonsterPrefabs:
   - {fileID: 2701320078967796374, guid: b4cb9574361f0cc46a5c653f2ee41005, type: 3}
   - {fileID: 2719428963997641290, guid: 266d064aece5a61469275cb0989e9b59, type: 3}
