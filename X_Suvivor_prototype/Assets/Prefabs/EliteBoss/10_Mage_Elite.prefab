@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4cb520930c6b349bc3eaaccc0d9098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
 --- !u!1 &8804294624336814762
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,8 +383,8 @@ MonoBehaviour:
   maxHealth: 0
   monsterData: {fileID: 11400000, guid: 846151683613370469b0aed1a499b0ae, type: 2}
   target: {fileID: 825119429889463638}
-  attackRange: 5
-  attackCooldown: 1
+  attackRange: 8
+  attackCooldown: 4
   attackHitbox: {fileID: 1324305830468638266}
   graphics: {fileID: 2660786240810932236}
   shadow: {fileID: 2660786240810932236}

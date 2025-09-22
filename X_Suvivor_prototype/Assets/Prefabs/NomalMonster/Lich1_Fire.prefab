@@ -185,5 +185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   speed: 5
-  lifeTime: 20
+  lifeTime: 3.5
   knockback: 1
+  orientation: 1
