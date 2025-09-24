@@ -19,7 +19,22 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    public enum Sfx { Dead, Hit, LevelUp=3, Lose, Melee, Range=7, Select, Win }
+    public enum Sfx
+    {
+        Dead = 0,
+        Hit,            // Hit(0), Hit(1) → 변주 2장 붙일 거면 이렇게 연속 배치
+        LevelUp = 3,
+        Lose,
+        Melee = 5,      // Melee(5), Melee(6) → 변주 2장
+        Range = 7,
+        Select,
+        Win,
+
+        // --- UI & Gacha 추가 ---
+        UI_Click,
+        Gacha_Start,
+        Gacha_Result,
+    }
 
     void Awake()
     {

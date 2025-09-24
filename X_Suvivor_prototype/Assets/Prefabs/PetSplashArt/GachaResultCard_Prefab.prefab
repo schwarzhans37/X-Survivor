@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7707959733989820388}
   - component: {fileID: 71307524596092275}
   - component: {fileID: 6603836369108102804}
+  - component: {fileID: 1236148646621123505}
   m_Layer: 0
   m_Name: GachaResultCard_Prefab
   m_TagString: Untagged
@@ -58,3 +59,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splashArtSpawnPoint: {fileID: 7707959733989820388}
+--- !u!114 &1236148646621123505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3792716434580113113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3320dffd53ce00b4d86c826d04c786dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 3792716434580113113}
+  cardContainer: {fileID: 0}
+  preDelay: 0.15
+  revealInterval: 0.18
