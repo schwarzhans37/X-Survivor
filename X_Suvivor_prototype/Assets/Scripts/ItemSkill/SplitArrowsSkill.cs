@@ -13,6 +13,12 @@ public class SplitArrowsSkill : MonoBehaviour
     public float cooldownTimer;
     public LayerMask enemyMask;        // Enemy 레이어
 
+    [Header("SFX")]
+    public AudioClip startSfx;              // 사용 즉시 1회 재생
+    [Range(0.25f, 2f)] public float startSfxPitch = 1f;
+    [Range(0f, 1.5f)] public float startSfxVolume = 1f;
+
+
     bool casting;
 
     void Update()
@@ -39,6 +45,10 @@ public class SplitArrowsSkill : MonoBehaviour
     {
         casting = true;
         cooldownTimer = cooldown;
+
+        // ▶ 사용 순간 효과음
+        if (startSfx && AudioManager.instance)
+            AudioManager.instance.PlaySfx(startSfx, startSfxPitch, startSfxVolume);
 
         // 360도를 arrowCount로 균등 분할하여 발사
         Vector3 origin = transform.position;

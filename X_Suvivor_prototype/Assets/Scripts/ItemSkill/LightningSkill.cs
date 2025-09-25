@@ -24,6 +24,19 @@ public class LightningSkill : MonoBehaviour
     const float FX_SCALE_MULT = 6f;     // 실제 뇌격 애니메이션 크기
     const float DAMAGE_R_MULT = 3f;     // 실제 피해 반경 범위
 
+    // ===== 상단 필드에 추가 =====
+    [Header("SFX")]
+    public AudioClip strikeSfx;                               // 번개 1타 사운드
+    [Range(0.25f, 2f)] public float strikeSfxPitch = 1.2f;    // 살짝 빠르게
+    [Range(0f, 1.5f)] public float strikeSfxVolume = 1.0f;   // 0~1.5
+    [Tooltip("같은 소리가 과도하게 겹치는 것을 막는 최소 간격(초)")]
+    public float sfxMinInterval = 0.08f;                      // 짧은 중복 억제
+    [Tooltip("0이면 전체 재생, 0보다 크면 앞부분만 잘라 재생")]
+    public float strikeSfxMaxDuration = 0.35f;                // 긴 파일 앞부분만
+    private float _lastSfxTime;                               // 내부 타임스탬프
+
+
+
     bool casting;
 
     void Update()
@@ -65,6 +78,9 @@ public class LightningSkill : MonoBehaviour
 
                 // 2) 데미지/스턴 적용
                 ApplyAOE(hitPos);
+
+                // 3) 사운드
+                PlayStrikeSfx();
             }
 
             // 다음 타격까지 대기
@@ -112,6 +128,25 @@ public class LightningSkill : MonoBehaviour
             }
         }
     }
+
+    // ===== 헬퍼 함수 교체 =====
+    void PlayStrikeSfx()
+    {
+        if (!strikeSfx || AudioManager.instance == null) return;
+
+        // 중복 재생 억제
+        if (Time.time - _lastSfxTime < sfxMinInterval) return; // 너무 촘촘한 중복 억제
+        _lastSfxTime = Time.time;
+
+        // AudioManager의 AudioClip 오버로드 사용
+        AudioManager.instance.PlaySfx(
+            strikeSfx,
+            strikeSfxPitch,
+            strikeSfxVolume,
+            strikeSfxMaxDuration > 0f ? strikeSfxMaxDuration : -1f
+        );
+    }
+
 
     // 플레이어 기준 '가장 가까운' 적 찾기
     Enemy FindClosestEnemy()

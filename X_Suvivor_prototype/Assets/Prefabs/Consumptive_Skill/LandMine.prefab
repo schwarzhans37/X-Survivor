@@ -199,3 +199,6 @@ MonoBehaviour:
   explodeAnimDuration: 0.6
   visualScale: 0.8
   destroyAfterExplode: 1
+  explodeSfx: {fileID: 8300000, guid: 9c2b975c6769db349b3080e75de73fd1, type: 3}
+  explodeSfxPitch: 1
+  explodeSfxVolume: 1.2

@@ -8,47 +8,71 @@ using UnityEngine.UI;
 */
 public class GachaResultUI : MonoBehaviour
 {
+    [Header("UI")]
     public GameObject resultPanel;      // 결과창 전체 패널
-    public Transform cardContainer;     // GachaResultCard.cs 가 붙어있는 '카드' 프리팹
-    public GameObject resultCardPrefab; // 결과 카드 1개의 프리팹
+    public Transform cardContainer;     // 카드들이 들어갈 부모
+    public GameObject resultCardPrefab; // 결과 카드 1개 프리팹
     public Button closeButton;
+
+    [Header("Timing")]
+    public float preDelay = 0.15f;      // 시작음 후 살짝 텀
+    public float revealInterval = 0.18f; // 카드 간 텀
+
+    [Header("SFX")]
+    public bool playSfx = true;
+    public AudioManager.Sfx startSfx = AudioManager.Sfx.Gacha_Start;
+    public AudioManager.Sfx revealSfx = AudioManager.Sfx.Gacha_Result;
+    public AudioManager.Sfx closeSfx = AudioManager.Sfx.UI_Click; // 선택
 
     // GachaManager가 이 함수를 호출하여 결과창을 띄움
     public void ShowResults(List<GachaResult> results)
     {
         resultPanel.SetActive(true);
+        closeButton.gameObject.SetActive(false);
         StartCoroutine(ShowResultsRoutine(results));
     }
 
     private IEnumerator ShowResultsRoutine(List<GachaResult> results)
     {
-        // 기존 카드들 삭제
+        // 기존 카드들 정리
         foreach (Transform child in cardContainer)
-        {
             Destroy(child.gameObject);
-        }
 
-        // 10회 뽑기일 경우 "Skip" 버튼 활성화
-        // ...
-        yield return new WaitForSeconds(0.5f);
+        // 시작 효과음 1회
+        if (playSfx && AudioManager.instance != null)
+            AudioManager.instance.PlaySfx(startSfx);
 
-        // 각 결과를 하나씩 애니메이션과 함께 표시
-        foreach (var result in results)
+        // 살짝 텀
+        if (preDelay > 0f) yield return new WaitForSeconds(preDelay);
+
+        // 각 결과를 하나씩 표시
+        for (int i = 0; i < results.Count; i++)
         {
-            GameObject cardGO = Instantiate(resultCardPrefab, cardContainer);
-            // GachaResultCard 스크립트에 데이터 전달
-            cardGO.GetComponent<GachaResultCard>().Setup(result); 
+            var result = results[i];
 
-            // 카드 하나가 나타나는 연출 (예: 0.2초 대기)
-            yield return new WaitForSeconds(0.2f);
+            // 카드 생성 + 데이터 세팅
+            GameObject cardGO = Instantiate(resultCardPrefab, cardContainer);
+            var card = cardGO.GetComponent<GachaResultCard>();
+            if (card != null) card.Setup(result);
+
+            // 카드 등장 타이밍에 결과음
+            if (playSfx && AudioManager.instance != null)
+                AudioManager.instance.PlaySfx(revealSfx);
+
+            // 다음 카드까지 텀
+            if (i < results.Count - 1 && revealInterval > 0f)
+                yield return new WaitForSeconds(revealInterval);
         }
 
-        // 모든 카드가 나온 후 닫기 버튼 활성화
+        // 전부 나온 뒤 닫기 버튼 활성화
         closeButton.gameObject.SetActive(true);
     }
 
     public void CloseResultPanel()
     {
+        if (playSfx && AudioManager.instance != null)
+            AudioManager.instance.PlaySfx(closeSfx); // 선택
+
         resultPanel.SetActive(false);
     }
 }

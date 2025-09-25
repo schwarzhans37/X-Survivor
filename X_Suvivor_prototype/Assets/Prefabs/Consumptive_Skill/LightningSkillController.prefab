@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 12
+  cooldownTimer: 0
   strikeCount: 5
   strikeInterval: 0.5
   enemyMask:
@@ -56,3 +57,8 @@ MonoBehaviour:
   lightningFxPrefab: {fileID: 1898655292594457388, guid: 29c1e3c9a9a25034e9a343e09defcab1, type: 3}
   fxLifetime: 0.8
   scaleFxToRadius: 1
+  strikeSfx: {fileID: 8300000, guid: ebfca60891622d044838c0cc9a433d25, type: 3}
+  strikeSfxPitch: 1.2
+  strikeSfxVolume: 1
+  sfxMinInterval: 0.03
+  strikeSfxMaxDuration: 0.35
