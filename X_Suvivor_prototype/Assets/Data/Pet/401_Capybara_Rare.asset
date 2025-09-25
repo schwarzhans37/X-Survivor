@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
-  m_Name: 303_Rabbit_Unique
+  m_Name: 401_Capybara_Rare
   m_EditorClassIdentifier: 
-  id: 303
-  petName: "\uD1A0\uB07C(\uC720\uB2C8\uD06C)"
-  petType: "\uD1A0\uB07C"
-  grade: "\uC720\uB2C8\uD06C"
-  petIcon: {fileID: 21300000, guid: 8ced4d2a64e71bd448a32197db6186bf, type: 3}
+  id: 401
+  petName: "\uCE74\uD53C\uBC14\uB77C(\uB808\uC5B4)"
+  petType: "\uCE74\uD53C\uBC14\uB77C"
+  grade: "\uB808\uC5B4"
+  petIcon: {fileID: 21300000, guid: 3a6be24854c2d544b9df5468f0e54f40, type: 3}
   petSlot: {fileID: 0}
-  inGamePrefab: {fileID: 1448656011933182545, guid: bb0c830dde2b6b64aad18d76aab365f7, type: 3}
+  inGamePrefab: {fileID: 1448656011933182545, guid: a4ed4015e72cf1b489982bde392b35e5, type: 3}
   splashArtPrefab: {fileID: 0}
   buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
   hasSkill: 0
