@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
-  m_Name: 303_Rabbit_Unique
+  m_Name: 503_Panda_Unique
   m_EditorClassIdentifier: 
-  id: 303
-  petName: "\uD1A0\uB07C(\uC720\uB2C8\uD06C)"
-  petType: "\uD1A0\uB07C"
+  id: 503
+  petName: "\uD310\uB2E4(\uC720\uB2C8\uD06C)"
+  petType: "\uD310\uB2E4"
   grade: "\uC720\uB2C8\uD06C"
-  petIcon: {fileID: 21300000, guid: 8ced4d2a64e71bd448a32197db6186bf, type: 3}
+  petIcon: {fileID: 21300000, guid: c36f250d8970be04ab10f8338b2d0988, type: 3}
   petSlot: {fileID: 0}
-  inGamePrefab: {fileID: 1448656011933182545, guid: bb0c830dde2b6b64aad18d76aab365f7, type: 3}
+  inGamePrefab: {fileID: 1448656011933182545, guid: accd09bcfd7a4734a8212319fed84fce, type: 3}
   splashArtPrefab: {fileID: 0}
   buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
   hasSkill: 0

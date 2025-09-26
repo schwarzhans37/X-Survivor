@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
   m_Name: 304_Rabbit_Legendary
   m_EditorClassIdentifier: 
-  id: 104
+  id: 304
   petName: "\uD1A0\uB07C(\uB808\uC804\uB354\uB9AC)"
   petType: "\uD1A0\uB07C"
   grade: "\uB808\uC804\uB354\uB9AC"
