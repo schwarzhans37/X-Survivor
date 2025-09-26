@@ -138,13 +138,7 @@ public class LightningSkill : MonoBehaviour
         if (Time.time - _lastSfxTime < sfxMinInterval) return; // 너무 촘촘한 중복 억제
         _lastSfxTime = Time.time;
 
-        // AudioManager의 AudioClip 오버로드 사용
-        AudioManager.instance.PlaySfx(
-            strikeSfx,
-            strikeSfxPitch,
-            strikeSfxVolume,
-            strikeSfxMaxDuration > 0f ? strikeSfxMaxDuration : -1f
-        );
+        AudioManager.instance.PlaySfx("Lightning");
     }
 
 

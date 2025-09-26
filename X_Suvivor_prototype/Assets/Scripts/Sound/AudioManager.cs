@@ -1,134 +1,160 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    [Header("# BGM")]
-    public AudioClip bgmClip;
-    [Range(0f, 1f)] public float bgmVolume = 0.5f;
+    [Header("# 컴포넌트")]
     AudioSource bgmPlayer;
-    AudioHighPassFilter bgmEffect; // optional FX on main camera
-
-    [Header("# SFX")]
-    public AudioClip[] sfxClips;
-    [Range(0f, 1f)] public float sfxVolume = 0.8f;
-    [Min(1)] public int channels = 16;
+    AudioHighPassFilter bgmEffect;
     AudioSource[] sfxPlayers;
+
+    [Header("# 볼륨설정")]
+    [Range(0f, 1f)] public float masterVolume = 1f;
+    [Range(0f, 1f)] public float bgmVolume = 0.5f;
+    [Range(0f, 1f)] public float sfxVolume = 0.8f;
+
+    [Header("# 효과음 설정")]
+    [Min(1)] public int channels = 16;
     int channelIndex;
 
-    public enum Sfx
-    {
-        Dead = 0,
-        Hit,            // Hit0, Hit1 (연속 인덱스 전제)
-        LevelUp = 3,
-        Lose,
-        Melee = 5,      // Melee0, Melee1 (연속 인덱스 전제)
-        Range = 7,
-        Select,
-        Win,
-
-        // UI & Gacha
-        UI_Click,
-        Gacha_Start,
-        Gacha_Result,
-    }
+    // 현재 로드된 사운드 데이터와 빠른 조회를 위한 딕셔너리
+    private SoundData currentSoundData;
+    private Dictionary<string, AudioClip> soundBank;
 
     void Awake()
     {
         if (instance != null && instance != this)
         {
-            Destroy(gameObject);   // 중복 방지
+            Destroy(gameObject);
             return;
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
 
+        // 오디오 플레이어들 초기 생성
         Init();
     }
 
     void Init()
     {
-        // --- BGM Source ---
+        // --- BGM 데이터 ---
         var bgmObject = new GameObject("BgmPlayer");
         bgmObject.transform.SetParent(transform, false);
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
-        bgmPlayer.volume = bgmVolume;
-        bgmPlayer.clip = bgmClip;
 
-        // 메인 카메라가 없을 수도 있으므로 널 가드
+        // 메인 카메라가 없을 경우를 대비한 Null 방지
         bgmEffect = Camera.main ? Camera.main.GetComponent<AudioHighPassFilter>() : null;
 
-        // --- SFX Sources (채널 풀) ---
-        var sfxObject = new GameObject("SfxPlayers");
-        sfxObject.transform.SetParent(transform, false);
+        // --- SFX 데이터 (채널 풀) ---
+        var sfxObejct = new GameObject("SfxPlayers");
+        sfxObejct.transform.SetParent(transform, false);
         sfxPlayers = new AudioSource[Mathf.Max(1, channels)];
 
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
-            var src = sfxObject.AddComponent<AudioSource>();
+            var src = sfxObejct.AddComponent<AudioSource>();
             src.playOnAwake = false;
             src.bypassListenerEffects = true;
-            src.volume = sfxVolume;
-            src.spatialBlend = 0f; // 2D
             sfxPlayers[i] = src;
         }
     }
 
-    // ---------------- BGM ----------------
-
-    public void PlayBgm(bool isPlay)
+    // 새로운 SoundData 에셋을 로드하고 해당 씬의 BGM을 재생
+    public void LoadAndPlaySceneSounds(SoundData soundData)
     {
-        if (!bgmPlayer) return;
-        if (isPlay) bgmPlayer.Play();
-        else bgmPlayer.Stop();
+        if (soundData == null)
+        {
+            Debug.LogWarning("로드할 SoundData가 없습니다.");
+            return;
+        }
+
+        currentSoundData = soundData;
+        soundBank = new Dictionary<string, AudioClip>();
+        foreach (var sound in currentSoundData.sounds)
+        {
+            if (!soundBank.ContainsKey(sound.name))
+            {
+                soundBank.Add(sound.name, sound.clip);
+            }
+        }
+
+        // BGM 자동 재생 (SoundData에 "BGM"이라는 이름의 클립이 있다면)
+        if (soundBank.ContainsKey("BGM"))
+        {
+            AudioClip newBgmClip = soundBank["BGM"];
+            // BGM이 바뀌었을 경우에만 새로 재생
+            if (newBgmClip != null && bgmPlayer.clip != newBgmClip)
+            {
+                bgmPlayer.clip = newBgmClip;
+                bgmPlayer.volume = masterVolume * bgmVolume;
+                bgmPlayer.Play();
+            }
+            // 새 씬의 BGM이 없다면 기존 BGM 정지
+            else if (newBgmClip == null)
+            {
+                bgmPlayer.Stop();
+            }
+        }
+        else
+        {
+            bgmPlayer.Stop(); // "BGM" 키가 없으면 일단 정지
+        }
     }
 
-    public void PlayBgm(AudioClip clip, float volume = 1f, bool loop = true)
+    public void StopBgm()
     {
-        if (!bgmPlayer) return;
-        if (clip == null) { bgmPlayer.Stop(); return; }
-        bgmPlayer.clip = clip;
-        bgmPlayer.volume = Mathf.Clamp01(volume);
-        bgmPlayer.loop = loop;
-        bgmPlayer.Play();
+        if (bgmPlayer != null) bgmPlayer.Stop();
     }
 
     public void EffectBgm(bool isPlay)
     {
-        if (bgmEffect) bgmEffect.enabled = isPlay;
+        if (bgmEffect != null) bgmEffect.enabled = isPlay;
     }
 
-    // ---------------- SFX ----------------
-
-    // 1) enum 기반 재생
-    public void PlaySfx(Sfx sfx)
+    public void PlaySfx(string sfxName)
     {
+        if (soundBank == null) return;
+
+        // "Hit", "Melee" 같은 이름을 받으면 "Hit0", "Hit1" 등으로 랜덤 재생 처리
+        string clipName = sfxName;
+        if (sfxName == "Hit" || sfxName == "Melee")
+        {
+            clipName = sfxName + Random.Range(0, 2);
+        }
+
+        if (!soundBank.ContainsKey(clipName))
+        {
+            Debug.LogWarning("SoundBank에서 Sfx를 찾을 수 없습니다: " + clipName);
+            return;
+        }
+
+        AudioClip clip = soundBank[clipName];
+        if (clip == null) return;
+
+        // 비어있는 채널을 순환하며 찾아 재생
         for (int i = 0; i < sfxPlayers.Length; i++)
         {
             int idx = (i + channelIndex) % sfxPlayers.Length;
             var src = sfxPlayers[idx];
             if (src.isPlaying) continue;
 
-            int ran = (sfx == Sfx.Hit || sfx == Sfx.Melee) ? Random.Range(0, 2) : 0;
-            int clipIndex = (int)sfx + ran;
-            if (clipIndex < 0 || clipIndex >= sfxClips.Length) return;
-
             channelIndex = idx;
+            src.clip = clip;
+            src.volume = masterVolume * sfxVolume;
             src.pitch = 1f;
-            src.volume = sfxVolume;          // 전역 SFX 볼륨 반영
-            src.clip = sfxClips[clipIndex];
             src.Play();
             break;
         }
     }
 
-    // 2) AudioClip 직접 재생 (스킬/임시 SFX용)
-    //    예) AudioManager.instance.PlaySfx(clip, 1.1f, 0.9f, 0.35f);
-    public void PlaySfx(AudioClip clip, float pitch = 1f, float volumeScale = 1f, float maxDuration = -1f)
+    // AudioClip을 직접 받아 재생하는 버전 (임시 효과음 등에 유용)
+    public void PlaySfx(AudioClip clip)
     {
         if (clip == null) return;
 
@@ -139,41 +165,11 @@ public class AudioManager : MonoBehaviour
             if (src.isPlaying) continue;
 
             channelIndex = idx;
-            src.pitch = pitch;
-            src.volume = Mathf.Clamp01(sfxVolume * volumeScale);
             src.clip = clip;
+            src.volume = masterVolume * sfxVolume;
+            src.pitch = 1f;
             src.Play();
-
-            if (maxDuration > 0f)
-                StartCoroutine(StopAfter(src, clip, maxDuration));
-
             break;
         }
-    }
-
-    // 안전 가드: 같은 채널이 다른 소리를 재생 중이면 건드리지 않음
-    IEnumerator StopAfter(AudioSource src, AudioClip clip, float t)
-    {
-        yield return new WaitForSeconds(t);
-        if (src && src.isPlaying && src.clip == clip) src.Stop();
-    }
-
-    // 필요하면 위치 기반(현재는 2D 믹싱이므로 전역 출력; 3D 필요 시 spatialBlend=1 사용)
-    public void PlaySfxAt(AudioClip clip, Vector3 worldPos, float pitch = 1f, float volumeScale = 1f, float maxDuration = -1f)
-    {
-        PlaySfx(clip, pitch, volumeScale, maxDuration); // 2D 게임이면 전역 재생으로 충분
-    }
-
-    // 볼륨 변경(옵션)
-    public void SetSfxVolume(float v)
-    {
-        sfxVolume = Mathf.Clamp01(v);
-        foreach (var src in sfxPlayers) if (src) src.volume = sfxVolume;
-    }
-
-    public void SetBgmVolume(float v)
-    {
-        bgmVolume = Mathf.Clamp01(v);
-        if (bgmPlayer) bgmPlayer.volume = bgmVolume;
     }
 }

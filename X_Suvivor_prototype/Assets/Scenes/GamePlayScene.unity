@@ -12784,6 +12784,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b2dee6c27d4bd0240b5815fdcff1b813, type: 2}
   - {fileID: 11400000, guid: 501416ec2bd07a84da40ea9df6703c8f, type: 2}
   killsForNextChest: 100
+  gamePlaySoundData: {fileID: 11400000, guid: 0d22e08796af0d141a73881968b4d8b3, type: 2}
 --- !u!4 &492052613
 Transform:
   m_ObjectHideFlags: 0

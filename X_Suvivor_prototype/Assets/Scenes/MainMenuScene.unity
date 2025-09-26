@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!114 &30813923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!114 &36307726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,7 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &55754989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &172851983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,7 +1502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &186781508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,7 +2690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &362264297
 GameObject:
   m_ObjectHideFlags: 0
@@ -3562,7 +3562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &576407715
 GameObject:
   m_ObjectHideFlags: 0
@@ -3859,7 +3859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &644311123
 GameObject:
   m_ObjectHideFlags: 0
@@ -3950,9 +3950,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76932bb57b565fb4a84bbd013caab5be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resultSlots: []
-  preDelay: 0.15
-  betweenDelay: 0.18
 --- !u!1 &678375886
 GameObject:
   m_ObjectHideFlags: 0
@@ -4292,7 +4289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &753882821
 GameObject:
   m_ObjectHideFlags: 0
@@ -4503,7 +4500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &782784355
 GameObject:
   m_ObjectHideFlags: 0
@@ -5325,7 +5322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &972506393
 GameObject:
   m_ObjectHideFlags: 0
@@ -5503,7 +5500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &982672741
 GameObject:
   m_ObjectHideFlags: 0
@@ -5948,7 +5945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!114 &1039818987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6653,7 +6650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!114 &1251718708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7353,7 +7350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &1332815287
 GameObject:
   m_ObjectHideFlags: 0
@@ -7572,7 +7569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &1353685644
 GameObject:
   m_ObjectHideFlags: 0
@@ -8458,7 +8455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &1567752889
 GameObject:
   m_ObjectHideFlags: 0
@@ -8838,7 +8835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &1616358174
 GameObject:
   m_ObjectHideFlags: 0
@@ -9254,7 +9251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &1631468900
 GameObject:
   m_ObjectHideFlags: 0
@@ -9544,7 +9541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playSfx: 1
-  clickSfx: 10
+  clickSfxName: ButtonClick
 --- !u!1 &1708440393
 GameObject:
   m_ObjectHideFlags: 0
@@ -9807,7 +9804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &1767530142
 GameObject:
   m_ObjectHideFlags: 0
@@ -9998,7 +9995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!114 &1806619679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10321,9 +10318,9 @@ MonoBehaviour:
   preDelay: 0.15
   revealInterval: 0.18
   playSfx: 1
-  startSfx: 11
-  revealSfx: 12
-  closeSfx: 10
+  startSfxName: GachaStart
+  revealSfxName: GachaResult
+  closeSfxName: ButtonClick
 --- !u!114 &1831437473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10336,7 +10333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!114 &1831437474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10514,6 +10511,7 @@ MonoBehaviour:
   Gacha_Panel: {fileID: 40697924}
   PetSelect_Panel: {fileID: 36307718}
   petSelectionUI: {fileID: 36307724}
+  mainMenuSoundData: {fileID: 11400000, guid: 2c16b90a6560c874d87a69e84d75184f, type: 2}
 --- !u!1 &1900299398
 GameObject:
   m_ObjectHideFlags: 0
@@ -10669,7 +10667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &1901824974
 GameObject:
   m_ObjectHideFlags: 0
@@ -11659,7 +11657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!1 &2118563035
 GameObject:
   m_ObjectHideFlags: 0
@@ -11919,7 +11917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onClick: 10
+  sfxName: ButtonClick
 --- !u!114 &2132180484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11964,6 +11962,54 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &818608959414539452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1646170582126253057}
+  - component: {fileID: 5647076225271293588}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1646170582126253057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818608959414539452}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5647076225271293588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818608959414539452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b0cfa838ce09b49bffde65557ccf10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolume: 1
+  bgmVolume: 0.2
+  sfxVolume: 0.5
+  channels: 16
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -11977,3 +12023,4 @@ SceneRoots:
   - {fileID: 972506394}
   - {fileID: 1413352397}
   - {fileID: 1823663120}
+  - {fileID: 1646170582126253057}

@@ -61,6 +61,6 @@ public class Shotgun : WeaponBase
         }
 
         // 7. 사운드 재생
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
+        AudioManager.instance.PlaySfx("Range");
     }
 }

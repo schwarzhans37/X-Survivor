@@ -41,6 +41,6 @@ public class Projectile : WeaponBase
         bulletTransform.GetComponent<Bullet>().Init(currentDamage, currentPenetration, currentProjectileSpeed, dir);
 
         // 6. 사운드 재생
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
+        AudioManager.instance.PlaySfx("Range");
     }
 }

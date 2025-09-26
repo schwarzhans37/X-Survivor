@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [DisallowMultipleComponent]
 public class UIButtonSfx : MonoBehaviour
 {
-    [SerializeField] public AudioManager.Sfx onClick = AudioManager.Sfx.UI_Click;
+    [SerializeField] public string sfxName = "ButtonClick";
 
     void Awake()
     {
@@ -16,6 +16,6 @@ public class UIButtonSfx : MonoBehaviour
     void OnClick()
     {
         if (AudioManager.instance != null)
-            AudioManager.instance.PlaySfx(onClick);
+            AudioManager.instance.PlaySfx(sfxName);
     }
 }

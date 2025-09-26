@@ -20,9 +20,9 @@ public class GachaResultUI : MonoBehaviour
 
     [Header("SFX")]
     public bool playSfx = true;
-    public AudioManager.Sfx startSfx = AudioManager.Sfx.Gacha_Start;
-    public AudioManager.Sfx revealSfx = AudioManager.Sfx.Gacha_Result;
-    public AudioManager.Sfx closeSfx = AudioManager.Sfx.UI_Click; // 선택
+    public string startSfxName = "GachaStart";
+    public string revealSfxName = "GachaResult";
+    public string closeSfxName = "ButtonClick";
 
     // GachaManager가 이 함수를 호출하여 결과창을 띄움
     public void ShowResults(List<GachaResult> results)
@@ -40,7 +40,7 @@ public class GachaResultUI : MonoBehaviour
 
         // 시작 효과음 1회
         if (playSfx && AudioManager.instance != null)
-            AudioManager.instance.PlaySfx(startSfx);
+            AudioManager.instance.PlaySfx(startSfxName);
 
         // 살짝 텀
         if (preDelay > 0f) yield return new WaitForSeconds(preDelay);
@@ -57,7 +57,7 @@ public class GachaResultUI : MonoBehaviour
 
             // 카드 등장 타이밍에 결과음
             if (playSfx && AudioManager.instance != null)
-                AudioManager.instance.PlaySfx(revealSfx);
+                AudioManager.instance.PlaySfx(revealSfxName);
 
             // 다음 카드까지 텀
             if (i < results.Count - 1 && revealInterval > 0f)
@@ -71,7 +71,7 @@ public class GachaResultUI : MonoBehaviour
     public void CloseResultPanel()
     {
         if (playSfx && AudioManager.instance != null)
-            AudioManager.instance.PlaySfx(closeSfx); // 선택
+            AudioManager.instance.PlaySfx(closeSfxName); // 선택
 
         resultPanel.SetActive(false);
     }

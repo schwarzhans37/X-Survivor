@@ -201,7 +201,7 @@ public class Enemy : MonoBehaviour
         if (health > 0)
         {
             if (anim) anim.SetTrigger("Hit");
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+            AudioManager.instance.PlaySfx("Hit");
         }
         else
         {
@@ -325,7 +325,7 @@ public class Enemy : MonoBehaviour
         if (health > 0)
         {
             if (anim) anim.SetTrigger("Hit");
-            if (GameManager.instance.isLive) AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+            if (GameManager.instance.isLive) AudioManager.instance.PlaySfx("Hit");
         }
         else
         {
@@ -374,7 +374,7 @@ public class Enemy : MonoBehaviour
             GameManager.instance.NotifyBossDefeated();
 
         if (GameManager.instance.isLive)
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+            AudioManager.instance.PlaySfx("Dead");
 
         // Death 끝에서 Dead()를 애니메이션 이벤트/SMB로 호출하길 권장
         // 필요시 코루틴으로 딜레이 후 Dead() 호출해도 됨

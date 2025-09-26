@@ -48,7 +48,7 @@ public class SplitArrowsSkill : MonoBehaviour
 
         // ▶ 사용 순간 효과음
         if (startSfx && AudioManager.instance)
-            AudioManager.instance.PlaySfx(startSfx, startSfxPitch, startSfxVolume);
+            AudioManager.instance.PlaySfx("SplitArrow");
 
         // 360도를 arrowCount로 균등 분할하여 발사
         Vector3 origin = transform.position;

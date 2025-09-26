@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     public int killsForNextChest = 100;    // 상자 스폰용 킬 카운트 간격
     private int currentKillThreshold;   // 다음 상자가 스폰될 목표 킬 카운트
 
+    [Header("# 사운드 데이터")]
+    [SerializeField] private SoundData gamePlaySoundData;
+
     public event Action<Enemy> OnBossSpawned;
     public event Action OnBossDefeated;
 
@@ -55,6 +58,11 @@ public class GameManager : MonoBehaviour
     // PlayerDataManager로부터 선택 정보를 가져와 게임을 시작
     void Start()
     {
+        if (AudioManager.instance != null && gamePlaySoundData != null)
+        {
+            AudioManager.instance.LoadAndPlaySceneSounds(gamePlaySoundData);
+        }
+
         int charId = PlayerDataManager.instance.playerData.selectedCharacterId;
         Debug.Log($"[GameManager] PlayerDataManager로부터 가져온 캐릭터 ID: {charId}"); // <--- 확인용 로그 추가
         int petId = PlayerDataManager.instance.playerData.selectedPetId;
@@ -119,8 +127,7 @@ public class GameManager : MonoBehaviour
         // 5. UI 및 게임 상태 설정
         //uiLevelUo.Select(playerId % 2);
         Resume();
-        AudioManager.instance.PlayBgm(true);
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.instance.PlaySfx("Select");
     }
 
     public void GameVictory()
@@ -142,8 +149,8 @@ public class GameManager : MonoBehaviour
         uiResult.Win();
         Stop();
 
-        AudioManager.instance.PlayBgm(false);
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
+        AudioManager.instance.StopBgm();
+        AudioManager.instance.PlaySfx("Win");
     }
 
     public void GameOver()
@@ -164,8 +171,8 @@ public class GameManager : MonoBehaviour
         uiResult.Lose();
         Stop();
 
-        AudioManager.instance.PlayBgm(false);
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
+        AudioManager.instance.StopBgm();
+        AudioManager.instance.PlaySfx("Lose");
     }
 
     public void GameRetry()
@@ -307,6 +314,7 @@ public class GameManager : MonoBehaviour
     public void ExitToMainMenu()
     {
         Time.timeScale = 1;
+        AudioManager.instance.StopBgm();
         SceneManager.LoadScene("MainMenuScene");
     }
 }

@@ -67,7 +67,7 @@ public class MagneticFieldSkill : MonoBehaviour
 
         // ▶ 사용 순간 효과음
         if (startSfx && AudioManager.instance)
-            AudioManager.instance.PlaySfx(startSfx, startSfxPitch, startSfxVolume);
+            AudioManager.instance.PlaySfx("Magnetic");
 
         // 오라 생성
         var aura = Instantiate(auraPrefab, transform.position, Quaternion.identity, transform);

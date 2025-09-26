@@ -21,6 +21,9 @@ public class MenuManager : MonoBehaviour
     public GameObject PetSelect_Panel;     // 펫 선택 패널
     public PetSelectionUI petSelectionUI;
 
+    [Header("사운드 데이터")]
+    [SerializeField] private SoundData mainMenuSoundData;
+
     void Awake()
     {
         // ===== 싱글톤 초기화 =====
@@ -37,8 +40,12 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
+        if (AudioManager.instance != null && mainMenuSoundData != null)
+        {
+            AudioManager.instance.LoadAndPlaySceneSounds(mainMenuSoundData);
+        }
         // 게임 시작 시 메인 메뉴(Menu1_panel)만 보이도록
-        ShowMainMenu();
+            ShowMainMenu();
     }
 
     private void ShowMainMenu()

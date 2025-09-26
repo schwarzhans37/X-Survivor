@@ -95,7 +95,7 @@ public class LandMine : MonoBehaviour
 
         // ---- SFX : 폭발 직전에 한 번 ----
         if (AudioManager.instance)
-            AudioManager.instance.PlaySfx(explodeSfx, explodeSfxPitch, explodeSfxVolume);
+            AudioManager.instance.PlaySfx("Bomb");
 
         // ===== 폭발 비주얼: Animator 복제 후 폭발 반경에 정확히 맞는 스케일 =====
         if (animator != null)
