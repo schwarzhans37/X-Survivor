@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 10
   cooldown: 15
+  cooldownTimer: 0
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
@@ -57,3 +58,6 @@ MonoBehaviour:
   tickInterval: 0.5
   slowPercent: 0.5
   slowDuration: 0.6
+  startSfx: {fileID: 8300000, guid: c13b71b4cf3ed01409dfaeee899bd745, type: 3}
+  startSfxPitch: 1
+  startSfxVolume: 0.85

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9214629934540291862}
   - component: {fileID: 4395169034665449353}
   - component: {fileID: 3969807975598019177}
+  - component: {fileID: -4225604145918678170}
   m_Layer: 5
   m_Name: PetSlot_Prefab
   m_TagString: Untagged
@@ -147,3 +148,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   petIcon: {fileID: 9214629934540291862}
   selectButton: {fileID: 4395169034665449353}
+--- !u!114 &-4225604145918678170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8679945823762406759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e707c5e43413b964d98c358bb6b7fb03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onClick: 10

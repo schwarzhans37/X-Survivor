@@ -24,6 +24,11 @@ public class LandMine : MonoBehaviour
     [Header("기타")]
     public bool destroyAfterExplode = true; // 폭발 후 이 오브젝트를 파괴할지(false면 SetActive(false))
 
+    [Header("SFX")]
+    public AudioClip explodeSfx;   // ← 폭발 사운드(프로젝트의 Bomb_Sound를 드래그)
+    [Range(0.25f, 2f)] public float explodeSfxPitch = 1f;
+    [Range(0f, 1.5f)] public float explodeSfxVolume = 1f;
+
     private bool armed = false;             // true가 되기 전에는 감지/폭발 안 함(자기 발동 방지)
     private bool exploding = false;         // 중복 폭발 방지 플래그
     bool scheduled = false;                 // 지연 폭발 예약 여부(중복 예약 방지)
@@ -87,6 +92,10 @@ public class LandMine : MonoBehaviour
     {
         if (exploding) return;
         exploding = true;
+
+        // ---- SFX : 폭발 직전에 한 번 ----
+        if (AudioManager.instance)
+            AudioManager.instance.PlaySfx(explodeSfx, explodeSfxPitch, explodeSfxVolume);
 
         // ===== 폭발 비주얼: Animator 복제 후 폭발 반경에 정확히 맞는 스케일 =====
         if (animator != null)

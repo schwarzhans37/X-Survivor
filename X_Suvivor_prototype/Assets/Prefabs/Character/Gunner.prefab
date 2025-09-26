@@ -383,6 +383,7 @@ MonoBehaviour:
   distance: 3
   duration: 0.2
   cooldown: 8
+  dodgeUI: {fileID: 0}
 --- !u!114 &-3835215629224337210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,6 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 6
+  cooldownTimer: 0
   minePrefab: {fileID: 4109112691387933910, guid: 2005293c9c7c60b4dac94c31d0b3a7b3, type: 3}
   maxActiveMines: 3
   placeOffset: 0.1
@@ -481,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 6
   cooldown: 10
+  cooldownTimer: 0
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
@@ -505,6 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 12
+  cooldownTimer: 0
   strikeCount: 5
   strikeInterval: 0.5
   enemyMask:
@@ -534,6 +538,7 @@ MonoBehaviour:
   damage: 40
   duration: 6
   cooldown: 10
+  cooldownTimer: 0
   enemyMask:
     serializedVersion: 2
     m_Bits: 64

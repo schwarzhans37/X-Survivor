@@ -21,6 +21,11 @@ public class MagneticFieldSkill : MonoBehaviour
     public float slowPercent = 0.5f;     // 0.5 = 50% 감속
     public float slowDuration = 0.6f;    // 슬로우 유지 시간(틱마다 갱신됨)
 
+    [Header("SFX")]
+    public AudioClip startSfx;          // 사용 즉시 1회 재생
+    [Range(0.25f, 2f)] public float startSfxPitch = 1f;
+    [Range(0f, 1.5f)] public float startSfxVolume = 1f;
+
     // 내부 상태
     bool active = false;
 
@@ -59,6 +64,10 @@ public class MagneticFieldSkill : MonoBehaviour
     {
         active = true;
         cooldownTimer = cooldown;
+
+        // ▶ 사용 순간 효과음
+        if (startSfx && AudioManager.instance)
+            AudioManager.instance.PlaySfx(startSfx, startSfxPitch, startSfxVolume);
 
         // 오라 생성
         var aura = Instantiate(auraPrefab, transform.position, Quaternion.identity, transform);
