@@ -261,7 +261,7 @@ public class Enemy : MonoBehaviour
         Vector3 toPlayer = (GameManager.instance.player.transform.position - origin).normalized;
 
         // 2) 풀에서 투사체 꺼내 배치
-        var go = GameManager.instance.pool.Get(PoolCategory.Projectile, projectilePoolIndex);
+        var go = GameManager.instance.pool.Get(PoolManager.PoolCategory.Projectile, projectilePoolIndex);
         go.transform.position = origin;
 
         // 3) 진행 방향 전달 → 투사체가 스스로 움직임
@@ -287,7 +287,7 @@ public class Enemy : MonoBehaviour
 
         for (int i = 0; i < expOrbCount; i++)
         {
-            GameObject item = GameManager.instance.pool.Get(PoolCategory.Item, expPoolIndex);
+            GameObject item = GameManager.instance.pool.Get(PoolManager.PoolCategory.Item, expPoolIndex);
             item.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
         }
 
@@ -298,7 +298,7 @@ public class Enemy : MonoBehaviour
                 int amount = Random.Range(itemToDrop.minAmount, itemToDrop.maxAmount + 1);
                 for (int i = 0; i < amount; i++)
                 {
-                    GameObject item = GameManager.instance.pool.Get(PoolCategory.Item, itemToDrop.itemPoolIndex);
+                    GameObject item = GameManager.instance.pool.Get(PoolManager.PoolCategory.Item, itemToDrop.itemPoolIndex);
                     item.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
                 }
             }

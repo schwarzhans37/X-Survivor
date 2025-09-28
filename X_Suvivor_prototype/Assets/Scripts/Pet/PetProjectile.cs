@@ -5,7 +5,7 @@ using UnityEngine;
 public class PetProjectile : MonoBehaviour
 {
     [Header("투사체 능력치")]
-    private float speed;
+    public float speed;
     private float damage;
     private float maxDistance; // 이 투사체가 날아갈 수 있는 최대 거리
     private Transform target;

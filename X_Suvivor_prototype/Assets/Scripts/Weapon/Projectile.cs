@@ -33,7 +33,7 @@ public class Projectile : WeaponBase
         Vector2 dir = (worldMousePos - transform.position).normalized;
 
         // 4. 오브젝트 풀에서 투사체를 가져옴
-        Transform bulletTransform = GameManager.instance.pool.Get(PoolCategory.Projectile, weaponData.PoolManagerIndex).transform;
+        Transform bulletTransform = GameManager.instance.pool.Get(PoolManager.PoolCategory.Projectile, weaponData.PoolManagerIndex).transform;
         bulletTransform.position = transform.position;
         bulletTransform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
 

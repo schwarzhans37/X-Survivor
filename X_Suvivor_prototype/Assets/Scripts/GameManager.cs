@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
 
     void SpawnTreasureChest()
     {
-        GameObject chest = pool.Get(PoolCategory.Item, 5);
+        GameObject chest = pool.Get(PoolManager.PoolCategory.Item, 5);
 
         Vector3 playerPos = player.transform.position;
         float spawnRadius = 5.0f;

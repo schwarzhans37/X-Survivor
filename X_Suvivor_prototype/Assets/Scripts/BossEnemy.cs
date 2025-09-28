@@ -186,7 +186,7 @@ public class BossEnemy : Enemy
 
     void SpawnProjectile(Vector3 origin, Vector2 dir, int poolIndex, string animName)
     {
-        var go = GameManager.instance.pool.Get(PoolCategory.Projectile, poolIndex);
+        var go = GameManager.instance.pool.Get(PoolManager.PoolCategory.Projectile, poolIndex);
         go.transform.position = origin;
         go.transform.rotation = Quaternion.identity; // 그래픽 회전은 EnemyProjectile이 처리
 

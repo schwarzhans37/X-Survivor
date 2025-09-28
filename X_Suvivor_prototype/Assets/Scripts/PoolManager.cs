@@ -11,6 +11,7 @@ public class PoolManager : MonoBehaviour
     public GameObject[] normalMonsterPrefabs;    // 일반 몬스터
     public GameObject[] eliteMonsterPrefabs;    // 엘리트 몬스터
     public GameObject[] bossMonsterPrefabs;     // 보스 몬스터
+    public GameObject[] petPrefabs;         // 펫 전용 프리팹
 
     // 각 카테고리별 풀을 담당할 리스트 배열들
     List<GameObject>[] itemPools;
@@ -18,6 +19,18 @@ public class PoolManager : MonoBehaviour
     List<GameObject>[] normalMonsterPools;
     List<GameObject>[] eliteMonsterPools;
     List<GameObject>[] bossMonsterPools;
+    List<GameObject>[] petPools;
+
+    // 어떤 종류의 풀을 사용할지 구분하기 위한 열거형(enum)
+    public enum PoolCategory
+    {
+        Item,
+        Projectile,
+        NormalMonster,
+        EliteMonster,
+        BossMonster,
+        Pet
+    }
 
     void Awake()
     {
@@ -45,10 +58,17 @@ public class PoolManager : MonoBehaviour
         {
             eliteMonsterPools[i] = new List<GameObject>();
         }
-        
+
         bossMonsterPools = new List<GameObject>[bossMonsterPrefabs.Length];
-        for (int i = 0; i < bossMonsterPools.Length; i++) {
+        for (int i = 0; i < bossMonsterPools.Length; i++)
+        {
             bossMonsterPools[i] = new List<GameObject>();
+        }
+
+        petPools = new List<GameObject>[petPrefabs.Length];
+        for (int i = 0; i < petPools.Length; i++)
+        {
+            petPools[i] = new List<GameObject>();
         }
     }
 
@@ -81,6 +101,10 @@ public class PoolManager : MonoBehaviour
                 targetPool = bossMonsterPools;
                 targetPrefab = bossMonsterPrefabs;
                 break;
+            case PoolCategory.Pet:
+                targetPool = petPools;
+                targetPrefab = petPrefabs;
+                break;
         }
 
         GameObject select = null;
@@ -102,14 +126,4 @@ public class PoolManager : MonoBehaviour
 
         return select;
     }
-}
-
-// 어떤 종류의 풀을 사용할지 구분하기 위한 열거형(enum)
-public enum PoolCategory
-{
-    Item,
-    Projectile,
-    NormalMonster,
-    EliteMonster,
-    BossMonster
 }

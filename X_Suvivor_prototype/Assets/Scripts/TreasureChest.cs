@@ -107,7 +107,7 @@ public class TreasureChest : MonoBehaviour
             int amount = Random.Range(itemToDrop.minAmount, itemToDrop.maxAmount + 1);
             for (int i = 0; i < amount; i++)
             {
-                GameObject item = GameManager.instance.pool.Get(PoolCategory.Item, itemToDrop.itemPoolIndex);
+                GameObject item = GameManager.instance.pool.Get(PoolManager.PoolCategory.Item, itemToDrop.itemPoolIndex);
                 Vector3 spawnPos = transform.position + (Vector3)Random.insideUnitCircle * 1.5f;
                 item.transform.position = spawnPos;
             }
