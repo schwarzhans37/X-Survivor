@@ -43,7 +43,7 @@ public class Shotgun : WeaponBase
         for (int i = 0; i < currentCount; i++)
         {
             // 3. 오브젝트 풀에서 투사체를 가져옴
-            Transform bulletTransform = GameManager.instance.pool.Get(PoolCategory.Projectile, weaponData.PoolManagerIndex).transform;
+            Transform bulletTransform = GameManager.instance.pool.Get(PoolManager.PoolCategory.Projectile, weaponData.PoolManagerIndex).transform;
             bulletTransform.position = transform.position;
 
             // 4. 총알의 발사 각도 계산

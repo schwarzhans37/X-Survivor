@@ -35,7 +35,7 @@ public class Sword : WeaponBase
         Vector2 dir = (worldMousePos - transform.position).normalized;
 
         // 2. 오브젝트 풀에서 '검' 프리팹을 가져와 활성화
-        GameObject swordInstance = GameManager.instance.pool.Get(PoolCategory.Projectile, weaponData.PoolManagerIndex).gameObject;
+        GameObject swordInstance = GameManager.instance.pool.Get(PoolManager.PoolCategory.Projectile, weaponData.PoolManagerIndex).gameObject;
         Transform swordTransform = swordInstance.transform;
         swordTransform.parent = this.transform;     // 컨트롤러의 자식으로 설정
 

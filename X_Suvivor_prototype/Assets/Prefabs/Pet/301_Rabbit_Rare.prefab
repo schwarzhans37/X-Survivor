@@ -153,3 +153,9 @@ MonoBehaviour:
   returnDistance: 6
   minWaitTime: 0.3
   maxWaitTime: 1
+  attackRange: 3.5
+  attackDamage: 20
+  attackCooldown: 4
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64

@@ -80,17 +80,17 @@ public class Spawner : MonoBehaviour
     void Spawn(MonsterData monsterData)
     {
         // MonsterData에 저장된 Tier 정보를 바탕으로 올바른 PoolCategory를 선택
-        PoolCategory category;
+        PoolManager.PoolCategory category;
         switch (monsterData.tier)
         {
             case MonsterData.MonsterTier.Elite:
-                category = PoolCategory.EliteMonster;
+                category = PoolManager.PoolCategory.EliteMonster;
                 break;
             case MonsterData.MonsterTier.Boss:
-                category = PoolCategory.BossMonster;
+                category = PoolManager.PoolCategory.BossMonster;
                 break;
             default: // MonsterTier.Normal
-                category = PoolCategory.NormalMonster;
+                category = PoolManager.PoolCategory.NormalMonster;
                 break;
         }
 

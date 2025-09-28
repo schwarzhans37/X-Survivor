@@ -49,7 +49,7 @@ public class Melee : WeaponBase
         // 필요한 개수만큼 새로 배치
         for (int i = 0; i < currentCount; i++)
         {
-            Transform blade = GameManager.instance.pool.Get(PoolCategory.Projectile, weaponData.PoolManagerIndex).transform;
+            Transform blade = GameManager.instance.pool.Get(PoolManager.PoolCategory.Projectile, weaponData.PoolManagerIndex).transform;
             blade.parent = transform; // 이 무기 오브젝트의 자식으로 설정
 
             blade.localPosition = Vector3.zero;
