@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1403403722560252523}
   - component: {fileID: 3528144728598297618}
   - component: {fileID: 5495237886329258799}
+  - component: {fileID: -8027669609178724727}
   m_Layer: 0
   m_Name: 402_Capybara_Epic
   m_TagString: Untagged
@@ -113,7 +114,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &3528144728598297618
 Animator:
   serializedVersion: 5
@@ -153,9 +154,45 @@ MonoBehaviour:
   returnDistance: 6
   minWaitTime: 0.3
   maxWaitTime: 1
+  maxHealth: 5
   attackRange: 4
   attackDamage: 30
   attackCooldown: 3
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!70 &-8027669609178724727
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448656011933182545}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.6, y: 0.9}
+  m_Direction: 0
