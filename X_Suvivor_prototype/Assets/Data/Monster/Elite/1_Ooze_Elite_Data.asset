@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c4dd2cff55dd44788a87cc7b162e65, type: 3}
   m_Name: 1_Ooze_Elite_Data
   m_EditorClassIdentifier: 
-  PoolManagerIndex: 0
+  PoolManagerIndex: 2
   Id: 10
   Name: "\uAD34\uBB3C \uC2AC\uB77C\uC784"
   tier: 1

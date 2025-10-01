@@ -35,6 +35,13 @@ public class Enemy : MonoBehaviour
     public Transform shootPivot;           // 총구 위치(Enemy 프리팹에서 지정)
     public int projectilePoolIndex = 0;    // PoolManager.Projectile 배열 인덱스
 
+    [Header("# Audio")]
+    [Tooltip("이 몬스터가 죽을 때 재생할 SFX 키. 비워두면 'Dead' 사용")]
+    public string deathSfxName = "Dead";
+
+    [Range(0f, 1.5f)] public float deathSfxVolume = 1f;   // ← 볼륨 슬라이더
+    [Range(0.5f, 2f)] public float deathSfxPitch = 1f;    // ← (옵션) 피치 슬라이더
+
 
     // 내부 저장: 기본 위치/오프셋
     [SerializeField] Vector2 graphicsBaseLocalPos; // 비워두면 Awake에서 자동 기록
@@ -373,11 +380,13 @@ public class Enemy : MonoBehaviour
         if (monsterData.tier == MonsterData.MonsterTier.Boss)
             GameManager.instance.NotifyBossDefeated();
 
-        if (GameManager.instance.isLive)
-            AudioManager.instance.PlaySfx("Dead");
+        // ---- 개별 사망 SFX : 이름이 비어있으면 "Dead" 사용, 볼륨/피치는 슬라이더 값 ----
+        if (AudioManager.instance)
+        {
+            string key = string.IsNullOrEmpty(deathSfxName) ? "Dead" : deathSfxName;
+            AudioManager.instance.PlaySfx(key, deathSfxVolume, deathSfxPitch);
+        }
 
-        // Death 끝에서 Dead()를 애니메이션 이벤트/SMB로 호출하길 권장
-        // 필요시 코루틴으로 딜레이 후 Dead() 호출해도 됨
     }
 
     public void Dead()

@@ -278,6 +278,9 @@ MonoBehaviour:
   bodyY: 0
   shootPivot: {fileID: 0}
   projectilePoolIndex: 0
+  deathSfxName: Elite2&6Dead
+  deathSfxVolume: 1
+  deathSfxPitch: 1
   graphicsBaseLocalPos: {x: 0, y: 0}
 --- !u!50 &5652272159261796642
 Rigidbody2D:

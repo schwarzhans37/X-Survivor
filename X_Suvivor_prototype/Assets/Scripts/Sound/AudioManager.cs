@@ -153,6 +153,36 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // ====== SFX 재생 (키 + 개별 볼륨/피치) ======
+    public void PlaySfx(string sfxName, float volumeScale, float pitch = 1f)
+    {
+        if (soundBank == null) return;
+
+        string clipName = sfxName;
+        if (sfxName == "Hit" || sfxName == "Melee")
+            clipName = sfxName + Random.Range(0, 2);
+
+        if (!soundBank.TryGetValue(clipName, out var clip) || clip == null)
+        {
+            Debug.LogWarning($"[Audio] SoundBank에 '{clipName}'가 없습니다.");
+            return;
+        }
+
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            int idx = (i + channelIndex) % sfxPlayers.Length;
+            var src = sfxPlayers[idx];
+            if (src.isPlaying) continue;
+
+            channelIndex = idx;
+            src.clip = clip;
+            src.pitch = Mathf.Clamp(pitch, 0.1f, 3f);
+            src.volume = masterVolume * sfxVolume * Mathf.Clamp01(volumeScale);
+            src.Play();
+            break;
+        }
+    }
+
     // AudioClip을 직접 받아 재생하는 버전 (임시 효과음 등에 유용)
     public void PlaySfx(AudioClip clip)
     {
