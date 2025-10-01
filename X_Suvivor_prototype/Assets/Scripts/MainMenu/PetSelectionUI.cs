@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class PetSelectionUI : MonoBehaviour
 {
@@ -35,20 +36,41 @@ public class PetSelectionUI : MonoBehaviour
         var ownedPetIDs = PlayerDataManager.instance.playerData.ownedPetIDs;
         var petDB = PlayerDataManager.instance.petDatabase;     // 데이터베이스 참조 가져오기
 
-        // 3. 보유한 펫만큼 슬롯을 동적으로 생성
+        List<PetData> ownedPets = new List<PetData>();
         foreach (int petId in ownedPetIDs)
         {
-            PetData data = petDB.GetPetByID(petId);     // 데이터베이스에서 검색
+            PetData data = petDB.GetPetByID(petId);
             if (data != null)
             {
-                GameObject slotGO = Instantiate(petSlotPrefab, gridContainer);
-                slotGO.GetComponent<PetSlot>().Setup(data, this);
+                ownedPets.Add(data);
             }
+        }
+
+        var sortedPets = ownedPets.OrderByDescending(pet => GetGradeOrder(pet.grade)).ThenBy(petDB => petDB.id);
+
+        // 3. 보유한 펫만큼 슬롯을 동적으로 생성
+        foreach (PetData data in sortedPets)
+        {
+            GameObject slotGO = Instantiate(petSlotPrefab, gridContainer);
+            slotGO.GetComponent<PetSlot>().Setup(data, this);
         }
 
         // 4. 초기 상태 설정
         selectedPet = null;
         startButton.interactable = false;   // 처음에는 START 버튼 비활성화
+    }
+
+    private int GetGradeOrder(string grade)
+    {
+        switch (grade)
+        {
+            case "레전더리": return 5;
+            case "유니크": return 4;
+            case "에픽": return 3;
+            case "레어": return 2;
+            case "노멀": return 1;
+            default:    return 0; 
+        }
     }
 
     // PetSlot이 클릭되었을 때 호출되는 함수
