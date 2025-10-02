@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
     public ItemCategory itemCategory;
 
     // 데이터를 담을 변수, 인스펙터에서는 하나만 사용됨
+    [Header("Data")]
     public WeaponData weaponData;
     public GearData gearData;
     public int currentDisplayLevel;   // 이 아이템 UI가 현재 표시하는 레벨

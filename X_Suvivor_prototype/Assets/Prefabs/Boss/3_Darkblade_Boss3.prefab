@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 192384621980607149}
   - component: {fileID: 4018979523827258877}
   - component: {fileID: 314891039599447575}
+  - component: {fileID: 83645947255573518}
   m_Layer: 6
   m_Name: Graphics
   m_TagString: Untagged
@@ -215,7 +216,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4cb520930c6b349bc3eaaccc0d9098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 1955878631526084460}
+--- !u!114 &83645947255573518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5483572285479842879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf5904876cd8b742a1c6ac3f28a7e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introClip: {fileID: 8300000, guid: 65b3207f91d67094e87be85dbe54c89d, type: 3}
+  meleeClip: {fileID: 8300000, guid: c9b8518b1800ca648ae13e5e1f03151f, type: 3}
+  fireKey: FireBoss
+  lightningKey: LightningBoss
+  magicKey: MagicBoss
+  volume: 1
+  pitch: 1
 --- !u!1 &5839732775987554974
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +248,8 @@ GameObject:
   - component: {fileID: 1955878631526084460}
   - component: {fileID: 3831674377905039992}
   - component: {fileID: 8249659759652194759}
+  - component: {fileID: 24654383896261920}
+  - component: {fileID: 6772934255359654218}
   m_Layer: 6
   m_Name: 3_Darkblade_Boss3
   m_TagString: Enemy
@@ -279,6 +301,13 @@ MonoBehaviour:
   bodyY: -1
   shootPivot: {fileID: 8304612114274216798}
   projectilePoolIndex: 7
+  deathSfxName: Dead
+  deathSfxVolume: 1
+  deathSfxPitch: 1
+  ignoreHitDuringAttack: 1
+  flashOnHit: 1
+  knockbackPower: 6
+  knockbackFriction: 10
   graphicsBaseLocalPos: {x: 0, y: 0}
   useMeleeWhenInRange: 1
   meleeRange: 3.5
@@ -293,21 +322,7 @@ MonoBehaviour:
     projectileAnimName: Fire
     shootPivots:
     - {fileID: 8304612114274216798}
-    aimAtPlayer: 1
-    startAngleDeg: 0
-    spreadDeg: 360
-    projectilesPerBurst: 1
-    bursts: 1
-    burstInterval: 0.12
-    rotatePerBurstDeg: 0
-    randomJitterDeg: 0
-    overrideProjectile:
-      overrideDamage: 0
-      damage: 0
-      overrideSpeed: 0
-      speed: 0
-      overrideLife: 0
-      life: 0
+    pattern: 1
     nextReadyTime: 0
   magic:
     name: Magic
@@ -320,21 +335,7 @@ MonoBehaviour:
     projectileAnimName: Magic
     shootPivots:
     - {fileID: 8304612114274216798}
-    aimAtPlayer: 1
-    startAngleDeg: 0
-    spreadDeg: 360
-    projectilesPerBurst: 1
-    bursts: 1
-    burstInterval: 0.12
-    rotatePerBurstDeg: 0
-    randomJitterDeg: 0
-    overrideProjectile:
-      overrideDamage: 0
-      damage: 0
-      overrideSpeed: 0
-      speed: 0
-      overrideLife: 0
-      life: 0
+    pattern: 1
     nextReadyTime: 0
   lightning:
     name: Lightning
@@ -347,21 +348,7 @@ MonoBehaviour:
     projectileAnimName: Lightning
     shootPivots:
     - {fileID: 8304612114274216798}
-    aimAtPlayer: 1
-    startAngleDeg: 0
-    spreadDeg: 360
-    projectilesPerBurst: 1
-    bursts: 1
-    burstInterval: 0.12
-    rotatePerBurstDeg: 0
-    randomJitterDeg: 0
-    overrideProjectile:
-      overrideDamage: 0
-      damage: 0
-      overrideSpeed: 0
-      speed: 0
-      overrideLife: 0
-      life: 0
+    pattern: 1
     nextReadyTime: 0
 --- !u!50 &3831674377905039992
 Rigidbody2D:
@@ -425,6 +412,37 @@ CapsuleCollider2D:
   m_Offset: {x: -2.2, y: -1.2}
   m_Size: {x: 4.3, y: 6.5}
   m_Direction: 0
+--- !u!114 &24654383896261920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5839732775987554974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf5904876cd8b742a1c6ac3f28a7e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introClip: {fileID: 8300000, guid: 65b3207f91d67094e87be85dbe54c89d, type: 3}
+  meleeClip: {fileID: 8300000, guid: c9b8518b1800ca648ae13e5e1f03151f, type: 3}
+  fireKey: FireBoss
+  lightningKey: LightningBoss
+  magicKey: MagicBoss
+  volume: 1
+  pitch: 1
+--- !u!114 &6772934255359654218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5839732775987554974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c1a0726f9b30f458be212d0dbf78f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7485007002644731795
 GameObject:
   m_ObjectHideFlags: 0

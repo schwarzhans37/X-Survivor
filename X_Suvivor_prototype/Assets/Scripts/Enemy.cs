@@ -42,6 +42,20 @@ public class Enemy : MonoBehaviour
     [Range(0f, 1.5f)] public float deathSfxVolume = 1f;   // ← 볼륨 슬라이더
     [Range(0.5f, 2f)] public float deathSfxPitch = 1f;    // ← (옵션) 피치 슬라이더
 
+    //전투 옵션 — 공격 중 Hit 전이 무시 / 피격 플래시
+    [Header("# Combat Options")]
+    [Tooltip("공격 중에는 Hit 상태로 전이하지 않습니다.")]
+    public bool ignoreHitDuringAttack = true;
+    [Tooltip("Hit를 무시할 때 잠깐 흰색 플래시를 보여줍니다.")]
+    public bool flashOnHit = true;
+
+    [Header("# Knockback")]
+    [Tooltip("한 번의 피격 시 부여되는 기본 넉백 세기")]
+    public float knockbackPower = 6f;
+    [Tooltip("넉백이 줄어드는 속도(값이 클수록 빨리 멈춤)")]
+    public float knockbackFriction = 10f;
+    protected Vector2 push; // 현재 외력(넉백) 속도 벡터
+
 
     // 내부 저장: 기본 위치/오프셋
     [SerializeField] Vector2 graphicsBaseLocalPos; // 비워두면 Awake에서 자동 기록
@@ -67,6 +81,9 @@ public class Enemy : MonoBehaviour
     protected float stunRemain = 0f;
     public bool IsStunned => stunRemain > 0f;
     public bool IsAlive => isLive;
+
+    // 피격 플래시 코루틴 핸들
+    Coroutine _flashCo;
 
     void Awake()
     {
@@ -96,6 +113,7 @@ public class Enemy : MonoBehaviour
     {
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
+        push = Vector2.zero;  // 넉백 초기화
 
         coll.enabled = true;
         rigid.simulated = true;
@@ -117,13 +135,11 @@ public class Enemy : MonoBehaviour
         if (!GameManager.instance.isLive) return;
         if (!isLive) return;
 
-        if (!isLive || (anim && anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")))
-            return;
-
-        // 스턴은 그대로(스턴 중엔 멈춤)
+        // 스턴 체크(스턴 중엔 완전 정지)
         if (stunRemain > 0f) { stunRemain -= Time.fixedDeltaTime; if (stunRemain < 0f) stunRemain = 0f; }
         if (IsStunned) { rigid.velocity = Vector2.zero; return; }
 
+        // 슬로우
         if (slowRemain > 0f) { slowRemain -= Time.fixedDeltaTime; if (slowRemain <= 0f) { slowRemain = 0f; slowMultiplier = 1f; } }
 
         // ── 공격 체크: "트리거만" 걸고 이동은 계속 ──
@@ -133,15 +149,16 @@ public class Enemy : MonoBehaviour
                          !isAttacking;
 
         if (canAttack)
-        {
             StartCoroutine(AttackRoutine());
-        }
 
-        // 이동
+        // 이동 + 외력 적용
         float curSpeed = baseSpeed * slowMultiplier;
-
         Vector2 dirVec = target.position - rigid.position;
         Vector2 nextVec = dirVec.normalized * curSpeed * Time.fixedDeltaTime;
+
+        // 외력(넉백) 일괄 적용/감쇠
+        ApplyExternalForces(ref nextVec);
+
         rigid.MovePosition(rigid.position + nextVec);
         rigid.velocity = Vector2.zero;
     }
@@ -197,17 +214,48 @@ public class Enemy : MonoBehaviour
         // (MonsterData에 넣지 않아도 됩니다)
     }
 
+    // Hit 반응 처리(공격 중 무시/플래시)
+    void HandleHitReaction()
+    {
+        if (ignoreHitDuringAttack && isAttacking)
+        {
+            if (flashOnHit && spriter)
+            {
+                if (_flashCo != null) StopCoroutine(_flashCo);
+                _flashCo = StartCoroutine(CoFlash());
+            }
+        }
+        else
+        {
+            if (anim) anim.SetTrigger("Hit");
+        }
+    }
+
+    // 피격 플래시
+    IEnumerator CoFlash(float t = 0.08f)
+    {
+        var org = spriter.color;
+        spriter.color = Color.white;
+        yield return new WaitForSeconds(t);
+        spriter.color = org;
+    }
+
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!isLive) return;
         if (!collision.CompareTag("Bullet")) return;
 
         health -= collision.GetComponent<Bullet>().damage;
-        StartCoroutine(KnockBack());
+
+        // 플레이어 반대 방향으로 임펄스 넉백
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        Vector3 dir = (transform.position - playerPos).normalized;
+        ApplyPush(dir * knockbackPower);
 
         if (health > 0)
         {
-            if (anim) anim.SetTrigger("Hit");
+            HandleHitReaction();
             AudioManager.instance.PlaySfx("Hit");
         }
         else
@@ -312,12 +360,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    IEnumerator KnockBack()
+    // 임펄스 방식 넉백 부여(누적)
+    protected void ApplyPush(Vector2 impulse)
     {
-        yield return wait;
-        Vector3 playerPos = GameManager.instance.player.transform.position;
-        Vector3 dirVec = transform.position - playerPos;
-        rigid.AddForce(dirVec.normalized * 3f, ForceMode2D.Impulse);
+        push += impulse;
     }
 
     public void ApplyDamage(float amount, Vector3? sourcePos = null, float knockPower = 3f)
@@ -326,12 +372,22 @@ public class Enemy : MonoBehaviour
 
         health -= amount;
 
-        if (sourcePos.HasValue) StartCoroutine(KnockBackFrom(sourcePos.Value, knockPower));
-        else StartCoroutine(KnockBack());
+        // ★ 피격 지점 기준 반대 방향 넉백
+        if (sourcePos.HasValue)
+        {
+            Vector3 dir = (transform.position - sourcePos.Value).normalized;
+            ApplyPush(dir * knockPower);
+        }
+        else
+        {
+            Vector3 playerPos = GameManager.instance.player.transform.position;
+            Vector3 dir = (transform.position - playerPos).normalized;
+            ApplyPush(dir * knockbackPower);
+        }
 
         if (health > 0)
         {
-            if (anim) anim.SetTrigger("Hit");
+            HandleHitReaction();
             if (GameManager.instance.isLive) AudioManager.instance.PlaySfx("Hit");
         }
         else
@@ -392,5 +448,16 @@ public class Enemy : MonoBehaviour
     public void Dead()
     {
         gameObject.SetActive(false);
+    }
+
+    // 외력(넉백) 적용/감쇠를 한 곳에서 처리 — 상속 클래스(BossEnemy)도 재사용
+    protected void ApplyExternalForces(ref Vector2 move)
+    {
+        // push는 '속도' 개념이므로 Δt를 곱해 위치 보정
+        move += push * Time.fixedDeltaTime;
+
+        // 감쇠로 0에 수렴
+        if (push != Vector2.zero)
+            push = Vector2.MoveTowards(push, Vector2.zero, knockbackFriction * Time.fixedDeltaTime);
     }
 }

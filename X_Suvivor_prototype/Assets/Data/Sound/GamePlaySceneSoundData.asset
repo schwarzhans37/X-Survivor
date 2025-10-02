@@ -57,3 +57,9 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: db87dbb58791fd2449e9c0603b369f18, type: 3}
   - name: BossDead
     clip: {fileID: 8300000, guid: 8ed72a7fb421daa458b63cea54a3ca9c, type: 3}
+  - name: FireBoss
+    clip: {fileID: 8300000, guid: 92d944aedcfdddc45857e0bc152c4a38, type: 3}
+  - name: LightningBoss
+    clip: {fileID: 8300000, guid: e96369d5a28d36a41926f02ce61b90b9, type: 3}
+  - name: MagicBoss
+    clip: {fileID: 8300000, guid: b5176b22e7b8b9748a623c3a567ddd84, type: 3}

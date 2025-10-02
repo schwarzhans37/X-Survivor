@@ -34,16 +34,24 @@ public class BossEnemy : Enemy
     void FixedUpdate()
     {
         if (!GameManager.instance.isLive || !isLive) return;
-        if (anim && anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
 
+        // ★ 공격 중 Hit 전이를 무시하도록 했기 때문에
+        //   "Hit 상태면 즉시 리턴"을 없애거나 옵션에 따라 동작.
+        //   (Enemy.ignoreHitDuringAttack 사용)
+        if (anim && anim.GetCurrentAnimatorStateInfo(0).IsName("Hit") && !ignoreHitDuringAttack)
+            return;
+
+        // 스턴 체크
         if (stunRemain > 0f) { stunRemain -= Time.fixedDeltaTime; if (stunRemain < 0f) stunRemain = 0f; }
         if (IsStunned) { rigid.velocity = Vector2.zero; return; }
 
+        // 슬로우 감소
         if (slowRemain > 0f) { slowRemain -= Time.fixedDeltaTime; if (slowRemain <= 0f) { slowRemain = 0f; slowMultiplier = 1f; } }
 
+        // 스킬/근접 선택 (캐스팅 중이 아닐 때만)
         if (!isAttacking)
         {
-            float dist = target ? Vector2.Distance(target.position, transform.position) : 999f;
+            float dist = (target ? Vector2.Distance(target.position, transform.position) : 999f);
             bool canMelee = useMeleeWhenInRange && attackHitbox && dist <= meleeRange;
 
             if (canMelee)
@@ -61,10 +69,17 @@ public class BossEnemy : Enemy
             }
         }
 
-        // 추적 이동
+        // ===== 추적 이동 =====
         float curSpeed = baseSpeed * slowMultiplier;
-        Vector2 dirVec = target.position - rigid.position;
-        rigid.MovePosition(rigid.position + dirVec.normalized * curSpeed * Time.fixedDeltaTime);
+
+        Vector2 dirVec = (target ? (target.position - rigid.position) : Vector2.zero);
+        Vector2 move = dirVec.normalized * curSpeed * Time.fixedDeltaTime;
+
+        // ★★★ 가장 중요: Enemy의 넉백 외력(push) 적용/감쇠
+        // Enemy에 protected로 정의된 ApplyExternalForces(ref ...) 호출
+        ApplyExternalForces(ref move);
+
+        rigid.MovePosition(rigid.position + move);
         rigid.velocity = Vector2.zero;
     }
 

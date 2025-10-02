@@ -243,6 +243,10 @@ MonoBehaviour:
   deathSfxName: Elite4&8&9&10Dead
   deathSfxVolume: 1
   deathSfxPitch: 1
+  ignoreHitDuringAttack: 1
+  flashOnHit: 1
+  knockbackPower: 6
+  knockbackFriction: 10
   graphicsBaseLocalPos: {x: 0, y: 0}
 --- !u!50 &5353028338350677402
 Rigidbody2D:
