@@ -43,3 +43,23 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c13b71b4cf3ed01409dfaeee899bd745, type: 3}
   - name: SplitArrow
     clip: {fileID: 8300000, guid: d9419ba0bfac1e84a95418ac5851caf6, type: 3}
+  - name: Elite1Dead
+    clip: {fileID: 8300000, guid: ec831c2536d30374dbf768096ce241a9, type: 3}
+  - name: Elite2&6Dead
+    clip: {fileID: 8300000, guid: 8ed72a7fb421daa458b63cea54a3ca9c, type: 3}
+  - name: Elite3Dead
+    clip: {fileID: 8300000, guid: a08ac83608ffa1a45a42a2af05f97315, type: 3}
+  - name: Elite4&8&9&10Dead
+    clip: {fileID: 8300000, guid: d9c3d67fb283f5945a17e2501695b645, type: 3}
+  - name: Elite5Dead
+    clip: {fileID: 8300000, guid: b43f69e53d5b38f4cb1c256f47507014, type: 3}
+  - name: Elite7Dead
+    clip: {fileID: 8300000, guid: db87dbb58791fd2449e9c0603b369f18, type: 3}
+  - name: BossDead
+    clip: {fileID: 8300000, guid: 8ed72a7fb421daa458b63cea54a3ca9c, type: 3}
+  - name: FireBoss
+    clip: {fileID: 8300000, guid: 92d944aedcfdddc45857e0bc152c4a38, type: 3}
+  - name: LightningBoss
+    clip: {fileID: 8300000, guid: e96369d5a28d36a41926f02ce61b90b9, type: 3}
+  - name: MagicBoss
+    clip: {fileID: 8300000, guid: b5176b22e7b8b9748a623c3a567ddd84, type: 3}

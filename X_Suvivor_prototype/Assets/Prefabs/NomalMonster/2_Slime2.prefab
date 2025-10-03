@@ -105,6 +105,25 @@ MonoBehaviour:
   maxHealth: 0
   monsterData: {fileID: 11400000, guid: 6eaae39a45a14134aa5088f09a728cda, type: 2}
   target: {fileID: 3496466978208674311}
+  attackRange: 1.1
+  attackCooldown: 1
+  attackHitbox: {fileID: 0}
+  graphics: {fileID: 0}
+  shadow: {fileID: 0}
+  bodyCollider: {fileID: 0}
+  bodyRightX: 0
+  bodyLeftX: 0
+  bodyY: 0
+  shootPivot: {fileID: 0}
+  projectilePoolIndex: 0
+  deathSfxName: Dead
+  deathSfxVolume: 1
+  deathSfxPitch: 1
+  ignoreHitDuringAttack: 1
+  flashOnHit: 1
+  knockbackPower: 6
+  knockbackFriction: 10
+  graphicsBaseLocalPos: {x: 0, y: 0}
 --- !u!95 &6596805978889301488
 Animator:
   serializedVersion: 5

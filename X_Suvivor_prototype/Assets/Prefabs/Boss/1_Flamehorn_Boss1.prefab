@@ -105,6 +105,8 @@ GameObject:
   - component: {fileID: -7377042968307317815}
   - component: {fileID: 4368333285856967845}
   - component: {fileID: 8931686529609860135}
+  - component: {fileID: 5531530101055409272}
+  - component: {fileID: 5102392881086119966}
   m_Layer: 6
   m_Name: 1_Flamehorn_Boss1
   m_TagString: Enemy
@@ -156,6 +158,13 @@ MonoBehaviour:
   bodyY: 0
   shootPivot: {fileID: 5650591807307770457}
   projectilePoolIndex: 5
+  deathSfxName: Dead
+  deathSfxVolume: 1
+  deathSfxPitch: 1
+  ignoreHitDuringAttack: 1
+  flashOnHit: 1
+  knockbackPower: 6
+  knockbackFriction: 10
   graphicsBaseLocalPos: {x: 0, y: 0}
   useMeleeWhenInRange: 1
   meleeRange: 3.5
@@ -260,6 +269,37 @@ CapsuleCollider2D:
   m_Offset: {x: -2.8, y: -1.3}
   m_Size: {x: 5, y: 6.3}
   m_Direction: 0
+--- !u!114 &5531530101055409272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249882315775862263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf5904876cd8b742a1c6ac3f28a7e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introClip: {fileID: 8300000, guid: 65b3207f91d67094e87be85dbe54c89d, type: 3}
+  meleeClip: {fileID: 8300000, guid: c9b8518b1800ca648ae13e5e1f03151f, type: 3}
+  fireKey: FireBoss
+  lightningKey: LightningBoss
+  magicKey: MagicBoss
+  volume: 1
+  pitch: 1
+--- !u!114 &5102392881086119966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249882315775862263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c1a0726f9b30f458be212d0dbf78f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1917226972582075908
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,6 +427,7 @@ GameObject:
   - component: {fileID: 4029751863335054879}
   - component: {fileID: 6321206843882777749}
   - component: {fileID: 8229877573044081475}
+  - component: {fileID: 708280569705676937}
   m_Layer: 6
   m_Name: Graphics
   m_TagString: Untagged
@@ -498,3 +539,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: -7377042968307317815}
+--- !u!114 &708280569705676937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7085549491730524194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf5904876cd8b742a1c6ac3f28a7e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introClip: {fileID: 8300000, guid: 65b3207f91d67094e87be85dbe54c89d, type: 3}
+  meleeClip: {fileID: 8300000, guid: c9b8518b1800ca648ae13e5e1f03151f, type: 3}
+  fireKey: FireBoss
+  lightningKey: LightningBoss
+  magicKey: MagicBoss
+  volume: 1
+  pitch: 1

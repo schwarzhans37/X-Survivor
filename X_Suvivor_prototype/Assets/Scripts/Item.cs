@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
-    // 아이템의 종류를 식별하기 위한 enum
     public enum ItemCategory { Weapon, Gear };
     public ItemCategory itemCategory;
 
-    // 데이터를 담을 변수, 인스펙터에서는 하나만 사용됨
     public WeaponData weaponData;
     public GearData gearData;
-    public int currentDisplayLevel;   // 이 아이템 UI가 현재 표시하는 레벨
 
+    // 이 슬롯이 “다음에 오를 레벨”을 표시하기 위해 내부적으로 가진 현재 레벨
+    public int currentDisplayLevel;
 
     [Header("UI 연결")]
-    [Tooltip("레벨업 메뉴에 등장할 성장 요소들의 내용물을 설정합니다.")]
     public Image icon;
     public Text textLevel;
     public Text textName;
@@ -25,99 +22,166 @@ public class Item : MonoBehaviour
 
     void Awake()
     {
-        // UI 컴포넌트들을 자식에서 찾아 할당
-        icon = transform.Find("Icon").GetComponent<Image>();
-        textLevel = transform.Find("LevelText").GetComponent<Text>();
-        textName = transform.Find("NameText").GetComponent<Text>();
-        textDesc = transform.Find("DescText").GetComponent<Text>();
+        // 인스펙터에 미리 연결돼 있으면 건들지 않음. 비어있으면 이름으로 탐색 (씬마다 이름이 다른 경우 대비)
+        if (!icon)
+            icon = transform.Find("Icon")?.GetComponent<Image>();
+
+        if (!textLevel)
+            textLevel = transform.Find("LevelText")?.GetComponent<Text>()
+                     ?? transform.Find("Text Level")?.GetComponent<Text>();
+
+        if (!textName)
+            textName = transform.Find("NameText")?.GetComponent<Text>()
+                     ?? transform.Find("Text Name")?.GetComponent<Text>();
+
+        if (!textDesc)
+            textDesc = transform.Find("DescText")?.GetComponent<Text>()
+                     ?? transform.Find("Text Desc")?.GetComponent<Text>();
     }
 
-    // LevelUp 스크립트가 이 함수를 호출하여 아이템 정보를 설정
+    // LevelUp이 호출
     public void Init(WeaponData data)
     {
         itemCategory = ItemCategory.Weapon;
-        this.weaponData = data;
+        weaponData = data;
+        gearData = null;
         UpdateUI();
     }
 
     public void Init(GearData data)
     {
         itemCategory = ItemCategory.Gear;
-        this.gearData = data;
+        gearData = data;
+        weaponData = null;
         UpdateUI();
     }
 
-    // 현재 정보에 맞게 UI 텍스트와 아이콘을 업데이트
     public void UpdateUI()
     {
-        // Player를 찾아 현재 장착된 아이템의 레벨을 가져옴
-        Player player = GameManager.instance.player;
+        var player = GameManager.instance.player;
 
         switch (itemCategory)
         {
             case ItemCategory.Weapon:
-                // 플레이어가 가진 무기의 실제 레벨을 가져와야 함
-                WeaponBase equippedWeapon = player.FindEquippedWeapon(weaponData);
-                currentDisplayLevel = equippedWeapon != null ? equippedWeapon.currentLevel : -1;
+                {
+                    // 1) 기존 방식 우선
+                    WeaponBase equipped = player.FindEquippedWeapon(weaponData);
 
-                icon.sprite = weaponData.weaponIcon;
-                textName.text = weaponData.weaponName;
-                textLevel.text = "Lv." + (currentDisplayLevel + 2);
-                // TODO: 레벨에 맞는 설명 업데이트
-                // textDesc.text = ...
-                break;
+                    // 2) 못 찾으면 이름으로 직접 스캔 (Player.cs 수정 없이 보완)
+                    if (equipped == null && player.equippedWeapons != null)
+                    {
+                        foreach (var w in player.equippedWeapons)
+                        {
+                            if (w && w.weaponData &&
+                                w.weaponData.weaponName == weaponData.weaponName)
+                            {
+                                equipped = w; break;
+                            }
+                        }
+                    }
+
+                    int curLv = equipped ? equipped.currentLevel : -1;   // 미보유: -1
+                    int nextLv = curLv + 2;                               // 표시용(1-base) + 다음레벨
+
+                    if (icon) icon.sprite = weaponData.weaponIcon;
+                    if (textName) textName.text = weaponData.weaponName;
+                    if (textLevel) textLevel.text = $"Lv.{nextLv}";
+                    if (textDesc) textDesc.text = BuildWeaponDesc(weaponData, curLv + 1); // 다음레벨(1-base)
+
+                    break;
+                }
+
             case ItemCategory.Gear:
-                // 플레이어가 가진 장비의 실제 레벨을 가져와야 함
-                Gear equippedGear = player.FindEquippedGear(gearData);
-                currentDisplayLevel = equippedGear != null ? equippedGear.currentLevel : -1;
+                {
+                    Gear equipped = player.FindEquippedGear(gearData);
 
-                icon.sprite = gearData.gearIcon;
-                textName.text = gearData.gearName;
-                textLevel.text = "Lv." + (currentDisplayLevel + 2);
-                // textDesc.text = string.Format(gearData.gearDesc, ...);
-                break;
+                    if (equipped == null && player.equippedGears != null)
+                    {
+                        foreach (var g in player.equippedGears)
+                        {
+                            if (g && g.gearData &&
+                                (g.gearData.gearName == gearData.gearName ||
+                                 g.type == gearData.gearType))              // 타입으로도 보조 매칭
+                            {
+                                equipped = g; break;
+                            }
+                        }
+                    }
+
+                    int curLv = equipped ? equipped.currentLevel : -1;
+                    int nextLv = curLv + 2;
+
+                    if (icon) icon.sprite = gearData.gearIcon;
+                    if (textName) textName.text = gearData.gearName;
+                    if (textLevel) textLevel.text = $"Lv.{nextLv}";
+                    if (textDesc) textDesc.text = BuildGearDesc(gearData, curLv + 1);
+
+                    break;
+                }
         }
     }
 
-    // 레벨업 버튼 클릭 시
+    // ===== 설명 생성기 (예: 다음 레벨 수치 보여주기) =====
+    string BuildWeaponDesc(WeaponData data, int nextLv1Based)
+    {
+        string line = !string.IsNullOrEmpty(data.weaponDesc) ? data.weaponDesc : "무기 강화";
+
+        if (data.damages != null && data.damages.Length > 0)
+        {
+            int idx = Mathf.Clamp(nextLv1Based - 1, 0, data.damages.Length - 1);
+            float dmg = data.damages[idx];
+            line += $"\n공격력 +{dmg:0.#}";
+        }
+
+        // 필요하면 투사체 개수/쿨타임 등도 비슷하게 이어서 추가
+        // if (data.projectileCounts != null) { ... }
+
+        return line;
+    }
+
+    string BuildGearDesc(GearData data, int nextLv1Based)
+    {
+        string line = !string.IsNullOrEmpty(data.gearDesc) ? data.gearDesc : "능력 향상";
+
+        if (data.Values != null && data.Values.Length > 0)
+        {
+            int idx = Mathf.Clamp(nextLv1Based - 1, 0, data.Values.Length - 1);
+            float val = data.Values[idx];
+            line += $"\n효과 +{val:0.#}";
+        }
+        return line;
+    }
+
+    // 선택 시 처리 (기존 로직 유지)
     public void OnClick()
     {
-        Player player = GameManager.instance.player;
+        var player = GameManager.instance.player;
 
         switch (itemCategory)
         {
             case ItemCategory.Weapon:
-                WeaponBase existingWeapon = player.FindEquippedWeapon(weaponData);
-                if (existingWeapon == null)
                 {
-                    player.EquipWeapon(weaponData);
+                    var w = player.FindEquippedWeapon(weaponData);
+                    if (w == null) player.EquipWeapon(weaponData);
+                    else w.LevelUp();
+                    break;
                 }
-                else
-                {
-                    existingWeapon.LevelUp();
-                }
-                break;
             case ItemCategory.Gear:
-                if (gearData.gearType == GearData.GearType.Heal)
                 {
-                    player.Heal();
-                    Debug.Log("체력을 모두 회복합니다.");
-                }
-                else
-                {
-                    Gear existingGear = player.FindEquippedGear(gearData);
-                    if (existingGear == null)
+                    if (gearData.gearType == GearData.GearType.Heal)
                     {
-                        player.EquipGear(gearData);
+                        player.Heal();
                     }
                     else
                     {
-                        existingGear.LevelUp();
+                        var g = player.FindEquippedGear(gearData);
+                        if (g == null) player.EquipGear(gearData);
+                        else g.LevelUp();
                     }
+                    break;
                 }
-                break;
         }
-        // 레벨업 UI를 닫는 로직
+
         GameManager.instance.uiLevelUo.hide();
     }
 }

@@ -187,6 +187,13 @@ MonoBehaviour:
   bodyY: 0
   shootPivot: {fileID: 113459118155659989}
   projectilePoolIndex: 3
+  deathSfxName: Dead
+  deathSfxVolume: 1
+  deathSfxPitch: 1
+  ignoreHitDuringAttack: 1
+  flashOnHit: 1
+  knockbackPower: 6
+  knockbackFriction: 10
   graphicsBaseLocalPos: {x: 0, y: 0}
 --- !u!50 &9037341673478512828
 Rigidbody2D:

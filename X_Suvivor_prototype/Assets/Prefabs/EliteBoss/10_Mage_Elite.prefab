@@ -394,6 +394,13 @@ MonoBehaviour:
   bodyY: 0
   shootPivot: {fileID: 4008730124218605876}
   projectilePoolIndex: 4
+  deathSfxName: Elite4&8&9&10Dead
+  deathSfxVolume: 1
+  deathSfxPitch: 1
+  ignoreHitDuringAttack: 1
+  flashOnHit: 1
+  knockbackPower: 6
+  knockbackFriction: 10
   graphicsBaseLocalPos: {x: 0, y: 0}
 --- !u!50 &825119429889463638
 Rigidbody2D:
