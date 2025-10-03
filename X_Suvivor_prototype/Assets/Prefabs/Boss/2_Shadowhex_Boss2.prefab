@@ -70,7 +70,7 @@ MonoBehaviour:
   deathSfxPitch: 1
   ignoreHitDuringAttack: 1
   flashOnHit: 1
-  knockbackPower: 6
+  knockbackPower: 1
   knockbackFriction: 10
   graphicsBaseLocalPos: {x: 0, y: 0}
   useMeleeWhenInRange: 1
