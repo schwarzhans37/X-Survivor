@@ -42,12 +42,11 @@ public class Enemy : MonoBehaviour
     [Range(0f, 1.5f)] public float deathSfxVolume = 1f;   // ← 볼륨 슬라이더
     [Range(0.5f, 2f)] public float deathSfxPitch = 1f;    // ← (옵션) 피치 슬라이더
 
-    //전투 옵션 — 공격 중 Hit 전이 무시 / 피격 플래시
-    [Header("# Combat Options")]
-    [Tooltip("공격 중에는 Hit 상태로 전이하지 않습니다.")]
-    public bool ignoreHitDuringAttack = true;
-    [Tooltip("Hit를 무시할 때 잠깐 흰색 플래시를 보여줍니다.")]
-    public bool flashOnHit = true;
+    // ==== Hit 애니 제거 → 빨간색 플래시로 대체 ====
+    [Header("# Hit Flash")]
+    public bool useHitFlash = true;
+    public Color hitFlashColor = new Color(1f, 0.25f, 0.25f, 1f);
+    [Range(0.05f, 1.5f)] public float hitFlashDuration = 0.5f;
 
     [Header("# Knockback")]
     [Tooltip("한 번의 피격 시 부여되는 기본 넉백 세기")]
@@ -82,7 +81,9 @@ public class Enemy : MonoBehaviour
     public bool IsStunned => stunRemain > 0f;
     public bool IsAlive => isLive;
 
-    // 피격 플래시 코루틴 핸들
+    // === 히트 플래시용 캐시 ===
+    SpriteRenderer[] _renderers;
+    Color[] _baseColors;
     Coroutine _flashCo;
 
     void Awake()
@@ -106,6 +107,17 @@ public class Enemy : MonoBehaviour
 
         if (shadow) shadowBaseLocalPos = shadow.localPosition;
 
+        _renderers = graphics
+            ? graphics.GetComponentsInChildren<SpriteRenderer>(true)
+            : GetComponentsInChildren<SpriteRenderer>(true);
+
+        if (_renderers != null && _renderers.Length > 0)
+        {
+            _baseColors = new Color[_renderers.Length];
+            for (int i = 0; i < _renderers.Length; i++)
+                _baseColors[i] = _renderers[i].color;
+        }
+
         wait = new WaitForFixedUpdate();
     }
 
@@ -120,6 +132,13 @@ public class Enemy : MonoBehaviour
 
         if (spriter) spriter.sortingOrder = 2;
         if (anim) anim.SetBool("Dead", false);
+
+        // 원래 색 복원
+        if (_renderers != null && _baseColors != null)
+        {
+            for (int i = 0; i < _renderers.Length; i++)
+                if (_renderers[i]) _renderers[i].color = _baseColors[i];
+        }
 
         Init(monsterData);
 
@@ -214,30 +233,27 @@ public class Enemy : MonoBehaviour
         // (MonsterData에 넣지 않아도 됩니다)
     }
 
-    // Hit 반응 처리(공격 중 무시/플래시)
-    void HandleHitReaction()
+    // === 빨간색 히트 플래시 ===
+    void FlashHit()                                           // ★ 추가
     {
-        if (ignoreHitDuringAttack && isAttacking)
-        {
-            if (flashOnHit && spriter)
-            {
-                if (_flashCo != null) StopCoroutine(_flashCo);
-                _flashCo = StartCoroutine(CoFlash());
-            }
-        }
-        else
-        {
-            if (anim) anim.SetTrigger("Hit");
-        }
+        if (!useHitFlash || _renderers == null || _baseColors == null) return;
+        if (_flashCo != null) StopCoroutine(_flashCo);
+        _flashCo = StartCoroutine(CoHitFlash());
     }
 
-    // 피격 플래시
-    IEnumerator CoFlash(float t = 0.08f)
+    IEnumerator CoHitFlash()                                  // ★ 추가
     {
-        var org = spriter.color;
-        spriter.color = Color.white;
-        yield return new WaitForSeconds(t);
-        spriter.color = org;
+        // 1) 빨간색으로
+        for (int i = 0; i < _renderers.Length; i++)
+            if (_renderers[i]) _renderers[i].color = hitFlashColor;
+
+        yield return new WaitForSeconds(hitFlashDuration);
+
+        // 2) 원래 색으로 복원
+        for (int i = 0; i < _renderers.Length; i++)
+            if (_renderers[i]) _renderers[i].color = _baseColors[i];
+
+        _flashCo = null;
     }
 
 
@@ -255,7 +271,7 @@ public class Enemy : MonoBehaviour
 
         if (health > 0)
         {
-            HandleHitReaction();
+            FlashHit();
             AudioManager.instance.PlaySfx("Hit");
         }
         else
@@ -276,7 +292,6 @@ public class Enemy : MonoBehaviour
         // 애니 트리거
         if (anim)
         {
-            anim.ResetTrigger("Hit");   // 피격 트리거 충돌 방지(선택)
             anim.SetTrigger("Attack");
         }
 
@@ -387,7 +402,7 @@ public class Enemy : MonoBehaviour
 
         if (health > 0)
         {
-            HandleHitReaction();
+            FlashHit();
             if (GameManager.instance.isLive) AudioManager.instance.PlaySfx("Hit");
         }
         else

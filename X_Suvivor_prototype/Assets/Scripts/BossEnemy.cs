@@ -35,12 +35,6 @@ public class BossEnemy : Enemy
     {
         if (!GameManager.instance.isLive || !isLive) return;
 
-        // ★ 공격 중 Hit 전이를 무시하도록 했기 때문에
-        //   "Hit 상태면 즉시 리턴"을 없애거나 옵션에 따라 동작.
-        //   (Enemy.ignoreHitDuringAttack 사용)
-        if (anim && anim.GetCurrentAnimatorStateInfo(0).IsName("Hit") && !ignoreHitDuringAttack)
-            return;
-
         // 스턴 체크
         if (stunRemain > 0f) { stunRemain -= Time.fixedDeltaTime; if (stunRemain < 0f) stunRemain = 0f; }
         if (IsStunned) { rigid.velocity = Vector2.zero; return; }
@@ -105,7 +99,7 @@ public class BossEnemy : Enemy
 
         if (attackHitbox) attackHitbox.enabled = false;
 
-        if (anim) { anim.ResetTrigger("Hit"); anim.SetTrigger("Attack"); }
+        if (anim) { anim.SetTrigger("Attack"); }
 
         // Attack 상태 진입 대기(최대 0.25s)
         float guard = 0f;
@@ -136,7 +130,6 @@ public class BossEnemy : Enemy
     {
         if (anim && !string.IsNullOrEmpty(s.animTrigger))
         {
-            anim.ResetTrigger("Hit");
             anim.SetTrigger(s.animTrigger);
         }
 
