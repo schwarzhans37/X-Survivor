@@ -19,13 +19,18 @@ public class PetController : MonoBehaviour
     [SerializeField] private float moveSpeed;        // 펫 이동속도
     [SerializeField] private float wanderRadius;     // 플레이어 주변 배화 반경
     [SerializeField] private float returnDistance;   // 반경보다 약간 크게 설정할 것, 거리가 많이 멀어지면 복귀 시작
+    public float avoidanceRadius = 2.5f;        // 해당 반경 안의 적을 '위험'으로 인지
+    public float avoidanceWeight = 1.5f;        // 회피하려는 힘의 가중치
     private bool isDead;                    // 펫이 체력이 다해 넉다운 상태인지 판단
 
     [Header("대기 시간 설정")]
     [SerializeField] private float minWaitTime = 0.5f;   // 최소 대기시간
     [SerializeField] private float maxWaitTime = 1.5f;   // 최대 대기시간
 
-    [Header("펫 공격 설정")]
+    [Header("펫 능력치 설정")]
+    public int maxHealth;
+    private int currentHealth;
+    private bool isInvincible;
     public float attackRange;      // 투사체 공격 사거리
     public float attackDamage;     // 공격 데미지
     public float attackCooldown;  // 공격 쿨타임
@@ -52,6 +57,10 @@ public class PetController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        currentHealth = maxHealth;
+        isInvincible = false;
+        isDead = false;
 
         // 플레이어를 자동으로 찾기 (만약 Inspector에서 할당되지 않았다면)
         if (playerTransform == null)
@@ -99,6 +108,80 @@ public class PetController : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // 몬스터와 충돌 & 현재 무적이 아니라면 데미지 1
+        if (collision.gameObject.CompareTag("Enemy") && !isInvincible && !isDead)
+        {
+            TakeDamage(1);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        // 이미 넉다운(체력0)상태거나 무적 상태일 경우 데미지 무시
+        if (isDead || isInvincible) return;
+
+        currentHealth -= damage;
+        Debug.Log($"펫이 공격받았습니다. 현재 체력 : {currentHealth}/{maxHealth}");
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            Die();
+        }
+        else
+        {
+            // 3초간 무적
+            StartCoroutine(InvincibleRoutine(3f));
+        }
+    }
+
+    void Die()
+    {
+        isDead = true;
+
+        // 사망 상태에서는 모든 코루틴 중지
+        if (movementCoroutine != null) StopCoroutine(movementCoroutine);
+        if (attackCoroutine != null) StopCoroutine(attackCoroutine);
+
+        // 물리적 움직임 중지
+        rigid.velocity = Vector2.zero;
+
+        // 충돌을 감지하지 않도록 콜라이더 비활성화
+        GetComponent<Collider2D>().enabled = false;
+
+        Debug.Log("펫이 쓰러졌습니다.");
+
+        // 사망 애니메이션 실행
+        if (anim != null)
+        {
+            anim.SetTrigger("Dead");
+        }
+    }
+
+    IEnumerator InvincibleRoutine(float duration)
+    {
+        isInvincible = true;
+
+        // 깜빡임 효과
+        Color originalColor = spriteRenderer.color;
+        float blinkInterval = 0.2f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.3f);
+            yield return new WaitForSeconds(blinkInterval / 2);
+            spriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(blinkInterval / 2);
+            elapsedTime += blinkInterval;
+        }
+
+        spriteRenderer.color = originalColor;
+        isInvincible = false;
+    }
+
     // 이동 관련 로직을 하나의 코루틴으로 관리
     private IEnumerator MovementRoutine()
     {
@@ -110,6 +193,28 @@ public class PetController : MonoBehaviour
                     // 목표 지점으로 이동
                     Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
                     rigid.velocity = direction * moveSpeed;
+
+                    // 주변의 위험 감지
+                    Vector2 avoidanceVector = Vector2.zero;
+                    Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius, enemyLayer);
+
+                    if (enemiesInRange.Length > 0)
+                    {
+                        // 감지된 모든 적으로부터 멀어지는 방향을 계산하여 합산
+                        foreach (var enemy in enemiesInRange)
+                        {
+                            Vector2 directionFromEnemy = (Vector2)transform.position - (Vector2)enemy.transform.position;
+                            // 거리가 가까울수록 더 강한 반발력을 갖도록 가중치 부여
+                            avoidanceVector += directionFromEnemy.normalized / Mathf.Max(directionFromEnemy.magnitude, 0.1f);
+                        }
+                        avoidanceVector /= enemiesInRange.Length;
+                    }
+
+                    // 최종 이동 방향 결정 (목표 방향 + 회피 방향)
+                    Vector2 finalDirection = (direction + (avoidanceVector * avoidanceWeight)).normalized;
+
+                    // 최종 방향으로 이동
+                    rigid.velocity = finalDirection * moveSpeed;
 
                     // 목표 지점에 도착하면 대기 상태로 변경
                     if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
@@ -160,7 +265,7 @@ public class PetController : MonoBehaviour
         if (anim != null)
         {
             // 속도가 0.1보다 크면 움직이는 것으로 간주
-            anim.SetBool("isMoving", rigid.velocity.magnitude > 0.1f);
+            anim.SetFloat("Speed", rigid.velocity.magnitude);
         }
 
         // 보는 방향 설정
@@ -191,6 +296,10 @@ public class PetController : MonoBehaviour
             // 복귀 거리 (Return Distance)
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(playerTransform.position, returnDistance);
+
+            //회피 반경 시각화
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, avoidanceRadius);
         }
     }
 
