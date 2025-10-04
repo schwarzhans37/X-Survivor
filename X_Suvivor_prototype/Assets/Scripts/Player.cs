@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     [Header("# 캐릭터 이미지 렌더")]
     public Hand[] hands;
 
-    [Header("캐릭터별 애니메이션 컨트롤러")]
+    [Header("# 캐릭터별 애니메이션 컨트롤러")]
     public RuntimeAnimatorController[] spriteAnimCon; // 플레이어 캐릭터 애니메이션 컨트롤러
 
     public bool isDashing { get; set; } = false;
@@ -33,6 +33,10 @@ public class Player : MonoBehaviour
     CapsuleCollider2D capColl;
     SpriteRenderer spriter; // 스프라이트(이미지)
     Animator anim;  // 캐릭터 애니메이션
+
+    [Header("# 펫 상호작용 설정")]
+    public float interactionRange = 2f;
+    public LayerMask petLayer;
 
     [Header("게임 중 현재 보유한 무기 목록")]
     public List<WeaponBase> equippedWeapons;
@@ -133,8 +137,8 @@ public class Player : MonoBehaviour
                     collectible.StartSeeking();
                 }
             }
-
         }
+        CheckForPetInteraction();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -358,6 +362,29 @@ public class Player : MonoBehaviour
         capColl.isTrigger = false;
 
         isInvincible = false;
+    }
+
+    private void CheckForPetInteraction()
+    {
+        // 'E'키를 눌렀을 때만 실행
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            // 내 주변 interactionRange 반경 안에 있는 펫 콜라이더를 찾음
+            Collider2D[] petsInRange = Physics2D.OverlapCircleAll(transform.position, interactionRange, petLayer);
+
+            foreach (var petCollider in petsInRange)
+            {
+                PetController pet = petCollider.GetComponent<PetController>();
+
+                // 펫을 찾았고, 그 펫이 죽은 상태라면
+                if (pet != null && pet.isDead)
+                {
+                    // 펫의 Revive() 함수를 호출
+                    pet.Revive();
+                    break;
+                }
+            }
+        }
     }
 
     void Die()

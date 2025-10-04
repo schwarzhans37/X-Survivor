@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3528144728598297618}
   - component: {fileID: 5495237886329258799}
   - component: {fileID: 5074094339627599451}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: 104_Dog_Legendary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,6 +163,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  revivePromptPrefab: {fileID: 1991691206239705430, guid: 1bc7c121e5a1ab742b85b2a090669c58, type: 3}
+  deathCount: 0
+  revivalCount: 0
 --- !u!70 &5074094339627599451
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -195,6 +198,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.6, y: 0.9}
+  m_Offset: {x: 0, y: -5}
+  m_Size: {x: 7, y: 10}
   m_Direction: 0

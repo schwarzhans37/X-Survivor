@@ -6660,6 +6660,10 @@ MonoBehaviour:
   - {fileID: 22100000, guid: 6bc6910d1bc79404b9bd2383832fd765, type: 2}
   - {fileID: 22100000, guid: d15a74b70ff303b408a8d28616248680, type: 2}
   - {fileID: 22100000, guid: b3be3670aa63d46419f265a814b1cb63, type: 2}
+  interactionRange: 2
+  petLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   equippedWeapons: []
   equippedGears: []
 --- !u!70 &274803309
