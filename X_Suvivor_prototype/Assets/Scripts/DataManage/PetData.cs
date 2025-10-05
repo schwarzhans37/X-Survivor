@@ -15,7 +15,6 @@ public class PetData : ScriptableObject
 
     [Header("그래픽 에셋")]
     public Sprite petIcon;       // UI에 표시될 아이콘
-    public GameObject petSlot;
     public GameObject inGamePrefab;     // 게임 플레이 중 플레이어를 따라다닐 펫 프리팹
     public GameObject splashArtPrefab;  // 가챠 결과창에 표시될 스플래시 아트 프리팹
 

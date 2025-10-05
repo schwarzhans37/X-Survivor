@@ -17,9 +17,8 @@ MonoBehaviour:
   petType: "\uD310\uB2E4"
   grade: "\uC720\uB2C8\uD06C"
   petIcon: {fileID: 21300000, guid: c36f250d8970be04ab10f8338b2d0988, type: 3}
-  petSlot: {fileID: 0}
   inGamePrefab: {fileID: 1448656011933182545, guid: accd09bcfd7a4734a8212319fed84fce, type: 3}
-  splashArtPrefab: {fileID: 0}
+  splashArtPrefab: {fileID: 114031326981911490, guid: 326e82dff2c6e0b42bee0224fb080da6, type: 3}
   buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
   hasSkill: 0
   skillDescription: "\uC2A4\uD0AC \uC5C6\uC74C"
