@@ -198,3 +198,6 @@ MonoBehaviour:
   lifeTime: 4
   knockback: 1
   orientation: 1
+  sfxOnHitKey: MagicBoss_Sound
+  sfxOnHitVolume: 1
+  sfxOnHitPitch: 1

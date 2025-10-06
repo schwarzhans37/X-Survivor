@@ -43,6 +43,14 @@ public class Player : MonoBehaviour
 
     private float speedBonusRate = 0f; // 장비를 통한 속도 증가율
 
+    // ====== Audio ======
+    [Header("# Audio")]
+    public AudioClip hitClip;                 // 맞았을 때 직접 재생할 클립(선택)
+    public string hitSfxKey = "PlayerHit";    // SoundData 키 재생을 쓰고 싶으면 이름 입력
+    public string deathSfxKey = "Lose"; // 사망 사운드 키(선택)
+    [Range(0f, 3f)] public float sfxVolume = 1f;
+    [Range(0.1f, 3f)] public float sfxPitch = 1f;
+
 
     void Awake()
     // 초기화(선언)
@@ -311,6 +319,10 @@ public class Player : MonoBehaviour
         }
         else
         {
+            // ★ 피격 SFX — 클립이 있으면 클립, 없으면 키로
+            if (hitClip) PlaySfxClip(hitClip);
+            else if (!string.IsNullOrEmpty(hitSfxKey)) PlaySfxKey(hitSfxKey);
+
             StartCoroutine(InvincibleRoutine(invincibleTime));
             Debug.Log("플레이어가 생명력 1개를 잃고 3초간 무적이 됩니다.");
         }
@@ -408,5 +420,17 @@ public class Player : MonoBehaviour
         }
 
         inputVec = value.Get<Vector2>();
+    }
+
+    // ===== Audio helpers =====
+    void PlaySfxClip(AudioClip clip)
+    {
+        if (!clip) return;
+        if (AudioManager.instance) AudioManager.instance.PlaySfx(clip);
+    }
+    void PlaySfxKey(string key)
+    {
+        if (string.IsNullOrEmpty(key)) return;
+        if (AudioManager.instance) AudioManager.instance.PlaySfx(key, sfxVolume, sfxPitch);
     }
 }

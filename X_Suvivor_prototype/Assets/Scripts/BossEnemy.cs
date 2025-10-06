@@ -186,23 +186,27 @@ public class BossEnemy : Enemy
                 shotDir = ((Vector2)(targetPos - origin)).normalized;
             }
 
-            SpawnProjectile(origin, shotDir, s.projectilePoolIndex, s.projectileAnimName);
+            SpawnProjectile(origin, shotDir, s.projectilePoolIndex, s.projectileAnimName, s);
         }
 
         yield break;
     }
 
-    void SpawnProjectile(Vector3 origin, Vector2 dir, int poolIndex, string animName)
+    void SpawnProjectile(Vector3 origin, Vector2 dir, int poolIndex, string animName, RangedSkill skill)
     {
         var go = GameManager.instance.pool.Get(PoolManager.PoolCategory.Projectile, poolIndex);
         go.transform.position = origin;
-        go.transform.rotation = Quaternion.identity; // 그래픽 회전은 EnemyProjectile이 처리
+        go.transform.rotation = Quaternion.identity;
 
         var proj = go.GetComponent<EnemyProjectile>();
         if (!proj) return;
 
+        if (!string.IsNullOrEmpty(skill.sfxOnHitKey))
+            proj.SetHitSfx(skill.sfxOnHitKey, skill.sfxOnHitVolume, skill.sfxOnHitPitch);
+
         proj.Fire(dir, animName);
     }
+
 
     // 애니메이션 이벤트 연동
     public override void AE_EnableHitbox() { base.AE_EnableHitbox(); }
@@ -245,6 +249,12 @@ public class RangedSkill
 
     [Header("Pattern")]
     public PatternMode pattern = PatternMode.AimedAtPlayer;
+
+    [Header("Sfx On Hit")]
+    [Tooltip("이 스킬의 투사체가 플레이어에 '명중'했을 때 재생할 사운드 키")]
+    public string sfxOnHitKey = "";            // 예: "MagicBoss"
+    [Range(0f, 3f)] public float sfxOnHitVolume = 1f;
+    [Range(0.1f, 3f)] public float sfxOnHitPitch = 1f;
 
     [HideInInspector] public float nextReadyTime;
     public void ResetCD() => nextReadyTime = Time.time + cooldown;

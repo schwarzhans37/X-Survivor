@@ -63,3 +63,5 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: e96369d5a28d36a41926f02ce61b90b9, type: 3}
   - name: MagicBoss
     clip: {fileID: 8300000, guid: b5176b22e7b8b9748a623c3a567ddd84, type: 3}
+  - name: PlayerHit
+    clip: {fileID: 8300000, guid: c0df63881b2f2d94aa67cfee8bb6ff51, type: 3}
