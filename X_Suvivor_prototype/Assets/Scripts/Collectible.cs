@@ -14,6 +14,22 @@ public class Collectible : MonoBehaviour
     private bool isSeeking;         // 플레이어에게 감지된 상태인가
     private Transform player;       // 플레이어의 위치정보
 
+    [Header("Audio")]
+    public string expSfxKey = "Exp";
+    public string goldSfxKey = "Money";
+    public string gemSfxKey = "Money";
+    [Range(0f, 3f)] public float sfxVolume = 1f;
+    [Range(0.1f, 3f)] public float sfxPitch = 1f;
+
+    [Header("같은 소리 과다 재생 방지(최소 간격)")]
+    public float minExpSfxInterval = 0.04f;
+    public float minGoldSfxInterval = 0.06f;
+    public float minGemSfxInterval = 0.06f;
+
+    static float _lastExpSfxTime;
+    static float _lastGoldSfxTime;
+    static float _lastGemSfxTime;
+
     void OnEnable()
     {
         // 오브젝트 풀링에서 재사용 될 때를 위한 초기화
@@ -53,7 +69,39 @@ public class Collectible : MonoBehaviour
                     GameManager.instance.GetGems(value);
                     break;
             }
+
+            // 사운드 재생
+            PlayPickupSfx();
+
             gameObject.SetActive(false);
+        }
+    }
+    void PlayPickupSfx()
+    {
+        if (AudioManager.instance == null) return;
+
+        switch (type)
+        {
+            case CollectibleType.Experience:
+                if (Time.time - _lastExpSfxTime < minExpSfxInterval) return;
+                _lastExpSfxTime = Time.time;
+                if (!string.IsNullOrEmpty(expSfxKey))
+                    AudioManager.instance.PlaySfx(expSfxKey, sfxVolume, sfxPitch);
+                break;
+
+            case CollectibleType.Gold:
+                if (Time.time - _lastGoldSfxTime < minGoldSfxInterval) return;
+                _lastGoldSfxTime = Time.time;
+                if (!string.IsNullOrEmpty(goldSfxKey))
+                    AudioManager.instance.PlaySfx(goldSfxKey, sfxVolume, sfxPitch);
+                break;
+
+            case CollectibleType.Gem:
+                if (Time.time - _lastGemSfxTime < minGemSfxInterval) return;
+                _lastGemSfxTime = Time.time;
+                if (!string.IsNullOrEmpty(gemSfxKey))
+                    AudioManager.instance.PlaySfx(gemSfxKey, sfxVolume, sfxPitch);
+                break;
         }
     }
 }

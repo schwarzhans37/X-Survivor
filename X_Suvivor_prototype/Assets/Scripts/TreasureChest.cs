@@ -27,9 +27,18 @@ public class TreasureChest : MonoBehaviour
     [Tooltip("확률적으로 드랍할 수 있는 스킬 아이템 목록")]
     public List<SkillDrop> potentialSkillDrops;
 
+    [Header("# Audio")]
+    [Tooltip("열릴 때 재생할 SoundData 키 (AudioManager에서 찾음)")]
+    public string openSfxKey = "TreasureChest_Sound";
+    [Tooltip("클립을 직접 재생하고 싶으면 여기에 넣기(키보다 우선)")]
+    public AudioClip openClip;
+    [Range(0f, 3f)] public float openSfxVolume = 1f;
+    [Range(0.1f, 3f)] public float openSfxPitch = 1f;
+
     private float currentTimer = 0f;
     private bool isPlayerInside = false;
     private bool isOpened = false;
+    private bool sfxPlayed = false;
 
     private Animator anim;
     private Collider2D coll;
@@ -43,6 +52,7 @@ public class TreasureChest : MonoBehaviour
     void OnEnable()
     {
         isOpened = false;
+        sfxPlayed = false;
         coll.enabled = true;
         progressCircle.fillAmount = 0;
         progressCircle.gameObject.SetActive(false);
@@ -97,6 +107,28 @@ public class TreasureChest : MonoBehaviour
         progressCircle.gameObject.SetActive(false);
         anim.SetTrigger("Open");
     }
+
+    public void AE_OpenSfx()
+    {
+        PlayOpenSfx();
+    }
+
+    // 내부 공용: 실제 재생 로직
+    void PlayOpenSfx()
+    {
+        if (sfxPlayed) return; // 중복 방지
+        sfxPlayed = true;
+
+        if (openClip != null && AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySfx(openClip); // 클립 직접 재생
+        }
+        else if (!string.IsNullOrEmpty(openSfxKey) && AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySfx(openSfxKey, openSfxVolume, openSfxPitch);
+        }
+    }
+
 
     // 애니메이션 이벤트에서 호출될 함수
     public void SpawnItems()
