@@ -23,6 +23,8 @@ public class PetController : MonoBehaviour
     public float avoidanceWeight = 1.5f;        // 회피하려는 힘의 가중치
     private bool isDead;                    // 펫이 체력이 다해 넉다운 상태인지 판단
 
+    public bool IsAlive => !isDead;
+
     [Header("대기 시간 설정")]
     [SerializeField] private float minWaitTime = 0.5f;   // 최소 대기시간
     [SerializeField] private float maxWaitTime = 1.5f;   // 최대 대기시간
