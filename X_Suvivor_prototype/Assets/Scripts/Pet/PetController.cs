@@ -21,7 +21,7 @@ public class PetController : MonoBehaviour
     [SerializeField] private float returnDistance;   // 반경보다 약간 크게 설정할 것, 거리가 많이 멀어지면 복귀 시작
     public float avoidanceRadius = 2.5f;        // 해당 반경 안의 적을 '위험'으로 인지
     public float avoidanceWeight = 1.5f;        // 회피하려는 힘의 가중치
-    private bool isDead;                    // 펫이 체력이 다해 넉다운 상태인지 판단
+    public bool isDead { get; private set; }                    // 펫이 체력이 다해 넉다운 상태인지 판단
 
     public bool IsAlive => !isDead;
 
@@ -38,6 +38,12 @@ public class PetController : MonoBehaviour
     public float attackCooldown;  // 공격 쿨타임
     public LayerMask enemyLayer;        // 적만 감지하는 레이어
     private PoolManager poolManager;
+
+    [Header("펫 부활")]
+    public GameObject revivePromptPrefab;
+    private GameObject revivePromptInstance;
+    [HideInInspector] public int deathCount = 0;
+    [HideInInspector] public int revivalCount = 0;
 
     private PetState currentState;          // 펫 현재 상태
     private Vector2 targetPosition;         // 이동 목표 지점
@@ -108,6 +114,23 @@ public class PetController : MonoBehaviour
             currentState = PetState.Waiting;
             rigid.velocity = Vector2.zero;
         }
+
+        // 펫이 죽었을 때만 다음 로직 실행
+        if (isDead)
+        {
+            if (revivePromptInstance != null)
+            {
+                // 2f 이내로 접근하면 UI 활성화
+                if (distanceToPlayer <= 2f)
+                {
+                    revivePromptInstance.SetActive(true);
+                }
+                else
+                {
+                    revivePromptInstance.SetActive(false);
+                }
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -142,6 +165,7 @@ public class PetController : MonoBehaviour
     void Die()
     {
         isDead = true;
+        deathCount++;   // 사망 횟수 카운트
 
         // 사망 상태에서는 모든 코루틴 중지
         if (movementCoroutine != null) StopCoroutine(movementCoroutine);
@@ -151,7 +175,7 @@ public class PetController : MonoBehaviour
         rigid.velocity = Vector2.zero;
 
         // 충돌을 감지하지 않도록 콜라이더 비활성화
-        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Collider2D>().isTrigger = true;
 
         Debug.Log("펫이 쓰러졌습니다.");
 
@@ -159,6 +183,42 @@ public class PetController : MonoBehaviour
         if (anim != null)
         {
             anim.SetTrigger("Dead");
+        }
+
+        if (revivePromptPrefab != null)
+        {
+            revivePromptInstance = Instantiate(revivePromptPrefab, transform);
+            revivePromptInstance.SetActive(false);  // 처음에는 비활성화
+        }
+    }
+
+    public void Revive()
+    {
+        Debug.Log("펫이 부활합니다.");
+        isDead = false;
+        revivalCount++;
+        currentHealth = maxHealth;
+
+        // 코루틴들 재시작
+        movementCoroutine = StartCoroutine(MovementRoutine());
+        attackCoroutine = StartCoroutine(AttackRoutine());
+
+        // 콜라이더를 원래대로 (물리 충돌 가능하게)
+        GetComponent<Collider2D>().isTrigger = false;
+
+        // 부활 직후 3초 무적
+        StartCoroutine(InvincibleRoutine(3f));
+
+        // 부활 UI 파괴
+        if (revivePromptInstance != null)
+        {
+            Destroy(revivePromptInstance);
+        }
+
+        // 애니메이터에게 Revive 신호를 보내 Dead 상태에서 애니메이션이 벗어나도록 유도
+        if (anim != null)
+        {
+            anim.SetTrigger("Revive");
         }
     }
 
