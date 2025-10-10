@@ -158,7 +158,7 @@ MonoBehaviour:
   maxWaitTime: 1
   maxHealth: 5
   attackRange: 4.5
-  attackDamage: 4
+  attackDamage: 40
   attackCooldown: 2
   enemyLayer:
     serializedVersion: 2
