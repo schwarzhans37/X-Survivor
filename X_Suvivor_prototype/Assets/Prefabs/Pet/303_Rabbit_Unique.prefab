@@ -201,3 +201,28 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -5}
   m_Size: {x: 7, y: 10}
   m_Direction: 0
+--- !u!114 &4931258523670982177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448656011933182545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19360cdd325de924296a7182e3d5b5b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rarity: 3
+  minRarityToUse: 3
+  cooldownEpic: 45
+  cooldownUnique: 35
+  cooldownLegendary: 20
+  triggerKey: 114
+  speedMultiplier: 1.5
+  speedBuffDuration: 5
+  tempMaxHealth: 1
+  tempMaxHealthDuration: 20
+  healNewHeart: 1
+  flatAttackBonus: 30
+  attackBuffDuration: 5

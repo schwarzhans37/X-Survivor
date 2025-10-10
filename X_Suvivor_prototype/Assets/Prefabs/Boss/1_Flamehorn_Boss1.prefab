@@ -161,8 +161,9 @@ MonoBehaviour:
   deathSfxName: Dead
   deathSfxVolume: 1
   deathSfxPitch: 1
-  ignoreHitDuringAttack: 1
-  flashOnHit: 1
+  useHitFlash: 1
+  hitFlashColor: {r: 1, g: 0.25, b: 0.25, a: 1}
+  hitFlashDuration: 0.5
   knockbackPower: 1
   knockbackFriction: 10
   graphicsBaseLocalPos: {x: 0, y: 0}
@@ -180,6 +181,9 @@ MonoBehaviour:
     shootPivots:
     - {fileID: 5650591807307770457}
     pattern: 1
+    sfxOnHitKey: 
+    sfxOnHitVolume: 1
+    sfxOnHitPitch: 1
     nextReadyTime: 0
   magic:
     name: Magic
@@ -193,6 +197,9 @@ MonoBehaviour:
     shootPivots:
     - {fileID: 5650591807307770457}
     pattern: 1
+    sfxOnHitKey: MagicBoss
+    sfxOnHitVolume: 1
+    sfxOnHitPitch: 1
     nextReadyTime: 0
   lightning:
     name: Lightning
@@ -206,6 +213,9 @@ MonoBehaviour:
     shootPivots:
     - {fileID: 5650591807307770457}
     pattern: 1
+    sfxOnHitKey: 
+    sfxOnHitVolume: 1
+    sfxOnHitPitch: 1
     nextReadyTime: 0
 --- !u!50 &4368333285856967845
 Rigidbody2D:
@@ -285,9 +295,9 @@ MonoBehaviour:
   meleeClip: {fileID: 8300000, guid: c9b8518b1800ca648ae13e5e1f03151f, type: 3}
   fireKey: FireBoss
   lightningKey: LightningBoss
-  magicKey: MagicBoss
   volume: 1
   pitch: 1
+  logNoopCalls: 0
 --- !u!114 &5102392881086119966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,6 +565,6 @@ MonoBehaviour:
   meleeClip: {fileID: 8300000, guid: c9b8518b1800ca648ae13e5e1f03151f, type: 3}
   fireKey: FireBoss
   lightningKey: LightningBoss
-  magicKey: MagicBoss
   volume: 1
   pitch: 1
+  logNoopCalls: 0

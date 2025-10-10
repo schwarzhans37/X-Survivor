@@ -201,3 +201,26 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -5}
   m_Size: {x: 7, y: 10}
   m_Direction: 0
+--- !u!114 &-6975699767997651964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448656011933182545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fffc2279d389ad41be7410585537775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rarity: 4
+  minRarityToUse: 4
+  cooldownEpic: 45
+  cooldownUnique: 35
+  cooldownLegendary: 20
+  triggerKey: 114
+  recallRange: 50
+  recallPulseSeconds: 0.25
+  useFallbackAttract: 1
+  flatAttackBonus: 30
+  attackBuffDuration: 5

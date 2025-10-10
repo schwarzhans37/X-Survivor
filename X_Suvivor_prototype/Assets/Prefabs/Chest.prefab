@@ -224,6 +224,10 @@ MonoBehaviour:
     dropChance: 0.5
   - skillData: {fileID: 11400000, guid: f80e9a217d6c19444a13a801799e451d, type: 2}
     dropChance: 0.35
+  openSfxKey: TreasureChest_Sound
+  openClip: {fileID: 8300000, guid: d6945231be24c7240a281458fc849e1f, type: 3}
+  openSfxVolume: 1
+  openSfxPitch: 1
 --- !u!95 &4240307569526073017
 Animator:
   serializedVersion: 5

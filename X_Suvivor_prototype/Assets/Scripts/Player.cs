@@ -47,6 +47,14 @@ public class Player : MonoBehaviour
 
     private float speedBonusRate = 0f; // 장비를 통한 속도 증가율
 
+    // ====== Audio ======
+    [Header("# Audio")]
+    public AudioClip hitClip;                 // 맞았을 때 직접 재생할 클립(선택)
+    public string hitSfxKey = "PlayerHit";    // SoundData 키 재생을 쓰고 싶으면 이름 입력
+    public string deathSfxKey = "Lose"; // 사망 사운드 키(선택)
+    [Range(0f, 3f)] public float sfxVolume = 1f;
+    [Range(0.1f, 3f)] public float sfxPitch = 1f;
+
 
     void Awake()
     // 초기화(선언)
@@ -62,7 +70,7 @@ public class Player : MonoBehaviour
         spriter = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         itemScanner = GetComponent<ItemScanner>();
-        baseScanRange = itemScanner.scanRange;
+        if (itemScanner != null) baseScanRange = itemScanner.scanRange;
         hands = GetComponentsInChildren<Hand>(true);
     }
 
@@ -89,6 +97,7 @@ public class Player : MonoBehaviour
         }
 
         UpdateSpeed();
+        UpdateMaxHealth();
     }
     
     void FixedUpdate()
@@ -238,34 +247,45 @@ public class Player : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        // 기본 속도에 보너스 증가율을 적용
-        float finalSpeedBonusRate = GetSpeedBonusFromGears();
-        speed = baseSpeed + finalSpeedBonusRate;
+        float gearBonus = GetSpeedBonusFromGears();  // 장비로 인한 +값
+
+        float mul = 1f;
+        var sp = GetComponent<PlayerMoveSpeedBuffReceiver>();
+        if (sp) mul = sp.TotalMultiplier;            // 토끼 스킬 등 버프 배수
+
+        speed = (baseSpeed + gearBonus) * mul;
     }
 
+    // 최대체력 최종 계산: 기본 + 장비 + (토끼 임시 보너스)
     private void UpdateMaxHealth()
     {
         int previousMaxHealth = maxHealth;
-        int healthBonus = 0;
 
-        //모든 장착된 장비 중 'Armor'타입의 효과를 합산
+        int gearBonus = 0;
         foreach (Gear gear in equippedGears)
         {
             if (gear.type == GearData.GearType.Armor)
             {
-                healthBonus += (int)gear.rate;
+                gearBonus += (int)gear.rate;
             }
         }
 
-        // 최종 최대 체력 계산
-        maxHealth = baseMaxHealth + healthBonus;
+        // ★ 임시 최대체력 보너스(토끼 스킬 60초 하트)
+        int tempBonus = 0;
+        var temp = GetComponent<PlayerTempMaxHealthBuffReceiver>();
+        if (temp) tempBonus = temp.TotalBonus;
 
-        // 최대 체력이 이전보다 증가했다면, 그 증가량 만큼 현재 체력도 회복
+        maxHealth = baseMaxHealth + gearBonus + tempBonus;
+
         if (maxHealth > previousMaxHealth)
         {
-            int healthIncrease = maxHealth - previousMaxHealth;
-            health += healthIncrease;
-            Debug.Log($"최대 체력이 {healthIncrease}만큼 증가하여, 현재 체력도 함께 회복됨.");
+            int inc = maxHealth - previousMaxHealth;
+            health = Mathf.Min(health + inc, maxHealth);  // 늘어난 하트만큼 회복
+            Debug.Log($"최대 체력이 {inc} 증가 → 현재 체력도 회복");
+        }
+        else
+        {
+            health = Mathf.Clamp(health, 0, maxHealth);   // 감소 시 초과분 클램프
         }
     }
 
@@ -315,6 +335,10 @@ public class Player : MonoBehaviour
         }
         else
         {
+            // ★ 피격 SFX — 클립이 있으면 클립, 없으면 키로
+            if (hitClip) PlaySfxClip(hitClip);
+            else if (!string.IsNullOrEmpty(hitSfxKey)) PlaySfxKey(hitSfxKey);
+
             StartCoroutine(InvincibleRoutine(invincibleTime));
             Debug.Log("플레이어가 생명력 1개를 잃고 3초간 무적이 됩니다.");
         }
@@ -405,6 +429,8 @@ public class Player : MonoBehaviour
 
     void UpdateItemScannerRange()
     {
+        if (!itemScanner) return;
+
         float rangeBonus = 0f;
 
         // 모든 장착된 장비 중 'Magnet' 타입의 효과를 합산
@@ -435,5 +461,35 @@ public class Player : MonoBehaviour
         }
 
         inputVec = value.Get<Vector2>();
+    }
+
+    // ★ 이동속도 버프 수치가 바뀔 때(토끼 스킬에서 SendMessage로 호출)
+    void OnSpeedBuffChanged(float _)
+    {
+        UpdateSpeed();
+    }
+
+    // ★ 임시 최대체력(토끼 스킬)이 바뀔 때
+    void OnTempMaxHealthChanged(int _)
+    {
+        UpdateMaxHealth();
+    }
+
+    // ★ 임시 하트 만료 시 초과 체력 컷(토끼 스킬에서 호출)
+    void ClampHealthToMax()
+    {
+        health = Mathf.Clamp(health, 0, maxHealth);
+    }
+
+    // ===== Audio helpers =====
+    void PlaySfxClip(AudioClip clip)
+    {
+        if (!clip) return;
+        if (AudioManager.instance) AudioManager.instance.PlaySfx(clip);
+    }
+    void PlaySfxKey(string key)
+    {
+        if (string.IsNullOrEmpty(key)) return;
+        if (AudioManager.instance) AudioManager.instance.PlaySfx(key, sfxVolume, sfxPitch);
     }
 }

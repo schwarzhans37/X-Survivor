@@ -9,8 +9,20 @@ public class EnemyProjectile : MonoBehaviour
     public float knockback = 1f;
 
     public enum OrientationMode { Upright, FaceDirection }
+
     [Header("Visual Orientation")]
     public OrientationMode orientation = OrientationMode.Upright; // 번개는 Upright
+
+    [Header("SFX on Hit")]
+    string _sfxOnHitKey = "";
+    float _sfxOnHitVol = 1f;
+    float _sfxOnHitPitch = 1f;
+    public void SetHitSfx(string key, float vol, float pitch)
+    {
+        _sfxOnHitKey = key;
+        _sfxOnHitVol = vol;
+        _sfxOnHitPitch = pitch;
+    }
 
     Animator anim;
     Collider2D col;
@@ -60,10 +72,19 @@ public class EnemyProjectile : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (exploding) return;
-        if (!other.CompareTag("Player")) return;
 
-        var p = other.GetComponent<Player>();
-        if (p) p.TakeDamage(damage);
+        // 스캐너/무기 히트박스 등 '트리거'는 전부 무시
+        if (other.isTrigger) return;
+
+        // 플레이어 몸통(논-트리거)만 히트 판정
+        var player = other.GetComponent<Player>() ?? other.GetComponentInParent<Player>();
+        if (player == null) return;
+
+        player.TakeDamage(damage);
+
+        // 맞았을 때만 Magic 사운드(키 세팅한 경우)
+        if (!string.IsNullOrEmpty(_sfxOnHitKey) && AudioManager.instance != null)
+            AudioManager.instance.PlaySfx(_sfxOnHitKey, _sfxOnHitVol, _sfxOnHitPitch);
 
         StartExplode();
     }
@@ -71,8 +92,8 @@ public class EnemyProjectile : MonoBehaviour
     void StartExplode()
     {
         exploding = true;
-        col.enabled = false;
-        anim.SetTrigger("StartExplode");
+        if (col) col.enabled = false;
+        if (anim) anim.SetTrigger("StartExplode");
     }
 
     // Explode 마지막 프레임 이벤트에서 호출

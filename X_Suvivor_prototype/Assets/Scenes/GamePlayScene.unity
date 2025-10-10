@@ -6624,6 +6624,8 @@ GameObject:
   - component: {fileID: 274803313}
   - component: {fileID: 274803314}
   - component: {fileID: 274803315}
+  - component: {fileID: 274803318}
+  - component: {fileID: 274803319}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -6666,6 +6668,11 @@ MonoBehaviour:
     m_Bits: 2048
   equippedWeapons: []
   equippedGears: []
+  hitClip: {fileID: 8300000, guid: c0df63881b2f2d94aa67cfee8bb6ff51, type: 3}
+  hitSfxKey: PlayerHit
+  deathSfxKey: Lose
+  sfxVolume: 3
+  sfxPitch: 1
 --- !u!70 &274803309
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -7020,6 +7027,30 @@ MonoBehaviour:
   - {fileID: 1550170053}
   - {fileID: 1412126216}
   - {fileID: 1561582994}
+--- !u!114 &274803318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274803307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502bb8bf67b29954ca03565ccd4b6829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &274803319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274803307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ee6f7bbe486894c807f510788b1bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &284860207
 GameObject:
   m_ObjectHideFlags: 0
