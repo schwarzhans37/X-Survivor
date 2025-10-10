@@ -234,3 +234,11 @@ MonoBehaviour:
   type: 0
   value: 100
   speed: 10
+  expSfxKey: Exp
+  goldSfxKey: Money
+  gemSfxKey: Money
+  sfxVolume: 1
+  sfxPitch: 1
+  minExpSfxInterval: 0.04
+  minGoldSfxInterval: 0.06
+  minGemSfxInterval: 0.06
