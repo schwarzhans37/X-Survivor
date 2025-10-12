@@ -16,4 +16,9 @@ MonoBehaviour:
   upgradeName: "\uD3AB \uCD5C\uB300\uCCB4\uB825 \uC99D\uAC00"
   upgradeDescription: "\uD3AB\uC758 \uCD5C\uB300\uCCB4\uB825\uC774 \uC99D\uAC00\uD55C\uB2E4."
   upgradeIcon: {fileID: -984763296, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
-  upgradeValues: []
+  upgradeValues:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5

@@ -161,9 +161,11 @@ MonoBehaviour:
   baseAttackRange: 5
   baseAttackDamage: 10
   baseAttackCooldown: 3.5
+  currentMaxHealth: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  currentHealth: 0
   revivePromptPrefab: {fileID: 1991691206239705430, guid: 1bc7c121e5a1ab742b85b2a090669c58, type: 3}
   deathCount: 0
   revivalCount: 0
@@ -182,7 +184,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
