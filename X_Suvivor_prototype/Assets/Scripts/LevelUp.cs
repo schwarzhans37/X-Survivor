@@ -8,6 +8,7 @@ public class LevelUp : MonoBehaviour
 {
     public List<WeaponData> weaponDatas; // 인스펙터에서 모든 무기 데이터 연결
     public List<GearData> gearDatas;   // 인스펙터에서 모든 장비 데이터 연결
+    public List<PetUpgradeData> petUpgradeDatas;    // 인스펙터에서 모든 펫 강화 데이터 연결
     RectTransform rect;
     private Item[] items; // 레벨업 슬롯 UI들
 
@@ -48,6 +49,9 @@ public class LevelUp : MonoBehaviour
 
         Player player = GameManager.instance.player;
 
+        // 현재 씬에 있는 펫 컨트롤러를 찾음. 없으면 null
+        PetController pet = FindObjectOfType<PetController>();
+
         // ===== 1. 레벨업 가능한 후보 아이템 목록 생성 =====
         List<object> candidateItems = new List<object>();
 
@@ -84,14 +88,31 @@ public class LevelUp : MonoBehaviour
             }
         }
         candidateItems.AddRange(availableGears);
-        
-        foreach(Gear equippedGear in player.equippedGears)
+
+        foreach (Gear equippedGear in player.equippedGears)
         {
             if (equippedGear.currentLevel < equippedGear.gearData.Values.Length)
             {
                 candidateItems.Add(equippedGear.gearData);
             }
         }
+        
+        // ----- 후보 5: 펫 강화 -----
+        // 펫이 존재하고, 살아있을 때만 펫 강화 항목을 후보에 추가
+        if (pet != null && pet.IsAlive)
+        {
+            foreach (PetUpgradeData data in petUpgradeDatas)
+            {
+                // PetController에게 이 강화의 현재 레벨을 물어봄
+                int currentLevel = pet.GetUpgradeLevel(data.upgradeType);
+
+                // 현재 레벨이 최대 레벨보다 낮으면 후보에 추가
+                if (currentLevel <data.upgradeValues.Length)
+                {
+                    candidateItems.Add(data);
+                }
+            }
+        } 
         
         // ===============================================
 
@@ -113,6 +134,10 @@ public class LevelUp : MonoBehaviour
             else if (selectedData is GearData)
             {
                 uiSlot.Init((GearData)selectedData);
+            }
+            else if (selectedData is PetUpgradeData)
+            {
+                uiSlot.Init((PetUpgradeData)selectedData);
             }
             
             uiSlot.gameObject.SetActive(true);

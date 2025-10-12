@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3528144728598297618}
   - component: {fileID: 5495237886329258799}
   - component: {fileID: -8720768394999697586}
+  - component: {fileID: 9114357730736514861}
   m_Layer: 11
   m_Name: 304_Rabbit_Legendary
   m_TagString: Untagged
@@ -153,13 +154,13 @@ MonoBehaviour:
   wanderRadius: 5
   returnDistance: 6
   avoidanceRadius: 2.5
-  avoidanceWeight: 1.5
+  avoidanceWeight: 1.75
   minWaitTime: 0.3
   maxWaitTime: 1
-  maxHealth: 5
-  attackRange: 5
-  attackDamage: 50
-  attackCooldown: 1
+  baseMaxHealth: 5
+  baseAttackRange: 5
+  baseAttackDamage: 10
+  baseAttackCooldown: 3
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

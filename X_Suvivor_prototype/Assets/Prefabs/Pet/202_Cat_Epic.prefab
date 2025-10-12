@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3528144728598297618}
   - component: {fileID: 5495237886329258799}
   - component: {fileID: -1934317435960231069}
+  - component: {fileID: 4959532050853316051}
   m_Layer: 11
   m_Name: 202_Cat_Epic
   m_TagString: Untagged
@@ -153,13 +154,13 @@ MonoBehaviour:
   wanderRadius: 5
   returnDistance: 6
   avoidanceRadius: 2.5
-  avoidanceWeight: 1.5
+  avoidanceWeight: 1.75
   minWaitTime: 0.3
   maxWaitTime: 1
-  maxHealth: 5
-  attackRange: 4
-  attackDamage: 30
-  attackCooldown: 3
+  baseMaxHealth: 5
+  baseAttackRange: 5
+  baseAttackDamage: 10
+  baseAttackCooldown: 4
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

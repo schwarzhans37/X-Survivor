@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -30,20 +31,30 @@ public class PetController : MonoBehaviour
     [SerializeField] private float maxWaitTime = 1.5f;   // 최대 대기시간
 
     [Header("펫 능력치 설정")]
-    public int maxHealth;
-    private int currentHealth;
-    private bool isInvincible;
-    public float attackRange;      // 투사체 공격 사거리
-    public float attackDamage;     // 공격 데미지
-    public float attackCooldown;  // 공격 쿨타임
-    public LayerMask enemyLayer;        // 적만 감지하는 레이어
+    public int baseMaxHealth = 5;
+    public float baseAttackRange = 3f;
+    public float baseAttackDamage = 10f;
+    public float baseAttackCooldown = 5f;
+
+    public int currentMaxHealth;
+    private float currentAttackDamage;
+    private float currentAttackCooldown;
+    private int projectileCount;
+
+    [Header("기타 설정")]
+    public LayerMask enemyLayer;
     private PoolManager poolManager;
+    public int currentHealth;
+    private bool isInvincible;
 
     [Header("펫 부활")]
     public GameObject revivePromptPrefab;
     private GameObject revivePromptInstance;
     [HideInInspector] public int deathCount = 0;
     [HideInInspector] public int revivalCount = 0;
+
+     // 각 강화 타입의 현재 레벨을 저장하는 딕셔너리
+    private Dictionary<PetUpgradeType, int> upgradeLevels = new Dictionary<PetUpgradeType, int>();
 
     private PetState currentState;          // 펫 현재 상태
     private Vector2 targetPosition;         // 이동 목표 지점
@@ -66,7 +77,12 @@ public class PetController : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        currentHealth = maxHealth;
+        currentMaxHealth = baseMaxHealth;
+        currentHealth = currentMaxHealth;
+        currentAttackDamage = baseAttackDamage;
+        currentAttackCooldown = baseAttackCooldown;
+        projectileCount = 1;
+
         isInvincible = false;
         isDead = false;
 
@@ -148,7 +164,7 @@ public class PetController : MonoBehaviour
         if (isDead || isInvincible) return;
 
         currentHealth -= damage;
-        Debug.Log($"펫이 공격받았습니다. 현재 체력 : {currentHealth}/{maxHealth}");
+        Debug.Log($"펫이 공격받았습니다. 현재 체력 : {currentHealth}/{currentMaxHealth}");
 
         if (currentHealth <= 0)
         {
@@ -197,7 +213,7 @@ public class PetController : MonoBehaviour
         Debug.Log("펫이 부활합니다.");
         isDead = false;
         revivalCount++;
-        currentHealth = maxHealth;
+        currentHealth = currentMaxHealth;
 
         // 코루틴들 재시작
         movementCoroutine = StartCoroutine(MovementRoutine());
@@ -371,47 +387,35 @@ public class PetController : MonoBehaviour
         while (!isDead)
         {
             // 공격 쿨타임만큼 대기
-            yield return new WaitForSeconds(attackCooldown);
+            float cooldown = Mathf.Max(01f, currentAttackCooldown);
+            yield return new WaitForSeconds(cooldown);
 
             // 가까운 적 찾기
-            Transform closestEnemy = FindClosestEnemy();
+            List<Transform> closestEnemies = FindClosestEnemies();
 
             // 찾았다면 공격
-            if (closestEnemy != null)
+            if (closestEnemies.Count > 0)
             {
-                PetAttack(closestEnemy);
+                foreach (Transform enemy in closestEnemies)
+                {
+                    PetAttack(enemy);
+                }
             }
         }
     }
 
-    private Transform FindClosestEnemy()
+    private List<Transform> FindClosestEnemies()
     {
         // attackRange 반경 내의 모든 적 콜라이더 가져옴
-        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer);
+        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, baseAttackRange, enemyLayer);
 
-        Transform bestTarget = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
-
-        // 가져온 모든 적들을 순화혀며 가장 가까운 적을 찾음
-        foreach (Collider2D enemyCollider in enemiesInRange)
-        {
-            // 살아있는 적인지 확인
-            Enemy enemy = enemyCollider.GetComponent<Enemy>();
-            if (enemy != null && enemy.IsAlive)
-            {
-                Vector3 directionToTarget = enemyCollider.transform.position - currentPosition;
-
-                float dSqrToTarget = directionToTarget.sqrMagnitude;
-                if (dSqrToTarget < closestDistanceSqr)
-                {
-                    closestDistanceSqr = dSqrToTarget;
-                    bestTarget = enemyCollider.transform;
-                }
-            }
-        }
-
-        return bestTarget;
+        return enemiesInRange
+            .Select(enemyCollider => enemyCollider.GetComponent<Enemy>()) // Enemy 컴포넌트를 가져옴
+            .Where(enemy => enemy != null && enemy.IsAlive) // 살아있는 적만 필터링
+            .OrderBy(enemy => Vector3.Distance(transform.position, enemy.transform.position)) // 가까운 순으로 정렬
+            .Take(projectileCount) // 투사체 개수만큼만 선택
+            .Select(enemy => enemy.transform) // Transform 정보만 추출
+            .ToList(); // 리스트로 변환하여 반환
     }
 
     private void PetAttack(Transform target)
@@ -425,7 +429,60 @@ public class PetController : MonoBehaviour
         if (projectile != null)
         {
             // 목표, 데미지, 사거리 전달
-            projectile.Init(target, attackDamage, attackRange);
+            projectile.Init(target, currentAttackDamage, baseAttackRange);
         }
     }
+
+    // 외부에서 특정 강화의 현재 레벨을 확인하는 함수
+    public int GetUpgradeLevel(PetUpgradeType upgradeType)
+    {
+        upgradeLevels.TryGetValue(upgradeType, out int currentLevel);
+        return currentLevel;
+    }
+
+    public void ApplyUpgrade(PetUpgradeData data)
+    {
+        // 이 강화 타입의 현재 레벨을 가져옵니다. 처음이라면 0입니다.
+        upgradeLevels.TryGetValue(data.upgradeType, out int currentLevel);
+
+        // 레벨업이 가능한 최대 레벨인지 확인합니다.
+        if (currentLevel >= data.upgradeValues.Length)
+        {
+            Debug.LogWarning($"{data.upgradeName} 강화는 이미 최대 레벨입니다.");
+            return;
+        }
+
+        // 해당 강화의 레벨을 1 증가시킵니다.
+        upgradeLevels[data.upgradeType] = currentLevel + 1;
+
+        // 강화 타입에 따라 실제 능력치를 업데이트합니다.
+        switch (data.upgradeType)
+        {
+            case PetUpgradeType.AttackDamage:
+                // 기본 공격력에 강화 수치를 더합니다.
+                currentAttackDamage = baseAttackDamage + data.upgradeValues[currentLevel];
+                Debug.Log($"펫 공격력 강화! 현재 공격력: {currentAttackDamage}");
+                break;
+            case PetUpgradeType.AttackCooldown:
+                // 기본 쿨타임에 강화 수치(음수)를 더합니다.
+                currentAttackCooldown = baseAttackCooldown + data.upgradeValues[currentLevel];
+                Debug.Log($"펫 공격 쿨타임 강화! 현재 쿨타임: {currentAttackCooldown}");
+                break;
+            case PetUpgradeType.ProjectileCount:
+                // 투사체 수를 업데이트합니다.
+                projectileCount = (int)data.upgradeValues[currentLevel];
+                Debug.Log($"펫 투사체 수 강화! 현재 개수: {projectileCount}");
+                break;
+            case PetUpgradeType.MaxHealth:
+                // 이전 최대 체력을 기억해 둡니다.
+                int previousMaxHealth = currentMaxHealth;
+                // 기본 체력에 강화 수치를 더해 새로운 최대 체력을 계산합니다.
+                currentMaxHealth = baseMaxHealth + (int)data.upgradeValues[currentLevel];
+                // 늘어난 체력만큼 현재 체력도 회복시켜줍니다.
+                currentHealth += currentMaxHealth - previousMaxHealth;
+                Debug.Log($"펫 최대 체력 강화! 현재 체력: {currentHealth}/{currentMaxHealth}");
+                break;
+        }
+    }
+
 }

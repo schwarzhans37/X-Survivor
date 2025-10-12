@@ -5495,6 +5495,7 @@ MonoBehaviour:
   itemCategory: 0
   weaponData: {fileID: 0}
   gearData: {fileID: 0}
+  petUpgradeData: {fileID: 0}
   currentDisplayLevel: 0
   icon: {fileID: 995042284}
   textLevel: {fileID: 920244178}
@@ -6238,6 +6239,7 @@ MonoBehaviour:
   itemCategory: 0
   weaponData: {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
   gearData: {fileID: 0}
+  petUpgradeData: {fileID: 0}
   currentDisplayLevel: 0
   icon: {fileID: 284860209}
   textLevel: {fileID: 1176450505}
@@ -11938,6 +11940,7 @@ MonoBehaviour:
   itemCategory: 0
   weaponData: {fileID: 0}
   gearData: {fileID: 0}
+  petUpgradeData: {fileID: 0}
   currentDisplayLevel: 0
   icon: {fileID: 1516740689}
   textLevel: {fileID: 1995017326}
@@ -12986,6 +12989,7 @@ MonoBehaviour:
   itemCategory: 0
   weaponData: {fileID: 11400000, guid: a3d94efcd1e8d1e4b8e4ad5af1509ece, type: 2}
   gearData: {fileID: 0}
+  petUpgradeData: {fileID: 0}
   currentDisplayLevel: 0
   icon: {fileID: 1791054443}
   textLevel: {fileID: 1974663144}
@@ -14186,6 +14190,7 @@ MonoBehaviour:
   itemCategory: 1
   weaponData: {fileID: 0}
   gearData: {fileID: 11400000, guid: b3f04ac9babce0b45895e05ce436bfd0, type: 2}
+  petUpgradeData: {fileID: 0}
   currentDisplayLevel: 0
   icon: {fileID: 1783480692}
   textLevel: {fileID: 953458019}
@@ -23120,6 +23125,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 010950c3aac462345bbbd341c4da15d3, type: 2}
   - {fileID: 11400000, guid: f0cd57b372b1e574d90d5822aa1f9d73, type: 2}
   - {fileID: 11400000, guid: 62f751b5a392f2e4fbf27959246e4611, type: 2}
+  petUpgradeDatas:
+  - {fileID: 11400000, guid: 4b1d1640ca28a2048b1eb30796a0a168, type: 2}
+  - {fileID: 11400000, guid: a1c553d49cf4cbe4cbc9814bb3347025, type: 2}
+  - {fileID: 11400000, guid: de97c276094d10547ae21d94efa8c3f3, type: 2}
+  - {fileID: 11400000, guid: ed0060b58adb80140bbf7eb9ae75853f, type: 2}
 --- !u!1 &1407444849
 GameObject:
   m_ObjectHideFlags: 0

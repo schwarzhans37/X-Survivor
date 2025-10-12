@@ -153,13 +153,13 @@ MonoBehaviour:
   wanderRadius: 5
   returnDistance: 6
   avoidanceRadius: 2.5
-  avoidanceWeight: 1.5
+  avoidanceWeight: 1.75
   minWaitTime: 0.3
   maxWaitTime: 1
-  maxHealth: 5
-  attackRange: 5
-  attackDamage: 50
-  attackCooldown: 1
+  baseMaxHealth: 5
+  baseAttackRange: 5
+  baseAttackDamage: 10
+  baseAttackCooldown: 3
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

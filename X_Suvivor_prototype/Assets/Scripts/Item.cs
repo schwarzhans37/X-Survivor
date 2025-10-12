@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
-    public enum ItemCategory { Weapon, Gear };
+    public enum ItemCategory { Weapon, Gear, PetUpgrade };
     public ItemCategory itemCategory;
 
     public WeaponData weaponData;
     public GearData gearData;
+    public PetUpgradeData petUpgradeData;
 
     // 이 슬롯이 “다음에 오를 레벨”을 표시하기 위해 내부적으로 가진 현재 레벨
     public int currentDisplayLevel;
@@ -53,6 +54,15 @@ public class Item : MonoBehaviour
         itemCategory = ItemCategory.Gear;
         gearData = data;
         weaponData = null;
+        UpdateUI();
+    }
+
+    public void Init(PetUpgradeData data)
+    {
+        itemCategory = ItemCategory.PetUpgrade;
+        petUpgradeData = data;
+        weaponData = null;
+        gearData = null;
         UpdateUI();
     }
 
@@ -118,6 +128,23 @@ public class Item : MonoBehaviour
 
                     break;
                 }
+
+            case ItemCategory.PetUpgrade:
+                {
+                    PetController pet = FindObjectOfType<PetController>();
+
+                    if (pet == null) break;
+
+                    int curLv = pet.GetUpgradeLevel(petUpgradeData.upgradeType);
+                    int nextLv = curLv + 1;
+
+                    if (icon) icon.sprite = petUpgradeData.upgradeIcon;
+                    if (textName) textName.text = petUpgradeData.upgradeName;
+                    if (textLevel) textLevel.text = $"Lv.{nextLv}";
+                    if (textDesc) textDesc.text = BuildPetUpgradeDesc(petUpgradeData, curLv);
+
+                    break;
+                }
         }
     }
 
@@ -152,6 +179,35 @@ public class Item : MonoBehaviour
         return line;
     }
 
+    string BuildPetUpgradeDesc(PetUpgradeData data, int currentLevel)
+    {
+        string line = !string.IsNullOrEmpty(data.upgradeDescription) ? data.upgradeDescription : "펫 능력 강화";
+        
+        // 다음 레벨의 인덱스를 계산
+        int nextLevelIndex = currentLevel; // 현재 레벨이 0이면, 다음은 index 0의 값
+
+        if (data.upgradeValues != null && data.upgradeValues.Length > nextLevelIndex)
+        {
+            float val = data.upgradeValues[nextLevelIndex];
+            
+            // 강화 타입에 따라 다른 텍스트를 보여wna
+            switch (data.upgradeType)
+            {
+                case PetUpgradeType.AttackCooldown:
+                    // 쿨타임 감소는 보통 음수 값이므로, 양수로 바꿔서 보여주는 것이 직관적
+                    line += $"\n쿨타임 {-val:0.##}초 감소";
+                    break;
+                case PetUpgradeType.ProjectileCount:
+                    line += $"\n총알 개수 {val}개로 증가";
+                    break;
+                default: // AttackDamage, MaxHealth 등
+                    line += $"\n효과 +{val:0.#}";
+                    break;
+            }
+        }
+        return line;
+    }
+
     // 선택 시 처리 (기존 로직 유지)
     public void OnClick()
     {
@@ -177,6 +233,15 @@ public class Item : MonoBehaviour
                         var g = player.FindEquippedGear(gearData);
                         if (g == null) player.EquipGear(gearData);
                         else g.LevelUp();
+                    }
+                    break;
+                }
+            case ItemCategory.PetUpgrade:
+                {
+                    PetController pet = FindObjectOfType<PetController>();
+                    if (pet != null)
+                    {
+                        pet.ApplyUpgrade(petUpgradeData);
                     }
                     break;
                 }

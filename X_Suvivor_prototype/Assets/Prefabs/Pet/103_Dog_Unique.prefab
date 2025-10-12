@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3528144728598297618}
   - component: {fileID: 5495237886329258799}
   - component: {fileID: -3308915197720117924}
+  - component: {fileID: 4935206943707987233}
   m_Layer: 11
   m_Name: 103_Dog_Unique
   m_TagString: Untagged
@@ -153,13 +154,13 @@ MonoBehaviour:
   wanderRadius: 5
   returnDistance: 6
   avoidanceRadius: 2.5
-  avoidanceWeight: 1.5
+  avoidanceWeight: 1.75
   minWaitTime: 0.3
   maxWaitTime: 1
-  maxHealth: 5
-  attackRange: 4.5
-  attackDamage: 40
-  attackCooldown: 2
+  baseMaxHealth: 5
+  baseAttackRange: 5
+  baseAttackDamage: 10
+  baseAttackCooldown: 3.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -218,8 +219,7 @@ MonoBehaviour:
   cooldownEpic: 45
   cooldownUnique: 35
   cooldownLegendary: 20
-  firstCastDelay: 1
-  autoLoop: 1
+  triggerKey: 114
   stunDuration: 5
   flatAttackBonus: 30
   attackBuffDuration: 5
