@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
-  m_Name: 500_Panda_Nomal
+  m_Name: 200_Cat_Normal
   m_EditorClassIdentifier: 
-  id: 500
-  petName: "\uD310\uB2E4(\uB178\uBA40)"
-  petType: "\uD310\uB2E4"
+  id: 200
+  petName: "\uACE0\uC591\uC774(\uB178\uBA40)"
+  petType: "\uACE0\uC591\uC774"
   grade: "\uB178\uBA40"
-  petIcon: {fileID: 21300000, guid: 4e4b660673ccfe044835621ff3e29cc1, type: 3}
-  inGamePrefab: {fileID: 1448656011933182545, guid: 83608a83299765a419a3c3b3b36f69ad, type: 3}
-  splashArtPrefab: {fileID: 7229414638806358818, guid: 8ff3ca8e293864c4693b227e66d710f9, type: 3}
+  petIcon: {fileID: 21300000, guid: ec828880d0347b943ab01ce321e66a8d, type: 3}
+  inGamePrefab: {fileID: 1448656011933182545, guid: 6195d727763fa8f4ca6dae5d83e87975, type: 3}
+  splashArtPrefab: {fileID: 3648688616992089384, guid: a43673cfa4f8d9a46923ac7c40e341e4, type: 3}
   buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
   hasSkill: 0
   skillDescription: "\uC2A4\uD0AC \uC5C6\uC74C"

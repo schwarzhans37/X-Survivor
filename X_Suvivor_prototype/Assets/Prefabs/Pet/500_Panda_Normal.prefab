@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1403403722560252523}
   - component: {fileID: 3528144728598297618}
   - component: {fileID: 5495237886329258799}
-  - component: {fileID: -5041671731241346243}
+  - component: {fileID: -8057138012044827542}
   m_Layer: 11
-  m_Name: 200_Cat_Nomal
+  m_Name: 500_Panda_Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ec828880d0347b943ab01ce321e66a8d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e4b660673ccfe044835621ff3e29cc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,7 +125,7 @@ Animator:
   m_GameObject: {fileID: 1448656011933182545}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 900b66bc9c732d14b86f9e47603e7fbd, type: 2}
+  m_Controller: {fileID: 22100000, guid: 6a47cccb19f88d64b80e8ac90535d4b5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   revivePromptPrefab: {fileID: 1991691206239705430, guid: 1bc7c121e5a1ab742b85b2a090669c58, type: 3}
   deathCount: 0
   revivalCount: 0
---- !u!70 &-5041671731241346243
+--- !u!70 &-8057138012044827542
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
-  m_Name: 100_Dog_Nomal
+  m_Name: 100_Dog_Normal
   m_EditorClassIdentifier: 
   id: 100
   petName: "\uAC15\uC544\uC9C0(\uB178\uBA40)"

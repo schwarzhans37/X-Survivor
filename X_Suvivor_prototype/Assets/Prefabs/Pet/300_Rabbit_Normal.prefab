@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1403403722560252523}
   - component: {fileID: 3528144728598297618}
   - component: {fileID: 5495237886329258799}
-  - component: {fileID: -747215727430530590}
+  - component: {fileID: -335036399801317654}
   m_Layer: 11
-  m_Name: 400_Capybara_Nomal
+  m_Name: 300_Rabbit_Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0d77d6641c10b7f4f8583254d1d9dc81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2b04d7719fa7407469899a202c32b821, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,7 +125,7 @@ Animator:
   m_GameObject: {fileID: 1448656011933182545}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: c4d628d6374a6af4fa7aaeaa4c760a07, type: 2}
+  m_Controller: {fileID: 22100000, guid: d14afb3ed0425614c9e87b916a7f278d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   revivePromptPrefab: {fileID: 1991691206239705430, guid: 1bc7c121e5a1ab742b85b2a090669c58, type: 3}
   deathCount: 0
   revivalCount: 0
---- !u!70 &-747215727430530590
+--- !u!70 &-335036399801317654
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

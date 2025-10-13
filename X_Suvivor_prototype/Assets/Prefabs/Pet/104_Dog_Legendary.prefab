@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3528144728598297618}
   - component: {fileID: 5495237886329258799}
   - component: {fileID: 5074094339627599451}
-  - component: {fileID: -6680327669906300421}
   m_Layer: 11
   m_Name: 104_Dog_Legendary
   m_TagString: Untagged
@@ -161,9 +160,11 @@ MonoBehaviour:
   baseAttackRange: 5
   baseAttackDamage: 10
   baseAttackCooldown: 3
+  currentMaxHealth: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  currentHealth: 0
   revivePromptPrefab: {fileID: 1991691206239705430, guid: 1bc7c121e5a1ab742b85b2a090669c58, type: 3}
   deathCount: 0
   revivalCount: 0
@@ -202,25 +203,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -5}
   m_Size: {x: 7, y: 10}
   m_Direction: 0
---- !u!114 &-6680327669906300421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448656011933182545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc56de4675021324fafd476f00310ae6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rarity: 4
-  minRarityToUse: 4
-  cooldownEpic: 45
-  cooldownUnique: 35
-  cooldownLegendary: 20
-  triggerKey: 114
-  stunDuration: 5
-  flatAttackBonus: 30
-  attackBuffDuration: 5
-  enemyTag: Enemy
