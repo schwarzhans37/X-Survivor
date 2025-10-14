@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 404
   petName: "\uCE74\uD53C\uBC14\uB77C(\uB808\uC804\uB354\uB9AC)"
-  petType: 0
+  petType: 4
   grade: 4
   petIcon: {fileID: 21300000, guid: f7a5058afe9bd4c4f8e7f5db61cb0665, type: 3}
   inGamePrefab: {fileID: 1448656011933182545, guid: 0b164548827464f48babd7f6fae3dbf0, type: 3}

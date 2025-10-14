@@ -12,6 +12,10 @@ public class PetSkillRunner : MonoBehaviour
     public Transform player;
     public PetController pet;
 
+    [Header("Trigger Settings")]
+    public bool manualTrigger = true; // 수동 발동 여부
+    // public bool autoLoop = false; // 자동 발동 여부
+
     private float cooldownRemain;
 
     void Awake()
@@ -36,9 +40,17 @@ public class PetSkillRunner : MonoBehaviour
         if (cooldownRemain > 0f && (pet == null || pet.IsAlive))
             cooldownRemain -= Time.deltaTime;
 
-        // 수동 발동
-        if (Input.GetKeyDown(data.triggerKey))
+        // 2. manualTrigger가 true일 때만 키 입력을 받도록 수정합니다.
+        if (manualTrigger && Input.GetKeyDown(data.triggerKey))
+        {
             TryCast();
+        }
+
+        // (추가) 만약 자동 발동 기능도 필요하다면 아래 코드를 활성화 할 수 있습니다.
+        // if (autoLoop)
+        // {
+        //     TryCast(); 
+        // }
     }
 
     public bool TryCast()

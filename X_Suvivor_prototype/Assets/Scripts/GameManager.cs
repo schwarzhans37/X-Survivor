@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     public GameObject enemyCleaner;
     public GameObject pauseMenuPanel;
 
+    [Header("# 펫 컴포넌트 참조")]
+    public PetSkillInstaller petSkillInstaller;
+
     [Header("# 캐릭터 관련 데이터베이스")]
     public List<CharaData> charaDatas;  // 모든 캐릭터 데이터를 담는 리스트
 
@@ -95,39 +98,62 @@ public class GameManager : MonoBehaviour
             Debug.LogError($"ID {charId}에 해당하는 CharaData를 찾을 수 없습니다.");
         }
 
-        // 4. 선택된 펫 소환 로직
-        if (petId != -1)    // 선택된 펫이 있다면....
-        {
-            PetData selectedPetData = PlayerDataManager.instance.petDatabase.GetPetByID(petId);
-
-            if (selectedPetData != null)
-            {
-                // PetData에 게임용 프리팹이 연결되어 있는지 확인
-                if (selectedPetData.inGamePrefab != null)
-                {
-                    // 프리팹을 씬에 생성
-                    GameObject petObject = Instantiate(selectedPetData.inGamePrefab, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
-                    Debug.Log($"[{selectedPetData.grade}] {selectedPetData.petName} (ID:{petId}) 펫을 소환했습니다.");
-                }
-                else
-                {
-                    Debug.LogError($"Pet Id {petId}의 PetData에 'inGamePrefab'이 연결되지 않았습니다.");
-                }
-            }
-            else
-            {
-                Debug.LogError($"Pet ID {petId}에 해당하는 PetData를 PetDatabase에서 찾을 수 없습니다.");
-            }
-        }
-        else
-        {
-            Debug.Log("선택된 펫이 없어 펫 없이 게임을 시작합니다.");
-        }
+        // 4. 선택된 펫 소환 및 스킬 설치 로직
+        SpawnPetAndInstallSkill(petId);
 
         // 5. UI 및 게임 상태 설정
         //uiLevelUo.Select(playerId % 2);
         Resume();
         AudioManager.instance.PlaySfx("Select");
+    }
+
+    // 펫 소환과 스킬 설치 로직을 별도의 함수로 분리하여 관리합니다.
+    void SpawnPetAndInstallSkill(int petId)
+    {
+        if (petId <= 0) // 펫 ID가 유효하지 않으면 (선택 안함 등)
+        {
+            Debug.Log("선택된 펫이 없어 펫 없이 게임을 시작합니다.");
+            return;
+        }
+
+        PetData selectedPetData = PlayerDataManager.instance.petDatabase.GetPetByID(petId);
+
+        if (selectedPetData == null)
+        {
+            Debug.LogError($"Pet ID {petId}에 해당하는 PetData를 PetDatabase에서 찾을 수 없습니다.");
+            return;
+        }
+
+        if (selectedPetData.inGamePrefab == null) // PetData에 프리팹이 연결되었는지 확인
+        {
+            Debug.LogError($"Pet Id {petId}의 PetData에 'inGamePrefab'이 연결되지 않았습니다.");
+            return;
+        }
+
+        // 1. 펫 프리팹을 씬에 생성
+        GameObject petObject = Instantiate(selectedPetData.inGamePrefab, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        PetController spawnedPet = petObject.GetComponent<PetController>();
+
+        if (spawnedPet == null)
+        {
+            Debug.LogError("소환된 펫 프리팹에 PetController 컴포넌트가 없습니다!");
+            Destroy(petObject); // 잘못된 프리팹이므로 파괴
+            return;
+        }
+
+        // 2. 소환된 펫 초기화 (플레이어를 알려줌)
+        spawnedPet.Initialize(player.transform);
+        Debug.Log($"[{selectedPetData.grade}] {selectedPetData.petName} (ID:{petId}) 펫을 소환했습니다.");
+
+        // 3. PetSkillInstaller에게 스킬 설치 명령
+        if (petSkillInstaller != null)
+        {
+            petSkillInstaller.InstallSkillForPet(spawnedPet);
+        }
+        else
+        {
+            Debug.LogWarning("GameManager에 PetSkillInstaller가 연결되지 않아 스킬을 설치할 수 없습니다.");
+        }
     }
 
     public void GameVictory()

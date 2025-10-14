@@ -11750,6 +11750,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartPrefab: {fileID: 6068196842494262564, guid: 8497e16ba9f077e4da659c01938ecbd3, type: 3}
   container: {fileID: 348604751}
+  petHeartPrefab: {fileID: 0}
+  p_container: {fileID: 0}
 --- !u!114 &348604754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12783,6 +12785,7 @@ GameObject:
   m_Component:
   - component: {fileID: 492052613}
   - component: {fileID: 492052612}
+  - component: {fileID: 492052614}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -12818,6 +12821,7 @@ MonoBehaviour:
   uiResult: {fileID: 1780199141}
   enemyCleaner: {fileID: 1882968315}
   pauseMenuPanel: {fileID: 1554093636}
+  petSkillInstaller: {fileID: 492052614}
   charaDatas:
   - {fileID: 11400000, guid: b2dee6c27d4bd0240b5815fdcff1b813, type: 2}
   - {fileID: 11400000, guid: 501416ec2bd07a84da40ea9df6703c8f, type: 2}
@@ -12838,6 +12842,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &492052614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492052611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06973e427ce4df47a1d74b2d99a63a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoFromSelectedPet: 1
+  skillPrefab: {fileID: 0}
+  parentUnderPlayer: 1
 --- !u!1 &496820869
 GameObject:
   m_ObjectHideFlags: 0
@@ -13326,7 +13345,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 5.9888887
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

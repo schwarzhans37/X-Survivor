@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 100
   petName: "\uAC15\uC544\uC9C0(\uB178\uBA40)"
-  petType: "\uAC15\uC544\uC9C0"
-  grade: "\uB178\uBA40"
+  petType: 0
+  grade: 0
   petIcon: {fileID: 21300000, guid: eb48b9553cf561a44acc6fda6ff4af4e, type: 3}
   inGamePrefab: {fileID: 1448656011933182545, guid: 4894761423a98054c8ca2a8d195f0875, type: 3}
   splashArtPrefab: {fileID: 8111258404320486337, guid: 1e5745c57be601d46ba34f8f18444f63, type: 3}
   buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
-  hasSkill: 0
-  skillDescription: "\uC2A4\uD0AC \uC5C6\uC74C"
-  initialSkillCount: 0
+  skillData: {fileID: 11400000, guid: f7474d8dc29968048a53ab2124af15ed, type: 2}
