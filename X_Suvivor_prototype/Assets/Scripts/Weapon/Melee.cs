@@ -59,7 +59,7 @@ public class Melee : WeaponBase
             blade.Rotate(rotVec);
             blade.Translate(blade.up * 1.5f, Space.World);
             
-            blade.GetComponent<Bullet>().Init(currentDamage, -100, 0, Vector2.zero);
+            blade.GetComponent<MeleeHitBox>().Init(currentDamage, -100);
         }
     }
 }

@@ -18,6 +18,7 @@ MonoBehaviour:
   weaponDesc: "\uD3C9\uBC94\uD55C \uC0AC\uB0E5\uCD1D\uC774\uB2E4."
   controllerPrefab: {fileID: 3203754832001300600, guid: 5b75026db9a3ddd438bb52aa0d88e5b1, type: 3}
   baseDamage: 10
+  baseRange: 0
   baseCount: 1
   basePenetration: 0
   baseCooldown: 1
@@ -28,6 +29,13 @@ MonoBehaviour:
   - 20
   - 25
   - 30
+  ranges:
+  - 2
+  - 2.5
+  - 3
+  - 3.5
+  - 4
+  - 4.5
   counts: 01000000010000000100000001000000
   penetrations: 01000000020000000300000004000000
   cooldowns:

@@ -22,6 +22,7 @@ public class WeaponData : ScriptableObject
 
     [Header("# 레벨 데이터")]
     public float baseDamage;          // 레벨 0 (기본) 데미지
+    public float baseRange;           // 레벨 0 (기본 ) 사거리
     public int baseCount;             // 레벨 0 (기본) 개수
     public int basePenetration;       // 레벨 0 (기본) 관통력
     public float baseCooldown;        // 레벨 0 (기본) 쿨다운
@@ -30,6 +31,7 @@ public class WeaponData : ScriptableObject
 
     // 레벨업에 따른 '증가량'을 배열로 관리
     public float[] damages;
+    public float[] ranges;
     public int[] counts;
     public int[] penetrations;
     public float[] cooldowns;

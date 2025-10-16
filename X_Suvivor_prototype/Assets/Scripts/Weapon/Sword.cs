@@ -40,7 +40,7 @@ public class Sword : WeaponBase
         swordTransform.parent = this.transform;     // 컨트롤러의 자식으로 설정
 
         // 3. 데미지, 관통력 등 초기화
-        swordInstance.GetComponent<Bullet>().Init(currentDamage, -100, 0, Vector2.zero);
+        swordInstance.GetComponent<MeleeHitBox>().Init(currentDamage, -100);
 
         // 4. 스윙 애니메이션
         float elapsedTime = 0f;

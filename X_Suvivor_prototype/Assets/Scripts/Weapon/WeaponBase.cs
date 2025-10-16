@@ -10,6 +10,7 @@ public abstract class WeaponBase : MonoBehaviour
 
     // 현재 레벨에 맞는 최종 스텟;
     protected float currentDamage;
+    protected float currentRange;
     protected int currentCount;
     protected int currentPenetration;
     protected float currentCooldown;
@@ -47,6 +48,7 @@ public abstract class WeaponBase : MonoBehaviour
         if (currentLevel == 0)
         {
             currentDamage = weaponData.baseDamage;
+            currentRange = weaponData.baseRange;
             currentPenetration = weaponData.basePenetration;
             currentCount = weaponData.baseCount;
             currentCooldown = weaponData.baseCooldown;
@@ -59,6 +61,9 @@ public abstract class WeaponBase : MonoBehaviour
 
             if (levelIndex < weaponData.damages.Length)
                 currentDamage = weaponData.damages[levelIndex];
+
+            if (levelIndex < weaponData.ranges.Length)
+                currentRange = weaponData.ranges[levelIndex];
 
             if (levelIndex < weaponData.penetrations.Length)
                 currentPenetration = weaponData.penetrations[levelIndex];

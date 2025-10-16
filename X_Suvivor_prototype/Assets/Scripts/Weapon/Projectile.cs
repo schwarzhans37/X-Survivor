@@ -38,7 +38,7 @@ public class Projectile : WeaponBase
         bulletTransform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
 
         // 5. 투사체를 초기화함.
-        bulletTransform.GetComponent<Bullet>().Init(currentDamage, currentPenetration, currentProjectileSpeed, dir);
+        bulletTransform.GetComponent<Bullet>().Init(currentDamage, currentRange, currentPenetration, currentProjectileSpeed, dir);
 
         // 6. 사운드 재생
         AudioManager.instance.PlaySfx("Range");
