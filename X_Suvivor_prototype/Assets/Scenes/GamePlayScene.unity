@@ -6628,6 +6628,8 @@ GameObject:
   - component: {fileID: 274803315}
   - component: {fileID: 274803318}
   - component: {fileID: 274803319}
+  - component: {fileID: 274803321}
+  - component: {fileID: 274803320}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -7051,6 +7053,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6ee6f7bbe486894c807f510788b1bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &274803320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274803307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315a24656f7719438a2436d7d7a4165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &274803321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274803307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1a796446f605f4bbc38df9a4084f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &284860207
@@ -13345,7 +13371,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.9888887
+  orthographic size: 6.0555553
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

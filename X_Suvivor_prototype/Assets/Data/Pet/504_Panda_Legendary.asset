@@ -20,4 +20,4 @@ MonoBehaviour:
   inGamePrefab: {fileID: 1448656011933182545, guid: 461c82b61bba6c14cadb50332e21cda5, type: 3}
   splashArtPrefab: {fileID: 1208520186783716176, guid: e38ff593169f3014eb0c38c1e5d357f8, type: 3}
   buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
-  skillData: {fileID: 0}
+  skillData: {fileID: 11400000, guid: b14ee5577c6c43b4fb57a9e0876d5f74, type: 2}

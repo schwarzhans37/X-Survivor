@@ -15,7 +15,7 @@ MonoBehaviour:
   gearType: 0
   gearId: 0
   gearName: "\uC7A5\uAC11"
-  gearDesc: "\uACF5\uACA9\uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  gearDesc: "\uACF5\uACA9\uB825\uC774 \uC99D\uAC00\uD558\uB294 \uC7A5\uAC11\uC774\uB2E4."
   gearIcon: {fileID: -201829820, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   baseValue: 20
   Values:

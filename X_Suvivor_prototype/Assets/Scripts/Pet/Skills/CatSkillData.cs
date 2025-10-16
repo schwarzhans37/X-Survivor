@@ -18,9 +18,9 @@ public class CatSkillData : PetSkillDefinition
     public LayerMask fallbackItemMask;
 
     [Header("공격력 버프")]
-    [Tooltip("등급별 고정 공격력 보너스 [일반, 레어, 에픽, 유니크, 레전드]")]
-    [InspectorName("등급별 공격력 보너스 [N,R,E,U,L]")]
-    public float[] atkFlat = new float[5] { 0, 0, 30, 30, 30 };
+    [Tooltip("등급별 공격력 배수 (1.5 = 50% 증가)")]
+    [InspectorName("등급별 공격력 배수 [N,R,E,U,L]")]
+    public float[] atkMultiplier = new float[5] { 1f, 1f, 1.5f, 1.5f, 1.5f };
 
     [Tooltip("등급별 공격력 버프 지속(초) [일반, 레어, 에픽, 유니크, 레전드]")]
     [InspectorName("등급별 버프 지속(초) [N,R,E,U,L]")]
@@ -63,14 +63,20 @@ public class CatSkillData : PetSkillDefinition
             }
         }
 
-        // 3) 공격력 버프
-        float bonus = atkFlat[Mathf.Clamp(i, 0, atkFlat.Length - 1)];
+        // 3. 공격력 배율 버프 로직
+        float multiplier = atkMultiplier[Mathf.Clamp(i, 0, atkMultiplier.Length - 1)];
         float dur = atkDuration[Mathf.Clamp(i, 0, atkDuration.Length - 1)];
-        if (ctx.player && dur > 0f && Mathf.Abs(bonus) > 0.0001f)
+
+        // 플레이어가 존재하고, 버프 지속시간이 있으며, 배율이 1배를 초과할 때만 실행
+        if (ctx.player && dur > 0f && multiplier > 1f)
         {
             var recv = ctx.player.GetComponent<PlayerAttackBuffReceiver>();
             if (!recv) recv = ctx.player.gameObject.AddComponent<PlayerAttackBuffReceiver>();
-            recv.AddFlatAttackBuff(bonus, dur);
+
+            // AddFlatAttackBuff 대신 AddMultiplier를 호출합니다.
+            recv.AddMultiplier(multiplier, dur);
         }
+
+        yield return null;
     }
 }

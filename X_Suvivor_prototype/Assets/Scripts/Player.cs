@@ -320,10 +320,14 @@ public class Player : MonoBehaviour
         Debug.Log("모든 장비 효과를 스탯에 다시 적용했습니다.");
     }
 
-
     public void TakeDamage(int damage)
     {
-        if (isInvincible || !GameManager.instance.isLive) return;
+        // 버프 시스템의 무적 상태를 가져와서 추가로 확인합니다.
+        var invincibilityBuff = GetComponent<PlayerInvincibilityBuffReceiver>();
+        bool isBuffInvincible = (invincibilityBuff != null && invincibilityBuff.IsInvincible);
+
+        // 기존의 isInvincible(피격 후 무적) 또는 isBuffInvincible(스킬 무적) 상태일 경우 데미지를 받지 않습니다.
+        if (isInvincible || isBuffInvincible || !GameManager.instance.isLive) return;
 
         health -= damage;
         Debug.Log("플레이어가 공격받았습니다.");
@@ -340,7 +344,7 @@ public class Player : MonoBehaviour
             else if (!string.IsNullOrEmpty(hitSfxKey)) PlaySfxKey(hitSfxKey);
 
             StartCoroutine(InvincibleRoutine(invincibleTime));
-            Debug.Log("플레이어가 생명력 1개를 잃고 3초간 무적이 됩니다.");
+            Debug.Log($"플레이어가 생명력 {damage}를 잃고 {invincibleTime}초간 무적이 됩니다.");
         }
     }
 
@@ -356,7 +360,6 @@ public class Player : MonoBehaviour
     IEnumerator InvincibleRoutine(float duration)
     {
         isInvincible = true;
-        capColl.isTrigger = true;
 
         // 1. 몬스터와의 충돌을 무시하기 위해 레이어 변경
         int originalLayer = gameObject.layer;
@@ -479,6 +482,17 @@ public class Player : MonoBehaviour
     void ClampHealthToMax()
     {
         health = Mathf.Clamp(health, 0, maxHealth);
+    }
+
+    // 펫 스킬 사용 시 공격력 배율 함수
+    public float GetDamageMultiplierFromBuffs()
+    {
+        var attackBuffReceiver = GetComponent<PlayerAttackBuffReceiver>();
+        if (attackBuffReceiver != null)
+        {
+            return attackBuffReceiver.TotalMultiplier;
+        }
+        return 1f; // 버프 리시버가 없으면 1배
     }
 
     // ===== Audio helpers =====

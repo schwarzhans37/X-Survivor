@@ -262,7 +262,20 @@ public class Enemy : MonoBehaviour
         if (!isLive) return;
         if (!collision.CompareTag("Bullet")) return;
 
-        health -= collision.GetComponent<Bullet>().damage;
+        Bullet bullet = collision.GetComponent<Bullet>();
+        if (bullet == null) return; // 총알이 아니면 무시
+
+        // 1. 플레이어의 장비(장갑)로 인한 '추가 데미지'를 가져옵니다.
+        float gearBonus = GameManager.instance.player.GetDamageBonusFromGears();
+
+        // 2. 펫 스킬 등으로 인한 '공격력 배율'을 가져옵니다.
+        float buffMultiplier = GameManager.instance.player.GetDamageMultiplierFromBuffs();
+
+        // 3. 최종 데미지를 계산합니다: (총알 기본 데미지 + 장비 보너스) * 버프 배율
+        float finalDamage = (bullet.damage + gearBonus) * buffMultiplier;
+
+        // 최종 계산된 데미지를 적용합니다.
+        health -= finalDamage;
 
         // 플레이어 반대 방향으로 임펄스 넉백
         Vector3 playerPos = GameManager.instance.player.transform.position;

@@ -2,36 +2,36 @@
 using System.Collections;
 using System.Collections.Generic;
 
-/// <summary>
-/// 플레이어가 일시적으로 공격력(플랫)을 얻는 버프 관리자.
-/// 기존 데미지 계산에 더하기만 하면 된다:
-///   최종공격력 = 기본공격력 + PlayerAttackBuffReceiver.TotalFlatBonus
-/// </summary>
 [DisallowMultipleComponent]
 public class PlayerAttackBuffReceiver : MonoBehaviour
 {
-    private readonly List<float> _activeBonuses = new List<float>();
+    private readonly List<float> _activeMultipliers = new List<float>();
 
-    /// <summary>현재 활성화된 모든 플랫 보너스 합</summary>
-    public float TotalFlatBonus
+    public float TotalMultiplier
     {
         get
         {
-            float sum = 0f;
-            for (int i = 0; i < _activeBonuses.Count; i++) sum += _activeBonuses[i];
-            return sum;
+            if (_activeMultipliers.Count == 0)
+                return 1f; // 버프가 없으면 1배 (곱셈에 영향 없음)
+
+            float total = 1f;
+            foreach (float multiplier in _activeMultipliers)
+            {
+                total *= multiplier;
+            }
+            return total;
         }
     }
 
-    public void AddFlatAttackBuff(float amount, float duration)
+    public void AddMultiplier(float multiplier, float duration)
     {
-        StartCoroutine(ApplyFlatBuff(amount, duration));
+        StartCoroutine(ApplyMultiplierBuff(multiplier, duration));
     }
 
-    private IEnumerator ApplyFlatBuff(float amount, float duration)
+    private IEnumerator ApplyMultiplierBuff(float multiplier, float duration)
     {
-        _activeBonuses.Add(amount);
+        _activeMultipliers.Add(multiplier);
         yield return new WaitForSeconds(duration);
-        _activeBonuses.Remove(amount);
+        _activeMultipliers.Remove(multiplier);
     }
 }

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbd19167ee561b44fa5b4dfb12bbeba1, type: 3}
-  m_Name: RabbitSkillData
+  m_Script: {fileID: 11500000, guid: e852eb69076a52f4ba6999320c9dfa9d, type: 3}
+  m_Name: CapybaraSkillData
   m_EditorClassIdentifier: 
   minRarityToUse: 2
   triggerKey: 114
@@ -20,24 +20,14 @@ MonoBehaviour:
   - 45
   - 35
   - 20
-  speedMul:
-  - 1
-  - 1
-  - 1.5
-  - 1.5
-  - 1.5
-  speedDur:
+  tempMaxHp: 0000000000000000010000000100000001000000
+  tempHpDur:
   - 0
   - 0
-  - 5
-  - 5
-  - 5
-  invincibilityDuration:
-  - 0
-  - 0
-  - 3
-  - 3
-  - 3
+  - 10
+  - 10
+  - 10
+  healNewHeart: 1
   atkFlat:
   - 0
   - 0
