@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
         health = baseMaxHealth;     // 시작 시 체력 초기화
         equippedWeapons = new List<WeaponBase>();   // 무기 리스트 초기화
         equippedGears = new List<Gear>();           // 장비 리스트 초기화
-        
+
         rigid = GetComponent<Rigidbody2D>();
         capColl = GetComponent<CapsuleCollider2D>();
         spriter = GetComponent<SpriteRenderer>();
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
         UpdateSpeed();
         UpdateMaxHealth();
     }
-    
+
     void FixedUpdate()
     /* 
         물리(Physics)계산용 업데이트 함수
@@ -109,7 +109,8 @@ public class Player : MonoBehaviour
         - Rigidbody
      */
     {
-        if (!GameManager.instance.isLive || isDashing) {
+        if (!GameManager.instance.isLive || isDashing)
+        {
             return;
         }
 
@@ -156,7 +157,7 @@ public class Player : MonoBehaviour
         // 몬스터 외의 오브젝트(아이템, 경험치 등)와 충돌했을 경우는 제외
         if (collision.gameObject.CompareTag("Enemy") && !isInvincible)
         {
-                TakeDamage(1);
+            TakeDamage(1);
         }
     }
 
@@ -201,7 +202,7 @@ public class Player : MonoBehaviour
 
     public void EquipGear(GearData gearData)
     {
-        if (gearData == null) 
+        if (gearData == null)
         {
             Debug.LogError("장착하려는 GearData가 null입니다.");
             return;
@@ -213,16 +214,16 @@ public class Player : MonoBehaviour
         newGearObj.transform.localPosition = Vector3.zero;
 
         Gear gearComponent = newGearObj.AddComponent<Gear>();
-        
+
         // 2. 생성된 Gear를 장비 목록에 **먼저** 추가합니다.
         equippedGears.Add(gearComponent);
-        
+
         // 3. Init 함수를 호출하여 데이터를 설정합니다.
         gearComponent.Init(gearData);
-        
+
         // 4. 새 장비가 추가되었으니, 모든 관련 스탯을 즉시 업데이트합니다.
         UpdateAllStatsFromGears();
-        
+
         Debug.Log($"[{gearData.gearName}] 장비를 장착했습니다.");
     }
 
@@ -320,14 +321,10 @@ public class Player : MonoBehaviour
         Debug.Log("모든 장비 효과를 스탯에 다시 적용했습니다.");
     }
 
+
     public void TakeDamage(int damage)
     {
-        // 버프 시스템의 무적 상태를 가져와서 추가로 확인합니다.
-        var invincibilityBuff = GetComponent<PlayerInvincibilityBuffReceiver>();
-        bool isBuffInvincible = (invincibilityBuff != null && invincibilityBuff.IsInvincible);
-
-        // 기존의 isInvincible(피격 후 무적) 또는 isBuffInvincible(스킬 무적) 상태일 경우 데미지를 받지 않습니다.
-        if (isInvincible || isBuffInvincible || !GameManager.instance.isLive) return;
+        if (isInvincible || !GameManager.instance.isLive) return;
 
         health -= damage;
         Debug.Log("플레이어가 공격받았습니다.");
@@ -344,7 +341,7 @@ public class Player : MonoBehaviour
             else if (!string.IsNullOrEmpty(hitSfxKey)) PlaySfxKey(hitSfxKey);
 
             StartCoroutine(InvincibleRoutine(invincibleTime));
-            Debug.Log($"플레이어가 생명력 {damage}를 잃고 {invincibleTime}초간 무적이 됩니다.");
+            Debug.Log("플레이어가 생명력 1개를 잃고 3초간 무적이 됩니다.");
         }
     }
 
@@ -360,6 +357,7 @@ public class Player : MonoBehaviour
     IEnumerator InvincibleRoutine(float duration)
     {
         isInvincible = true;
+        capColl.isTrigger = true;
 
         // 1. 몬스터와의 충돌을 무시하기 위해 레이어 변경
         int originalLayer = gameObject.layer;
