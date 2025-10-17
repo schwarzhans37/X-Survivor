@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3a0050cab1fb24fab4e04b8338db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 0}
+  weaponData: {fileID: 11400000, guid: a39f79fc8739d5b469db1706b19a3760, type: 2}
   currentLevel: 0
   swingDuration: 0.3
   swingDistance: 1.5

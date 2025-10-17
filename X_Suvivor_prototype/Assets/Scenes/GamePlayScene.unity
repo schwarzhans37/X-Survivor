@@ -11838,22 +11838,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &348604753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348604750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9da9bf2a4724534cb170a1f1a2e5bf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heartPrefab: {fileID: 6068196842494262564, guid: 8497e16ba9f077e4da659c01938ecbd3, type: 3}
-  container: {fileID: 348604751}
-  petHeartPrefab: {fileID: 0}
-  p_container: {fileID: 0}
 --- !u!114 &348604754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13447,7 +13431,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 6.0555553
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -36872,6 +36856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   damage: 1000000
+  range: 0
   penetration: 0
   bulletSize: 0
   bulletSpeed: 0
