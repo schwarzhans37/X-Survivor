@@ -165,7 +165,7 @@ public class HealthUI : MonoBehaviour
         p_hearts.Clear();
 
         // [수정] PetController의 변수 이름에 맞춰 수정합니다.
-        lastPetMaxHealth = pet.baseMaxHealth;
+        lastPetMaxHealth = pet.currentMaxHealth;
 
         for (int i = 0; i < lastPetMaxHealth; i++)
         {

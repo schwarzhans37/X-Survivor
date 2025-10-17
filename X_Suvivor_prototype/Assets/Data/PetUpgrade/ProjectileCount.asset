@@ -18,8 +18,8 @@ MonoBehaviour:
     \uC99D\uAC00"
   upgradeIcon: {fileID: 2054073412, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
   upgradeValues:
-  - 1
   - 2
   - 3
   - 4
   - 5
+  - 6
