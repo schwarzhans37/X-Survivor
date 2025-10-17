@@ -20,6 +20,7 @@ MonoBehaviour:
     \uBD88\uAC00\uB2A5\uD558\uB2E4."
   controllerPrefab: {fileID: 5057525125169318806, guid: b82f7ae7d6f9df546b408669096ceeae, type: 3}
   baseDamage: 4
+  baseRange: 0
   baseCount: 3
   basePenetration: 0
   baseCooldown: 1
@@ -30,6 +31,13 @@ MonoBehaviour:
   - 9
   - 13
   - 18
+  ranges:
+  - 2
+  - 2.5
+  - 3
+  - 3.5
+  - 4
+  - 4.5
   counts: 04000000050000000600000007000000
   penetrations: 
   cooldowns:

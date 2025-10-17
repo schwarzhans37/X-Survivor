@@ -262,21 +262,41 @@ public class Enemy : MonoBehaviour
         if (!isLive) return;
         if (!collision.CompareTag("Bullet")) return;
 
-        health -= collision.GetComponent<Bullet>().damage;
+        float hitDamage = 0f;
 
-        // 플레이어 반대 방향으로 임펄스 넉백
-        Vector3 playerPos = GameManager.instance.player.transform.position;
-        Vector3 dir = (transform.position - playerPos).normalized;
-        ApplyPush(dir * knockbackPower);
-
-        if (health > 0)
+        Bullet bullet = collision.GetComponent<Bullet>();
+        if (bullet != null)
         {
-            FlashHit();
-            AudioManager.instance.PlaySfx("Hit");
+            hitDamage = bullet.damage;
         }
         else
         {
-            Die();
+            MeleeHitBox meleeHitBox = collision.GetComponent<MeleeHitBox>();
+            if (meleeHitBox != null)
+            {
+                hitDamage = meleeHitBox.damage;
+            }
+        }
+
+        // 유효한 데미지를 성공적으로 가져왔을 때만 아래 로직을 실행합니다.
+        if (hitDamage > 0f)
+        {
+            health -= hitDamage;
+
+            // 플레이어 반대 방향으로 임펄스 넉백
+            Vector3 playerPos = GameManager.instance.player.transform.position;
+            Vector3 dir = (transform.position - playerPos).normalized;
+            ApplyPush(dir * knockbackPower);
+
+            if (health > 0)
+            {
+                FlashHit();
+                AudioManager.instance.PlaySfx("Hit");
+            }
+            else
+            {
+                Die();
+            }
         }
     }
 

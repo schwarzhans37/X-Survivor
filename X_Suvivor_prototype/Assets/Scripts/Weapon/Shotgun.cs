@@ -57,7 +57,7 @@ public class Shotgun : WeaponBase
 
             // 6. 투사체 회전 및 초기화
             bulletTransform.rotation = Quaternion.FromToRotation(Vector3.up, finalDir);
-            bulletTransform.GetComponent<Bullet>().Init(currentDamage, currentPenetration, currentProjectileSpeed, finalDir);
+            bulletTransform.GetComponent<Bullet>().Init(currentDamage, currentRange, currentPenetration, currentProjectileSpeed, finalDir);
         }
 
         // 7. 사운드 재생
