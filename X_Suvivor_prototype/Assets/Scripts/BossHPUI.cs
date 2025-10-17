@@ -9,6 +9,8 @@ public class BossHPUI : MonoBehaviour
     public Text bossNameText;    // 보스 이름 텍스트 (인스펙터에서 연결)
     public GameObject container;
 
+    public BossWarningEffect bossWaringEffect;
+
     private Enemy currentBoss;   // 현재 추적중인 보스 Enemy 컴포넌트
 
     void Start()
@@ -44,6 +46,15 @@ public class BossHPUI : MonoBehaviour
         hpSlider.value = boss.health;
 
         container.SetActive(true); // UI 전체를 활성화
+
+        if (bossWaringEffect != null)
+        {
+            bossWaringEffect.StartWarningEffect();
+        }
+        else
+        {
+            Debug.LogWarning("[BossHPUI]에 BossWarningURP 컴포넌트가 연결되지 않았습니다.");
+        }
     }
 
     // "보스가 죽었다"는 신호를 받았을 때 실행될 함수
