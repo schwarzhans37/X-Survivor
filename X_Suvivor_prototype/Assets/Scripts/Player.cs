@@ -482,6 +482,17 @@ public class Player : MonoBehaviour
         health = Mathf.Clamp(health, 0, maxHealth);
     }
 
+    // 펫 스킬 사용 시 공격력 배율 함수
+    public float GetDamageMultiplierFromBuffs()
+    {
+        var attackBuffReceiver = GetComponent<PlayerAttackBuffReceiver>();
+        if (attackBuffReceiver != null)
+        {
+            return attackBuffReceiver.TotalMultiplier;
+        }
+        return 1f;
+    }
+
     // ===== Audio helpers =====
     void PlaySfxClip(AudioClip clip)
     {
