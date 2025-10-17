@@ -60,16 +60,16 @@ public class PetSelectionUI : MonoBehaviour
         startButton.interactable = false;   // 처음에는 START 버튼 비활성화
     }
 
-    private int GetGradeOrder(string grade)
+    private int GetGradeOrder(PetRarity grade)
     {
         switch (grade)
         {
-            case "레전더리": return 5;
-            case "유니크": return 4;
-            case "에픽": return 3;
-            case "레어": return 2;
-            case "노멀": return 1;
-            default:    return 0; 
+            case PetRarity.Legendary: return 5;
+            case PetRarity.Unique: return 4;
+            case PetRarity.Epic: return 3;
+            case PetRarity.Rare: return 2;
+            case PetRarity.Normal: return 1;
+            default: return 0;
         }
     }
 

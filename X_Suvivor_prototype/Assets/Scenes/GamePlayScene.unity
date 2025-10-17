@@ -6705,6 +6705,8 @@ GameObject:
   - component: {fileID: 274803315}
   - component: {fileID: 274803318}
   - component: {fileID: 274803319}
+  - component: {fileID: 274803321}
+  - component: {fileID: 274803320}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -7128,6 +7130,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6ee6f7bbe486894c807f510788b1bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &274803320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274803307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315a24656f7719438a2436d7d7a4165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &274803321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274803307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1a796446f605f4bbc38df9a4084f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &284860207
@@ -11812,6 +11838,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &348604753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348604750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9da9bf2a4724534cb170a1f1a2e5bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartPrefab: {fileID: 6068196842494262564, guid: 8497e16ba9f077e4da659c01938ecbd3, type: 3}
+  container: {fileID: 348604751}
+  petHeartPrefab: {fileID: 0}
+  p_container: {fileID: 0}
 --- !u!114 &348604754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12845,6 +12887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 492052613}
   - component: {fileID: 492052612}
+  - component: {fileID: 492052614}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -12880,6 +12923,7 @@ MonoBehaviour:
   uiResult: {fileID: 1780199141}
   enemyCleaner: {fileID: 1882968315}
   pauseMenuPanel: {fileID: 1554093636}
+  petSkillInstaller: {fileID: 492052614}
   charaDatas:
   - {fileID: 11400000, guid: b2dee6c27d4bd0240b5815fdcff1b813, type: 2}
   - {fileID: 11400000, guid: 501416ec2bd07a84da40ea9df6703c8f, type: 2}
@@ -12900,6 +12944,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &492052614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492052611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06973e427ce4df47a1d74b2d99a63a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoFromSelectedPet: 1
+  skillPrefab: {fileID: 0}
+  parentUnderPlayer: 1
 --- !u!1 &496820869
 GameObject:
   m_ObjectHideFlags: 0
@@ -13388,7 +13447,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 6.0555553
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

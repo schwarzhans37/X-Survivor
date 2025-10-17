@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
+  m_Name: 500_Panda_Normal
+  m_EditorClassIdentifier: 
+  id: 500
+  petName: "\uD310\uB2E4(\uB178\uBA40)"
+  petType: 3
+  grade: 0
+  petIcon: {fileID: 21300000, guid: 4e4b660673ccfe044835621ff3e29cc1, type: 3}
+  inGamePrefab: {fileID: 1448656011933182545, guid: 83608a83299765a419a3c3b3b36f69ad, type: 3}
+  splashArtPrefab: {fileID: 7229414638806358818, guid: 8ff3ca8e293864c4693b227e66d710f9, type: 3}
+  buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
+  skillData: {fileID: 11400000, guid: b14ee5577c6c43b4fb57a9e0876d5f74, type: 2}
