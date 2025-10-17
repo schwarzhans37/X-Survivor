@@ -492,7 +492,7 @@ public class Player : MonoBehaviour
         {
             return attackBuffReceiver.TotalMultiplier;
         }
-        return 1f; // 버프 리시버가 없으면 1배
+        return 1f;
     }
 
     // ===== Audio helpers =====
