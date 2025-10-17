@@ -324,7 +324,15 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (isInvincible || !GameManager.instance.isLive) return;
+        // 1. 플레이어에게 붙어있는 '무적 효과 관리자'를 찾아옵니다.
+        var invincibilityBuff = GetComponent<PlayerInvincibilityBuffReceiver>();
+
+        // 2. 관리자에게 "지금 무적 상태야?" 라고 물어봅니다.
+        bool isBuffInvincible = (invincibilityBuff != null && invincibilityBuff.IsInvincible);
+
+        // 3. 피격 후 기본 무적(isInvincible) 또는 '스킬 무적(isBuffInvincible)' 상태라면,
+        //    데미지를 받지 않고 함수를 즉시 종료합니다.
+        if (isInvincible || isBuffInvincible || !GameManager.instance.isLive) return;
 
         health -= damage;
         Debug.Log("플레이어가 공격받았습니다.");

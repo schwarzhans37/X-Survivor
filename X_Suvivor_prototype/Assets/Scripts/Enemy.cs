@@ -281,7 +281,17 @@ public class Enemy : MonoBehaviour
         // 유효한 데미지를 성공적으로 가져왔을 때만 아래 로직을 실행합니다.
         if (hitDamage > 0f)
         {
-            health -= hitDamage;
+            // 1. 플레이어의 장비(장갑)로 인한 '추가 데미지'를 가져옵니다.
+            float gearBonus = GameManager.instance.player.GetDamageBonusFromGears();
+
+            // 2. 펫 스킬 등으로 인한 '공격력 배율'을 가져옵니다.
+            float buffMultiplier = GameManager.instance.player.GetDamageMultiplierFromBuffs();
+
+            // 3. 최종 데미지를 계산합니다: (기본 데미지 + 장비 보너스) * 버프 배율
+            float finalDamage = (hitDamage + gearBonus) * buffMultiplier;
+
+            // 4. 최종 계산된 데미지를 적용합니다. (기존: health -= hitDamage;)
+            health -= finalDamage;
 
             // 플레이어 반대 방향으로 임펄스 넉백
             Vector3 playerPos = GameManager.instance.player.transform.position;
