@@ -22,8 +22,10 @@ public class Player : MonoBehaviour
     public Vector2 inputVec;    // 캐릭터 좌표
     public ItemScanner itemScanner;     // 캐릭터의 아이템 회수범위
 
+    /* 미활용 스크립트
     [Header("# 캐릭터 이미지 렌더")]
     public Hand[] hands;
+    */
 
     [Header("# 캐릭터별 애니메이션 컨트롤러")]
     public RuntimeAnimatorController[] spriteAnimCon; // 플레이어 캐릭터 애니메이션 컨트롤러
@@ -71,7 +73,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         itemScanner = GetComponent<ItemScanner>();
         if (itemScanner != null) baseScanRange = itemScanner.scanRange;
-        hands = GetComponentsInChildren<Hand>(true);
+        //hands = GetComponentsInChildren<Hand>(true);
     }
 
     public void Init(int charId)
