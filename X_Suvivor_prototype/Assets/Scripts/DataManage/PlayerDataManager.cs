@@ -13,7 +13,12 @@ public class PlayerDataManager : MonoBehaviour
 
     [Header("데이터베이스 참조")]
     public PetDatabase petDatabase;   // 펫 데이터베이스 연결
-    private string savePath;            // 데이터 저장 경로
+
+    [Header("메인 메뉴 UI 참조 (에디터에서 연결)")]
+    [Tooltip("메인 메뉴 씬에 있는 환영 팝업 UI 오브젝트")]
+    public GameObject welcomePopup; // 환영 팝업 UI를 연결할 변수
+
+    private string savePath;           // 데이터 저장 경로
 
     public event Action OnPlayerDataUpdated;    // 재화 변경 이벤트 선언(인스턴스 기반)
 
@@ -35,6 +40,48 @@ public class PlayerDataManager : MonoBehaviour
         savePath = Path.Combine(Application.persistentDataPath, "playerdata.json");
         Debug.Log("데이터 저장 경로: " + savePath);
         LoadData(); // 게임 시작 시 데이터 로드
+    }
+
+    // Awake 이후, 다른 스크립트들이 준비된 후 실행됩니다.
+    void Start()
+    {
+        // 팝업을 띄울지 여기서 결정합니다.
+        CheckForWelcomeGift();
+    }
+
+    private void CheckForWelcomeGift()
+    {
+        // 저장된 데이터가 있고, 보유한 펫이 하나도 없다면 신규 유저로 판단합니다.
+        if (playerData != null && (playerData.ownedPetIDs == null || playerData.ownedPetIDs.Count == 0))
+        {
+            Debug.Log("보유한 펫이 없어 신규 유저로 판단, 환영 팝업을 띄웁니다.");
+
+            // welcomePopup이 Inspector에 연결되어 있다면 활성화시킵니다.
+            if (welcomePopup != null)
+            {
+                welcomePopup.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning("Welcome Popup이 PlayerDataManager에 연결되지 않았습니다.");
+            }
+        }
+    }
+
+    public void UnlockPet(int petId)
+    {
+        // ownedPetIds 리스트가 null이면 새로 생성해줍니다. (안전장치)
+        if (playerData.ownedPetIDs == null)
+        {
+            playerData.ownedPetIDs = new List<int>();
+        }
+
+        // 이미 보유한 펫이 아니라면 목록에 추가합니다.
+        if (!playerData.ownedPetIDs.Contains(petId))
+        {
+            playerData.ownedPetIDs.Add(petId);
+            Debug.Log($"펫 ID: {petId} 해금 및 보유 목록에 추가 완료!");
+        }
     }
 
     public void AddGold(long amount)
