@@ -6735,13 +6735,10 @@ MonoBehaviour:
   baseScanRange: 0
   inputVec: {x: 0, y: 0}
   itemScanner: {fileID: 0}
-  hands:
-  - {fileID: 2086997471}
-  - {fileID: 2097888753}
   spriteAnimCon:
-  - {fileID: 9100000, guid: bc1fe6d26d801214495cb1d94d81c331, type: 2}
-  - {fileID: 22100000, guid: 6bc6910d1bc79404b9bd2383832fd765, type: 2}
-  - {fileID: 22100000, guid: d15a74b70ff303b408a8d28616248680, type: 2}
+  - {fileID: 22100000, guid: cd8f8082f9600ad419f62b184b19cefa, type: 2}
+  - {fileID: 22100000, guid: 645dfdacd85cd354d9571b6188d31652, type: 2}
+  - {fileID: 22100000, guid: 1ae9ca9c8a2da834799da907f2fcb78a, type: 2}
   - {fileID: 22100000, guid: b3be3670aa63d46419f265a814b1cb63, type: 2}
   interactionRange: 2
   petLayer:
@@ -6787,7 +6784,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.6, y: 0.9}
+  m_Size: {x: 0.6, y: 1.25}
   m_Direction: 0
 --- !u!50 &274803310
 Rigidbody2D:
@@ -6857,7 +6854,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 978012912, guid: 99a24620d31e5ce4e823c32d11e17c2c, type: 3}
+  m_Sprite: {fileID: 264495375, guid: ec6a2341032776045906b45c1efeed6b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7352,8 +7349,8 @@ Transform:
   m_GameObject: {fileID: 309433880}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.45, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.713, z: 0}
+  m_LocalScale: {x: 1.2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 274803312}
