@@ -11,13 +11,13 @@ public class Projectile : WeaponBase
     {
         base.Init(data);    // 부모 클래스의 Init 실행
 
-        /* 손 등장 로직 (이제는 사용하지 않는 로직, 차후 삭제 필요)
+        // 손 등장 로직 (차후에는 삭제해야할 컨텐츠의 로직임)
         Hand hand = System.Array.Find(player.hands, h => !h.isLeft);
         if (hand != null)
         {
             hand.spriter.sprite = data.handSprite;
             hand.gameObject.SetActive(true);
-        }*/
+        }
     }
 
     protected override void Attack()
