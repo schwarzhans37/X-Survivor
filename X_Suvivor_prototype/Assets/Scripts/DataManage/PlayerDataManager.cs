@@ -68,7 +68,7 @@ public class PlayerDataManager : MonoBehaviour
     }
 
     // 외부에 데이터 변경을 알리는 함수
-    private void NotifyDataUpdate()
+    public void NotifyDataUpdate()
     {
         if (OnPlayerDataUpdated != null)
         {
