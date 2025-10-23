@@ -20,6 +20,9 @@ public class MenuManager : MonoBehaviour
     public GameObject Gacha_Panel;
     public GameObject PetSelect_Panel;     // 펫 선택 패널
     public PetSelectionUI petSelectionUI;
+    public GameObject Shop_Panel;
+    public GameObject GoldToGem_Controll_Panel;
+    public GameObject GemToGold_Controll_Panel;
 
     [Header("사운드 데이터")]
     [SerializeField] private SoundData mainMenuSoundData;
@@ -170,5 +173,47 @@ public class MenuManager : MonoBehaviour
         Debug.Log("Back 버튼이 클릭됨 (캐릭터 선택으로 이동)");
         PetSelect_Panel.SetActive(false);
         charSelect_Panel.SetActive(true);
+    }
+
+    // 가챠 페이지의 Shop 버튼 클릭 시 호출
+    public void OpenShop()
+    {
+        Debug.Log("상점 버튼이 클릭됨");
+        Shop_Panel.SetActive(true);
+    }
+
+    // 상점에서 '닫기'버튼 클릭 시 호출
+    public void BackShopToGacha()
+    {
+        Debug.Log("상점에서 뒤로 가기 버튼이 클릭됨");
+        Shop_Panel.SetActive(false);
+    }
+
+    // 상점 내 '골드를 젬으로 교환'버튼 클릭 시 호출
+    public void OpenGoldToGemExchange()
+    {
+        Debug.Log("골드 -> 젬 교환 버튼이 클릭됨.");
+        GoldToGem_Controll_Panel.SetActive(true);
+        GemToGold_Controll_Panel.SetActive(false);
+    }
+
+    public void CloseGoldToGemExchange()
+    {
+        Debug.Log("골드 -> 젬 패널 닫기 버튼이 클릭됨.");
+        GoldToGem_Controll_Panel.SetActive(false);
+    }
+
+    // 상점 내 '젬을 골드로 교환'버튼 클릭 시 호출
+    public void OpenGemToGoldExchange()
+    {
+        Debug.Log("젬 -> 골드 교환 버튼이 클릭됨");
+        GemToGold_Controll_Panel.SetActive(true);
+        GoldToGem_Controll_Panel.SetActive(false);
+    }
+
+    public void CloseGemToGoldExchange()
+    {
+        Debug.Log("젬 -> 골드 패널 닫기 버튼이 클릭됨.");
+        GemToGold_Controll_Panel.SetActive(false);
     }
 }

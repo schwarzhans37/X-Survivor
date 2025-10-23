@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3f190dca0fa466469403cef61e0866e, type: 3}
-  m_Name: MeleeWeapon
+  m_Name: Sword3
   m_EditorClassIdentifier: 
   weaponType: 0
   weaponId: 0
-  weaponName: "\uC0BD"
-  weaponDesc: "\uD3C9\uBC94\uD55C \uC0BD\uC774\uB2E4."
+  weaponName: "\uBD80\uC720\uAC80"
+  weaponDesc: "\uC8FC\uBCC0\uC744 \uB5A0\uB098\uB2C8\uBA70 \uACF5\uACA9\uD558\uB294
+    \uAC80"
   controllerPrefab: {fileID: 7476748833660721422, guid: 6aacbed4c49829240a6b20548cb1d194, type: 3}
   baseDamage: 10
+  baseRange: 0
   baseCount: 3
   basePenetration: 0
   baseCooldown: 0
@@ -28,6 +30,7 @@ MonoBehaviour:
   - 20
   - 25
   - 30
+  ranges: []
   counts: 04000000050000000600000007000000
   penetrations: 
   cooldowns: []
@@ -37,7 +40,7 @@ MonoBehaviour:
   - 240
   - 270
   spreadAngles: []
-  weaponIcon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  weaponIcon: {fileID: 918189622, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
   projectilePrefab: {fileID: 8603556273567077586, guid: b8c748878cd45864db22ee214d1423b4, type: 3}
-  handSprite: {fileID: 143021600, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  handSprite: {fileID: 0}
   PoolManagerIndex: 2
