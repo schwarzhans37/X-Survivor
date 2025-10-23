@@ -23,10 +23,10 @@ public class PlayerData
     // 기본 데이터 생성자
     public PlayerData()
     {
-        gold = 10000;
-        gems = 100000;
+        gold = 0;
+        gems = 0;
         unlockedCharacterIDs = new List<int>() { 1, 2 }; // 기본 캐릭터(1번, 2번)는 처음부터 해금
-        ownedPetIDs = new List<int>() { 100 }; // 기본 펫(100번)은 처음부터 보유
+        ownedPetIDs = new List<int>(); // 기본 펫(100번)은 처음부터 보유
         completedAchievementIDs = new List<int>();
         unlockedMonsterIDs = new List<int>();
         seenPetIDs = new List<int>();

@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4263696634743614977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5818941263361955148}
+  - component: {fileID: 4971231393328438178}
+  - component: {fileID: 5676825034274384929}
+  - component: {fileID: 861392099152866783}
+  m_Layer: 0
+  m_Name: DogWalker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &5818941263361955148
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263696634743614977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4971231393328438178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263696634743614977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d20d7dc537d8d4ba46693e34df0eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkFrames:
+  - {fileID: 21300000, guid: 969d6286435754e4986bf07589c16227, type: 3}
+  - {fileID: 21300000, guid: aba1649a8fb9463439c1a251dc5f66c2, type: 3}
+  - {fileID: 21300000, guid: db1d9db8d3c37da4c9c1b0d4c3d4c2ce, type: 3}
+  - {fileID: 21300000, guid: 41ae7c164c6eaf84f8b0298cbed578c0, type: 3}
+  - {fileID: 21300000, guid: 51a196ae974f51d429c110641f248882, type: 3}
+  - {fileID: 21300000, guid: 921e7fd2c2048d84bb0be06909542e20, type: 3}
+  - {fileID: 21300000, guid: f2f9ad4c9634d87459c97306192cc745, type: 3}
+  - {fileID: 21300000, guid: 090322eb301a3454a83a2d993acd059d, type: 3}
+  - {fileID: 21300000, guid: c5b58c429d758c740b751dd74bed5178, type: 3}
+  - {fileID: 21300000, guid: 66b4f29704d2c114cacefa58f8d9495c, type: 3}
+  - {fileID: 21300000, guid: 659170ddce00f2e4d90f6ba02bba00fe, type: 3}
+  - {fileID: 21300000, guid: 5ebba043cd6708441880979edaeaf25f, type: 3}
+  - {fileID: 21300000, guid: 80daffaca7f162d4d92b7ebcc836c975, type: 3}
+  - {fileID: 21300000, guid: ca561102d61e3794ba875be8ed11ac72, type: 3}
+  - {fileID: 21300000, guid: 9bcfd7a9f2f122c4ba93431ed2cbe35b, type: 3}
+  - {fileID: 21300000, guid: bbcd72c7c4c7d8b4f8773a564f0ccde8, type: 3}
+  - {fileID: 21300000, guid: ac2b81611df00e1459ce0cc546f5fe0d, type: 3}
+  - {fileID: 21300000, guid: 0339db647c0ccd942be76f832386b471, type: 3}
+  - {fileID: 21300000, guid: 2dfc5868b85ae2f41a52f43e7c89f7a9, type: 3}
+  - {fileID: 21300000, guid: 2b69c94aa2da3c849ba12f247ef9c224, type: 3}
+  animationFPS: 10
+--- !u!222 &5676825034274384929
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263696634743614977}
+  m_CullTransparentMesh: 1
+--- !u!114 &861392099152866783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263696634743614977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 969d6286435754e4986bf07589c16227, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
