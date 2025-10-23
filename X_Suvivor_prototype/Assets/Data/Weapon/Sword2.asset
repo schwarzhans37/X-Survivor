@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f190dca0fa466469403cef61e0866e, type: 3}
+  m_Name: Sword2
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  weaponId: 4
+  weaponName: "\uB808\uC774\uD53C\uC5B4"
+  weaponDesc: 
+  controllerPrefab: {fileID: 4741519768121625544, guid: 3de00a1a1be453248a58d5bc264a94ee, type: 3}
+  baseDamage: 20
+  baseRange: 4
+  baseCount: 1
+  basePenetration: 2
+  baseCooldown: 2
+  baseProjectileSpeed: 3
+  baseSpreadAngle: 0
+  damages:
+  - 25
+  - 30
+  - 35
+  - 40
+  - 45
+  ranges:
+  - 5.5
+  - 7
+  - 8.5
+  - 10
+  - 11.5
+  counts: 
+  penetrations: 0400000006000000080000000a0000000c000000
+  cooldowns: []
+  projectileSpeeds: []
+  spreadAngles: []
+  weaponIcon: {fileID: -268230670, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
+  projectilePrefab: {fileID: 750360626413910962, guid: 4c4b0bec2b64d4f49a22a59fa3801679, type: 3}
+  handSprite: {fileID: -268230670, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
+  PoolManagerIndex: 8

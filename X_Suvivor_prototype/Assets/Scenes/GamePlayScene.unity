@@ -18540,6 +18540,7 @@ MonoBehaviour:
   - {fileID: 4377587479154669750, guid: 5e4e16863710ee84f901d205086926e7, type: 3}
   - {fileID: 6789345883338771121, guid: 411bf34d2bec1584793b8e9b8473f596, type: 3}
   - {fileID: 2466804144809045657, guid: 02559352a721dae40a6db21653c8d7bb, type: 3}
+  - {fileID: 750360626413910962, guid: 4c4b0bec2b64d4f49a22a59fa3801679, type: 3}
   normalMonsterPrefabs:
   - {fileID: 2701320078967796374, guid: b4cb9574361f0cc46a5c653f2ee41005, type: 3}
   - {fileID: 2719428963997641290, guid: 266d064aece5a61469275cb0989e9b59, type: 3}
@@ -23278,6 +23279,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3d94efcd1e8d1e4b8e4ad5af1509ece, type: 2}
   - {fileID: 11400000, guid: 53bf31cc59e0fd04c8c2cf4348008cec, type: 2}
   - {fileID: 11400000, guid: a39f79fc8739d5b469db1706b19a3760, type: 2}
+  - {fileID: 11400000, guid: e8be27ef3fc686a40a2b566fb27086e1, type: 2}
   gearDatas:
   - {fileID: 11400000, guid: b3f04ac9babce0b45895e05ce436bfd0, type: 2}
   - {fileID: 11400000, guid: 1ccf9c3adcc733743afc615e86b7e6d0, type: 2}
