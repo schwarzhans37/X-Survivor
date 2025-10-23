@@ -57,7 +57,7 @@ public class Melee : WeaponBase
 
             Vector3 rotVec = Vector3.forward * 360 * i / currentCount;
             blade.Rotate(rotVec);
-            blade.Translate(blade.up * 1.5f, Space.World);
+            blade.Translate(blade.up * 3f, Space.World);
             
             blade.GetComponent<MeleeHitBox>().Init(currentDamage, -100);
         }

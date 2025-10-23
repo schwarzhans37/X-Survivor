@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3115497278948125128}
   - component: {fileID: 3471483460854706546}
   m_Layer: 0
-  m_Name: Melee_Controller
+  m_Name: Sword3_Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

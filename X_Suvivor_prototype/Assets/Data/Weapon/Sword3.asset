@@ -40,7 +40,7 @@ MonoBehaviour:
   - 240
   - 270
   spreadAngles: []
-  weaponIcon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  weaponIcon: {fileID: 918189622, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
   projectilePrefab: {fileID: 8603556273567077586, guid: b8c748878cd45864db22ee214d1423b4, type: 3}
-  handSprite: {fileID: 143021600, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  handSprite: {fileID: 0}
   PoolManagerIndex: 2
