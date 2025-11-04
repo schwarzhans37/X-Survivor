@@ -11,6 +11,7 @@ public class SkillSlotUI : MonoBehaviour
     public Text cooldownText;
 
     private InventorySlot currentSlot;
+    private PetSkillRunner currentSkillRunner;
 
     void Update()
     {

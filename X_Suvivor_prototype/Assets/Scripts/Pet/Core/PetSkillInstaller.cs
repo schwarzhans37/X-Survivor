@@ -43,6 +43,7 @@ public class PetSkillInstaller : MonoBehaviour
 
     void InstallFromSelectedPet(Transform parent, PetController petController)
     {
+        var petSkillUI = FindObjectOfType<PetSkillSlotUI>();
         var pdm = PlayerDataManager.instance;
         if (pdm == null || pdm.playerData == null) return;
 
@@ -81,6 +82,16 @@ public class PetSkillInstaller : MonoBehaviour
         {
             TryInjectField(runnerInstance, "pet", petController);
             Debug.Log($"{petController.name}에게 스킬 러너를 성공적으로 주입했습니다.");
+        }
+
+        // 스킬 러너가 성공적으로 생성되면 UI에 연결합니다.
+        if (petSkillUI != null)
+        {
+            petSkillUI.LinkSkillRunner(runnerInstance);
+        }
+        else
+        {
+            Debug.LogWarning("씬에서 PetSkillSlotUI를 찾을 수 없습니다!");
         }
     }
 
