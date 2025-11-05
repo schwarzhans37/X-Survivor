@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8401119013464397241}
   - component: {fileID: 134660575005783053}
+  - component: {fileID: 2057820904146994247}
+  - component: {fileID: 6151015022744915383}
   m_Layer: 0
   m_Name: RabbitWalker
   m_TagString: Untagged
@@ -17,21 +19,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8401119013464397241
-Transform:
+--- !u!224 &8401119013464397241
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3277066602967587188}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -160}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &134660575005783053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,5 +50,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d20d7dc537d8d4ba46693e34df0eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkFrames: []
+  walkFrames:
+  - {fileID: 21300000, guid: bfcd066268b97bc4597e34652a3124fd, type: 3}
+  - {fileID: 21300000, guid: f16231715462e7e46b169dcf4355aa99, type: 3}
+  - {fileID: 21300000, guid: ea3b328d3cbb0b540966720b4b977fa3, type: 3}
+  - {fileID: 21300000, guid: e24e6ef4b4998d740a6e275f191371b3, type: 3}
+  - {fileID: 21300000, guid: 63cf9f7551a40c347aa0b29667c82caf, type: 3}
+  - {fileID: 21300000, guid: 92cf3a8f8381dd7499bf1bf4178d9aa4, type: 3}
+  - {fileID: 21300000, guid: 68bb5f80400870742874aa32455bdb49, type: 3}
+  - {fileID: 21300000, guid: 8ee09cc8d29b9134ca721b10f804a3ce, type: 3}
+  - {fileID: 21300000, guid: 7936d28b61c06764b840025ff20ac782, type: 3}
+  - {fileID: 21300000, guid: c6b1dd5f79ce4e0458594087d8e802ce, type: 3}
+  - {fileID: 21300000, guid: a13c25077c3cdc643a4850d238473e5f, type: 3}
+  - {fileID: 21300000, guid: f2eb5a9c05cf74a49bfde8b3a1bd33db, type: 3}
+  - {fileID: 21300000, guid: 9ea8033d4f763d94dbfdef26330bd84f, type: 3}
+  - {fileID: 21300000, guid: b48f7e03333a0eb4f8d9d2595470591d, type: 3}
+  - {fileID: 21300000, guid: 576d7a5faa3a1b045bdd752e802d887a, type: 3}
+  - {fileID: 21300000, guid: 844baff526e76be4d812822aaa8a33ac, type: 3}
+  - {fileID: 21300000, guid: af51af3e2dab6c84b83dc8297c63c7c5, type: 3}
+  - {fileID: 21300000, guid: bb21ee7942e918b4c91bb058a6cf8c18, type: 3}
+  - {fileID: 21300000, guid: cbe1e646302b5164783f921e21d653c8, type: 3}
+  - {fileID: 21300000, guid: 42186f7a1821b1c46bd292b166bf635f, type: 3}
+  - {fileID: 21300000, guid: f15e6b537b78cd84ea0a92d8647b3e48, type: 3}
+  - {fileID: 21300000, guid: c7707cc3711b0e046acaca1d4d9576e6, type: 3}
+  - {fileID: 21300000, guid: 32355961049d4cf4baa242163385f21e, type: 3}
+  - {fileID: 21300000, guid: d93c3dca8ab64d7419fbe196e8fc324a, type: 3}
+  - {fileID: 21300000, guid: 12a60b0726af798409d9963a49225ac0, type: 3}
+  - {fileID: 21300000, guid: 202e4fa4b8139094d9fb69b02a2ee29c, type: 3}
+  - {fileID: 21300000, guid: 5eb3a80487975aa44978b3bbbab7a31f, type: 3}
+  - {fileID: 21300000, guid: 44929958bd20c9a49aa1f4df93986f10, type: 3}
+  - {fileID: 21300000, guid: 1c068a97af30bb241a68180351d884fb, type: 3}
+  - {fileID: 21300000, guid: 23deae5b73c8f8741ab45f18ad979520, type: 3}
   animationFPS: 10
+--- !u!222 &2057820904146994247
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277066602967587188}
+  m_CullTransparentMesh: 1
+--- !u!114 &6151015022744915383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277066602967587188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: bfcd066268b97bc4597e34652a3124fd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
