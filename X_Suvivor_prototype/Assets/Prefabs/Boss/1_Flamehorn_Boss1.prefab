@@ -164,8 +164,8 @@ MonoBehaviour:
   useHitFlash: 1
   hitFlashColor: {r: 1, g: 0.25, b: 0.25, a: 1}
   hitFlashDuration: 0.5
-  knockbackPower: 1
-  knockbackFriction: 10
+  knockbackPower: 0
+  knockbackFriction: 0
   graphicsBaseLocalPos: {x: 0, y: 0}
   useMeleeWhenInRange: 1
   meleeRange: 3.5
