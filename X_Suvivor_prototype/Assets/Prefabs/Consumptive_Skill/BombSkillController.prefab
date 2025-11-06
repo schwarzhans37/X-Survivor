@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 6
+  cooldownTimer: 0
   minePrefab: {fileID: 4109112691387933910, guid: 2005293c9c7c60b4dac94c31d0b3a7b3, type: 3}
+  baseDamage: 40
+  damageBonusPerLevel: 2
   maxActiveMines: 3
   placeOffset: 0.1
   armingDelay: 0.15

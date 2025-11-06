@@ -14,6 +14,8 @@ public class BombSkill : MonoBehaviour
 
     [Header("지뢰 설정")]
     public GameObject minePrefab;
+    public int baseDamage = 40;         // 지뢰의 기본 데미지
+    public int damageBonusPerLevel = 5; // 레벨당 추가 데미지
     public int maxActiveMines = 3;
     public float placeOffset = 0.1f;
     public float armingDelay = 0.15f;
@@ -65,6 +67,9 @@ public class BombSkill : MonoBehaviour
         var mine = go.GetComponent<LandMine>();
         if (mine != null)
         {
+            int finalDamage = baseDamage + damageBonusPerLevel * (GameManager.instance.level - 1);
+            mine.damage = finalDamage;
+
             // 설치 직후 아밍 지연(자기발동 방지)
             mine.Arm(armingDelay);
             activeMines.Add(mine);
