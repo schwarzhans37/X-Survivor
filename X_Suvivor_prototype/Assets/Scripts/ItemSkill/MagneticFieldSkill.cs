@@ -17,6 +17,7 @@ public class MagneticFieldSkill : MonoBehaviour
 
     [Header("도트/슬로우")]
     public float dps = 8f;               // 초당 피해량
+    public float dpsBonusPerLevel = 2;
     public float tickInterval = 0.5f;    // 틱 간격
     public float slowPercent = 0.5f;     // 0.5 = 50% 감속
     public float slowDuration = 0.6f;    // 슬로우 유지 시간(틱마다 갱신됨)
@@ -93,12 +94,15 @@ public class MagneticFieldSkill : MonoBehaviour
 
         // DOT + 슬로우 루프
         float t = 0f, acc = 0f;
+
+        float finalDps = dps + dpsBonusPerLevel * (GameManager.instance.level - 1);
+
         while (t < duration)
         {
             t += Time.deltaTime; acc += Time.deltaTime;
             if (acc >= tickInterval)
             {
-                ApplyTick(dps * acc);
+                ApplyTick(finalDps * acc);
                 acc = 0f;
             }
             yield return null;

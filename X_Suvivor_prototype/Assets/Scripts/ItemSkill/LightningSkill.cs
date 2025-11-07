@@ -13,6 +13,7 @@ public class LightningSkill : MonoBehaviour
 
     [Header("피해/판정")]
     public int damage = 40;             // 강한 피해
+    public int damageBonusPerLevel = 5;
     public float radius = 1.2f;          // 충돌 반경(데미지/스턴 적용 범위)
     public float stunDuration = 1.0f;    // 스턴 시간
 
@@ -118,12 +119,14 @@ public class LightningSkill : MonoBehaviour
     {
         float damageRadius = radius * DAMAGE_R_MULT;
 
+        int finalDamage = damage + damageBonusPerLevel * (GameManager.instance.level - 1);
+
         var cols = Physics2D.OverlapCircleAll(center, damageRadius, enemyMask);
         foreach (var c in cols)
         {
             if (c.TryGetComponent<Enemy>(out var e) && e.IsAlive)
             {
-                e.ApplyDamage(damage, center, 0f);
+                e.ApplyDamage(finalDamage, center, 0f);
                 e.ApplyStun(stunDuration);
             }
         }
