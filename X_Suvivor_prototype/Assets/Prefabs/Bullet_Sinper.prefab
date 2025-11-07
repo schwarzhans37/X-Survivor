@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4243573672316180614}
   - component: {fileID: -2812765729162014329}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet_Sinper
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.22, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -537537479, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -1327499133, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  m_Color: {r: 0.22352943, g: 0.22352943, b: 0.227451, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -148,7 +148,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.22222222, y: 0.44444445}
+  m_Size: {x: 0.3, y: 0.5}
   m_Direction: 0
 --- !u!114 &4243573672316180614
 MonoBehaviour:
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   damage: 0
+  range: 0
   penetration: 0
   bulletSize: 0
   bulletSpeed: 0
@@ -231,8 +232,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.990566, g: 0.23829652, b: 0.38463265, a: 1}
-      key1: {r: 1, g: 0.6521572, b: 0.3160377, a: 0}
+      key0: {r: 0.7015796, g: 0, b: 1, a: 1}
+      key1: {r: 0.7019608, g: 0, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

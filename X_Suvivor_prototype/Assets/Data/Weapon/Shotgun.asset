@@ -23,21 +23,21 @@ MonoBehaviour:
   baseRange: 0
   baseCount: 3
   basePenetration: 0
-  baseCooldown: 1
+  baseCooldown: 3
   baseProjectileSpeed: 3
   baseSpreadAngle: 30
   damages:
-  - 6
-  - 9
-  - 13
-  - 18
+  - 30
+  - 40
+  - 50
+  - 60
   ranges:
-  - 2
-  - 2.5
   - 3
-  - 3.5
   - 4
-  - 4.5
+  - 5
+  - 6
+  - 7
+  - 8
   counts: 04000000050000000600000007000000
   penetrations: 
   cooldowns:
@@ -56,6 +56,6 @@ MonoBehaviour:
   - 60
   - 70
   weaponIcon: {fileID: -762074860, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-  projectilePrefab: {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
+  projectilePrefab: {fileID: 160219108243616678, guid: cd75def75f67c814ab2e71910bed2174, type: 3}
   handSprite: {fileID: 1772703093, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-  PoolManagerIndex: 1
+  PoolManagerIndex: 9

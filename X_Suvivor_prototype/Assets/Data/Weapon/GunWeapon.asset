@@ -25,17 +25,17 @@ MonoBehaviour:
   baseProjectileSpeed: 3
   baseSpreadAngle: 0
   damages:
-  - 15
+  - 30
   - 20
   - 25
   - 30
   ranges:
-  - 2
-  - 2.5
   - 3
-  - 3.5
   - 4
-  - 4.5
+  - 5
+  - 6
+  - 7
+  - 8
   counts: 01000000010000000100000001000000
   penetrations: 01000000020000000300000004000000
   cooldowns:
