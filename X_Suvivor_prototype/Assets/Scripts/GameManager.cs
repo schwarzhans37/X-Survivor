@@ -297,6 +297,26 @@ public class GameManager : MonoBehaviour
         // TODO: HUD에 젬 획득량 표시 UI 업데이트
     }
 
+    // 지정된 위치에 데미지 팝업을 표시합니다.
+    public void ShowDamagePopup(float damage, Vector3 position)
+    {
+        // PoolManager의 VFX 카테고리 0번에서 팝업을 가져옵니다.
+        GameObject popupInstance = pool.Get(PoolManager.PoolCategory.VFX, 0);
+
+        if (popupInstance != null)
+        {
+            // 팝업의 위치를 몬스터 위치로 설정 (약간의 랜덤 오프셋)
+            popupInstance.transform.position = position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), 0, 0);
+
+            // 팝업 스크립트의 Setup 함수를 호출하여 데미지 값을 전달
+            DamagePopup popupScript = popupInstance.GetComponent<DamagePopup>();
+            if (popupScript != null)
+            {
+                popupScript.Setup(damage);
+            }
+        }
+    }
+
     public void Stop()
     {
         isLive = false;

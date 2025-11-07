@@ -293,6 +293,8 @@ public class Enemy : MonoBehaviour
             // 4. 최종 계산된 데미지를 적용합니다. (기존: health -= hitDamage;)
             health -= finalDamage;
 
+            GameManager.instance.ShowDamagePopup(finalDamage, transform.position);
+
             // 플레이어 반대 방향으로 임펄스 넉백
             Vector3 playerPos = GameManager.instance.player.transform.position;
             Vector3 dir = (transform.position - playerPos).normalized;
