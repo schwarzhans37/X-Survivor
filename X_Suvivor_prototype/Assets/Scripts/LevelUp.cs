@@ -52,12 +52,30 @@ public class LevelUp : MonoBehaviour
         // 현재 씬에 있는 펫 컨트롤러를 찾음. 없으면 null
         PetController pet = FindObjectOfType<PetController>();
 
-        // ===== 1. 레벨업 가능한 후보 아이템 목록 생성 =====
-        List<object> candidateItems = new List<object>();
+        // ==== 현재 캐릭터의 직업에 맞는 무기 타입 결정 ====
+        WeaponData.WeaponType allowedWeaponType;
+        int characterId = GameManager.instance.playerId;
 
-        // ----- 후보 1: 아직 획득하지 않은 무기들 -----
+        if (characterId == 1)
+        {
+            allowedWeaponType = WeaponData.WeaponType.Melee;
+        }
+        else
+        {
+            allowedWeaponType = WeaponData.WeaponType.Range;
+        }
+
+        // 직업에 맞는 무기만 필터링
+        List<WeaponData> filteredWeapons = weaponDatas
+            .Where(data => data.weaponType == allowedWeaponType)
+            .ToList();
+
+        // 레벨업 가능한 후보 아이템 목록 생성
+        List<Object> candidateItems = new List<Object>();
+
+        // ----- 후보 1: 아직 획득하지 않은 무기들(필터링된 목록을 사용) -----
         List<WeaponData> availableWeapons = new List<WeaponData>();
-        foreach (WeaponData data in weaponDatas)
+        foreach (WeaponData data in filteredWeapons)
         {
             // 플레이어가 이 무기를 가지고 있지 않다면 후보에 추가
             if (player.FindEquippedWeapon(data) == null)
@@ -68,14 +86,14 @@ public class LevelUp : MonoBehaviour
         candidateItems.AddRange(availableWeapons);
 
         // ----- 후보 2: 이미 획득했지만, 최대 레벨이 아닌 무기들 -----
-        foreach (WeaponBase equippedWeapon in player.equippedWeapons)
-        {
-            // 최대 레벨이 아니라면 후보에 추가
-            if (equippedWeapon.currentLevel < equippedWeapon.weaponData.damages.Length)
+            foreach (WeaponBase equippedWeapon in player.equippedWeapons)
             {
-                candidateItems.Add(equippedWeapon.weaponData);
+                // 최대 레벨이 아니라면 후보에 추가
+                if (equippedWeapon.currentLevel < equippedWeapon.weaponData.damages.Length)
+                {
+                    candidateItems.Add(equippedWeapon.weaponData);
+                }
             }
-        }
 
         // ----- 후보 3 & 4: 장비 (위와 동일한 로직 적용) -----
         // (Player.cs에 FindEquippedGear 함수가 완성되었다고 가정)
@@ -119,7 +137,7 @@ public class LevelUp : MonoBehaviour
         // 2. 이 중에서 랜덤하게 3개를 중복 없이 뽑습니다.
         // 후보가 3개 미만일 수도 있으므로, Math.Min을 사용해 안전하게 처리
         int numToSelect = Mathf.Min(3, candidateItems.Count);
-        List<object> selectedItems = candidateItems.OrderBy(x => Random.value).Take(numToSelect).ToList();
+        List<object> selectedItems = candidateItems.OrderBy(x => Random.value).Take(numToSelect).Cast<object>().ToList();
 
         // 3. 뽑힌 아이템들을 UI 슬롯에 할당합니다.
         for (int i = 0; i < selectedItems.Count; i++)

@@ -16,10 +16,10 @@ MonoBehaviour:
   Id: 9
   Name: "\uC815\uC608 \uACE0\uBE14\uB9B0"
   tier: 0
-  Maxhealth: 200
+  Maxhealth: 310
   AttackPower: 0
   AttackRange: 0
-  Speed: 3.75
+  Speed: 5
   mixExpOrbs: 1
   maxExpOrbs: 1
   dropList: []

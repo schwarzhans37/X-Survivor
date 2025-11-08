@@ -19129,6 +19129,11 @@ MonoBehaviour:
   - {fileID: 6789345883338771121, guid: 411bf34d2bec1584793b8e9b8473f596, type: 3}
   - {fileID: 2466804144809045657, guid: 02559352a721dae40a6db21653c8d7bb, type: 3}
   - {fileID: 750360626413910962, guid: 4c4b0bec2b64d4f49a22a59fa3801679, type: 3}
+  - {fileID: 160219108243616678, guid: cd75def75f67c814ab2e71910bed2174, type: 3}
+  - {fileID: 160219108243616678, guid: 6ee74127a18141b4997b848eb3d1763e, type: 3}
+  - {fileID: 160219108243616678, guid: a4e14304fb07fa748a805924291a5283, type: 3}
+  - {fileID: 456216486446730008, guid: e073d97e320a0214089ea281cddb5b42, type: 3}
+  - {fileID: 8907633866650014768, guid: 038008788c241a445bc0c956bf6ee8b1, type: 3}
   normalMonsterPrefabs:
   - {fileID: 2701320078967796374, guid: b4cb9574361f0cc46a5c653f2ee41005, type: 3}
   - {fileID: 2719428963997641290, guid: 266d064aece5a61469275cb0989e9b59, type: 3}
@@ -24181,11 +24186,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDatas:
-  - {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
+  - {fileID: 11400000, guid: a87a060c1fd31fe4192a9b9250de9e67, type: 2}
   - {fileID: 11400000, guid: a3d94efcd1e8d1e4b8e4ad5af1509ece, type: 2}
   - {fileID: 11400000, guid: 53bf31cc59e0fd04c8c2cf4348008cec, type: 2}
   - {fileID: 11400000, guid: a39f79fc8739d5b469db1706b19a3760, type: 2}
   - {fileID: 11400000, guid: e8be27ef3fc686a40a2b566fb27086e1, type: 2}
+  - {fileID: 11400000, guid: 7e8706d411f13a049a97eb7104232e58, type: 2}
+  - {fileID: 11400000, guid: 15bf1aae251ad354384b0b9ff42fd68c, type: 2}
+  - {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
   gearDatas:
   - {fileID: 11400000, guid: b3f04ac9babce0b45895e05ce436bfd0, type: 2}
   - {fileID: 11400000, guid: 1ccf9c3adcc733743afc615e86b7e6d0, type: 2}

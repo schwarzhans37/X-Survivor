@@ -13,34 +13,53 @@ MonoBehaviour:
   m_Name: Sword3
   m_EditorClassIdentifier: 
   weaponType: 0
-  weaponId: 0
-  weaponName: "\uBD80\uC720\uAC80"
-  weaponDesc: "\uC8FC\uBCC0\uC744 \uB5A0\uB098\uB2C8\uBA70 \uACF5\uACA9\uD558\uB294
+  weaponId: 7
+  weaponName: "\uAC80\uBB34"
+  weaponDesc: "\uCE90\uB9AD\uD130 \uC8FC\uBCC0\uC744 5\uCD08\uAC04 \uD654\uC804\uD558\uB294
     \uAC80"
-  controllerPrefab: {fileID: 7476748833660721422, guid: 6aacbed4c49829240a6b20548cb1d194, type: 3}
-  baseDamage: 10
+  controllerPrefab: {fileID: 7476748833660721422, guid: 6f04c0365f5ef904880bef4a7dbccc5d, type: 3}
+  baseDamage: 45
   baseRange: 0
-  baseCount: 3
+  baseCount: 1
   basePenetration: 0
-  baseCooldown: 0
-  baseProjectileSpeed: 150
+  baseCooldown: 5
+  baseProjectileSpeed: 900
   baseSpreadAngle: 0
   damages:
-  - 15
-  - 20
-  - 25
-  - 30
+  - 50
+  - 55
+  - 60
+  - 65
+  - 70
+  - 75
+  - 80
+  - 85
+  - 90
   ranges: []
-  counts: 04000000050000000600000007000000
+  counts: 010000000100000001000000010000000100000001000000010000000100000001000000
   penetrations: 
-  cooldowns: []
+  cooldowns:
+  - 4.75
+  - 4.5
+  - 4.25
+  - 4
+  - 3.75
+  - 3.5
+  - 3.25
+  - 3
+  - 2.75
   projectileSpeeds:
-  - 180
-  - 210
-  - 240
-  - 270
+  - 900
+  - 900
+  - 900
+  - 900
+  - 900
+  - 900
+  - 900
+  - 900
+  - 900
   spreadAngles: []
-  weaponIcon: {fileID: 918189622, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
-  projectilePrefab: {fileID: 8603556273567077586, guid: b8c748878cd45864db22ee214d1423b4, type: 3}
+  weaponIcon: {fileID: 1166595436, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
+  projectilePrefab: {fileID: 8907633866650014768, guid: 038008788c241a445bc0c956bf6ee8b1, type: 3}
   handSprite: {fileID: 0}
-  PoolManagerIndex: 2
+  PoolManagerIndex: 13

@@ -8,6 +8,7 @@ public class SplitArrowsSkill : MonoBehaviour
     public int arrowCount = 12;        // 12방향
     public float arrowSpeed = 12f;     // 화살 속도(빠르게)
     public int damage = 20;            // 1회 타격 데미지
+    public int damageBonusPerLevel = 5;
     public float duration = 6f;        // 전체 지속 시간(6초)
     public float cooldown = 10f;       // 쿨타임
     public float cooldownTimer;
@@ -73,7 +74,9 @@ public class SplitArrowsSkill : MonoBehaviour
         var arrow = go.GetComponent<PiercingArrow>();
         if (arrow != null)
         {
-            arrow.Init(dir * arrowSpeed, damage, duration, enemyMask);
+            int finalDamage = damage + damageBonusPerLevel * (GameManager.instance.level - 1);
+
+            arrow.Init(dir * arrowSpeed, finalDamage, duration, enemyMask);
         }
         else
         {
