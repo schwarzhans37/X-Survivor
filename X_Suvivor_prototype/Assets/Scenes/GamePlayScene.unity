@@ -13697,7 +13697,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 6.0333333
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -14072,39 +14072,52 @@ MonoBehaviour:
   - spawnTime: 30
     monsterData: {fileID: 11400000, guid: 5399fefffbe0fd245811a28d9b94a432, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
   - spawnTime: 60
     monsterData: {fileID: 11400000, guid: 5399fefffbe0fd245811a28d9b94a432, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
   - spawnTime: 90
     monsterData: {fileID: 11400000, guid: 5399fefffbe0fd245811a28d9b94a432, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
   - spawnTime: 120
     monsterData: {fileID: 11400000, guid: bc39ebeaac5a04045bd4aa8350fe5227, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
   - spawnTime: 150
     monsterData: {fileID: 11400000, guid: bc39ebeaac5a04045bd4aa8350fe5227, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
   - spawnTime: 150
     monsterData: {fileID: 11400000, guid: bc39ebeaac5a04045bd4aa8350fe5227, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
   - spawnTime: 180
     monsterData: {fileID: 11400000, guid: bc39ebeaac5a04045bd4aa8350fe5227, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
   - spawnTime: 210
     monsterData: {fileID: 11400000, guid: 5399fefffbe0fd245811a28d9b94a432, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
   - spawnTime: 210
     monsterData: {fileID: 11400000, guid: bc39ebeaac5a04045bd4aa8350fe5227, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
   - spawnTime: 240
     monsterData: {fileID: 11400000, guid: bc39ebeaac5a04045bd4aa8350fe5227, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
   - spawnTime: 240
     monsterData: {fileID: 11400000, guid: bc39ebeaac5a04045bd4aa8350fe5227, type: 2}
     isSpawned: 0
-  - spawnTime: 240
+    isWarningTriggerd: 0
+  - spawnTime: 270
     monsterData: {fileID: 11400000, guid: 48a84c02ee3aeb54c8e55da97830dd57, type: 2}
     isSpawned: 0
+    isWarningTriggerd: 0
+  postProcessVolume: {fileID: 1520776913}
 --- !u!1 &552283318
 GameObject:
   m_ObjectHideFlags: 0
