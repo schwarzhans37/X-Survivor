@@ -190,10 +190,11 @@ MonoBehaviour:
   deathSfxName: Dead
   deathSfxVolume: 1
   deathSfxPitch: 1
-  ignoreHitDuringAttack: 1
-  flashOnHit: 1
-  knockbackPower: 6
-  knockbackFriction: 10
+  useHitFlash: 1
+  hitFlashColor: {r: 1, g: 0.25, b: 0.25, a: 1}
+  hitFlashDuration: 0.5
+  knockbackPower: 0
+  knockbackFriction: 0
   graphicsBaseLocalPos: {x: 0, y: 0}
 --- !u!50 &9037341673478512828
 Rigidbody2D:
