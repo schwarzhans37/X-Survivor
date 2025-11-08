@@ -12,6 +12,7 @@ public class PoolManager : MonoBehaviour
     public GameObject[] eliteMonsterPrefabs;    // 엘리트 몬스터
     public GameObject[] bossMonsterPrefabs;     // 보스 몬스터
     public GameObject[] petPrefabs;         // 펫 전용 프리팹
+    public GameObject[] vfxPrefabs;         // 데미지 팝업 프리팹
 
     // 각 카테고리별 풀을 담당할 리스트 배열들
     List<GameObject>[] itemPools;
@@ -20,6 +21,7 @@ public class PoolManager : MonoBehaviour
     List<GameObject>[] eliteMonsterPools;
     List<GameObject>[] bossMonsterPools;
     List<GameObject>[] petPools;
+    List<GameObject>[] vfxPools;
 
     // 어떤 종류의 풀을 사용할지 구분하기 위한 열거형(enum)
     public enum PoolCategory
@@ -29,7 +31,8 @@ public class PoolManager : MonoBehaviour
         NormalMonster,
         EliteMonster,
         BossMonster,
-        Pet
+        Pet,
+        VFX
     }
 
     void Awake()
@@ -70,6 +73,12 @@ public class PoolManager : MonoBehaviour
         {
             petPools[i] = new List<GameObject>();
         }
+
+        vfxPools = new List<GameObject>[vfxPrefabs.Length];
+        for (int i = 0; i < vfxPools.Length; i++)
+        {
+            vfxPools[i] = new List<GameObject>();
+        }
     }
 
     // 어떤 카테고리의 몇 번째 인덱스를 가져올지 명시적으로 요청하는 Get 함수
@@ -104,6 +113,10 @@ public class PoolManager : MonoBehaviour
             case PoolCategory.Pet:
                 targetPool = petPools;
                 targetPrefab = petPrefabs;
+                break;
+            case PoolCategory.VFX:
+                targetPool = vfxPools;
+                targetPrefab = vfxPrefabs;
                 break;
         }
 
