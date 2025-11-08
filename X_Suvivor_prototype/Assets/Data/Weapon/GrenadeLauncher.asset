@@ -21,7 +21,7 @@ MonoBehaviour:
   baseRange: 10
   baseCount: 1
   basePenetration: -100
-  baseCooldown: 1
+  baseCooldown: 8
   baseProjectileSpeed: 5
   baseSpreadAngle: 0
   damages:
