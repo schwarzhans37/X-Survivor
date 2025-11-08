@@ -17,7 +17,7 @@ MonoBehaviour:
   weaponName: "\uB808\uC774\uD53C\uC5B4"
   weaponDesc: "\uADFC\uC811\uD55C \uC801\uB4E4\uC744 \uAD00\uD1B5\uD558\uC5EC \uCC0C\uB978\uB2E4."
   controllerPrefab: {fileID: 4741519768121625544, guid: 3de00a1a1be453248a58d5bc264a94ee, type: 3}
-  baseDamage: 20
+  baseDamage: 25
   baseRange: 4
   baseCount: 1
   basePenetration: 0
@@ -25,17 +25,25 @@ MonoBehaviour:
   baseProjectileSpeed: 3
   baseSpreadAngle: 0
   damages:
-  - 25
   - 30
   - 35
   - 40
   - 45
+  - 50
+  - 55
+  - 60
+  - 65
+  - 70
   ranges:
+  - 4.5
+  - 5
   - 5.5
+  - 6
+  - 6.5
   - 7
+  - 7.5
+  - 8
   - 8.5
-  - 10
-  - 11.5
   counts: 
   penetrations: 
   cooldowns: []

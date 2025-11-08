@@ -19,36 +19,54 @@ MonoBehaviour:
     \uBB34\uAE30.\n\uB9E4\uC6B0 \uAC15\uB825\uD55C \uD55C\uBC29\uC744 \uC790\uB791\uD55C\uB2E4."
   controllerPrefab: {fileID: 5057525125169318806, guid: 093930f0f5d0b0e4dabe701b5baa04b4, type: 3}
   baseDamage: 40
-  baseRange: 0
+  baseRange: 10
   baseCount: 1
   basePenetration: 9999
   baseCooldown: 5
-  baseProjectileSpeed: 0
+  baseProjectileSpeed: 20
   baseSpreadAngle: 0
   damages:
+  - 50
+  - 60
+  - 70
+  - 80
+  - 90
   - 100
-  - 125
-  - 150
-  - 175
+  - 110
+  - 120
+  - 130
   ranges:
-  - 8
   - 10
   - 12
+  - 12
   - 14
+  - 14
+  - 15
+  - 15
   - 16
-  - 18
-  counts: 01000000010000000100000001000000
-  penetrations: 0f2700000f2700000f2700000f270000
+  - 16
+  counts: 010000000100000001000000010000000100000001000000010000000100000001000000
+  penetrations: 0f2700000f2700000f2700000f2700000f2700000f2700000f2700000f2700000f270000
   cooldowns:
-  - 5
+  - 4.75
   - 4.5
+  - 4.25
   - 4
+  - 3.75
   - 3.5
+  - 3.25
+  - 3
+  - 2.75
   projectileSpeeds:
-  - 40
-  - 40
-  - 40
-  - 40
+  - 20.25
+  - 20.5
+  - 20.75
+  - 21
+  - 21.25
+  - 21.5
+  - 21.75
+  - 22
+  - 22.25
   spreadAngles: []
   weaponIcon: {fileID: -762074860, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   projectilePrefab: {fileID: 160219108243616678, guid: 6ee74127a18141b4997b848eb3d1763e, type: 3}

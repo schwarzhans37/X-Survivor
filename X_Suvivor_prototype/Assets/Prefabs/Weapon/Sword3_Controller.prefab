@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3115497278948125128}
-  - component: {fileID: 3471483460854706546}
+  - component: {fileID: 1100859369485219850}
   m_Layer: 0
   m_Name: Sword3_Controller
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3471483460854706546
+--- !u!114 &1100859369485219850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,8 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7476748833660721422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb25109425a963b4593cc2085d708f62, type: 3}
+  m_Script: {fileID: 11500000, guid: c11cc27327260aa4aab20f1caf4e864a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
-  currentLevel: 0

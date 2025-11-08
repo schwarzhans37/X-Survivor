@@ -16,7 +16,7 @@ MonoBehaviour:
   Id: 13
   Name: "\uB124\uD06C\uB85C\uB9E8\uC11C"
   tier: 1
-  Maxhealth: 300
+  Maxhealth: 450
   AttackPower: 0
   AttackRange: 0
   Speed: 3
