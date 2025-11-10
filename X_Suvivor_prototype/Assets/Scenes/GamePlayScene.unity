@@ -14237,15 +14237,15 @@ MonoBehaviour:
     monsterData: {fileID: 11400000, guid: 846151683613370469b0aed1a499b0ae, type: 2}
     isSpawned: 0
     isWarningTriggerd: 0
-  - spawnTime: 450
+  - spawnTime: 500
     monsterData: {fileID: 11400000, guid: 48a84c02ee3aeb54c8e55da97830dd57, type: 2}
     isSpawned: 0
     isWarningTriggerd: 0
-  - spawnTime: 720
+  - spawnTime: 770
     monsterData: {fileID: 11400000, guid: 0fe3f203932029544a2ab9c9e5d669bc, type: 2}
     isSpawned: 0
     isWarningTriggerd: 0
-  - spawnTime: 990
+  - spawnTime: 1040
     monsterData: {fileID: 11400000, guid: 51abb8e97a04a594fb47f73164326791, type: 2}
     isSpawned: 0
     isWarningTriggerd: 0
