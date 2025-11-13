@@ -16,7 +16,7 @@ MonoBehaviour:
   Id: 102
   Name: "\uC554\uD751 \uAE30\uC0AC"
   tier: 2
-  Maxhealth: 4500
+  Maxhealth: 13000
   AttackPower: 0
   AttackRange: 0
   Speed: 5.5
