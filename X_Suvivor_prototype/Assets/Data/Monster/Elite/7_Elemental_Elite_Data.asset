@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c4dd2cff55dd44788a87cc7b162e65, type: 3}
+  m_Name: 7_Elemental_Elite_Data
+  m_EditorClassIdentifier: 
+  PoolManagerIndex: 6
+  Id: 16
+  Name: "\uC5D8\uB9AC\uBA58\uD0C8 \uB85C\uBD07"
+  tier: 1
+  Maxhealth: 1300
+  AttackPower: 0
+  AttackRange: 0
+  Speed: 3.5
+  mixExpOrbs: 0
+  maxExpOrbs: 0
+  dropList:
+  - itemPoolIndex: 1
+    dropChance: 1
+    minAmount: 8
+    maxAmount: 10
+  - itemPoolIndex: 3
+    dropChance: 1
+    minAmount: 8
+    maxAmount: 10
+  animator: {fileID: 9100000, guid: 443fc26084013504bbda4a8a9dc6ffb4, type: 2}

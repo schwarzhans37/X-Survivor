@@ -4831,6 +4831,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 540239191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &90801891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 90801892}
+  - component: {fileID: 90801893}
+  m_Layer: 0
+  m_Name: MonsterDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &90801892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90801891}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.29152006, y: 1.1124785, z: 0.06474232}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 941918227}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &90801893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90801891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bac408bc8cf2834fb48b50f855f186b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &91911106
 GameObject:
   m_ObjectHideFlags: 0
@@ -5205,10 +5249,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 45c648bd175e3ee4fb726ccc05727e36, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 0}
+  textLevel: {fileID: 0}
+  textName: {fileID: 0}
+  textDesc: {fileID: 0}
 --- !u!114 &134957068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5694,10 +5742,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 00c272024b0ae394b80e8ac9b6d37cc7, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 0}
+  textLevel: {fileID: 0}
+  textName: {fileID: 0}
+  textDesc: {fileID: 0}
 --- !u!114 &215061061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6122,15 +6174,16 @@ MonoBehaviour:
   speed: 0
   baseSpeed: 3
   health: 0
+  baseMaxHealth: 0
   maxHealth: 100
+  invincibleTime: 3
+  baseScanRange: 0
   inputVec: {x: 0, y: 0}
-  scanner: {fileID: 0}
+  itemScanner: {fileID: 0}
   hands: []
-  animCon:
-  - {fileID: 9100000, guid: bc1fe6d26d801214495cb1d94d81c331, type: 2}
-  - {fileID: 22100000, guid: 6bc6910d1bc79404b9bd2383832fd765, type: 2}
-  - {fileID: 22100000, guid: d15a74b70ff303b408a8d28616248680, type: 2}
-  - {fileID: 22100000, guid: b3be3670aa63d46419f265a814b1cb63, type: 2}
+  spriteAnimCon: []
+  equippedWeapons: []
+  equippedGears: []
 --- !u!70 &274803309
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -6260,7 +6313,6 @@ Transform:
   m_Children:
   - {fileID: 309433881}
   - {fileID: 624048414}
-  - {fileID: 540239191}
   - {fileID: 2086997469}
   - {fileID: 2097888752}
   m_Father: {fileID: 0}
@@ -6331,8 +6383,7 @@ MonoBehaviour:
   scanRange: 10
   targetLayer:
     serializedVersion: 2
-    m_Bits: 64
-  nearestTarget: {fileID: 0}
+    m_Bits: 128
 --- !u!1 &284860207
 GameObject:
   m_ObjectHideFlags: 0
@@ -6459,7 +6510,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b859672a6d4b6b4abfd917a567cc47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
+  healthUI: {fileID: 0}
+  expBarUI: {fileID: 0}
+  levelTextUI: {fileID: 0}
+  killCountUI: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!114 &294626587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11228,10 +11283,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 738c5fe054bfe25478bfcc4c22e45186, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 0}
+  textLevel: {fileID: 0}
+  textName: {fileID: 0}
+  textDesc: {fileID: 0}
 --- !u!114 &378761491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11823,11 +11882,16 @@ MonoBehaviour:
   killCount: 0
   nowExp: 0
   needExp: 05000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000
+  acquiredGold: 0
+  acquiredGems: 0
   player: {fileID: 274803308}
   pool: {fileID: 941918228}
   uiLevelUo: {fileID: 1390879062}
   uiResult: {fileID: 1780199141}
   enemyCleaner: {fileID: 1882968315}
+  pauseMenuPanel: {fileID: 0}
+  charaDatas: []
+  killsForNextChest: 100
 --- !u!4 &492052613
 Transform:
   m_ObjectHideFlags: 0
@@ -11991,10 +12055,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: a3d94efcd1e8d1e4b8e4ad5af1509ece, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 0}
+  textLevel: {fileID: 0}
+  textName: {fileID: 0}
+  textDesc: {fileID: 0}
 --- !u!114 &497561704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12289,7 +12357,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 6.633333
+  orthographic size: 5.9888887
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -12505,7 +12573,7 @@ Transform:
   - {fileID: 89465862}
   - {fileID: 1412047258}
   - {fileID: 1723583720}
-  m_Father: {fileID: 274803312}
+  m_Father: {fileID: 941918227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &540239192
 MonoBehaviour:
@@ -12519,17 +12587,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0053ecb3fe4877748bc23f588b44363b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: []
-  spawnData:
-  - spriteType: 0
-    spawnTime: 0.7
-    health: 10
-    monsterSpeed: 1.5
-  - spriteType: 1
-    spawnTime: 0.2
-    health: 15
-    monsterSpeed: 2.5
-  levelTime: 0
+  poolManager: {fileID: 0}
+  spawnWaves: []
+  spawnEvents: []
 --- !u!1 &558546457
 GameObject:
   m_ObjectHideFlags: 0
@@ -12852,10 +12912,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25717c2e7a7c0834aaafaf3836d86135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 9fdd3a6da9c9d154abaf124eac0b053f, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  gear: {fileID: 0}
+  itemCategory: 0
+  weaponData: {fileID: 0}
+  gearData: {fileID: 0}
+  currentDisplayLevel: 0
+  icon: {fileID: 0}
+  textLevel: {fileID: 0}
+  textName: {fileID: 0}
+  textDesc: {fileID: 0}
 --- !u!114 &576173953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15109,7 +15173,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 540239191}
+  - {fileID: 90801892}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &941918228
@@ -15124,10 +15190,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24162acb7e2ade4fa346d744ba9ee1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 269897315896794488, guid: bde7851dc437b3941aa52032e00d8b4a, type: 3}
-  - {fileID: 8603556273567077586, guid: 06dea0a8519840f429f4393cad4144f1, type: 3}
-  - {fileID: 160219108243616678, guid: 227d5e30c2b163144bbacea3d1bf9114, type: 3}
+  itemPrefabs: []
+  projectilePrefabs: []
+  normalMonsterPrefabs: []
+  eliteMonsterPrefabs: []
+  bossMonsterPrefabs: []
 --- !u!1 &953070458
 GameObject:
   m_ObjectHideFlags: 0
@@ -15220,7 +15287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b859672a6d4b6b4abfd917a567cc47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  healthUI: {fileID: 0}
+  expBarUI: {fileID: 0}
+  levelTextUI: {fileID: 0}
+  killCountUI: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!1 &953458017
 GameObject:
   m_ObjectHideFlags: 0
@@ -18600,7 +18671,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b859672a6d4b6b4abfd917a567cc47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  healthUI: {fileID: 0}
+  expBarUI: {fileID: 0}
+  levelTextUI: {fileID: 0}
+  killCountUI: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!114 &1386245242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18732,6 +18807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fed49378c4d134439802f3654201f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponDatas: []
+  gearDatas: []
 --- !u!1 &1396656158
 GameObject:
   m_ObjectHideFlags: 0
@@ -19235,7 +19312,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b859672a6d4b6b4abfd917a567cc47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  healthUI: {fileID: 0}
+  expBarUI: {fileID: 0}
+  levelTextUI: {fileID: 0}
+  killCountUI: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!1 &1499530239
 GameObject:
   m_ObjectHideFlags: 0
@@ -29112,7 +29193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b859672a6d4b6b4abfd917a567cc47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  healthUI: {fileID: 0}
+  expBarUI: {fileID: 0}
+  levelTextUI: {fileID: 0}
+  killCountUI: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!1 &1748265743
 GameObject:
   m_ObjectHideFlags: 0
@@ -30208,8 +30293,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893fd350bce804e43b335aef7b61fdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   damage: 1000000
-  per: -1
+  penetration: 0
+  bulletSize: 0
+  bulletSpeed: 0
 --- !u!61 &1882968317
 BoxCollider2D:
   m_ObjectHideFlags: 0

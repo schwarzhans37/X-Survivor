@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
+  m_Name: 101_Dog_Rare
+  m_EditorClassIdentifier: 
+  id: 101
+  petName: "\uAC15\uC544\uC9C0(\uB808\uC5B4)"
+  petType: 0
+  grade: 1
+  petIcon: {fileID: 21300000, guid: 5744a732468999b46bd8ea4f061deed8, type: 3}
+  inGamePrefab: {fileID: 1448656011933182545, guid: b30082977fe0d6a4792bc51725d144c0, type: 3}
+  splashArtPrefab: {fileID: 8909918778690197281, guid: 4c7c4ca6e22aaf24689fabcecca15a1e, type: 3}
+  buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
+  skillData: {fileID: 11400000, guid: f7474d8dc29968048a53ab2124af15ed, type: 2}

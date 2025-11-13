@@ -1,0 +1,26 @@
+Id,PetType,Grade,HasSkill,Buff,Skill,SkillCount
+100,Dog,Nomal,FALSE,,None,0
+101,Dog,Rare,FALSE,,None,0
+102,Dog,Epic,TRUE,,Stun 3sec,1
+103,Dog,Unique,TRUE,,Stun 3sec,2
+104,Dog,Legendary,TRUE,,Stun 3sec,3
+200,Cat,Nomal,FALSE,,None,0
+201,Cat,Rare,FALSE,,None,0
+202,Cat,Epic,TRUE,,ItemAbsorb,1
+203,Cat,Unique,TRUE,,ItemAbsorb,2
+204,Cat,Legendary,TRUE,,ItemAbsorb,3
+300,Rabbit,Nomal,FALSE,,None,0
+301,Rabbit,Rare,FALSE,,None,0
+302,Rabbit,Epic,TRUE,,Speed 3sec&invincibility 3sec,1
+303,Rabbit,Unique,TRUE,,Speed 3sec&invincibility 3sec,2
+304,Rabbit,Legendary,TRUE,,Speed 3sec&invincibility 3sec,3
+400,Panda,Nomal,FALSE,,None,0
+401,Panda,Rare,FALSE,,None,0
+402,Panda,Epic,TRUE,,PowerRangeAttack,1
+403,Panda,Unique,TRUE,,PowerRangeAttack,2
+404,Panda,Legendary,TRUE,,PowerRangeAttack,3
+500,Capybara,Nomal,FALSE,,None,0
+501,Capybara,Rare,FALSE,,None,0
+502,Capybara,Epic,TRUE,,TemporaryHeart 10sec,1
+503,Capybara,Unique,TRUE,,TemporaryHeart 10sec,2
+504,Capybara,Legendary,TRUE,,TemporaryHeart 10sec,3

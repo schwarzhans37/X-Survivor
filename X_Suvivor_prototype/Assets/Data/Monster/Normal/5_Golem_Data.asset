@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c4dd2cff55dd44788a87cc7b162e65, type: 3}
+  m_Name: 5_Golem_Data
+  m_EditorClassIdentifier: 
+  PoolManagerIndex: 4
+  Id: 4
+  Name: "\uBC14\uC704 \uACE8\uB818"
+  tier: 0
+  Maxhealth: 150
+  AttackPower: 0
+  AttackRange: 0
+  Speed: 3
+  mixExpOrbs: 1
+  maxExpOrbs: 1
+  dropList: []
+  animator: {fileID: 9100000, guid: d0386596995084f44b145effe9b5be5f, type: 2}

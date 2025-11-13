@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8dc706984d0944fa1cecb85f5fb3f4, type: 3}
+  m_Name: totalKills_1
+  m_EditorClassIdentifier: 
+  id: 1
+  category: 1
+  title: "\uC2DC\uC791\uC740 \uC27D\uC9C0 \uC54A\uC558\uC9C0..."
+  description: "\uCCAB \uBAAC\uC2A4\uD130 \uCC98\uCE58"
+  icon: {fileID: 832244302, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
+  statToTrack: totalkills
+  targetValue: 1
+  rewardType: 0
+  rewardAmount: 10
+  characterUnlockId: 0
+  nextAchievement: {fileID: 0}

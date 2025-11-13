@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
+  m_Name: 104_Dog_Legendary
+  m_EditorClassIdentifier: 
+  id: 104
+  petName: "\uAC15\uC544\uC9C0(\uB808\uC804\uB354\uB9AC)"
+  petType: 0
+  grade: 4
+  petIcon: {fileID: 21300000, guid: b6c8c4fd496cefd41906fd1bac4c4881, type: 3}
+  inGamePrefab: {fileID: 1448656011933182545, guid: 03046d0779e8e8a43b933e11939825d0, type: 3}
+  splashArtPrefab: {fileID: 3353230691933095515, guid: e706cb5143beca8429c8a2fca6550a39, type: 3}
+  buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
+  skillData: {fileID: 11400000, guid: f7474d8dc29968048a53ab2124af15ed, type: 2}

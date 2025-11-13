@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
+  m_Name: 102_Dog_Epic
+  m_EditorClassIdentifier: 
+  id: 102
+  petName: "\uAC15\uC544\uC9C0(\uC5D0\uD53D)"
+  petType: 0
+  grade: 2
+  petIcon: {fileID: 21300000, guid: 288f5ee7cf00775469c6e6e3159a6aa8, type: 3}
+  inGamePrefab: {fileID: 1448656011933182545, guid: 7baabe0bfb2def045ba894dd4c8af964, type: 3}
+  splashArtPrefab: {fileID: 3924671708673706554, guid: f8749d90d24d81f4496993864892312c, type: 3}
+  buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
+  skillData: {fileID: 11400000, guid: f7474d8dc29968048a53ab2124af15ed, type: 2}

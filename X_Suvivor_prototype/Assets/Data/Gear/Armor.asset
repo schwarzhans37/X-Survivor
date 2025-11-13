@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae07e794746da8b4b8cd9fb089389b18, type: 3}
+  m_Name: Armor
+  m_EditorClassIdentifier: 
+  gearType: 2
+  gearId: 30
+  gearName: "\uAC11\uC637"
+  gearDesc: "\uCD5C\uB300 \uCCB4\uB825\uC744 \uD56D\uC0F9\uC2DC\uCF1C\uC8FC\uB294
+    \uAC11\uC637\uC774\uB2E4."
+  gearIcon: {fileID: 2077811463, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
+  baseValue: 1
+  Values:
+  - 2
+  - 3

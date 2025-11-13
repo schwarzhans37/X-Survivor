@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61291837bd3ddf44b448e77072397d1, type: 3}
+  m_Name: LandMine
+  m_EditorClassIdentifier: 
+  skillType: 1
+  skillName: "\uC9C0\uB8B0"
+  skillIcon: {fileID: 21300000, guid: 93dffb46d7780d94cac9aeceaa6d0f07, type: 3}
+  skillPrefab: {fileID: 2230116441141057076, guid: a4b056a4db383e3489f8d1fa056ea19e, type: 3}

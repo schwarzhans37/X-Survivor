@@ -8,19 +8,20 @@ TagManager:
   - Area
   - Enemy
   - Bullet
+  - Exp
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Exp
+  - PlayerInvincible
+  - LandMine
+  - EnemyAttack
+  - Pet
   - 
   - 
   - 

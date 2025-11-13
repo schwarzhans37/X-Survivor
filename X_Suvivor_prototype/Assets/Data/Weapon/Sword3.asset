@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f190dca0fa466469403cef61e0866e, type: 3}
+  m_Name: Sword3
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  weaponId: 7
+  weaponName: "\uAC80\uBB34"
+  weaponDesc: "\uCE90\uB9AD\uD130 \uC8FC\uBCC0\uC744 5\uCD08\uAC04 \uD654\uC804\uD558\uB294
+    \uAC80"
+  controllerPrefab: {fileID: 7476748833660721422, guid: 6f04c0365f5ef904880bef4a7dbccc5d, type: 3}
+  baseDamage: 45
+  baseRange: 0
+  baseCount: 1
+  basePenetration: 0
+  baseCooldown: 5
+  baseProjectileSpeed: 900
+  baseSpreadAngle: 0
+  damages:
+  - 50
+  - 55
+  - 60
+  - 65
+  - 70
+  - 75
+  - 80
+  - 85
+  - 90
+  ranges: []
+  counts: 010000000100000001000000010000000100000001000000010000000100000001000000
+  penetrations: 
+  cooldowns:
+  - 4.75
+  - 4.5
+  - 4.25
+  - 4
+  - 3.75
+  - 3.5
+  - 3.25
+  - 3
+  - 2.75
+  projectileSpeeds:
+  - 900
+  - 900
+  - 900
+  - 900
+  - 900
+  - 900
+  - 900
+  - 900
+  - 900
+  spreadAngles: []
+  weaponIcon: {fileID: 1166595436, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
+  projectilePrefab: {fileID: 8907633866650014768, guid: 038008788c241a445bc0c956bf6ee8b1, type: 3}
+  handSprite: {fileID: 0}
+  PoolManagerIndex: 13

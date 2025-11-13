@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a55bb5aae0ad884bb214515748fbd1f, type: 3}
+  m_Name: 301_Rabbit_Rare
+  m_EditorClassIdentifier: 
+  id: 301
+  petName: "\uD1A0\uB07C(\uB808\uC5B4)"
+  petType: 2
+  grade: 1
+  petIcon: {fileID: 21300000, guid: 852ebf5c4240d794cba2e85153f68d5d, type: 3}
+  inGamePrefab: {fileID: 1448656011933182545, guid: 8665181e04dc7334c8db2798c92b6102, type: 3}
+  splashArtPrefab: {fileID: 5704140724047839671, guid: ab571f99828fbe64b836d4d64a063b40, type: 3}
+  buffDescription: "\uB2A5\uB825\uCE58 \uAC15\uD654 \uC5C6\uC74C"
+  skillData: {fileID: 11400000, guid: d946a9038f8ae844c93e74ab936d3c35, type: 2}

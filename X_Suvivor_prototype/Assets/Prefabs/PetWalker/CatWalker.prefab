@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4628031139973481443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6677768394116899904}
+  - component: {fileID: 7605236993778748246}
+  - component: {fileID: -8426951572880511181}
+  - component: {fileID: 7852599385073959313}
+  m_Layer: 0
+  m_Name: CatWalker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6677768394116899904
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628031139973481443}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 2.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -160}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7605236993778748246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628031139973481443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d20d7dc537d8d4ba46693e34df0eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkFrames:
+  - {fileID: 21300000, guid: ea2ab5925e2d2d24c98712a571ff5e80, type: 3}
+  - {fileID: 21300000, guid: 89099cfd42bef5141bf7486a5a6a9eb0, type: 3}
+  - {fileID: 21300000, guid: c2da63e8b7bd9094e8065a1cc70038a2, type: 3}
+  - {fileID: 21300000, guid: 57b12f86d185a5443bebf9fd5756aadc, type: 3}
+  - {fileID: 21300000, guid: da6bf61129202254885d9fbf0c80165d, type: 3}
+  - {fileID: 21300000, guid: b22482d898837684987fe5efb4d3c9ae, type: 3}
+  - {fileID: 21300000, guid: b52e161ae7789c14a9cf928eb0f99236, type: 3}
+  - {fileID: 21300000, guid: 4f063b0b8283d30429e32bb4253529c6, type: 3}
+  - {fileID: 21300000, guid: 0d32ed86b00165449947cfa1fe1f9663, type: 3}
+  - {fileID: 21300000, guid: b19dd86623d23bb46a91d11af9740045, type: 3}
+  - {fileID: 21300000, guid: a61f5b8d96af8dd4d904afb984f27079, type: 3}
+  - {fileID: 21300000, guid: 6bcfa44aca912c44492ddd04d0d2856d, type: 3}
+  - {fileID: 21300000, guid: 440d7c513eeface48b04bf77d6da3dd7, type: 3}
+  - {fileID: 21300000, guid: acaeb0e800b458a4abea52e1bfb6fb44, type: 3}
+  - {fileID: 21300000, guid: 1f0a8e2cd6bbeeb47a0f366f712fc5a3, type: 3}
+  - {fileID: 21300000, guid: 3578acbfffa62a9479d5b2f4a36e6bb5, type: 3}
+  - {fileID: 21300000, guid: 585f34f1333e157418e61852b5aeecda, type: 3}
+  - {fileID: 21300000, guid: 9ab1b18b36d5e524ba967f24a40e5999, type: 3}
+  - {fileID: 21300000, guid: 6d1ab22651f38af43b055c4275e9c1bf, type: 3}
+  - {fileID: 21300000, guid: 7543e4f4df2fe4e4f890136fe4d3f1e8, type: 3}
+  animationFPS: 10
+--- !u!222 &-8426951572880511181
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628031139973481443}
+  m_CullTransparentMesh: 1
+--- !u!114 &7852599385073959313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628031139973481443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: ea2ab5925e2d2d24c98712a571ff5e80, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1

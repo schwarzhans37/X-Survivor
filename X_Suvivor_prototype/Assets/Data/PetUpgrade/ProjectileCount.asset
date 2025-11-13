@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e50869443cc7ba4c8e6951f3b4a93fb, type: 3}
+  m_Name: ProjectileCount
+  m_EditorClassIdentifier: 
+  upgradeType: 2
+  upgradeName: "\uBA40\uD2F0\uC0F7"
+  upgradeDescription: "\uD3AB\uC758 \uB3D9\uC2DC \uACF5\uACA9 \uAC00\uB2A5 \uD69F\uC218
+    \uC99D\uAC00"
+  upgradeIcon: {fileID: 2054073412, guid: 77c9cd161f10e3c4cb078bcd4dc1a84c, type: 3}
+  upgradeValues:
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
