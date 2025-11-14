@@ -13,6 +13,9 @@
   - 사냥의 재미도 있어야 한다.
   - 2D 기반의 게임이면 좋겠다.
 
+> #### 다운로드
+  구글 드라이브 : https://drive.google.com/drive/folders/1vKNMcQta_9cCKbbApJgvP-NismoMEqMg
+
 ***
 
 > #### 작품 소개
