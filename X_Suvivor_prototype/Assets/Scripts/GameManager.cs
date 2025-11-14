@@ -61,13 +61,20 @@ public class GameManager : MonoBehaviour
     // PlayerDataManager로부터 선택 정보를 가져와 게임을 시작
     void Start()
     {
-        if (AudioManager.instance != null && gamePlaySoundData != null)
+        if (AudioManager.instance != null)
         {
-            AudioManager.instance.LoadAndPlaySceneSounds(gamePlaySoundData);
+            // 1. (추가) 현재 재생 중인 BGM (메인 메뉴 BGM 등)을 먼저 멈춥니다.
+            AudioManager.instance.StopBgm();
+
+            // 2. (기존) 인게임 BGM 데이터를 로드하고 재생합니다.
+            if (gamePlaySoundData != null)
+            {
+                AudioManager.instance.LoadAndPlaySceneSounds(gamePlaySoundData);
+            }
         }
 
         int charId = PlayerDataManager.instance.playerData.selectedCharacterId;
-        Debug.Log($"[GameManager] PlayerDataManager로부터 가져온 캐릭터 ID: {charId}"); // <--- 확인용 로그 추가
+        Debug.Log($"[GameManager] PlayerDataManager로부터 가져온 캐릭터 ID: {charId}");
         int petId = PlayerDataManager.instance.playerData.selectedPetId;
 
         GameStart(charId, petId);
@@ -203,6 +210,16 @@ public class GameManager : MonoBehaviour
 
     public void GameRetry()
     {
+        // 씬을 로드하기 전에 시간을 1배속으로 되돌립니다.
+        Time.timeScale = 1;
+
+        // (선택사항) BGM이 멈추지 않는 문제를 위해 StopBgm을 명시적으로 호출합니다.
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.StopBgm();
+        }
+
+        // Scene 0번 (아마도 MainMenuScene)을 로드합니다.
         SceneManager.LoadScene(0);
     }
 
