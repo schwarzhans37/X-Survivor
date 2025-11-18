@@ -30,6 +30,13 @@ public class MainMenuPetParade : MonoBehaviour
     // 다음 펫을 생성해도 되는지 여부 (중간 지점 도달 시 true가 됨)
     private bool canSpawnNext = false;
 
+    void Awake()
+    {
+        // 씬이 로드될 때, 이전에 게임 시간이 멈췄을(Time.timeScale = 0) 수 있으므로
+        // 무조건 시간을 1배속(정상)으로 되돌립니다.
+        Time.timeScale = 1f;
+    }
+
     IEnumerator Start()
     {
         // 시작 위치, 중간 위치, 끝 위치가 설정되지 않았으면 경고 후 종료

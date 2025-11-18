@@ -10,6 +10,13 @@ public class BG_Scroller : MonoBehaviour
 
     private RawImage rawImage; // Renderer 대신 RawImage 사용
 
+    void Awake()
+    {
+        // 씬이 로드될 때, 이전에 게임 시간이 멈췄을 수 있으므로
+        // 무조건 시간을 1배속(정상)으로 되돌립니다.
+        Time.timeScale = 1f;
+    }
+
     void Start()
     {
         // 이 오브젝트의 RawImage 컴포넌트를 가져옴
