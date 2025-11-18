@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: BGM
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 393e2b4c736306c40b2b95d5d45d3426, type: 3}
   - name: ButtonClick
     clip: {fileID: 8300000, guid: 44a5d716536c11248a09ee1a54d5d168, type: 3}
   - name: GachaStart
