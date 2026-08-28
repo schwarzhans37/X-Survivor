@@ -71,5 +71,3 @@
     5) 중복 펫 처리 : 현재 프로젝트 기획 상, 중복 펫은 같은 등급의 펫을 강화하는 시스템을 추가로 구축하고 싶으나 우선순위는 밀림.
 
 ***
-> #### 개발 진행 현황
-<img width="1642" height="882" alt="image" src="https://github.com/user-attachments/assets/74193c60-19ec-4d0c-9b41-6fceaffb5f5d" />
